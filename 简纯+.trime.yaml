@@ -3287,10 +3287,12 @@ preset_keyboards:
           key_symbol_offset_x: 0,
         }
 #下面新增最后一排按钮
-      - { click: IME_switch1, width: 25, height: 25, key_back_color: keyboard_back_color }
-      - { click: Left, width: 25, height: 25, key_back_color: keyboard_back_color }
-      - { click: Right, width: 25, height: 25, key_back_color: keyboard_back_color } 
-      - { click: 'Back1', width: 25, height: 25, key_back_color: keyboard_back_color }
+      - { click: IME_switch1, width: 18, height: 25, key_back_color: keyboard_back_color }
+      - { click: Left, width: 16, height: 25, key_back_color: keyboard_back_color }
+      - { click: fancha, width: 16, height: 25, key_back_color: keyboard_back_color }
+      - { click: bihua, width: 16, height: 25, key_back_color: keyboard_back_color }
+      - { click: Right, width: 16, height: 25, key_back_color: keyboard_back_color } 
+      - { click: 'Back1', width: 18, height: 25, key_back_color: keyboard_back_color }
 
 
   18jian:
@@ -3359,10 +3361,12 @@ preset_keyboards:
           key_symbol_offset_x: 0,
         }
 #下面新增最后一排按钮
-      - { click: IME_switch1, width: 25, height: 25, key_back_color: keyboard_back_color }
-      - { click: Left, width: 25, height: 25, key_back_color: keyboard_back_color }
-      - { click: Right, width: 25, height: 25, key_back_color: keyboard_back_color } 
-      - { click: 'Back1', width: 25, height: 25, key_back_color: keyboard_back_color }
+      - { click: IME_switch1, width: 18, height: 25, key_back_color: keyboard_back_color }
+      - { click: Left, width: 16, height: 25, key_back_color: keyboard_back_color }
+      - { click: fancha, width: 16, height: 25, key_back_color: keyboard_back_color }
+      - { click: bihua, width: 16, height: 25, key_back_color: keyboard_back_color }
+      - { click: Right, width: 16, height: 25, key_back_color: keyboard_back_color } 
+      - { click: 'Back1', width: 18, height: 25, key_back_color: keyboard_back_color }
 
 
 
@@ -3427,11 +3431,12 @@ preset_keyboards:
           key_symbol_offset_x: 0,
         }
 #下面新增最后一排按钮
-      - { click: IME_switch1, width: 25, height: 25, key_back_color: keyboard_back_color }
-      - { click: Left, width: 25, height: 25, key_back_color: keyboard_back_color }
-      - { click: Right, width: 25, height: 25, key_back_color: keyboard_back_color } 
-      - { click: 'Back1', width: 25, height: 25, key_back_color: keyboard_back_color }
-
+      - { click: IME_switch1, width: 18, height: 25, key_back_color: keyboard_back_color }
+      - { click: Left, width: 16, height: 25, key_back_color: keyboard_back_color }
+      - { click: fancha, width: 16, height: 25, key_back_color: keyboard_back_color }
+      - { click: bihua, width: 16, height: 25, key_back_color: keyboard_back_color }
+      - { click: Right, width: 16, height: 25, key_back_color: keyboard_back_color } 
+      - { click: 'Back1', width: 18, height: 25, key_back_color: keyboard_back_color }
 
   9jian:
     name: 9键
@@ -3479,10 +3484,12 @@ preset_keyboards:
           key_symbol_offset_x: 0,
         }
 #下面新增最后一排按钮
-      - { click: IME_switch1, width: 25, height: 25, key_back_color: keyboard_back_color }
-      - { click: Left, width: 25, height: 25, key_back_color: keyboard_back_color }  
-      - { click: Right, width: 25, height: 25, key_back_color: keyboard_back_color } 
-      - { click: 'Back1', width: 25, height: 25, key_back_color: keyboard_back_color }
+      - { click: IME_switch1, width: 18, height: 25, key_back_color: keyboard_back_color }
+      - { click: Left, width: 16, height: 25, key_back_color: keyboard_back_color }
+      - { click: fancha, width: 16, height: 25, key_back_color: keyboard_back_color }
+      - { click: bihua, width: 16, height: 25, key_back_color: keyboard_back_color }
+      - { click: Right, width: 16, height: 25, key_back_color: keyboard_back_color } 
+      - { click: 'Back1', width: 18, height: 25, key_back_color: keyboard_back_color }
 
   letter:
     ascii_mode: 1
@@ -3867,6 +3874,8 @@ preset_keys:
   space: { label: '', preview: '{schema}', repeatable: false, functional: false, send: space}
   space1: {label: 空格, repeatable: false, functional: false, send: space}  #用于liquidkeyboard显示一致性
   space2: {label: ⎵, repeatable: false, functional: false, send: space}  #用与数字键盘空格的展现形式
+  bihua: { label: '笔画', send: '~' }
+  fancha: { label: '反查', send: '`' }
   jisuan: { label: '计算', send: V }
   jine: { label: '金额', send: R }
   riqi: { label: '日期', send: N }
