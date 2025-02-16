@@ -252,7 +252,7 @@ patch:
     tag: radical_lookup
     dictionary: radical_pinyin
     enable_user_dict: false
-    prefix: "az"  # 反查前缀（反查时前缀会消失影响打英文所以设定为两个字母，或可改成一个非字母符号），与 recognizer/patterns/radical_lookup 匹配
+    prefix: "`"  # 反查前缀（反查时前缀会消失影响打英文所以设定为两个字母，或可改成一个非字母符号），与 recognizer/patterns/radical_lookup 匹配
     tips: "  〔部件组字〕"
     comment_format:  #{comment}
       - erase/^.*$//
@@ -262,7 +262,7 @@ patch:
     dictionary: stroke 
     db_class: stabledb
     enable_completion: true
-    prefix: "ab"
+    prefix: "~"
     suffix: "'"
     tips: 〔笔画 hspnz〕 
     preedit_format:
@@ -279,8 +279,8 @@ patch:
     import_preset: default  # 从 default.yaml 继承通用的
     patterns:  # 再增加方案专有的：
       punct: "^/([0-9]|10|[A-Za-z]+)$"    # 响应 symbols.yaml 的 symbols
-      radical_lookup: "^az[A-Za-z]*$"        # 响应部件拆字的反查，与 radical_lookup/prefix 匹配
-      reverse_stroke: "^ab[A-Za-z]*$"     #响应笔画反查，与reverse_stroke/prefix 匹配
+      radical_lookup: "^`[A-Za-z]*$"        # 响应部件拆字的反查，与 radical_lookup/prefix 匹配
+      reverse_stroke: "^~[A-Za-z]*$"     #响应笔画反查，与reverse_stroke/prefix 匹配
       add_user_dict: "^ac[A-Za-z/`']*$"      #自造词
       unicode: "^U[a-f0-9]+"              # 脚本将自动获取第 2 个字符 U 作为触发前缀，响应 lua_translator@unicode，输出 Unicode 字符
       number: "^R[0-9]+[.]?[0-9]*"        # 脚本将自动获取第 2 个字符 R 作为触发前缀，响应 lua_translator@number_translator，数字金额大写
@@ -430,7 +430,7 @@ patch:
   grammar:
     language: wanxiang-lts-zh-hans
     collocation_max_length: 8         #命中的最长词组
-    collocation_min_length: 3         #命中的最短词组，搭配词频健全的词库时候应当最小值设为3避开2字高频词
+    collocation_min_length: 2         #命中的最短词组，搭配词频健全的词库时候应当最小值设为3避开2字高频词
     collocation_penalty: -10          #默认-12 对常见搭配词组施加的惩罚值。较高的负值会降低这些搭配被选中的概率，防止过于频繁地出现某些固定搭配。
     non_collocation_penalty: -12      #默认-12 对非搭配词组施加的惩罚值。较高的负值会降低非搭配词组被选中的概率，避免不合逻辑或不常见的词组组合。
     weak_collocation_penalty: -24     #默认-24 对弱搭配词组施加的惩罚值。保持默认值通常是为了有效过滤掉不太常见但仍然合理的词组组合。
