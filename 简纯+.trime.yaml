@@ -3874,7 +3874,7 @@ preset_keys:
   space: { label: '', preview: '{schema}', repeatable: false, functional: false, send: space}
   space1: {label: 空格, repeatable: false, functional: false, send: space}  #用于liquidkeyboard显示一致性
   space2: {label: ⎵, repeatable: false, functional: false, send: space}  #用与数字键盘空格的展现形式
-  bihua: { label: '笔画', send: '~' }
+  bihua: { label: '笔画', text: '{`}{`}' }
   fancha: { label: '反查', send: '`' }
   jisuan: { label: '计算', send: V }
   jine: { label: '金额', send: R }
