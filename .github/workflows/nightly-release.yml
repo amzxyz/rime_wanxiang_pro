@@ -149,7 +149,7 @@ jobs:
             - **tiger_dicts.zip**：虎码辅助码
             - **wubi_dicts.zip**：五笔辅助码
             - **hanxin_dicts.zip**：汉心辅助码
-            - **wanxiang-lts-zh-hans.gram**：与词库同步更新的语法模型
+            - **[wanxiang-lts-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram)**：与词库同步更新的语法模型
           files: |
             dist/9-cn_dicts.zip
             dist/1-moqi_cndicts.zip
