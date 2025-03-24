@@ -4,7 +4,7 @@
 #兼容词库，对于多字词汇两种读音的场景，手动维护到本表以及一些其他的杂项
 ---
 name: compatible
-version: "2025-03-24 18:27"
+version: "2025-03-24 21:05"
 sort: by_weight
 ...
 攒个	cuán;fb;fr;fz;jm;qo,xo;uo;rt;fr gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra	391
@@ -4065,10 +4065,10 @@ sort: by_weight
 枪落进了糠	qiāng;mv;mv;mc;wt;du;ez;sw;lv luò;ck;ck;cl;zo;tr;ls;ai;ck jìn;zj;zj;zj;uq;yt;qu;fj;zj le;al;vl;aa,vu;rp;nn;rl;bn;vv kāng;ml;mn;mk;lo;fe;pk;oy;ml	1
 墙上七枚钉	qiáng;tk;tk;th;gd;gw;gd;ff;tk shàng;ba;la;aa,ba;pu;ym;yf;hh;aa qī;av;av;ag;aa;ju;rq;ag;av méi;mw;mw;mw;wj;dk;eh;st;lw dīng;jd;jd;jd;dj;on;za;qs;jd	1
 墙要枪上窗	qiáng;tk;tk;th;gd;gw;gd;ff;tk yào;xn;xn;xn;py;mv;vb;sv;xn qiāng;mv;mv;mc;wt;du;ez;sw;lv shàng;ba;la;aa,ba;pu;ym;yf;hh;aa chuāng;bw;bw;xx,bx;id;je,jk,jn;eh;pw;gw	1
-撒了羊骨头	sā;fw;fw;fs;jj;qk;uh;ra;fw le;al;vl;aa,vu;rp;nn;rl;bn;vv yáng;bf;bl;da;fp;tq;gy;ud;ea gǔ;go;ko;go,ob,og;cc;bb;fg;me;ao tou;dd;dd;dd;hx;yk,xk;wm;ud;dd	1
+撒了羊骨头	sā;fw;fw;fs;jj;qk;uh;ra;fw le;al;vl;aa,vu;rp;nn;rl;bn;vv yáng;bf;bl;da;fp;tq;gy;ud;ea gǔ;go;lo;go,ob,og;cc;bb;fg;me;ao tou;dd;dd;dd;hx;yk,xk;wm;ud;dd	1
 山里有个寺	shān;kl;lk;aa;pp;uu;vs;mm;aa lǐ;tt;la;aa,tt;vg;wg;dl;jf;aa yǒu;uo;uo;ou,uo;sl;kb;nv;de;ao gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra sì;tc;tc;ct,tc;gk;gi;gk;ff;tc	1
 山外有个市	shān;kl;lk;aa;pp;uu;vs;mm;aa wài;xb;xb;xb;fh;ny;ly;qh;xb yǒu;uo;uo;ou,uo;sl;kb;nv;de;ao gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra shì;wj;wj;wj;iy;yb;zr;ym;wj	1
-伸手拿骨头	shēn;ru;ru;ru;xp;ol;jg;wj;ru shǒu;pf;pl;pa,ub;up;qq;us;rt;pv ná;ru;ru;uh;ep;oq;ju;wg;ru gǔ;go;ko;go,ob,og;cc;bb;fg;me;ao tou;dd;dd;dd;hx;yk,xk;wm;ud;dd	1
+伸手拿骨头	shēn;ru;ru;ru;xp;ol;jg;wj;ru shǒu;pf;pl;pa,ub;up;qq;us;rt;pv ná;ru;ru;uh;ep;oq;ju;wg;ru gǔ;go;lo;go,ob,og;cc;bb;fg;me;ao tou;dd;dd;dd;hx;yk,xk;wm;ud;dd	1
 师傅四十四	shī;lj;lj;ab,aj,db,dj;py;lb;pr;jg;aj fù;rc;rc;rc,rf;xk;oi;jk;wg;rc sì;ke;ke;aa,ke;nk;wc;ys;lh;we shí;al;al;aa;ss;jj;ns;fg;aa sì;ke;ke;aa,ke;nk;wc;ys;lh;we	1
 十四和四十	shí;al;al;aa;ss;jj;ns;fg;aa sì;ke;ke;aa,ke;nk;wc;ys;lh;we hé;hk;hk;hk;uo;hr;xd;tk;hk sì;ke;ke;aa,ke;nk;wc;ys;lh;we shí;al;al;aa;ss;jj;ns;fg;aa	1
 十四是十四	shí;al;al;aa;ss;jj;ns;fg;aa sì;ke;ke;aa,ke;nk;wc;ys;lh;we shì;oz;or;op,ov;ve;ao;ot;jg;or shí;al;al;aa;ss;jj;ns;fg;aa sì;ke;ke;aa,ke;nk;wc;ys;lh;we	1
@@ -4192,7 +4192,7 @@ sort: by_weight
 老罗拉了一车梨	lǎo;lb;lb;bl,lb;ga;jp;ql;ft;ub luó;sx;sx;sx;af;wi;yl;lq;sx lā;fl;fl;fl;jb;qt;ui;ru;fl le;al;vl;aa,vu;rp;nn;rl;bn;vv yì;aa;aa;aa;dd;mm;fi;gg;aa chē;au;al;aa;tt;kq;yc;lg;aa lí;hm;hm;ml;uw;hd,xd;xe;tj;hl	1
 老罗拉梨做梨酒	lǎo;lb;lb;bl,lb;ga;jp;ql;ft;ub luó;sx;sx;sx;af;wi;yl;lq;sx lā;fl;fl;fl;jb;qt;ui;ru;fl lí;hm;hm;ml;uw;hd,xd;xe;tj;hl zuò;rw;rw;rg;xj;ok;jh;wd;rw lí;hm;hm;ml;uw;hd,xd;xe;tj;hl jiǔ;dy;dy;dy;kd;ew;ky;is;dy	1
 老罗人称大力罗	lǎo;lb;lb;bl,lb;ga;jp;ql;ft;ub luó;sx;sx;sx;af;wi;yl;lq;sx rén;pn;pn;pd;ee;oo;jr;ww;pn chēng;hx;hx;he;uf;hf;xy;tq;hx dà;ar;un;ad;xx;kk;md;dd;an lì;vp;vp;gp;uu;ks;sl;lt;vp luó;sx;sx;sx;af;wi;yl;lq;sx	1
-里头有堆羊骨头	lǐ;tt;la;aa,tt;vg;wg;dl;jf;aa tou;dd;dd;dd;hx;yk,xk;wm;ud;dd yǒu;uo;uo;ou,uo;sl;kb;nv;de;ao duī;tv;tf;tv;ga;gg;gu;fw;ta yáng;bf;bl;da;fp;tq;gy;ud;ea gǔ;go;ko;go,ob,og;cc;bb;fg;me;ao tou;dd;dd;dd;hx;yk,xk;wm;ud;dd	1
+里头有堆羊骨头	lǐ;tt;la;aa,tt;vg;wg;dl;jf;aa tou;dd;dd;dd;hx;yk,xk;wm;ud;dd yǒu;uo;uo;ou,uo;sl;kb;nv;de;ao duī;tv;tf;tv;ga;gg;gu;fw;ta yáng;bf;bl;da;fp;tq;gy;ud;ea gǔ;go;lo;go,ob,og;cc;bb;fg;me;ao tou;dd;dd;dd;hx;yk,xk;wm;ud;dd	1
 两个乐得笑哈哈	liǎng;ar;ad;ad;de;mb;ml;gm;ad gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra lè;px;pd;pd,px;uf;hd;by;qi;pd de;rc;ic;xc;hk;hi;wk;tj;rc xiào;vy;vy;vy;nx;hk;rm;tt;vy hā;kk;kk;kh;oo;rr;dd;kw;kk hā;kk;kk;kh;oo;rr;dd;kw;kk	1
 龙洞困龙在深洞	lóng;yp;ul;ad;sh;ip;tl;dx;ab dòng;dk;dk;dt;ko;er;kd;im;dk kùn;km;km;km;nw;wd,xd;re;ls;wl lóng;yp;ul;ad;sh;ip;tl;dx;ab zài;ut;ut;ta,ut;sg;kg;ng;dh;at shēn;dm;dm;dm;kw;ed;ke;ip;dl dòng;dk;dk;dt;ko;er;kd;im;dk	1
 龙去农田做农工	lóng;yp;ul;ad;sh;ip;tl;dx;ab qù;ts;ts;ts;gp;gi;gk;fc;tv nóng;by;dn;by,ny;ih;hv;wt;pe;dh tián;ku;ku;aa;ww;ww;qt;ll;wu zuò;rw;rw;rg;xj;ok;jh;wd;rw nóng;by;dn;by,ny;ih;hv;wt;pe;dh gōng;aa;aa;aa;pp;mm;ug;aa;aa	1
@@ -4241,7 +4241,7 @@ sort: by_weight
 谁说十四是适时	shuí;yv;yf;yv;ca;ig;su;yw;ya shuō;yx;ye;yd;ck;iu;sp;yu;ye shí;al;al;aa;ss;jj;ns;fg;aa sì;ke;ke;aa,ke;nk;wc;ys;lh;we shì;oz;or;op,ov;ve;ao;ot;jg;or shì;zu;zk;zu;sq;yr;au;td;zk shí;oc;oc;oc;vk;ai;ok;jf;oc	1
 谁说四十是细席	shuí;yv;yf;yv;ca;ig;su;yw;ya shuō;yx;ye;yd;ck;iu;sp;yu;ye sì;ke;ke;aa,ke;nk;wc;ys;lh;we shí;al;al;aa;ss;jj;ns;fg;aa shì;oz;or;op,ov;ve;ao;ot;jg;or xì;st;st;st;ew;vw;iq;xl;st xí;gj;gj;jc,gj;ry;ib;xr;ya;gj	1
 四个孩子出果市	sì;ke;ke;aa,ke;nk;wc;ys;lh;we gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra hái;zr;zr;zh;ae;no;hk;by;zr zi;la;va;aa,vh;aa;nd;hi;bb;va chū;uu;vk;ck,aa;pp;uu;sm;bm;va guǒ;tm;ln;ad,tm;vw;wd;qe;js;an shì;wj;wj;wj;iy;yb;zr;ym;wj	1
-送在口里啃骨头	sòng;zt;zt;zg;fq;yk;hu;ud;zd zài;ut;ut;ta,ut;sg;kg;ng;dh;at kǒu;la;la;aa;oo;rr;dk;kk;aa lǐ;tt;la;aa,tt;vg;wg;dl;jf;aa kěn;ko;ko;kk;ol;rb;dv;kh;ko gǔ;go;ko;go,ob,og;cc;bb;fg;me;ao tou;dd;dd;dd;hx;yk,xk;wm;ud;dd	1
+送在口里啃骨头	sòng;zt;zt;zg;fq;yk;hu;ud;zd zài;ut;ut;ta,ut;sg;kg;ng;dh;at kǒu;la;la;aa;oo;rr;dk;kk;aa lǐ;tt;la;aa,tt;vg;wg;dl;jf;aa kěn;ko;ko;kk;ol;rb;dv;kh;ko gǔ;go;lo;go,ob,og;cc;bb;fg;me;ao tou;dd;dd;dd;hx;yk,xk;wm;ud;dd	1
 他的舌头没伸直	tā;ry;ry;ry;xr;od;je;wb;ry de;bu;bu;bu;sh;hi,xx;ui;rq;bu shé;qk;qk;qk;so;hr;as;td;qk tou;dd;dd;dd;hx;yk,xk;wm;ud;dd méi;du;dy;du;kl;ee;kr;im;dy shēn;ru;ru;ru;xp;ol;jg;wj;ru zhí;uq;uq;aa,uq;su;jm;nf;fh;ua	1
 他的舌头没用力	tā;ry;ry;ry;xr;od;je;wb;ry de;bu;bu;bu;sh;hi,xx;ui;rq;bu shé;qk;qk;qk;so;hr;as;td;qk tou;dd;dd;dd;hx;yk,xk;wm;ud;dd méi;du;dy;du;kl;ee;kr;im;dy yòng;kf,ol;kl;kf;lp;bq;ty;et;pa lì;vp;vp;gp;uu;ks;sl;lt;vp	1
 藤条头上挂铜铃	téng;cu;cu;ct;zo;te;lk;ae;cu tiáo;wm;wm;wm;jf;hd;he;ts;wx tóu;dd;dd;dd;hx;yk,xk;wm;ud;dd shàng;ba;la;aa,ba;pu;ym;yf;hh;aa guà;ft;ft;fg;jg;qg;ug;rf;ft tóng;jk;jk;jt;do;or;zd;qm;jk líng;js;js;jl;dp;oi;zk;qw;jv	1

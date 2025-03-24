@@ -3,7 +3,7 @@
 #https://github.com/amzxyz/RIME-LMDG
 ---
 name: chars
-version: "2025-03-24 18:27"
+version: "2025-03-24 21:05"
 sort: by_weight
 ...
 啊	a;kk;kk;ka;oj;rr;dz;kb;kk	915
@@ -1811,7 +1811,7 @@ sort: by_weight
 㲢	biàn;hm;hm;mb;;iu;mv;yn;	1
 㳎	biàn;dc;dc;db;;et;kl;ic;	1
 㴜	biàn;dc;dc;db;;eb;ki;iy;	1
-㵷	biàn;xx;du;dx;;yj;nn;ui;	1
+㵷	biàn;xd;du;dx;;yj;nn;ui;	1
 㻞	biàn;wc;wc;wb;;mb;ni;gy;	1
 䁵	biǎn;oy;oy;oq;;bv;qt;hl;	1
 䉸	biàn;vk;vu;vb;;hj;rn;tu;	1
@@ -7990,7 +7990,7 @@ sort: by_weight
 𪍹	dú;li;li;mu;;di,ji;ec;sw;	1
 𪐞	dù;lq;hq;hv,hq;;wp;pr;lf;	1
 段	duàn;pu;py;ud,du,pu;ul;he;ur;wd;py	769
-断	duàn;vj;vj;ja,jm,jv;lp;vl;pt;on;vj	764
+断	duàn;vj;mj;ja,jm,jv;lp;vl;pt;on;vj	764
 短	duǎn;ub;ua;ud;ed;ot;oz;td;ud	737
 端	duān;le;le;le;be;yb;il;um;le	727
 锻	duàn;ju;jy;jd;dl;oe;zr;qw;jy	652
@@ -11158,7 +11158,7 @@ sort: by_weight
 古	gǔ;uk;uk;uk;so;jr;cg;dg;uk	752
 估	gū;rg;rk;rg;xo;or;jc;wd;rk	734
 顾	gù;iy;ir;ye;rm;mo;xw;db;ir	713
-骨	gǔ;go;ko;go,ob,og;cc;bb;fg;me;ao	708
+骨	gǔ;go;lo;go,ob,og;cc;bb;fg;me;ao	708
 固	gù;kg;kk;kg;no;wr;rc;ld;wk	695
 鼓	gǔ;tv;uy;vd,uv;gl;ge;hc;fk;uy	694
 谷	gǔ;bk;bk;bk,kr;fo;cr;hg;ww;bk	688
@@ -11184,7 +11184,7 @@ sort: by_weight
 崮	gù;ug;ek;ug;po;ur,xr;vc;ml;sk	383
 牯	gǔ;ng;nk;ng;bo;hr;qc;tr;nk	378
 诂	gǔ;yg;yk;yg;co;ir;sc;yd;yk	376
-骨	gū;go;ko;go,ob,og;cc;bb;fg;me;ao	372
+骨	gū;go;lo;go,ob,og;cc;bb;fg;me;ao	372
 蛄	gū;ig;ik;ig;fo;lr;cc;jd;ik	369
 逧	gǔ;zg;zk;zg;;yr;hu;ww;	368
 痼	gù;bg;bk;bg;mo;kr;ac;ul;bk	364
@@ -37410,7 +37410,7 @@ sort: by_weight
 湾	wān;dg;dg;dw;kr;en;kb;iy;dg	719
 卍	wàn;vl;vl;aa,vu;rp;nx;aa;hg,nh;	649
 卐	wàn;va;vv;aa,vh;rp;vx;aa;gh,ng;	644
-丸	wán;ld;pd;jd,pd;uh;ki;ki;vy;pd	642
+丸	wán;jd;pd;jd,pd;uh;ki;ki;vy;pd	642
 弯	wān;wg;wg;gy,yg;ir;yn;zb;yo;wg	634
 腕	wàn;ov;ov;ow;lt;bu;vz;ep;ov	587
 挽	wǎn;fe;fv;fm;jr;qu;up;rq;fm	584
