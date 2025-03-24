@@ -1,0 +1,166 @@
+name: Nightly Build dicts
+
+on:
+  workflow_dispatch: # 手动触发
+  push:
+    branches:
+      - main
+
+concurrency: # 防止并发冲突
+  group: nightly-release
+  cancel-in-progress: true
+
+jobs:
+  nightly-release:
+    runs-on: ubuntu-22.04
+
+    steps:
+      # 1. 检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. 检查指定文件夹或文件是否有变动
+      - name: Check if cn_dicts or wanxiang-lts-zh-hans.gram has changes
+        id: check_changes
+        run: |
+          if git diff --quiet HEAD HEAD~1 -- cn_dicts wanxiang-lts-zh-hans.gram; then
+            echo "SKIP=true" >> $GITHUB_ENV
+          else
+            echo "SKIP=false" >> $GITHUB_ENV
+          fi
+      # 3. 条件跳过任务
+      - name: Skip if no changes
+        if: env.SKIP == 'true'
+        run: echo "No changes detected in 'cn_dicts' or 'wanxiang-lts-zh-hans.gram'. Skipping release process."
+
+      # 4. 安装 Python（确保我们能够调用 Python 脚本）
+      - name: Setup Python
+        if: env.SKIP != 'true'
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      # 5. 运行Python 脚本对 cn_dicts 进行处理，生成多个词库文件夹
+      - name: Process Rime dicts
+        if: env.SKIP != 'true'
+        run: |
+          echo "Processing cn_dicts with Python script..."
+          pip install --upgrade pip
+          python custom/万象分包.py
+
+      # 6. 打包原有的 cn_dicts 文件夹
+      - name: Pack cn_dicts
+        if: env.SKIP != 'true'
+        run: |
+          mkdir -p dist
+          echo "Packing original cn_dicts..."
+          if [ -d "cn_dicts" ]; then
+            zip -r dist/9-cn_dicts.zip cn_dicts
+            echo "Packing completed: dist/9-cn_dicts.zip"
+          else
+            echo "Error: cn_dicts folder does not exist."
+            exit 1
+          fi
+      # 7. 将拆分后的 8 个词库文件夹一并打包
+      - name: Pack splitted dicts
+        if: env.SKIP != 'true'
+        run: |
+          echo "Packing splitted dict folders..."
+      
+          # 定义文件夹 -> ZIP文件名的映射关系
+          declare -A dict_map=(
+            ["moqi_cndicts"]="1-moqi_cndicts.zip"
+            ["flypy_dicts"]="2-flypy_dicts.zip"
+            ["zrm_dicts"]="3-zrm_dicts.zip"
+            ["jdh_dicts"]="4-jdh_dicts.zip"
+            ["cj_dicts"]="5-cj_dicts.zip"
+            ["tiger_dicts"]="6-tiger_dicts.zip"
+            ["wubi_dicts"]="7-wubi_dicts.zip"
+            ["hanxin_dicts"]="8-hanxin_dicts.zip"
+          )
+      
+          mkdir -p dist
+      
+          # 遍历字典并按指定顺序命名 ZIP 文件
+          for dict_dir in "${!dict_map[@]}"; do
+            if [ -d "$dict_dir" ]; then
+              zip -r "dist/${dict_map[$dict_dir]}" "$dict_dir"
+              echo "Packed: dist/${dict_map[$dict_dir]}"
+            else
+              echo "Warning: $dict_dir folder does not exist. Skipped."
+            fi
+          done
+
+      # 8. 删除旧的 Release 和 Tag
+      - name: Delete existing Nightly Release and Tag
+        if: env.SKIP != 'true'
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const tag = "dict-nightly";
+            try {
+              // 检查现有的 Release
+              const releases = await github.rest.repos.listReleases({
+                owner: context.repo.owner,
+                repo: context.repo.repo
+              });
+              const existingRelease = releases.data.find(r => r.tag_name === tag);
+              if (existingRelease) {
+                console.log(`Deleting existing Release with ID: ${existingRelease.id}`);
+                await github.rest.repos.deleteRelease({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  release_id: existingRelease.id
+                });
+              }
+
+              // 删除现有的 Tag
+              console.log(`Deleting tag: ${tag}`);
+              await github.rest.git.deleteRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: `tags/${tag}`
+              });
+            } catch (error) {
+              console.log(`Error deleting Release or Tag: ${error.message}`);
+            }
+
+      # 9. 等待清理完成
+      - name: Wait for cleanup
+        if: env.SKIP != 'true'
+        run: sleep 10
+
+      # 10. 创建新的 Release，并把上述打包好的所有文件都上传
+      - name: Create new Release
+        if: env.SKIP != 'true'
+        uses: "softprops/action-gh-release@v2"
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: dict-nightly
+          name: "每夜构建-词库更新"
+          body: |
+            - **cn_dicts.zip**：最新的全辅助码原始中文词库文件
+            - **moqi_cndicts.zip**：墨奇辅助码
+            - **flypy_dicts.zip**：小鹤辅助码
+            - **zrm_dicts.zip**：自然码辅助码
+            - **jdh_dicts.zip**：简单鹤辅助码
+            - **cj_dicts.zip**：仓颉辅助码
+            - **tiger_dicts.zip**：虎码辅助码
+            - **wubi_dicts.zip**：五笔辅助码
+            - **hanxin_dicts.zip**：汉心辅助码
+            - **wanxiang-lts-zh-hans.gram**：与词库同步更新的语法模型
+          files: |
+            dist/9-cn_dicts.zip
+            dist/1-moqi_cndicts.zip
+            dist/2-flypy_dicts.zip
+            dist/3-zrm_dicts.zip
+            dist/4-jdh_dicts.zip
+            dist/5-cj_dicts.zip
+            dist/6-tiger_dicts.zip
+            dist/7-wubi_dicts.zip
+            dist/8-hanxin_dicts.zip
+            wanxiang-lts-zh-hans.gram
+          draft: false
+          prerelease: false
+          make_latest: true

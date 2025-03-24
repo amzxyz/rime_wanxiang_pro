@@ -1,0 +1,12 @@
+# Rime schema settings
+# encoding: utf-8
+
+schema:
+  schema_id: charset
+  name: 字符集过滤器
+  version: "1.0"
+
+engine:
+
+translator:
+  dictionary: charset

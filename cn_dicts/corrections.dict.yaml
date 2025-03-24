@@ -1,0 +1,116 @@
+# Rime dictionary
+# encoding: utf-8
+#https://github.com/amzxyz/RIME-LMDG
+#错音错字对照表
+---
+name: corrections
+version: "2025-03-24 17:51"
+sort: by_weight
+...
+株木琅玛	zhū;mw;mv;mv;we;dd;ea;sr;lv mù;ur;un;ad;ww;dd;em;ss;un láng;wl;wl;wl;ah;mv;ni;gy;wh mǎ;wm;wm;wm;az;mm;nn;gc;wm	12	(有声)
+衾何以堪	qīn;ry;ry;yj;ek;ov;jt;wy;rh hé;rk;rk;rk;xj;or;jz;ws;rk yǐ;lr;vr;rd,ry;re;vo;vj;ny;vr kān;tb;tv;tu;gr;gv;ga;fa;tu	364	(小说)
+墨明棋妙	mò;lt;ht;th,ht;ng;wg;pg;lf;ht míng;oo;oo;oo;vl;ab;ov;je;oo qí;mb;mb;mq;wf;dc;eh;sa;lb miào;nu;nu;nu;yu;vh;bt;vi;nu	382	(乐队)
+压力山大	yā;id;id;id,it;rh;mi,xi;xi;df;id lì;vp;vp;gp;uu;ks;sl;lt;vp shān;kl;lk;aa;pp;uu;vs;mm;aa dà;ar;un;ad;xx;kk;md;dd;an	190	(网络语)
+鸭梨山大	yā;jn;jn;nj,jn;vc;wm;sx;lq;jn lí;hm;hm;ml;uw;hd,xd;xe;tj;hl shān;kl;lk;aa;pp;uu;vs;mm;aa dà;ar;un;ad;xx;kk;md;dd;an	481	(网络语)
+麻麻赖赖	má;gm;gm;gl;rw;id,ic;zm;ys;gl má;gm;gm;gl;rw;id,ic;zm;ys;gl lài;ub;ur;uf;dm;do;xo;gk;ur lài;ub;ur;uf;dm;do;xo;gk;ur	156	(网络语)
+绝代双椒	jué;sb;sb;ss;et;vu;im;xq;sb dài;ry;ry;ry;xa;op;jp;wa;rg shuāng;yy;yy;yy;ll;ee,xe;rr;cc;yy jiāo;my;my;mu;wl;de;er;sh;ly	300	(网络语)
+毁人不倦	huǐ;ju;jy;jy,ug;sl;he;pr;va;jy rén;pn;pn;pd;ee;oo;jr;ww;pn bú;ab;ad;ad,ax;dh;mf;cb;gi;ad juàn;rv;rv;rj;xt;ou;jz;wu;rv	431	(歌曲名)
+满山遍野	mǎn;dl;dl;dl;ke;eb;km;ia;dl shān;kl;lk;aa;pp;uu;vs;mm;aa biàn;zc;zc;zb;qq;yb;mu;yn;zc yě;ly;ll;ly,yl;vp;wn;di;jf;ly	519	(漫)山遍野
+佛教胜地	fó;rf;rf;rf;xp;on;jt;wx;rf jiào;lw;lw;wx;gj;jk;qh;ft;uw shèng;ou;ou;ou;lg;bm;vl;et;ou dì;ty;ty;ty;ga;gd;ge;fb;ty	1	佛教(圣)地
+杉杉来吃	shān;mp;mp;mp;wu;dh;ee;se;lp shān;mp;mp;mp;wu;dh;ee;se;lp lái;am;an;am,wb;dl;dt;ah;go;an chī;kv;kv;kq;or;rn;da;kt;ky	424	(玩笑语)
+一泄千里	yī;aa;aa;aa;dd;mm;fi;gg;aa xiè;du;du;du;kr;et;ka;ia;du qiān;pu;pu;pa;ss;hj;lq;tf;pu lǐ;tt;la;aa,tt;vg;wg;dl;jf;aa	315	(玩笑语)
+美丽冻人	měi;yd;yd;dy,yd;fx;tk;gm;ug;ed lì;ad;ad;ad;dh;mb;fv;gm;ad dòng;dd;dd;dd;ff;id;wy;ua;dd rén;pn;pn;pd;ee;oo;jr;ww;pn	123	(俏皮话)
+老肩巨滑	lǎo;lb;lb;bl,lb;ga;jp;ql;ft;ub jiān;ho;ho;ho,oh;ql;hb,ib;mv;yn;ho jù;kk;ka;kk,aa;dr;ss;nn;an;ka huá;do;dg;dg;kc;eb;kf;im;do	233	(玩笑语)
+食话食说	shí;rg;rl;rl,pd;eh;ov;qs;wy;rh huà;yu;yk;yu;co;ir;sa;yt;yk shí;rg;rl;rl,pd;eh;ov;qs;wy;rh shuō;yx;ye;yd;ck;iu;sp;yu;ye	247	(节目)
+膻中	shan;od;oa;od;ld;bm;vf;ey;od zhong;kl;ll;aa,ka;op;ll;dg;kh;aa	364	膻(dàn)中
+按耐	àn;fn;fn;fa;jy;qv;ub;rp;fn nài;ec;ec;ce;ek;mi;lk;dm;ec	0	按捺(nà)
+甭介	béng;by;by;by;dp;mq;ct;gi;by jie;rl;rl;ra,rd;ep;ol;jp;wj;ra	56	甭价(jie)
+别介	bié;kd;kd;dl;oi;rn,xn;dp;kl;kd jie;rl;rl;ra,rd;ep;ol;jp;wj;ra	31	别价(jie)
+槟榔	bin;mb;mb;mb;wf;dc;eh;sp;lb lang;me;me;ml;wb;dl;et;sy;le	633	bīng láng
+脖颈	bo;oz;oz;ob,oz;la;bd;vh;ef;oz jing;jy;vr;yg;rm;no;rw;ca;vr	483	bó gěng
+草薙	cao;cu;cu;cz;zs;tj;ln;aj;cu zhi;cv;cf;cv;za;tg;lu;at;cv	88	cǎo tì
+掺和	chan;fp;fp;fc;ju;qh;ue;rc;fp he;hk;hk;hk;uo;hr;xd;tk;hk	438	chān huo
+称职	cheng;hx;hx;he;uf;hf;xy;tq;hx zhi;ev;eb;ev;df;sc;qh;bk;eb	90	chèn zhí
+龇牙	ci;vb;vb;ic;ra;yp,xm;lv;hw;vb ya;gp,ac;ap;ap;du;mh;ly;ah;ap	62	zī yá
+凑活	còu;dt;dt;dz;fx;ik;wm;ud;dt huo;du;dk;du;ko;er;ka;it;dk	246	凑合(he)
+道行	dao;zz;zz;zu;fq;yu;hu;ut;zm hang;rd;ii;xd,xi;hp;hn;px;tf;rd	270	dào héng
+给予	gei;sk;sk;sh;eo;vr;id;xw;sk yu;sl;sl;sa,aa;pp;nn;iv;cb;vv	11349	jǐ yǔ
+厚朴	hou;iz;iz;iz;ra;md;xh;dj;iz pu;mb;mb;mb;wh;dy;ey;sh;lb	52	hòu pò
+馄饨	hun;ub;ub;uk;ga;np;qv;qn;ub dun;ut;ut;ut;gr;nu;qs;qn;ut	898	hún tun
+角色	jiao;dy;dl,dy;dy;gp;ng,nq;xt;qe;ey se;db;db;db;gt;nu;xm;qc;eb	20102	jué sè
+结扎	jie;sk;sk;sj;eo;vr;id;xf;sk zha;fv;fv;fg;jr;qu,xu;ua;rn;fv	126	jié zā
+钜惠	jù;jj;jj;jj;dr;os;zn;qa;jj huì;ix;ax;xh,hx;dn;jp;nh;gj;ax	549	(巨)惠
+六安	liu;wb;wb;wb,dd,db;if;yc;al;uy;wb an;bn;bn;bn;iy;jv;wb;pv;gn	110	lù ān
+埋怨	mai;tl;tl;tl;gg;gg;gd;fj;tl yuan;xx;xx;xe,xy;fn;np;lh;qb;xx	1138	mán yuàn
+模板	mo;md;md;mm;wx;dk;em;sa;ld ban;my;my;mf;wl;de,xe;er;sr;ly	14674	mú bǎn
+模具	mo;md;md;mm;wx;dk;em;sa;ld ju;qb;qb;ba,bq,qb;pf;bc;qh;hw;ab	1935	mú jù
+模样	mo;md;md;mm;wx;dk;em;sa;ld yang;my;my;my;wp;dq;eg;su;ly	5185	mú yàng
+木讷	mu;ur;un;ad;ww;dd;em;ss;un na;yn;yn;yn;ce;ib;sj;ym;yn	471	mù nè
+弄堂	nong;wc;wc;cw,wc;az;mt;nl;ga;wa tang;xt;xt;tk,dt,xt;hg;fg;sg;ip;et	126	lòng táng
+暖和	nuan;oy;oy;oy;vl;ae;or;je;oy he;hk;hk;hk;uo;hr;xd;tk;hk	590	nuǎn huo
+偌大	nuo;rk;rk;rr;xo;or;jd;wa;rk da;ar;un;ad;xx;kk;md;dd;an	680	偌(ruò)大
+比萨	pi;bb;bb;bb;aa;pp;vv;xx;bb sa;ci;ci;ci;zr;th;lx;ab;ci	197	bǐ sà
+强劲	qiang;gi;gi;gs;rf;ni;bc;xk;gi jin;jl;vl;lg;ru;ns;rs;ca;vl	1505	qiáng jìng
+热列	rè;fh;fh;hv;jn;qf;uc;rv;fe liè;dd;dd;dd;fi;mn;gp;gq;dd	1	(烈)
+说服	shui;yx;ye;yd;ck;iu;sp;yu;ye fu;oy;oy;oy;ll;be;vr;eb;oy	5642	shuō fú
+似的	si;rr;rr;ry;xe;oo;jj;wn;rr de;bu;bu;bu;sh;hi,xx;ui;rq;bu	703	似(shì)的
+藤蔓	teng;cu;cu;ct;zo;te;lk;ae;cu man;cy;cy;cm;zl;te;lr;aj;cy	320	téng wàn
+调换	tiao;yk;yk;yv;co;ir;sd;ym;yk huan;fr;fd;fh;je;qk,xk;um;rq;fd	616	diào huàn
+胴体	tong;ok;ok;ot;lo;br;vd;em;ok ti;rb;rb;rb;xd;om;jf;ws;rb	80	dòng tǐ
+荨麻	xun;cc;cc;cx;zk;ti,xi;lk;av;cc ma;gm;gm;gl;rw;id,ic;zm;ys;gl	71	qián má
+吱声	zhi;kv;ky;kv;ol;re;dc;kf;ky sheng;tu;up;um;gp;gh;gc;fn;up	217	zī shēng
+主角	zhu;wt;dw;dw;ha;yg;in;yg;wt jiao;dy;dl,dy;dy;gp;ng,nq;xt;qe;ey	24115	zhǔ jué
+比萨饼	bǐ;bb;bb;bb;aa;pp;vv;xx;bb sà;ci;ci;ci;zr;th;lx;ab;ci bǐng;uk;uk;ub;gp;nt;ql;qn;uk	23
+脖颈儿	bo;oz;oz;ob,oz;la;bd;vh;ef;oz jing;jy;vr;yg;rm;no;rw;ca;vr er;pv;pv;pg;kk;lu;pe;qt;pv	10	bó gěng er
+草薙剑	cao;cu;cu;cz;zs;tj;ln;aj;cu zhi;cv;cf;cv;za;tg;lu;at;cv jian;qd,rd;rd;da,dq;ei;on;jp;wg;rd	17	cǎo tì jiàn
+草薙京	cao;cu;cu;cz;zs;tj;ln;aj;cu zhi;cv;cf;cv;za;tg;lu;at;cv jing;wx;wx;wx;if;yf;gy;yi;wx	144	cǎo tì jīng
+吃比萨	chi;kv;kv;kq;or;rn;da;kt;ky pi;bb;bb;bb;aa;pp;vv;xx;bb sa;ci;ci;ci;zr;th;lx;ab;ci	5	chī bǐ sà
+龇着牙	ci;vb;vb;ic;ra;yp,xm;lv;hw;vb zhe;yo;yo;yo;fs;tu;gq;ud;em ya;gp,ac;ap;ap;du;mh;ly;ah;ap	14	zī zhe yá
+大宛马	da;ar;un;ad;xx;kk;md;dd;an wan;bv;bv;be,by;it;ju;wz;pq;gv ma;va;va;aa,vh;zz;nm;nm;cn;va	9	dà yuān mǎ
+独乐乐	du;qi;qi;qi;bf;ki;mc;qt;qi le;px;pd;pd,px;uf;hd;by;qi;pd le;px;pd;pd,px;uf;hd;by;qi;pd	13	dú yuè lè
+海参崴	hai;dm;dm;dm;kh;ey;kk;it;dm shen;sp;sp;sp;pu;ih;ke;cd;vp wei;un;en;uw;ph;uv;vb;md;sg	304	hǎi shēn wǎi
+贾平凹	jia;xb;xr;bx,xb;pm;mo;vo;sm;xr ping;au;au;aa,gb;sf;mj;eh;gu;au ao;la,ka;la;aa;pd;su;mf;mm;aa	247	jià píng wā
+卡脖子	ka;ub;ub;bx,ub;ph;yy;yy;hh;ub bo;oz;oz;ob,oz;la;bd;vh;ef;oz zi;la;va;aa,vh;aa;nd;hi;bb;va	308	qiǎ bó zi
+六安市	liu;wb;wb;wb,dd,db;if;yc;al;uy;wb an;bn;bn;bn;iy;jv;wb;pv;gn shi;wj;wj;wj;iy;yb;zr;ym;wj	23	lù ān shì
+六安县	liu;wb;wb;wb,dd,db;if;yc;al;uy;wb an;bn;bn;bn;iy;jv;wb;pv;gn xian;qs;qs;sq,qs;pp;bi;fk;eg;qv	3	lù ān xiàn
+六合区	liu;wb;wb;wb,dd,db;if;yc;al;uy;wb he;rk;rk;rk;eo;or;jd;wg;rk qū;kx;kx;ki;dr;sk;nb;aq;kx	3	lù hé qū
+螺蛳粉	luo;ix;ix;il;ff;lf;ci;jl;ix shi;ij;ij;iu;fy;lb;cr;jj;ij fen;mf;md;mf;lu;fh;pp;ow;md	645	luó sī fěn
+魔蝎座	mó;gg;gg;gm,mg;dp;ii;za;ys;gv xiē;ir;iv;ih;fr;lv;cf;jj;iv zuò;gr;gt;gz;rg;ig;xg;yw;gt	0	摩羯(jié)座
+鄱阳湖	pan;ce;pe;ef;hb;hl;tt;to;fe yang;eo;eo;eo;bv;na;to;bj;eo hu;do;do;dh;kl;eb;kv;id;do	1336	pó yáng hú
+比萨饼	pi;bb;bb;bb;aa;pp;vv;xx;bb sa;ci;ci;ci;zr;th;lx;ab;ci bing;uk;uk;ub;gp;nt;ql;qn;uk	23	bǐ sà bǐng
+契科夫	qī;fd;fd;dd;ax;qk;am;dh;fd kē;hd;hu;hd;us;hj;xj;tu;hu fū;er;an;ad,er;ee;qo;hf;fw;an	0	契诃(hē)夫
+荨麻疹	qian;cc;cc;cx;zk;ti,xi;lk;av;cc ma;gm;gm;gl;rw;id,ic;zm;ys;gl zhen;bp;bp;bp;mu;kh;ae;uw;bp	198	xún má zhěn
+太行山	tai;dd;dd;dd;xh;ki;mi;dy;dd xing;rd;ii;xd,xi;hp;hn;px;tf;rd shan;kl;lk;aa;pp;uu;vs;mm;aa	390	tài háng shān
+头皮屑	tou;dd;dd;dd;hx;yk,xk;wm;ud;dd pi;py;vy;ad,ay,vd,vy,ya;rl;de;rp;hc;vy xue;uo;uo;ux;ql;sb;cv;ni;uo	525	tóu pi xiè
+万柏林	wàn;av;ap;ag,ap;du;ms;fp;dn;ap bó;mb;mb;mb;ws;da;eu;sr;lb lín;mm;mm;mm;ww;dd;ee;ss;ll	2	万柏(bǎi)林
+雪佛兰	xue;ye;ye;yx;ys;mm;tb;fv;ya fo;rf;rf;rf;xp;on;jt;wx;rf lan;bs;bs;bs,qe;fu;tm;ht;uf;es	365	xuě fú lán
+鸭绿江	ya;jn;jn;nj,jn;vc;wm;sx;lq;jn lv;su;su;sl;eo;ve;ik;xv;su jiang;dg;dg;dg;kp;em;ku;ia;dg	152	yā lù jiāng
+张柏芝	zhang;gi;gi;gi;rh;no;bp;xt;gi bai;mb;mb;mb;ws;da;eu;sr;lb zhi;cv;cv;cv;zh;to;lr;ap;cv	748	zhāng bó zhī
+众乐乐	zhong;rr;rr;rc;ee;oo;jj;ww;rr le;px;pd;pd,px;uf;hd;by;qi;pd le;px;pd;pd,px;uf;hd;by;qi;pd	20	zhòng yuè lè
+阿弥陀佛	a;ek;ek;ek;bj;nr;tz;bs;ek mi;gx;gx;ge;rf;nf;by;xq;gx tuo;eb;eb;et;ba;np;tv;bp;eb fo;rf;rf;rf;xp;on;jt;wx;rf	371	ē mí tuó fó
+安徽六安	an;bn;bn;bn;iy;jv;wb;pv;gn hui;rx;iw;xw;hj;hk;wh;tm;rw liu;wb;wb;wb,dd,db;if;yc;al;uy;wb an;bn;bn;bn;iy;jv;wb;pv;gn	16	ān huī lù ān
+按耐不住	àn;fn;fn;fa;jy;qv;ub;rp;fn nài;ec;ec;ce;ek;mi;lk;dm;ec bú;ab;ad;ad,ax;dh;mf;cb;gi;ad zhù;rv;rv;rv;xg;og;jn;wy;rv	0	按捺(nà)不住
+龇牙咧嘴	ci;vb;vb;ic;ra;yp,xm;lv;hw;vb ya;gp,ac;ap;ap;du;mh;ly;ah;ap lie;kd;kd;kl;oi;rn;dp;kg;kd zui;ky;ky;kj,kz;op;rb;dt;kh;ky	166	zī yá liě zuǐ
+大腹便便	da;ar;un;ad;xx;kk;md;dd;an fu;ow;ow;of;lj;be;vh;et;ow bian;rg;rg;rg;xy;ok;jb;wg;rg bian;rg;rg;rg;xy;ok;jb;wg;rg	147	dà fù pián pián
+歇斯底里	jie;oq;or;qh;ve;ao;oe;jq;or si;cj;qj;jq,qj;vp;tl;zt;ad;qj di;gu;gd;gd;rh;im,ii;xi;yq;gd li;tt;la;aa,tt;vg;wg;dl;jf;aa	883	xiē sī dǐ lǐ
+力能扛鼎	li;vp;vp;gp;uu;ks;sl;lt;vp neng;sb;sb;sb;pa;ip;kv;ce;vb kang;fg;fg;fg;jp;qm;uu;ra;fg ding;po;ov;oa,od;sr;bl,bn;qa;hn;mv	26	lì néng gāng dǐng
+模棱两可	mo;md;md;mm;wx;dk;em;sa;ld ling;mw;mw;ml,mw;wj;de;eh;sf;lw liang;ar;ad;ad;de;mb;ml;gm;ad ke;dk;dk;dk;jj;mr;zk;sk;av	848	mó léng liǎng kě
+南京六合	nan;ug;ug;ua,uy;sp;jj;ng;fm;uu jing;wx;wx;wx;if;yf;gy;yi;wx liu;wb;wb;wb,dd,db;if;yc;al;uy;wb he;rk;rk;rk;eo;or;jd;wg;rk	5	nán jīng lù hé
+人模狗样	ren;pn;pn;pd;ee;oo;jr;ww;pn mo;md;md;mm;wx;dk;em;sa;ld gou;qj;qk;qj;bi;kr;mg;qt;qk yang;my;my;my;wp;dq;eg;su;ly	146	rén mú góu yàng
+心宽体胖	xin;dd;dd;dd;nn;pp;hx;ny;dd kuan;bj;be;bj,jb;ir;ju,xu;we;pa;gj ti;rb;rb;rb;xd;om;jf;ws;rb pang;ob;ob;ob;ls;bq;vu;eu;ob	39	xīn kūan tǐ pán
+虚与委蛇	xu;hy;hy;hy;pd;yc;zc;ha;ay yu;va;aa;aa;dd;ym;ff;gn;aa wei;hn;hn;hn;uy;hv;xb;tv;hn she;ib;ib;it;fa;lp;cv;jp;ib	93	xū yǔ wēi yí
+血脉偾张	xuè;pm;pm;pa,pm;ua;ht;ta;tl;pm mài;oy;oy;oy;lo;be;vk;ey;oy fèn;rb;rr;rb;xm;oo;jo;wf;rr zhāng;gi;gi;gi;rh;no;bp;xt;gi	0	血脉贲(bēn)张 | 血脉偾(fèn)张
+血脉喷张	xuè;pm;pm;pa,pm;ua;ht;ta;tl;pm mài;oy;oy;oy;lo;be;vk;ey;oy pēn;kb;kr;kb;om;ro;do;kf;kr zhāng;gi;gi;gi;rh;no;bp;xt;gi	0	血脉贲(bēn)张 | 血脉偾(fèn)张
+一模一样	yi;aa;aa;aa;dd;mm;fi;gg;aa mo;md;md;mm;wx;dk;em;sa;ld yi;aa;aa;aa;dd;mm;fi;gg;aa yang;my;my;my;wp;dq;eg;su;ly	5083	yì mú yí yàng
+饮鸩解渴	yin;uq;ur;uq;ge;no;qe;qn;ur jiu;bn;dn;na,ng,nv,ny;ic;lm;wx;pq;dn jie;dn;dn;jn;gb;nq;xq;qe;en ke;dr;dv;dh;kr;ev;kf;ij;dv	0	饮鸩(zhèn)解渴
+饮鸩止渴	yin;uq;ur;uq;ge;no;qe;qn;ur jiu;bn;dn;na,ng,nv,ny;ic;lm;wx;pq;dn zhi;lb,la,ba;la;aa;rr;ym;si;hh;ua ke;dr;dv;dh;kr;ev;kf;ij;dv	336	饮鸩(zhèn)止渴
+饮鸩解渴	yin;uq;ur;uq;ge;no;qe;qn;ur zhen;bn;dn;na,ng,nv,ny;ic;lm;wx;pq;dn jie;dn;dn;jn;gb;nq;xq;qe;en ke;dr;dv;dh;kr;ev;kf;ij;dv	0	饮鸩(zhèn)解渴
+有模有样	you;uo;uo;ou,uo;sl;kb;nv;de;ao mo;md;md;mm;wx;dk;em;sa;ld you;uo;uo;ou,uo;sl;kb;nv;de;ao yang;my;my;my;wp;dq;eg;su;ly	279	yǒu mú yǒu yàng
+装模作样	zhuang;ly;dy;yv;lk;lv;at;uf;dh mo;md;md;mm;wx;dk;em;sa;ld zuo;rv;rv;rv;xu;os;jw;wt;rv yang;my;my;my;wp;dq;eg;su;ly	485	zhuāng mú zuò yàng
+安徽六安市	an;bn;bn;bn;iy;jv;wb;pv;gn hui;rx;iw;xw;hj;hk;wh;tm;rw liu;wb;wb;wb,dd,db;if;yc;al;uy;wb an;bn;bn;bn;iy;jv;wb;pv;gn shi;wj;wj;wj;iy;yb;zr;ym;wj	3	ān huī lù ān shì
+南京六合区	nan;ug;ug;ua,uy;sp;jj;ng;fm;uu jing;wx;wx;wx;if;yf;gy;yi;wx liu;wb;wb;wb,dd,db;if;yc;al;uy;wb he;rk;rk;rk;eo;or;jd;wg;rk qu;kx;kx;ki;dr;sk;nb;aq;kx	1	nán jīng lù hé qū
+安徽省六安市	an;bn;bn;bn;iy;jv;wb;pv;gn hui;rx;iw;xw;hj;hk;wh;tm;rw sheng;uo;uo;ou;ps;fu;yq;it;um liu;wb;wb;wb,dd,db;if;yc;al;uy;wb an;bn;bn;bn;iy;jv;wb;pv;gn shi;wj;wj;wj;iy;yb;zr;ym;wj	8	ān huī shěng lù ān shì
+南无阿弥陀佛	na;ug;ug;ua,uy;sp;jj;ng;fm;uu mo;ay;ay;ag,ay,ee;ur;mu;du;fq;av a;ek;ek;ek;bj;nr;tz;bs;ek mi;gx;gx;ge;rf;nf;by;xq;gx tuo;eb;eb;et;ba;np;tv;bp;eb fo;rf;rf;rf;xp;on;jt;wx;rf	42	nā mó ē mí tuó fó
+南京市六合区	nan;ug;ug;ua,uy;sp;jj;ng;fm;uu jing;wx;wx;wx;if;yf;gy;yi;wx shi;wj;wj;wj;iy;yb;zr;ym;wj liu;wb;wb;wb,dd,db;if;yc;al;uy;wb he;rk;rk;rk;eo;or;jd;wg;rk qu;kx;kx;ki;dr;sk;nb;aq;kx	2	nán jīng shì lù hé qū
+南无阿弥陀佛	nan;ug;ug;ua,uy;sp;jj;ng;fm;uu wu;ay;ay;ag,ay,ee;ur;mu;du;fq;av a;ek;ek;ek;bj;nr;tz;bs;ek mi;gx;gx;ge;rf;nf;by;xq;gx tuo;eb;eb;et;ba;np;tv;bp;eb fo;rf;rf;rf;xp;on;jt;wx;rf	42	nā mó ē mí tuó fó
+南无阿弥陀佛	nan;ug;ug;ua,uy;sp;jj;ng;fm;uu wu;ay;ay;ag,ay,ee;ur;mu;du;fq;av e;ek;ek;ek;bj;nr;tz;bs;ek mi;gx;gx;ge;rf;nf;by;xq;gx tuo;eb;eb;et;ba;np;tv;bp;eb fo;rf;rf;rf;xp;on;jt;wx;rf	42	nā mó ē mí tuó fó
