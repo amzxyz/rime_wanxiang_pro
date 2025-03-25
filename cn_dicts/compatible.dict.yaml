@@ -4,7 +4,7 @@
 #兼容词库，对于多字词汇两种读音的场景，手动维护到本表以及一些其他的杂项
 ---
 name: compatible
-version: "2025-03-25 00:13"
+version: "2025-03-25 15:06"
 sort: by_weight
 ...
 攒个	cuán;fb;fr;fz;jm;qo,xo;uo;rt;fr gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra	391
@@ -150,6 +150,8 @@ sort: by_weight
 所长	suǒ;hj;pj;hj,jh;up;hl;mt;rn;pj cháng;pn;pn;pd;uh;po;pc;ta;pn	611
 所长	suǒ;hj;pj;hj,jh;up;hl;mt;rn;pj zhǎng;pn;pn;pd;uh;po;pc;ta;pn	786
 调配	tiáo;yk;yk;yv;co;ir;sd;ym;yk pèi;yj;yj;yj;pt;mu;yv;sg;yj	622
+调为	tiáo;yk;yk;yv;co;ir;sd;ym;yk wéi;ld;dd;dd;uu;ii;ii;yl;dd	468
+都为	dōu;le;le;ev;gb;jl;qt;ft;ue wéi;ld;dd;dd;uu;ii;ii;yl;dd	630
 我为	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg wèi;ld;dd;dd;uu;ii;ii;yl;dd	663
 我为	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg wéi;ld;dd;dd;uu;ii;ii;yl;dd	467
 五行	wǔ;aw;aa;aa;gg;mm;wu;gg;aa háng;rd;ii;xd,xi;hp;hn;px;tf;rd	558
