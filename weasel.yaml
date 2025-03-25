@@ -175,3 +175,19 @@ preset_color_schemes:
     hilited_label_color: 0xFFFFFF
     hilited_candidate_back_color: 0x79af22
     shadow_color: 0x20000000
+
+  Lumk_light:
+    name: "鹿鸣／Lumk light"
+    author: "Lumk X <x@xx.cc>"
+    back_color: 0xF9F9F9
+    border_color: 0xE2E7F5
+    candidate_text_color: 0x121212
+    comment_text_color: 0x8E8E8E
+    hilited_candidate_back_color: 0xECE4FC
+    hilited_candidate_label_color: 0xB18FF4
+    hilited_candidate_text_color: 0x7A40EC
+    hilited_label_color: 0xA483EC
+    hilited_mark_color: 0x7A40EC
+    label_color: 0x888785
+    text_color: 0x8100EB
+    shadow_color: 0x20000000

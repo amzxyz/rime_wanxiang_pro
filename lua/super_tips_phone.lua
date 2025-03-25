@@ -2,8 +2,8 @@
 --采用leveldb数据库,支持大数据遍历,支持多种类型混合,多种拼音编码混合,维护简单
 --支持候选匹配和编码匹配两种
 --https://github.com/amzxyz/rime_wanxiang_pro
---     - lua_processor@*super_tips_phone*S               #超级提示模块：表情、简码、翻译、化学式
---     - lua_filter@*super_tips_phone*M                  #如果只放到lua_processor一个模块里手机就无法刷新界面,只能分开实现
+--     - lua_processor@*super_tips*S               #超级提示模块：表情、简码、翻译、化学式
+--     - lua_filter@*super_tips*M                  #如果只放到lua_processor一个模块里手机就无法刷新界面,只能分开实现
 --     key_binder/tips_key: "slash"     参数配置
 local _db_pool = _db_pool or {}  -- 数据库池
 
@@ -30,10 +30,12 @@ local M = {}
 -- 初始化词典并加载数据到 LevelDB
 function M.init(env)
     local config = env.engine.schema.config
+    M.tips_key = config:get_string('key_binder/tips_key')
     local db = wrapLevelDb('tips', true)  -- 用于存储词典的 LevelDb 数据库，打开写入模式
     local path = rime_api.get_user_data_dir() .. "/jm_dicts/tips_show.txt"
     local file = io.open(path, "r")
     if not file then
+        db:close()  -- 关闭数据库连接
         return
     end
     -- 从文本文件加载词典并写入到数据库
@@ -46,7 +48,9 @@ function M.init(env)
         ::continue::
     end
     file:close()
+    db:close()  -- 关闭数据库连接
 end
+
 
 -- 处理候选词及提示逻辑
 function M.func(input, env)

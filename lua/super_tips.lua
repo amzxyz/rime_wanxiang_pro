@@ -32,6 +32,7 @@ function M.init(env)
     local path = rime_api.get_user_data_dir() .. "/jm_dicts/tips_show.txt"
     local file = io.open(path, "r")
     if not file then
+        db:close()  -- 关闭数据库连接
         return
     end
     -- 从文本文件加载词典并写入到数据库
@@ -44,7 +45,9 @@ function M.init(env)
         ::continue::
     end
     file:close()
+    db:close()  -- 关闭数据库连接
 end
+
 -- 处理候选词及提示逻辑
 function M.func(key, env)
     local engine = env.engine
