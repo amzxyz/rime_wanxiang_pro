@@ -3,7 +3,7 @@
 #https://github.com/amzxyz/RIME-LMDG
 ---
 name: chars
-version: "2025-03-26 00:03"
+version: "2025-03-26 09:04"
 sort: by_weight
 ...
 啊	a;kk;kk;ka;oj;rr;dz;kb;kk	915
@@ -2725,7 +2725,6 @@ sort: by_weight
 𩁞	cài;cv;cf;vc;;tg;lu;aw;	1
 𩧇	cài;mu;mx;mc;;sf;nf;ca;	1
 𪇭	cài;cn;cn;nc,cn;;tf;lx;aw;	1
-乲	cal;;dv	1
 参	cān;sp;sp;sp;pu;ih;ke;cd;vp	793
 餐	cān;dg;ll;uy;ph;yv;gq;hq;ah	759
 残	cán;dj;dj;dj;fa;mj;gp;gq;dg	667
@@ -8036,7 +8035,6 @@ sort: by_weight
 𩤣	duàn;mu;my;md;;se;nr;cw;	1
 𫞌	duàn;;my	1
 𫟁	duàn;;yy	1
-叾	dug;;lk	1
 对	duì;yc;yc;cy,yc;lk;ei;rk;cf;yc	901
 队	duì;er;er;er;be;no;tj;bw;er	783
 堆	duī;tv;tf;tv;ga;gg;gu;fw;ta	654
@@ -24139,7 +24137,6 @@ sort: by_weight
 𩭾	máo;ew;aw;iw;;sk;ph;de;	1
 𩿂	mào;mn;mn;nm,mn;;hf;vx;tf;	1
 𪃑	mào;on;kn;nm,mn;;af;ox;jh;	1
-唜	mas;;mb	1
 么	me;ps;ps;ps;up;hi;tk;tc;pv	862
 麼	me;gy;gy;my;;ii;zi;ys;	538
 嚒	mē;ky;ky;km;;ri;di;ky;	339
@@ -31904,7 +31901,6 @@ sort: by_weight
 𡬉	sài;it;pt;ds;;hg;xg;rf;	1
 𦞫	sài;bo;bo;bo,ob;;jb;wv;pf;	1
 𪃄	sāi;tn;tn;ns,sn;;wf;qx;ln;	1
-虄	sal;;cu	1
 三	sān;ae;ae;aa;uu;mm;ts;dg;ae	824
 叁	sān;ss;ss;ss;pu;im;kt;cd;vs	800
 散	sàn;cw;cw;wo;zj;tk;lh;ae;cw	693
@@ -35263,7 +35259,6 @@ sort: by_weight
 𫉨	tà;;cy	1
 踏	tā;zo;zo;zt;gv;ra;po;kh;zo	1
 遢	tā;zx;zx;zy;vq;ym;ou;jn;zx	1
-襨	tae;;pc	1
 太	tài;dd;dd;dd;xh;ki;mi;dy;dd	855
 台	tái;sk;sk;sk;po;ir;kd;ck;vk	801
 态	tài;tx;tx;xt;xn;kp;mh;dy;tx	769
@@ -51003,6 +50998,11 @@ sort: by_weight
 𫝷	zuò;;gt	1
 呒	ḿ;kw;kw;kw;or;ru;dd;kf;kw	1
 呣	ḿ;km;km;km;oh;ri;dk;kx;km	1
+乲	无;;dv	1
+叾	无;;lk	1
+唜	无;;mb	1
+虄	无;;cu	1
+襨	无;;pc	1
 乥	无;;pv	1
 夞	无;	1
 𥩟	无;	1
