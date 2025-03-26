@@ -907,37 +907,37 @@ end
 -- end
 
 function GetNowTimeJq(date)
-	local JQtable1, JQtable2
-	date = tostring(date)
-	if string.len(date) < 8 then
-	  return "无效日期"
-	end
-	JQtable2 = GetNextJQ(date)
-	if tonumber(string.sub(date, 5, 8)) < 322 then
-	  JQtable1 = GetNextJQ(tonumber(string.sub(date, 1, 4)) - 1 .. string.sub(date, 5, 8))
-	  -- print(#JQtable1)
-	  if tonumber(string.sub(date, 5, 8)) < 108 then
-		for i = 20, 24 do
-		  table.insert(JQtable2, i - 19, JQtable1[i])
-		end
-	  elseif tonumber(string.sub(date, 5, 8)) < 122 then
-		for i = 21, 24 do
-		  table.insert(JQtable2, i - 20, JQtable1[i])
-		end
-	  elseif tonumber(string.sub(date, 5, 8)) < 206 then
-		for i = 22, 24 do
-		  table.insert(JQtable2, i - 21, JQtable1[i])
-		end
-	  elseif tonumber(string.sub(date, 5, 8)) < 221 then
-		for i = 23, 24 do
-		  table.insert(JQtable2, i - 22, JQtable1[i])
-		end
-	  else
-		table.insert(JQtable2, 1, JQtable1[24])
-	  end
-	  -- print(table.concat(JQtable2))
-	end
-	return JQtable2
+    local JQtable1, JQtable2
+    date = tostring(date)
+    if string.len(date) < 8 then
+      return "无效日期"
+    end
+    JQtable2 = GetNextJQ(date)
+    if tonumber(string.sub(date, 5, 8)) < 322 then
+      JQtable1 = GetNextJQ(tonumber(string.sub(date, 1, 4)) - 1 .. string.sub(date, 5, 8))
+      -- print(#JQtable1)
+      if tonumber(string.sub(date, 5, 8)) < 108 then
+        for i = 20, 24 do
+          table.insert(JQtable2, i - 19, JQtable1[i])
+        end
+      elseif tonumber(string.sub(date, 5, 8)) < 122 then
+        for i = 21, 24 do
+          table.insert(JQtable2, i - 20, JQtable1[i])
+        end
+      elseif tonumber(string.sub(date, 5, 8)) < 206 then
+        for i = 22, 24 do
+          table.insert(JQtable2, i - 21, JQtable1[i])
+        end
+      elseif tonumber(string.sub(date, 5, 8)) < 221 then
+        for i = 23, 24 do
+          table.insert(JQtable2, i - 22, JQtable1[i])
+        end
+      else
+        table.insert(JQtable2, 1, JQtable1[24])
+      end
+      -- print(table.concat(JQtable2))
+    end
+    return JQtable2
   end
   
 
@@ -2241,7 +2241,7 @@ local function translator(input, seg, env)
     
         -- 计算距离下一年1月1日的天数
         local next_year = year + 1
-        local new_year_time = os.time({year = next_year, month = 1, day = 1})
+        local new_year_time = os.time({year = next_year, month = 1, day = 1, hour = 0, min = 0, sec = 0})
         local diff_days_next_year = math.floor((new_year_time - now) / (24 * 3600))
 
         -- 遍历前三个节日并返回节日名称、日期、倒计时天数
