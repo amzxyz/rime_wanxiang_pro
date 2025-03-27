@@ -4,7 +4,7 @@
 #兼容词库，对于多字词汇两种读音的场景，手动维护到本表以及一些其他的杂项
 ---
 name: compatible
-version: "2025-03-27 09:48"
+version: "2025-03-27 21:57"
 sort: by_weight
 ...
 攒个	cuán;fb;fr;fz;jm;qo,xo;uo;rt;fr gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra	391
@@ -94,6 +94,21 @@ sort: by_weight
 还回去	hái;zb;zb;zb;dq;yf;cu;gi;zb huí;kk;kk;kk;no;wr;rd;lk;wk qù;ts;ts;ts;gp;gi;gk;fc;tv	285
 还回来	huán;zb;zb;zb;dq;yf;cu;gi;zb huí;kk;kk;kk;no;wr;rd;lk;wk lái;am;an;am,wb;dl;dt;ah;go;an	350
 还回来	hái;zb;zb;zb;dq;yf;cu;gi;zb huí;kk;kk;kk;no;wr;rd;lk;wk lái;am;an;am,wb;dl;dt;ah;go;an	460
+还给那	hái;zb;zb;zb;dq;yf;cu;gi;zb gěi;sk;sk;sh;eo;vr;id;xw;sk nà;ve;ve;el;rb;sl;at;vf;ve	94
+还给你	hái;zb;zb;zb;dq;yf;cu;gi;zb gěi;sk;sk;sh;eo;vr;id;xw;sk nǐ;rx;rx;re;xf;of;jy;wq;rx	248
+还给谁	hái;zb;zb;zb;dq;yf;cu;gi;zb gěi;sk;sk;sh;eo;vr;id;xw;sk shuí;yv;yf;yv;ca;ig;su;yw;ya	53
+还给他	hái;zb;zb;zb;dq;yf;cu;gi;zb gěi;sk;sk;sh;eo;vr;id;xw;sk tā;ry;ry;ry;xr;od;je;wb;ry	250
+还给她	hái;zb;zb;zb;dq;yf;cu;gi;zb gěi;sk;sk;sh;eo;vr;id;xw;sk tā;ny;ny;ny;yr;vd;be;vb;ny	228
+还给我	hái;zb;zb;zb;dq;yf;cu;gi;zb gěi;sk;sk;sh;eo;vr;id;xw;sk wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg	285
+还给这	hái;zb;zb;zb;dq;yf;cu;gi;zb gěi;sk;sk;sh;eo;vr;id;xw;sk zhè;zw;zw;zw;jq;yk;vu;yp;zx	110
+你还给	nǐ;rx;rx;re;xf;of;jy;wq;rx hái;zb;zb;zb;dq;yf;cu;gi;zb gěi;sk;sk;sh;eo;vr;id;xw;sk	138
+他还给	tā;ry;ry;ry;xr;od;je;wb;ry hái;zb;zb;zb;dq;yf;cu;gi;zb gěi;sk;sk;sh;eo;vr;id;xw;sk	129
+我还给	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg hái;zb;zb;zb;dq;yf;cu;gi;zb gěi;sk;sk;sh;eo;vr;id;xw;sk	145
+还给你钱	hái;zb;zb;zb;dq;yf;cu;gi;zb gěi;sk;sk;sh;eo;vr;id;xw;sk nǐ;rx;rx;re;xf;of;jy;wq;rx qián;jj;jj;jj;da;oj;zp;qg;jg	223
+还给她过	hái;zb;zb;zb;dq;yf;cu;gi;zb gěi;sk;sk;sh;eo;vr;id;xw;sk tā;ny;ny;ny;yr;vd;be;vb;ny guò;zc;zc;zc;kq;yi;ku;fp;zc	71
+还给她们	hái;zb;zb;zb;dq;yf;cu;gi;zb gěi;sk;sk;sh;eo;vr;id;xw;sk tā;ny;ny;ny;yr;vd;be;vb;ny men;rm;rm;rm;xo;os;ja;wu;rm	303
+什么时候还	shén;ru;ru;ru;xs;oj;jn;wf;ru me;ps;ps;ps;up;hi;tk;tc;pv shí;oc;oc;oc;vk;ai;ok;jf;oc hòu;ru;ru;ru;xx;ok;jo;wh;rd huán;zb;zb;zb;dq;yf;cu;gi;zb	10
+下次一定还	xià;ab;ab;ab,ad;dh;my;fy;gh;ab cì;dq;dr;dq;fe;io,mo;we;uq;dr yī;aa;aa;aa;dd;mm;fi;gg;aa dìng;bz;br;bp;ie;jo;wt;pg;gr huán;zb;zb;zb;dq;yf;cu;gi;zb	10
 还都	huán;zb;zb;zb;dq;yf;cu;gi;zb dū;le;le;ev;gb;jl;qt;ft;ue	578
 还都	hái;zb;zb;zb;dq;yf;cu;gi;zb dōu;le;le;ev;gb;jl;qt;ft;ue	578
 重载	zhòng;ql;pa;pa,ql;sg;hg;ld;tg;pa zài;gi;ui;gi,ig;ha;jq;ny;fa;ig	500
