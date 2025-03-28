@@ -4926,7 +4926,6 @@
 翻译：a.深渊的;深海的	abyssal
 翻译：n.阿比西尼亚	Abyssinia
 翻译：a.阿比西尼亚的 n.阿比西尼亚人;依索比亚人	Abyssinian
-翻译：n.交流	ac
 翻译：n.洋槐;刺块;阿拉伯橡胶树	acacia
 翻译：n.学术界;学术环境	academia
 翻译：a.学院的;理论的;不够实际的	academic

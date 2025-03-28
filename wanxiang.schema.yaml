@@ -3,7 +3,7 @@
 #本方案匹配词库解码顺序为：全拼拼音；墨奇码;鹤形;自然码;简单鹤;仓颉;虎码首末;五笔前2;汉心码;
 #############DIY你想要的方案组合,试试搭配一个自然码+墨奇辅助的方案吧！###########################
 set_shuru_schema:              #配置此项就是选择什么输入法,同时拆分反查和中英文混输也将匹配该输入方案
-  __include: 自然码             #可选解码规则有   全拼, 自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光 选择一个填入
+  __include: 自然码             #可选解码规则有   全拼, 自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光, 国标双拼    选择一个填入
 set_algebra_fuzhu:             #配置此项就是选择什么辅助码
   __include: fuzhu_zrm         #可选辅助码有：fuzhu_kong，fuzhu_hanxin, fuzhu_moqi, fuzhu_flypy, fuzhu_zrm, fuzhu_tiger, fuzhu_wubi    选择一个填入
 set_cn_en:                     #中英混输
@@ -585,7 +585,7 @@ speller:
     - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
     - xform/^ng(;.*)/eng$1/
     - xform/ńg|ňg|ǹg/eng/
-    - xform/ń|ň|ǹ/en/ 
+    - xform/ń|ň|ǹ/en/
     - derive/^([jqxy])u(;.*)$/$1v$2/
     - derive/^([aoe].*)(;.*)$/o$1$2/
     - xform/^([ae])(.*)(;.*)$/$1$1$2$3/
@@ -624,7 +624,7 @@ speller:
     - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
     - xform/^ng(;.*)/eng$1/
     - xform/ńg|ňg|ǹg/eng/
-    - xform/ń|ň|ǹ/en/ 
+    - xform/ń|ň|ǹ/en/
     - derive/^([jqxy])u(;.*)$/$1v$2/
     - xform/^([aoe].*)(;.*)$/Ⓞ$1$2/
     - xform/^(\w+?)en(;.*)$/$1Ⓦ$2/
@@ -661,7 +661,7 @@ speller:
     - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
     - xform/^ng(;.*)/eng$1/
     - xform/ńg|ňg|ǹg/eng/
-    - xform/ń|ň|ǹ/en/ 
+    - xform/ń|ň|ǹ/en/
     - xform/^([aoe].*)(;.*)$/Ⓞ$1$2/
     - xform/^(\w+?)ei(;.*)$/$1Ⓠ$2/
     - xform/^(\w+?)ian(;.*)$/$1Ⓦ$2/
@@ -692,6 +692,41 @@ speller:
     - xform/^sh/Ⓥ/
     - xlit/ⓆⓌⒺⓇⓉⓎⓄⓅⒶⓈⒹⒻⒼⒽⒿⓀⓁⓏⓍⒸⓋⒷⓃⓂ/qwertyopasdfghjklzxcvbnm/
 
+国标双拼:
+  __append:
+    - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
+    - xform/^ng(;.*)/eng$1/
+    - xform/ńg|ňg|ǹg/eng/
+    - xform/ń|ň|ǹ/en/
+    - derive/^([jqxy])u(;.*)$/$1v$2/
+    - derive/^([aoe])([ioun])(;.*)$/$1$1$2$3/
+    - xform/^([aoe])(ng)?(;.*)$/$1$1$2$3/
+    - xform/^(\w+?)[iu]a(;.*)$/$1Ⓠ$2/
+    - xform/^(\w+?)[vu]an(;.*)$/$1Ⓦ$2/
+    - xform/^(\w+?)en(;.*)$/$1Ⓡ$2/
+    - xform/^(\w+?)ie(;.*)$/$1Ⓣ$2/
+    - xform/^(\w+?)(iu|uai)(;.*)$/$1Ⓨ$3/
+    - xform/^(\w+?)uo(;.*)$/$1Ⓞ$2/
+    - xform/^(\w+?)ou(;.*)$/$1Ⓟ$2/
+    - xform/^(\w+?)i?ong(;.*)$/$1Ⓢ$2/
+    - xform/^(\w+?)ian(;.*)$/$1Ⓓ$2/
+    - xform/^(\w+?)an(;.*)$/$1Ⓕ$2/
+    - xform/^(\w+?)(iang|uang)(;.*)$/$1Ⓝ$3/
+    - xform/^(\w+?)iao(;.*)$/$1Ⓜ$2/
+    - xform/^(\w+?)ang(;.*)$/$1Ⓖ$2/
+    - xform/^(\w+?)eng(;.*)$/$1Ⓗ$2/
+    - xform/^(\w+?)ing(;.*)$/$1Ⓙ$2/
+    - xform/^(\w+?)ai(;.*)$/$1Ⓚ$2/
+    - xform/^(\w+?)(in|er)(;.*)$/$1Ⓛ$3/
+    - xform/^(\w+?)[vu]n(;.*)$/$1Ⓩ$2/
+    - xform/^(\w+?)[vu]e(;.*)$/$1Ⓧ$2/
+    - xform/^(\w+?)ao(;.*)$/$1Ⓒ$2/
+    - xform/^(\w+?)(v|ui)(;.*)$/$1Ⓥ$3/
+    - xform/^(\w+?)ei(;.*)$/$1Ⓑ$2/
+    - xform/^zh/Ⓥ/
+    - xform/^ch/Ⓘ/
+    - xform/^sh/Ⓤ/
+    - xlit/ⓆⓌⓇⓉⓎⓊⒾⓄⓅⓈⒹⒻⒼⒽⒿⓀⓁⓏⓍⒸⓋⒷⓃⓂ/qwrtyuiopsdfghjklzxcvbnm/
 ###############################################以下是用来配置不同的辅助码方案###############################################
 fuzhu_kong: 
   __append: 

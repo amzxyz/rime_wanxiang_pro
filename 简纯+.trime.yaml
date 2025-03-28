@@ -186,7 +186,7 @@ style:
   key_height: { __include: conf/sym_height } #键高
   key_width: 12 #键宽，占屏幕宽的百分比
   round_corner: 13 #按键圆角半径
-  shadow_radius: 0.9#按键阴影半径
+  shadow_radius: 0.9 #按键阴影半径
   key_font: symbol.ttf #键盘字型
   latin_font: latin.ttf #西文字型
   hanb_font: hanb.ttf #扩充字型
@@ -3290,7 +3290,7 @@ preset_keyboards:
       - { click: IME_switch1, width: 18, height: 25, key_back_color: keyboard_back_color }
       - { click: Left, width: 16, height: 25, key_back_color: keyboard_back_color }
       - { click: fancha, width: 16, height: 25, key_back_color: keyboard_back_color }
-      - { click: bihua, width: 16, height: 25, key_back_color: keyboard_back_color }
+      - { click: zaoci, width: 16, height: 25, key_back_color: keyboard_back_color }
       - { click: Right, width: 16, height: 25, key_back_color: keyboard_back_color } 
       - { click: 'Back1', width: 18, height: 25, key_back_color: keyboard_back_color }
 
@@ -3364,7 +3364,7 @@ preset_keyboards:
       - { click: IME_switch1, width: 18, height: 25, key_back_color: keyboard_back_color }
       - { click: Left, width: 16, height: 25, key_back_color: keyboard_back_color }
       - { click: fancha, width: 16, height: 25, key_back_color: keyboard_back_color }
-      - { click: bihua, width: 16, height: 25, key_back_color: keyboard_back_color }
+      - { click: zaoci, width: 16, height: 25, key_back_color: keyboard_back_color }
       - { click: Right, width: 16, height: 25, key_back_color: keyboard_back_color } 
       - { click: 'Back1', width: 18, height: 25, key_back_color: keyboard_back_color }
 
@@ -3434,7 +3434,7 @@ preset_keyboards:
       - { click: IME_switch1, width: 18, height: 25, key_back_color: keyboard_back_color }
       - { click: Left, width: 16, height: 25, key_back_color: keyboard_back_color }
       - { click: fancha, width: 16, height: 25, key_back_color: keyboard_back_color }
-      - { click: bihua, width: 16, height: 25, key_back_color: keyboard_back_color }
+      - { click: zaoci, width: 16, height: 25, key_back_color: keyboard_back_color }
       - { click: Right, width: 16, height: 25, key_back_color: keyboard_back_color } 
       - { click: 'Back1', width: 18, height: 25, key_back_color: keyboard_back_color }
 
@@ -3487,7 +3487,7 @@ preset_keyboards:
       - { click: IME_switch1, width: 18, height: 25, key_back_color: keyboard_back_color }
       - { click: Left, width: 16, height: 25, key_back_color: keyboard_back_color }
       - { click: fancha, width: 16, height: 25, key_back_color: keyboard_back_color }
-      - { click: bihua, width: 16, height: 25, key_back_color: keyboard_back_color }
+      - { click: zaoci, width: 16, height: 25, key_back_color: keyboard_back_color }
       - { click: Right, width: 16, height: 25, key_back_color: keyboard_back_color } 
       - { click: 'Back1', width: 18, height: 25, key_back_color: keyboard_back_color }
 
@@ -3874,7 +3874,7 @@ preset_keys:
   space: { label: '', preview: '{schema}', repeatable: false, functional: false, send: space}
   space1: {label: 空格, repeatable: false, functional: false, send: space}  #用于liquidkeyboard显示一致性
   space2: {label: ⎵, repeatable: false, functional: false, send: space}  #用与数字键盘空格的展现形式
-  bihua: { label: '笔画', text: '{`}{`}' }
+  zaoci: { label: '造词', text: '{a}{c}' }
   fancha: { label: '反查', send: '`' }
   jisuan: { label: '计算', send: V }
   jine: { label: '金额', send: R }
@@ -3945,7 +3945,7 @@ preset_keys:
   # trime键盘
   Mode_switch_space: { toggle: ascii_mode, send: Mode_switch, states: [' ', 'ascii'] }
   Keyboard_switch: { label: 键盘, send: Eisu_toggle, select: .next }
-  Back: { label: 返回, send: Eisu_toggle, select: .default }
+  Back: { label: 返回, send: Eisu_toggle, select: .last_lock }
   Back9: { label: 返回, send: Eisu_toggle, select: 9jian }
   Back14: { label: 返回, send: Eisu_toggle, select: 14jian }
   Back18: { label: 返回, send: Eisu_toggle, select: 18jian }
