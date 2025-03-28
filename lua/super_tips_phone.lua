@@ -2,8 +2,8 @@
 --采用leveldb数据库,支持大数据遍历,支持多种类型混合,多种拼音编码混合,维护简单
 --支持候选匹配和编码匹配两种
 --https://github.com/amzxyz/rime_wanxiang_pro
---     - lua_processor@*super_tips*S               #超级提示模块：表情、简码、翻译、化学式
---     - lua_filter@*super_tips*M                  #如果只放到lua_processor一个模块里手机就无法刷新界面,只能分开实现
+--     - lua_processor@*super_tips_phone*S               #超级提示模块：表情、简码、翻译、化学式
+--     - lua_filter@*super_tips_phone*M                  #如果只放到lua_processor一个模块里手机就无法刷新界面,只能分开实现
 --     key_binder/tips_key: "slash"     参数配置
 local _db_pool = _db_pool or {}  -- 数据库池
 
