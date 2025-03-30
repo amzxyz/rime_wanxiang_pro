@@ -328,14 +328,18 @@ function CircleEquationsxr(h, k, r)
     -- 圆的标准方程
     local standardEquation
     if h == 0 then
-        if k >= 0 then
+        if k > 0 then
             standardEquation = "x²+(y-" .. k .. ")²=" .. r_squared
+        elseif k == 0 then
+            standardEquation = "x²+y²=" .. r_squared
         else
             standardEquation = "x²+(y+" .. -k .. ")²=" .. r_squared
         end
     elseif k == 0 then
-        if h >= 0 then
+        if h > 0 then
             standardEquation = "(x-" .. h .. ")²+y²=" .. r_squared
+        elseif h == 0 then
+            standardEquation = "x²+y²=" .. r_squared
         else
             standardEquation = "(x+" .. -h .. ")²+y²=" .. r_squared
         end
@@ -436,11 +440,15 @@ function CircleEquationsxl(h ,k ,x1, y1, x2, y2)
             end
         end
     elseif k == 0 then
-        if h > 0 then
-            standardEquation = "(x-" .. h .. ")²+y²=" .. r_squared
-        else
-            standardEquation = "(x+" .. -h .. ")²+y²=" .. r_squared
-        end
+            if h == 0 then
+                standardEquation = "x²+y²=" .. r_squared
+            else
+                if h > 0 then
+                    standardEquation = "(x-" .. h .. ")²+y²=" .. r_squared
+                else
+                    standardEquation = "(x+" .. -h .. ")²+y²=" .. r_squared
+                end
+            end
     else
         if h > 0 and k > 0 then
             standardEquation = "(x-" .. h .. ")²+(y-" .. k .. ")²=" .. r_squared
@@ -618,10 +626,14 @@ function CircleEquationssd(x1, y1, x2, y2, x3, y3)
             end
         end
     elseif k == 0 then
-        if h > 0 then
-            standardEquation = "(x-" .. h .. ")²+y²=" .. r_squared
+        if h == 0 then
+            standardEquation = "y²+x²=" .. r_squared
         else
-            standardEquation = "(x+" .. -h .. ")²+y²=" .. r_squared
+            if h > 0 then
+                standardEquation = "(x-" .. h .. ")²+y²=" .. r_squared
+            else
+                standardEquation = "(x+" .. -h .. ")²+y²=" .. r_squared
+            end
         end
     else
         if h > 0 and k > 0 then
