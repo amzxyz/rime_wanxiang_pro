@@ -103,7 +103,7 @@ engine:
     - lua_translator@*shijian            # 时间、日期、星期、农历、节气、时辰等等
     - lua_translator@*unicode            # Unicode
     - lua_translator@*number_translator  # 数字、金额大写
-    - lua_translator@*calculator         # 计算器
+    - lua_translator@*super_calculator   # 计算器
     - table_translator@custom_phrase     # 自定义短语 custom_phrase.txt
     - table_translator@melt_eng          # 英文输入
     - table_translator@cn_en             # 中英混合词汇
