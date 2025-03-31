@@ -6,29 +6,30 @@
 -- 计算n次方根、平均值、方差、阶乘、角度与弧度的相互转化
 
 -- 新增功能：
--- 求解一元一次方程、二元一次方程组、一元二次方程；
+-- 求解一元一次方程、二元一次方程组、一元二次方程、一元三次方程；
 -- 求解一次、二次函数解析式、圆的方程；
 -- 取整函数（包括向上取整和向下取整）、求余函数
 -- 已知数列中任意两项，求通项公式(等差或等比);求数列的前n项和(等差或等比)
 -- 已知三角形三边长，求面积；已知正多边形边数n、边长a，求面积
 
 -- 功能代码一览：
--- rdm = "随机数"
--- crpa = "已知边数n与边长a计算正多边形面积"
--- cta = "已知三角形的三边长,求三角形面积"
--- gss = "已知等比数列的首项a1,公比q ,求指定的前n项和"
--- ass = "已知等差数列的首项a1,公差d ,求指定的前n项和"
--- fsf = "已知数列的任意两项,求其通项公式"
+-- sjs = "随机数"
+-- zdbx = "已知边数n与边长a计算正多边形面积"
+-- sjx = "已知三角形的三边长,求三角形面积"
+-- dbsl = "已知等比数列的首项a1,公比q ,求指定的前n项和"
+-- dcsl = "已知等差数列的首项a1,公差d ,求指定的前n项和"
+-- txgs = "已知数列的任意两项,求其通项公式"
 -- cexr = "已知圆心坐标和半径求圆的方程"
 -- cexl = "已知圆心和圆上不同两点的坐标求圆方程"
 -- cesd = "已知圆上不同三点的坐标，求圆方程"
--- sle = "求解一元一次方程"
--- sls = "求解二元一次方程组"
--- psf = "点斜法求解一次函数解析式"
--- tpf = "两点法求解一次函数解析式"
--- sqe = "求解一元二次方程"
--- gqed = "顶点式求解二次函数解析式"
--- gqey = "一般式求解二次函数解析式"
+-- yyyc = "求解一元一次方程"
+-- eyyc = "求解二元一次方程组"
+-- dxf = "点斜法求解一次函数解析式"
+-- ldf = "两点法求解一次函数解析式"
+-- yyec = "求解一元二次方程"
+-- yysc = "求解一元三次方程"
+-- dds = "顶点式求解二次函数解析式"
+-- ybs = "一般式求解二次函数解析式"
 -- sin = "正弦"
 -- sinh = "双曲正弦"
 -- asin = "反正弦"
@@ -51,9 +52,9 @@
 -- avg = "平均值"
 -- var = "方差"
 -- fact = "阶乘"
--- ceil = "向上取整"
--- floor = "向下取整"
--- mod = "取余函数"
+-- xsqz = "向上取整"
+-- xxqz = "向下取整"
+-- mod = "求余函数"
 
 local T = {}
 
@@ -103,8 +104,8 @@ local methods_desc = {
 -- random([m [,n ]]) 返回m-n之间的随机数, n为空则返回1-m之间, 都为空则返回0-1之间的小数
 local function random(...) return math.random(...) end
 -- 注册到函数表中
-calc_methods["rdm"] = random
-methods_desc["rdm"] = "随机数"
+calc_methods["sjs"] = random
+methods_desc["sjs"] = "随机数"
 
 
 
@@ -168,6 +169,318 @@ end
 
 
 
+-- 计算开 N 次方
+local function nth_root(x, n)
+    if n % 2 == 0 and x < 0 then
+        return nil -- 偶次方时负数没有实数解
+    elseif x < 0 then
+        return -((-x) ^ (1 / n))
+    else
+        return x ^ (1 / n)
+    end
+end
+calc_methods["nroot"] = nth_root
+methods_desc["nroot"] = "计算 x 开 N 次方"
+
+
+
+
+-- 正弦
+local function sin(x) return math.sin(x) end
+calc_methods["sin"] = sin
+methods_desc["sin"] = "正弦"
+
+
+
+
+-- 双曲正弦
+local function sinh(x)
+    return (math.exp(x) - math.exp(-x)) / 2
+end
+calc_methods["sinh"] = sinh
+methods_desc["sinh"] = "双曲正弦"
+
+
+
+
+-- 反正弦
+local function asin(x) return math.asin(x) end
+calc_methods["asin"] = asin
+methods_desc["asin"] = "反正弦"
+
+
+
+
+-- 余弦
+local function cos(x) return math.cos(x) end
+calc_methods["cos"] = cos
+methods_desc["cos"] = "余弦"
+
+
+
+
+-- 双曲余弦
+local function cosh(x)
+    return (math.exp(x) + math.exp(-x)) / 2
+end
+calc_methods["cosh"] = cosh
+methods_desc["cosh"] = "双曲余弦"
+
+
+
+
+-- 反余弦
+local function acos(x) return math.acos(x) end
+calc_methods["acos"] = acos
+methods_desc["acos"] = "反余弦"
+
+
+
+
+-- 正切
+local function tan(x) return math.tan(x) end
+calc_methods["tan"] = tan
+methods_desc["tan"] = "正切"
+
+
+
+
+-- 双曲正切
+local function tanh(x)
+    local e = math.exp(2 * x)
+    return (e - 1) / (e + 1)
+end
+calc_methods["tanh"] = tanh
+methods_desc["tanh"] = "双曲正切"
+
+
+
+
+-- 反正切
+local function atan(x) return math.atan(x) end
+calc_methods["atan"] = atan
+methods_desc["atan"] = "反正切"
+
+
+
+
+-- 返回以弧度为单位的点(x,y)相对于x轴的逆时针角度。y是点的纵坐标，x是点的横坐标
+-- 返回范围从−π到π （以弧度为单位），其中负角度表示向下旋转，正角度表示向上旋转
+-- 它与传统的 math.atan(y/x) 函数相比，具有更好的数学定义，因为它能够正确处理边界情况（例如x=0）
+local function atan2(y, x)
+    if x == 0 and y == 0 then
+        return 0 / 0 -- 返回NaN
+    elseif x == 0 and y ~= 0 then
+        if y > 0 then
+            return math.pi / 2
+        else
+            return -math.pi / 2
+        end
+    else
+        return math.atan(y / x) + (x < 0 and math.pi or 0)
+    end
+end
+calc_methods["atan2"] = atan2
+methods_desc["atan2"] = "返回以弧度为单位的点(x,y)相对于x轴的逆时针角度"
+
+
+
+
+-- 将角度从弧度转换为度 e.g. deg(π) = 180
+local function deg(x) return math.deg(x) end
+calc_methods["deg"] = deg
+methods_desc["deg"] = "弧度转换为角度"
+
+
+
+
+-- 将角度从度转换为弧度 e.g. rad(180) = π
+local function rad(x) return math.rad(x) end
+calc_methods["rad"] = rad
+methods_desc["rad"] = "角度转换为弧度"
+
+
+
+
+-- 返回 x*2^y
+local function ldexp(x, y) return x * 2 ^ y end
+calc_methods["ldexp"] = ldexp
+methods_desc["ldexp"] = "返回 x*2^y"
+
+
+
+
+-- 返回 e^x
+local function exp(x) return math.exp(x) end
+calc_methods["exp"] = exp
+methods_desc["exp"] = "返回 e^x"
+
+
+
+
+-- 返回x的平方根 e.g. sqrt(x) = x^0.5
+local function sqrt(x) return math.sqrt(x) end
+calc_methods["sqrt"] = sqrt
+methods_desc["sqrt"] = "计算 x 平方根"
+
+
+
+
+-- x为底的对数, log(10, 100) = log(100) / log(10) = 2
+local function log(x, y)
+    -- 不能为负数或0
+    if x <= 0 or y <= 0 then
+        return nil
+    end
+
+    return math.log(y) / math.log(x)
+end
+calc_methods["log"] = log
+methods_desc["log"] = "x作为底数的对数"
+
+
+
+
+-- 自然数e为底的对数
+local function loge(x)
+    -- 不能为负数或0
+    if x <= 0 then return nil end
+
+    return math.log(x)
+end
+calc_methods["loge"] = loge
+methods_desc["loge"] = "e作为底数的对数"
+
+
+
+
+-- 10为底的对数
+local function logt(x)
+    -- 不能为负数或0
+    if x <= 0 then return nil end
+
+    return math.log(x) / math.log(10)
+end
+calc_methods["logt"] = logt
+methods_desc["logt"] = "10作为底数的对数"
+
+
+
+
+-- 平均值
+local function avg(...)
+    local data = {...}
+    local n = select("#", ...)
+    -- 样本数量不能为0
+    if n == 0 then return nil end
+
+    -- 计算总和
+    local sum = 0
+    for _, value in ipairs(data) do
+        sum = sum + value
+    end
+
+    return sum / n
+end
+calc_methods["avg"] = avg
+methods_desc["avg"] = "平均值"
+
+
+
+
+-- 方差
+local function variance(...)
+    local data = {...}
+    local n = select("#", ...)
+    -- 样本数量不能为0
+    if n == 0 then return nil end
+
+    -- 计算均值
+    local sum = 0
+    for _, value in ipairs(data) do
+        sum = sum + value
+    end
+    local mean = sum / n
+
+    -- 计算方差
+    local sum_squared_diff = 0
+    for _, value in ipairs(data) do
+        sum_squared_diff = sum_squared_diff + (value - mean) ^ 2
+    end
+
+    return sum_squared_diff / n
+end
+calc_methods["var"] = variance
+methods_desc["var"] = "方差"
+
+
+
+
+-- 阶乘
+local function factorial(x)
+    -- 不能为负数
+    if x < 0 then return nil end
+    if x == 0 or x == 1 then return 1 end
+
+    local result = 1
+    for i = 1, x do
+        result = result * i
+    end
+
+    return result
+end
+calc_methods["fact"] = factorial
+methods_desc["fact"] = "阶乘"
+
+
+
+
+-- 实现阶乘计算(!)
+local function replaceToFactorial(str)
+    -- 替换[0-9]!字符为fact([0-9])以实现阶乘
+    return str:gsub("([0-9]+)!", "fact(%1)")
+end
+
+
+
+
+-- 向上取整函数
+function ceil(x)
+    return math.ceil(x)
+end
+calc_methods["xsqz"] = ceil
+methods_desc["xsqz"] = "向上取整"
+
+
+
+
+-- 向下取整函数
+function floor(x)
+    return math.floor(x)
+end
+calc_methods["xxqz"] = floor
+methods_desc["xxqz"] = "向下取整"
+
+
+
+
+-- 取余函数
+-- 定义一个取余函数
+function remainder(x, y)
+    -- 使用math.fmod函数计算余数
+    local result = math.fmod(x, y)
+    -- 如果x是负数，math.fmod会返回负数，需要调整为正数
+    if result < 0 then
+        result = result + y
+    end
+    return result
+end
+calc_methods["mod"] = remainder
+methods_desc["mod"] = "求余函数"
+
+
+
+
 -- 计算正多边形面积
 function calculateRegularPolygonArea(n, a)
     -- 检查边数n是否为正整数
@@ -184,8 +497,8 @@ function calculateRegularPolygonArea(n, a)
     s = f(s)
     return s
 end
-calc_methods["crpa"] = calculateRegularPolygonArea
-methods_desc["crpa"] = "已知边数n与边长a计算正多边形面积"
+calc_methods["zdbx"] = calculateRegularPolygonArea
+methods_desc["zdbx"] = "已知边数n与边长a计算正多边形面积"
 
 
 
@@ -208,8 +521,8 @@ function geometricSeriesSum(a1, q, n)
         return s
     end
 end
-calc_methods["gss"] = geometricSeriesSum
-methods_desc["gss"] = "已知等比数列的首项a1,公比q ,求指定的前n项和"
+calc_methods["dbsl"] = geometricSeriesSum
+methods_desc["dbsl"] = "已知等比数列的首项a1,公比q ,求指定的前n项和"
 
 
 
@@ -229,8 +542,8 @@ function ArithmeticSeriesSum(a1, d, n)
         return s
     end
 end
-calc_methods["ass"] = ArithmeticSeriesSum
-methods_desc["ass"] = "已知等差数列的首项a1,公差d ,求指定的前n项和"
+calc_methods["dcsl"] = ArithmeticSeriesSum
+methods_desc["dcsl"] = "已知等差数列的首项a1,公差d ,求指定的前n项和"
 
 
 
@@ -308,8 +621,8 @@ function findSequenceFormula(ai, i, ak, k, b)
         return "b 参数必须是0或1"
     end
 end
-calc_methods["fsf"] = findSequenceFormula
-methods_desc["fsf"] = "已知数列的任意两项,求其通项公式"
+calc_methods["txgs"] = findSequenceFormula
+methods_desc["txgs"] = "已知数列的任意两项,求其通项公式"
 
 
 
@@ -440,15 +753,15 @@ function CircleEquationsxl(h ,k ,x1, y1, x2, y2)
             end
         end
     elseif k == 0 then
-            if h == 0 then
-                standardEquation = "x²+y²=" .. r_squared
+        if h == 0 then
+            standardEquation = "x²+y²=" .. r_squared
+        else
+            if h > 0 then
+                standardEquation = "(x-" .. h .. ")²+y²=" .. r_squared
             else
-                if h > 0 then
-                    standardEquation = "(x-" .. h .. ")²+y²=" .. r_squared
-                else
-                    standardEquation = "(x+" .. -h .. ")²+y²=" .. r_squared
-                end
+                standardEquation = "(x+" .. -h .. ")²+y²=" .. r_squared
             end
+        end
     else
         if h > 0 and k > 0 then
             standardEquation = "(x-" .. h .. ")²+(y-" .. k .. ")²=" .. r_squared
@@ -654,6 +967,8 @@ calc_methods["cesd"] = CircleEquationssd
 methods_desc["cesd"] = "已知圆上不同三点的坐标，求圆方程"
 
 
+
+
 -- 求解一元一次方程:ax+b=0
 function solveLinearEquation(a, b)
     -- 检查a是否为0，因为如果a为0，方程将不再是一元一次方程
@@ -670,8 +985,8 @@ function solveLinearEquation(a, b)
         return "x=" .. x
     end
 end
-calc_methods["sle"] = solveLinearEquation
-methods_desc["sle"] = "求解一元一次方程"
+calc_methods["yyyc"] = solveLinearEquation
+methods_desc["yyyc"] = "求解一元一次方程"
 
 
 
@@ -698,8 +1013,8 @@ function solveLinearSystem(a, b, c, d, e, f)
     return "x=" .. x .. ",y=" .. y
     
 end
-calc_methods["sls"] = solveLinearSystem
-methods_desc["sls"] = "求解二元一次方程组"
+calc_methods["eyyc"] = solveLinearSystem
+methods_desc["eyyc"] = "求解二元一次方程组"
 
 
 
@@ -747,8 +1062,8 @@ function pointSlopeForm(k, x1, y1)
 
     return equation
 end
-calc_methods["psf"] = pointSlopeForm
-methods_desc["psf"] = "点斜法求解一次函数解析式"
+calc_methods["dxf"] = pointSlopeForm
+methods_desc["dxf"] = "点斜法求解一次函数解析式"
 
 
 
@@ -799,8 +1114,8 @@ function twoPointsForm(x1, y1, x2, y2)
         return "y=" .. k .. b
     end
 end
-calc_methods["tpf"] = twoPointsForm
-methods_desc["tpf"] = "两点法求解一次函数解析式"
+calc_methods["ldf"] = twoPointsForm
+methods_desc["ldf"] = "两点法求解一次函数解析式"
 
 
 
@@ -821,17 +1136,90 @@ function solveQuadraticEquation(a, b, c)
     elseif discriminant == 0 then
         local x = -b / (2 * a)
         x = f(x)
-        return "x1=x2=" .. x
+        return "x₁=x₂=" .. x
     else
         local x1 = (-b + math.sqrt(discriminant)) / (2 * a)
         local x2 = (-b - math.sqrt(discriminant)) / (2 * a)
         x1 = f(x1)
         x2 = f(x2)
-        return "x1=" .. x1 .. ",x2=" .. x2
+        return "x₁=" .. x1 .. ",x₂=" .. x2
     end
 end
-calc_methods["sqe"] = solveQuadraticEquation
-methods_desc["sqe"] = "求解一元二次方程"
+calc_methods["yyec"] = solveQuadraticEquation
+methods_desc["yyec"] = "求解一元二次方程"
+
+
+
+
+-- 求解一元三次方程
+function solveCubicEquation(a, b, c, d)
+    -- 检查参数正确性
+    if type(a) ~= "number" or type(b) ~= "number" or type(c) ~= "number" or type(d) ~= "number" then
+        return "错误：系数必须是数字。"
+    end
+    if a == 0 then
+        return "错误：系数a不能为零。"
+    end
+
+    -- 计算重根判别式
+    local A = b^2 - 3*a*c
+    local B = b*c - 9*a*d
+    local C = c^2 - 3*b*d
+    A = f(A)
+    B = f(B)
+    C = f(C)
+
+    -- 计算总判别式
+    local Delta = B^2 - 4*A*C
+    Delta = f(Delta)
+
+    -- 根据盛金公式进行求解
+    if A == 0 and B == 0 then
+        -- 条件一：A = B = 0，方程有一个三重实根
+        local x = -b / (3*a)
+        x = f(x)
+        return "x₁=x₂=x₃=" .. x
+    elseif Delta > 0 then
+        -- 条件二：Delta > 0，方程有一个实根和一对共轭虚根
+        local Y1 = A * b + 3 * a * (-B + math.sqrt(Delta)) / 2
+        local Y2 = A * b + 3 * a * (-B - math.sqrt(Delta)) / 2
+        local y1 = nth_root(Y1, 3)
+        local y2 = nth_root(Y2, 3)
+        local x1 = (-b - y1 - y2) / (3*a)
+        x1 = f(x1)
+        local P = (-b+0.5*(y1+y2)) / (3*a)
+        P = f(P)
+        local Q = (0.5*math.sqrt(3)*(y1-y2))/ (3*a)
+        Q = f(Q)
+        Q = Q .. "i"
+        local x2 = P + Q
+        local x3 = P - Q
+        return "x₁=" .. x1 .. ",x₂=" .. x2 .. ",x₃=" .. x3
+    elseif Delta == 0 and A ~= 0 then
+        -- 条件三：Delta = 0，方程有三个实根，其中有一个两重根
+        local K = B / A
+        local x1 = -b / a + K
+        local x2 = -0.5 * K
+        x1 = f(x1)
+        x2 = f(x2)
+        return "x₁=" .. x1 .. ",x₂=x₃=" .. x2
+    elseif Delta < 0 and A > 0 then
+        -- 条件四：Delta < 0，方程有三个不相等的实根
+        local T = (2*A*b - 3*a*B) / (2*math.sqrt(A^3))
+        local M = math.acos(T)
+        local S = math.cos(M/3)
+        local R = math.sin(M/3)
+        local x1 = (-b - 2*math.sqrt(A)*S) / (3*a)
+        local x2 = (-b + math.sqrt(A)*(S + math.sqrt(3)*R)) / (3*a)
+        local x3 = (-b + math.sqrt(A)*(S - math.sqrt(3)*R)) / (3*a)
+        x1 = f(x1)
+        x2 = f(x2)
+        x3 = f(x3)
+        return "x₁=" .. x1 .. ",x₂=" .. x2 .. ",x₃=" .. x3
+    end
+end
+calc_methods["yysc"] = solveCubicEquation
+methods_desc["yysc"] = "求解一元三次方程"
 
 
 
@@ -895,8 +1283,8 @@ function getQuadraticEquationdd(x1, y1, x2, y2)
     -- 使用格式化函数并返回解析式
     return "y=" .. formatCoefficient(a, b, c)
 end
-calc_methods["gqed"] = getQuadraticEquationdd
-methods_desc["gqed"] = "顶点式求解二次函数解析式"
+calc_methods["dds"] = getQuadraticEquationdd
+methods_desc["dds"] = "顶点式求解二次函数解析式"
 
 
 
@@ -985,8 +1373,8 @@ function getQuadraticEquationy(x1, y1, x2, y2, x3, y3)
     local equation = "y=" .. formatCoefficient(a, b, c)
     return equation
 end
-calc_methods["gqey"] = getQuadraticEquationy
-methods_desc["gqey"] = "一般式求解二次函数解析式"
+calc_methods["ybs"] = getQuadraticEquationy
+methods_desc["ybs"] = "一般式求解二次函数解析式"
 
 
 
@@ -1006,331 +1394,8 @@ function calculateTriangleArea(a, b, c)
     s = f(s)
     return s
 end
-calc_methods["cta"] = calculateTriangleArea
-methods_desc["cta"] = "已知三角形的三边长,求三角形面积"
-
-
-
--- 正弦
-local function sin(x) return math.sin(x) end
-calc_methods["sin"] = sin
-methods_desc["sin"] = "正弦"
-
-
-
-
--- 双曲正弦
-local function sinh(x)
-    return (math.exp(x) - math.exp(-x)) / 2
-end
-calc_methods["sinh"] = sinh
-methods_desc["sinh"] = "双曲正弦"
-
-
-
-
--- 反正弦
-local function asin(x) return math.asin(x) end
-calc_methods["asin"] = asin
-methods_desc["asin"] = "反正弦"
-
-
-
-
--- 余弦
-local function cos(x) return math.cos(x) end
-calc_methods["cos"] = cos
-methods_desc["cos"] = "余弦"
-
-
-
-
--- 双曲余弦
-local function cosh(x)
-    return (math.exp(x) + math.exp(-x)) / 2
-end
-calc_methods["cosh"] = cosh
-methods_desc["cosh"] = "双曲余弦"
-
-
-
-
--- 反余弦
-local function acos(x) return math.acos(x) end
-calc_methods["acos"] = acos
-methods_desc["acos"] = "反余弦"
-
-
-
-
--- 正切
-local function tan(x) return math.tan(x) end
-calc_methods["tan"] = tan
-methods_desc["tan"] = "正切"
-
-
-
-
--- 双曲正切
-local function tanh(x)
-    local e = math.exp(2 * x)
-    return (e - 1) / (e + 1)
-end
-calc_methods["tanh"] = tanh
-methods_desc["tanh"] = "双曲正切"
-
-
-
-
--- 反正切
-local function atan(x) return math.atan(x) end
-calc_methods["atan"] = atan
-methods_desc["atan"] = "反正切"
-
-
-
-
--- 返回以弧度为单位的点(x,y)相对于x轴的逆时针角度。y是点的纵坐标，x是点的横坐标
--- 返回范围从−π到π （以弧度为单位），其中负角度表示向下旋转，正角度表示向上旋转
--- 它与传统的 math.atan(y/x) 函数相比，具有更好的数学定义，因为它能够正确处理边界情况（例如x=0）
-local function atan2(y, x)
-    if x == 0 and y == 0 then
-        return 0 / 0 -- 返回NaN
-    elseif x == 0 and y ~= 0 then
-        if y > 0 then
-            return math.pi / 2
-        else
-            return -math.pi / 2
-        end
-    else
-        return math.atan(y / x) + (x < 0 and math.pi or 0)
-    end
-end
-calc_methods["atan2"] = atan2
-methods_desc["atan2"] = "返回以弧度为单位的点(x,y)相对于x轴的逆时针角度"
-
-
-
-
--- 将角度从弧度转换为度 e.g. deg(π) = 180
-local function deg(x) return math.deg(x) end
-calc_methods["deg"] = deg
-methods_desc["deg"] = "弧度转换为角度"
-
-
-
-
--- 将角度从度转换为弧度 e.g. rad(180) = π
-local function rad(x) return math.rad(x) end
-calc_methods["rad"] = rad
-methods_desc["rad"] = "角度转换为弧度"
-
-
-
-
--- 返回两个值, 无法参与运算后续
--- 返回m,e 使得x = m*2^e
---[[
-local function frexp(x)
-  return math.frexp(x)
-end
-calcPlugin["frexp"] = frexp
---]]
-
-
-
-
--- 返回 x*2^y
-local function ldexp(x, y) return x * 2 ^ y end
-calc_methods["ldexp"] = ldexp
-methods_desc["ldexp"] = "返回 x*2^y"
-
-
-
-
--- 返回 e^x
-local function exp(x) return math.exp(x) end
-calc_methods["exp"] = exp
-methods_desc["exp"] = "返回 e^x"
-
-
-
-
--- 计算开 N 次方
-local function nth_root(x, n)
-    if n % 2 == 0 and x < 0 then
-        return nil -- 偶次方时负数没有实数解
-    elseif x < 0 then
-        return -((-x) ^ (1 / n))
-    else
-        return x ^ (1 / n)
-    end
-end
-calc_methods["nroot"] = nth_root
-methods_desc["nroot"] = "计算 x 开 N 次方"
-
-
-
-
--- 返回x的平方根 e.g. sqrt(x) = x^0.5
-local function sqrt(x) return math.sqrt(x) end
-calc_methods["sqrt"] = sqrt
-methods_desc["sqrt"] = "计算 x 平方根"
-
-
-
-
--- x为底的对数, log(10, 100) = log(100) / log(10) = 2
-local function log(x, y)
-    -- 不能为负数或0
-    if x <= 0 or y <= 0 then
-        return nil
-    end
-
-    return math.log(y) / math.log(x)
-end
-calc_methods["log"] = log
-methods_desc["log"] = "x作为底数的对数"
-
-
-
-
--- 自然数e为底的对数
-local function loge(x)
-    -- 不能为负数或0
-    if x <= 0 then return nil end
-
-    return math.log(x)
-end
-calc_methods["loge"] = loge
-methods_desc["loge"] = "e作为底数的对数"
-
-
-
-
--- 10为底的对数
-local function logt(x)
-    -- 不能为负数或0
-    if x <= 0 then return nil end
-
-    return math.log(x) / math.log(10)
-end
-calc_methods["logt"] = logt
-methods_desc["logt"] = "10作为底数的对数"
-
-
-
-
--- 平均值
-local function avg(...)
-    local data = {...}
-    local n = select("#", ...)
-    -- 样本数量不能为0
-    if n == 0 then return nil end
-
-    -- 计算总和
-    local sum = 0
-    for _, value in ipairs(data) do
-        sum = sum + value
-    end
-
-    return sum / n
-end
-calc_methods["avg"] = avg
-methods_desc["avg"] = "平均值"
-
-
-
-
--- 方差
-local function variance(...)
-    local data = {...}
-    local n = select("#", ...)
-    -- 样本数量不能为0
-    if n == 0 then return nil end
-
-    -- 计算均值
-    local sum = 0
-    for _, value in ipairs(data) do
-        sum = sum + value
-    end
-    local mean = sum / n
-
-    -- 计算方差
-    local sum_squared_diff = 0
-    for _, value in ipairs(data) do
-        sum_squared_diff = sum_squared_diff + (value - mean) ^ 2
-    end
-
-    return sum_squared_diff / n
-end
-calc_methods["var"] = variance
-methods_desc["var"] = "方差"
-
-
-
-
--- 阶乘
-local function factorial(x)
-    -- 不能为负数
-    if x < 0 then return nil end
-    if x == 0 or x == 1 then return 1 end
-
-    local result = 1
-    for i = 1, x do
-        result = result * i
-    end
-
-    return result
-end
-calc_methods["fact"] = factorial
-methods_desc["fact"] = "阶乘"
-
-
-
-
--- 实现阶乘计算(!)
-local function replaceToFactorial(str)
-    -- 替换[0-9]!字符为fact([0-9])以实现阶乘
-    return str:gsub("([0-9]+)!", "fact(%1)")
-end
-
-
-
-
--- 向上取整函数
-function ceil(x)
-    return math.ceil(x)
-end
-calc_methods["ceil"] = ceil
-methods_desc["ceil"] = "向上取整"
-
-
-
-
--- 向下取整函数
-function floor(x)
-    return math.floor(x)
-end
-calc_methods["floor"] = floor
-methods_desc["floor"] = "向下取整"
-
-
-
-
--- 取余函数
--- 定义一个取余函数
-function remainder(x, y)
-    -- 使用math.fmod函数计算余数
-    local result = math.fmod(x, y)
-    -- 如果x是负数，math.fmod会返回负数，需要调整为正数
-    if result < 0 then
-        result = result + y
-    end
-    return result
-end
-calc_methods["mod"] = remainder
-methods_desc["mod"] = "取余函数"
+calc_methods["sjx"] = calculateTriangleArea
+methods_desc["sjx"] = "已知三角形的三边长,求三角形面积"
 
 
 
