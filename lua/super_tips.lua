@@ -41,7 +41,6 @@ function M.init(env)
     local path = find_dict_file("tips_show.txt")
 
     if not path then
-        log.info("super_tips: tips_show.txt not found.")
         db:close()
         return
     end

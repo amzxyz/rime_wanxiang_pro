@@ -29,6 +29,31 @@ local patterns = {
     hanxin = "[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;([^;]*)"
 }
 -- #########################
+-- # 辅助码拆分提示模块 (chaifen)
+-- #########################
+local CF = {}
+function CF.init(env)
+    -- 初始化拆分词典（reverse.bin 形式）
+    env.chaifen_dict = ReverseLookup("wanxiang_lookup")
+end
+function CF.fini(env)
+    env.chaifen = nil
+    collectgarbage()
+ end
+-- 拆分功能：返回拆分注释
+function CF.run(cand, env, initial_comment)
+    local dict = env.chaifen_dict
+    if not dict then return nil end
+
+    local append = dict:lookup(cand.text)
+    if append ~= "" then
+        if initial_comment and initial_comment ~= "" then
+            return append
+        end
+    end
+    return nil
+end
+-- #########################
 -- # 错音错字提示模块 (Corrector)
 -- #########################
 local CR = {}
@@ -64,18 +89,33 @@ local function load_corrections(file_path)
 end
 function CR.init(env)
     local config = env.engine.schema.config
-
     -- 初始化 corrector_type 和样式
     env.settings.corrector_type = (env.settings.corrector_type and env.settings.corrector_type:gsub('^*', '')) or '{comment}'
     CR.style = config:get_string("super_comment/corrector_type") or '{comment}'
 
     -- 仅在 corrections_cache 为 nil 时加载词典
     if not corrections_cache then
-        local corrections_file_path = rime_api.get_user_data_dir() .. "/cn_dicts/corrections.dict.yaml"
-        CR.corrections = load_corrections(corrections_file_path)
+        -- 优先查找用户目录，再查系统目录
+        local function find_file(filename, subdir)
+            local user_path = rime_api.get_user_data_dir() .. "/" .. subdir .. "/" .. filename
+            local shared_path = rime_api.get_shared_data_dir() .. "/" .. subdir .. "/" .. filename
+
+            local file = io.open(user_path, "r")
+            if file then file:close(); return user_path end
+
+            file = io.open(shared_path, "r")
+            if file then file:close(); return shared_path end
+
+            return nil
+        end
+        local corrections_file_path = find_file("corrections.dict.yaml", "cn_dicts")
+        if corrections_file_path then
+            CR.corrections = load_corrections(corrections_file_path)
+        else
+            CR.corrections = {}
+        end
     end
 end
-
 function CR.run(cand, env)
     -- 使用候选词的 comment 作为 code，在缓存中查找对应的修正
     local correction = corrections_cache[cand.comment]
@@ -182,50 +222,65 @@ end
 local ZH = {}
 function ZH.init(env)
     local config = env.engine.schema.config
-
-    -- 检查开关状态
-    local is_fuzhu_enabled = env.engine.context:get_option("fuzhu_switch")
-
-    -- 设置辅助码功能
-    env.settings = {
-        corrector_enabled = config:get_bool("super_comment/corrector") or true,  -- 错音错词提醒功能
-        corrector_type = config:get_string("super_comment/corrector_type") or "{comment}",  -- 提示类型
-        fuzhu_code_enabled = is_fuzhu_enabled,  -- 辅助码提醒功能通过开关控制
-        candidate_length = tonumber(config:get_string("super_comment/candidate_length")) or 1,  -- 候选词长度
-        fuzhu_type = config:get_string("super_comment/fuzhu_type") or ""  -- 辅助码类型
-    }
+-- 检查开关状态
+local is_fuzhu_enabled = env.engine.context:get_option("fuzhu_switch")
+local is_chaifen_enabled = env.engine.context:get_option("chaifen_switch")
+-- 设置辅助码功能
+env.settings = {
+    corrector_enabled = config:get_bool("super_comment/corrector") or true,  -- 错音错词提醒功能
+    corrector_type = config:get_string("super_comment/corrector_type") or "{comment}",  -- 提示类型
+    fuzhu_code_enabled = is_fuzhu_enabled,  -- 辅助码提醒功能通过开关控制
+    chaifen_enabled = is_chaifen_enabled,  -- 辅助码拆分提醒功能通过开关控制
+    candidate_length = tonumber(config:get_string("super_comment/candidate_length")) or 1,  -- 候选词长度
+    fuzhu_type = config:get_string("super_comment/fuzhu_type") or ""  -- 辅助码类型
+}
 end
-
 function ZH.func(input, env)
     -- 初始化
     ZH.init(env)
     CR.init(env)
+    CF.init(env)
 
+    -- 声明反查模式的 tag 状态
     local seg = env.engine.context.composition:back()
     env.is_radical_mode = seg and (
-        seg:has_tag("radical_lookup") 
-        or seg:has_tag("reverse_stroke") 
+        seg:has_tag("radical_lookup")
+        or seg:has_tag("reverse_stroke")
         or seg:has_tag("add_user_dict")
     ) or false
 
-    -- 遍历输入的候选词
+    local input_str = env.engine.context.input or ""
+    local index = 0
     for cand in input:iter() do
+        index = index + 1
         local initial_comment = cand.comment
         local final_comment = initial_comment
-
-        -- 处理辅助码提示
+    
+        -- 辅助码处理
         if env.settings.fuzhu_code_enabled then
             local fz_comment = FZ.run(cand, env, initial_comment)
             if fz_comment then
                 final_comment = fz_comment
             end
         else
-            -- 如果辅助码显示被关闭，则清空注释
-            final_comment = ""
-
+            if final_comment ~= initial_comment then
+                -- 有其他模块修改过注释，保留
+            elseif input_str:match("//") and index == 1 then  --匹配pin造词状态
+                -- 输入包含 //，首选项保留注释
+            else
+                -- 其他情况清空
+                final_comment = ""
+            end
+        end
+        -- 拆分辅助码
+        if env.settings.chaifen_enabled then
+            local cf_comment = CF.run(cand, env, initial_comment)
+            if cf_comment then
+                final_comment = cf_comment
+            end
         end
 
-        -- 处理错音错词提示
+        -- 错音错词提示
         if env.settings.corrector_enabled then
             local cr_comment = CR.run(cand, env, initial_comment)
             if cr_comment then
@@ -233,7 +288,7 @@ function ZH.func(input, env)
             end
         end
 
-        -- 处理部件组字模式注释
+        -- 部件组字注释
         if env.is_radical_mode then
             local az_comment = AZ.run(cand, env, initial_comment)
             if az_comment then
@@ -246,11 +301,13 @@ function ZH.func(input, env)
             cand:get_genuine().comment = final_comment
         end
 
-        yield(cand)  -- 输出当前候选词
+        yield(cand)
     end
 end
+
 return {
     CR = CR,
+    CF = CF,
     FZ = FZ,
     AZ = AZ,
     ZH = ZH,

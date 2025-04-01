@@ -24,10 +24,11 @@ schema:
   description: |
     万象拼音 支持常见双拼方案和全拼输入，辅助码同时支持 全拼拼音；墨奇码;鹤形;自然码;简单鹤;仓颉;虎码首末;五笔前2;汉心码; 采用万象归一的词库，换方案不换词库，不丢失用户词！
   dependencies:
-    - melt_eng        # 英文输入，作为次翻译器挂载到拼音方案
-    - radical_pinyin  # 反查：部件拆字，反查及辅码
-    - stroke          #反查：笔画组字
-    - charset         #字符集过滤器
+    - wanxiang_stroke    #笔画反查
+    - wanxiang_radical   #部件拆字，反查及辅码
+    - wanxiang_lookup    #辅助码拆分注释、翻译注释、行政区划匹配、车牌、等等注释类显示滤镜，Lua专用：super_comment
+    - wanxiang_en        #英文输入
+    - wanxiang_charset   #字符集过滤器
 
 # 开关
 # reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。
@@ -54,10 +55,9 @@ switches:
   - name: charset_filter
     states: [ 小, 大 ]
     reset: 0
-#  - name: zrm_chaifen
-#    states: [ 然, 自 ]
-#  - name: moqi_chaifen
-#    states: [ 奇, 墨 ]
+  - name: chaifen_switch
+    states: [ 然, 自 ]
+    #states: [ 奇, 墨 ]   #这里需要自己更换，wanxiang_lookup.dict.yaml默认放的是自然码的拆分
   - name: super_tips
     states: [ off, tips ]
     reset: 1
@@ -77,6 +77,7 @@ engine:
     - lua_processor@*cold_word_drop.processor
     - lua_processor@*quick_symbol_text    #快符引导以及重复上屏
     - lua_processor@*super_tips           #超级提示模块：表情、简码、翻译、化学式、等等靠你想象
+  #   - lua_processor@*super_tips_phone*S     #超级提示模块：表情、简码、翻译、化学式、等等靠你想象，这里负责兼容手机，手机上开启这个
     - lua_processor@*userdb_sync_delete   #通过输入 /del 触发,用于清理自定义同步目录下txt用户词典里被标记c<0的词条
     - ascii_composer
     - recognizer
@@ -105,7 +106,7 @@ engine:
     - lua_translator@*number_translator  # 数字、金额大写
     - lua_translator@*super_calculator   # 计算器
     - table_translator@custom_phrase     # 自定义短语 custom_phrase.txt
-    - table_translator@melt_eng          # 英文输入
+    - table_translator@wanxiang_en          # 英文输入
     - table_translator@cn_en             # 中英混合词汇
     - table_translator@chengyu           # 简码成语
     - table_translator@radical_lookup    # 部件拆字反查
@@ -124,10 +125,9 @@ engine:
     - simplifier@traditionalize                     # 简繁切换
     - simplifier@mars                               #火星文
     - simplifier@chinese_english                    #中英翻译
-    - lua_filter@*search@radical_pinyin             # 部件拆字辅码放在简繁转换之后
+    - lua_filter@*search@wanxiang_radical           # 部件拆字辅码放在简繁转换之后
+ #   - lua_filter@*super_tips_phone*M               #超级提示模块：表情、简码、翻译、化学式、等等靠你想象，这里负责兼容手机，手机上开启这个
     - lua_filter@*super_comment                     #超级注释模块，支持错词提示、辅助码显示，部件组字读音注释，支持个性化配置和关闭相应的功能，详情搜索super_comment进行详细配置
-    #- simplifier@moqi_chaifen                       #墨奇拆分型辅助码查询，放在超级注释后面
-    #- simplifier@zrm_chaifen                        #自然码拆分型辅助码查询，放在超级注释后面
     - uniquifier                                    # 去重
 
 predictor:
@@ -203,8 +203,8 @@ translator:
 #  user_dict: zrm.userdb  # 用户词典的文件名称
 #  db_class: tabledb  #开启后就不会产生zrm.userdb这样的文件夹，会直接输出文本zrm.txt同时无法使用同步能力
   enable_user_dict: false # 是否开启自动调频
-  disable_user_dict_for_patterns:
-    - "^[a-z]{1,6}"    #基本的6码3字不调频
+#  disable_user_dict_for_patterns:
+#    - "^[a-z]{1,6}"    #基本的6码3字不调频
   enable_correction: false #是否开启自动纠错
   initial_quality: 3       # 初始质量拼音的权重应该比英文大
   spelling_hints: 50             # 将注释以词典字符串形式完全暴露，通过super_comment.lua完全接管，灵活配置。
@@ -220,7 +220,7 @@ custom_phrase:
   db_class: stabledb
   enable_completion: false # 补全提示
   enable_sentence: false   # 禁止造句
-  initial_quality: 99      # custom_phrase 的权重应该比 pinyin 和 melt_eng 大
+  initial_quality: 99      # custom_phrase 的权重应该比 pinyin 和 wanxiang_en 大
 
 # 简码词库导入位于jm_dicts得txt文件词库
 chengyu:
@@ -232,8 +232,8 @@ chengyu:
   initial_quality: 1.2 #本表词和系统词重码居后
 
 # 次翻译器，英文
-melt_eng:
-  dictionary: melt_eng     # 挂载词库 melt_eng.dict.yaml
+wanxiang_en:
+  dictionary: wanxiang_en     # 挂载词库 wanxiang_en.dict.yaml
   enable_sentence: false   # 禁止造句
   enable_user_dict: false  # 禁用用户词典，是否开启自动调频
   initial_quality: 1.1     # 初始权重
@@ -271,24 +271,6 @@ chinese_english:
   comment_format:
     - "xform/-/ /"
 
-# 显示墨奇码拆分
-moqi_chaifen:
-  option_name: moqi_chaifen
-  opencc_config: moqi_chaifen.json
-  tips: char
-  show_in_comment: true
-  comment_format:
-    - "xform/	/ /"
-
-#显示自然码拆分
-zrm_chaifen:
-  option_name: zrm_chaifen
-  opencc_config: zrm_chaifen.json
-  tips: char
-  show_in_comment: true
-  comment_format:
-    - "xform/	/ /"
-
 # 简繁切换
 traditionalize:
   option_name: traditionalization
@@ -299,7 +281,7 @@ traditionalize:
 # 部件拆字反查
 radical_lookup:
   tag: radical_lookup
-  dictionary: radical_pinyin
+  dictionary: wanxiang_radical
   enable_user_dict: false
   prefix: "`"  # 反查前缀（反查时前缀会消失影响打英文所以设定为两个字母，或可改成一个非字母符号），与 recognizer/patterns/radical_lookup 匹配
   tips: "  〔部件组字〕"
@@ -308,7 +290,7 @@ radical_lookup:
 
 reverse_stroke:
   tag: reverse_stroke
-  dictionary: stroke 
+  dictionary: wanxiang_stroke
   db_class: stabledb
   enable_completion: true
   prefix: "``"
@@ -349,7 +331,7 @@ recognizer:
 #   symbols    Rime 的预设配置是以 '/' 前缀开头输出一系列字符，自定义的修改 symbols.yaml
 punctuator:
   digit_separators: ":,."  #数字分隔符
-  __include: symbols:/symbol_table         # 从 symbols.yaml 导入配置
+  __include: wanxiang_symbols:/symbol_table         # 从 symbols.yaml 导入配置
 
 # 从 default 继承快捷键
 key_binder:
@@ -364,9 +346,8 @@ key_binder:
     #- { when: has_menu, accept: semicolon, send: 2 }
 #使用Control+e进入翻译模式
     - { when: has_menu, accept: "Control+e", toggle: chinese_english }
-#使用快捷键Control+m/z分别开启和关闭墨奇或自然码辅助码拆分显示
-    - { when: has_menu, accept: "Control+m", toggle: moqi_chaifen }
-    - { when: has_menu, accept: "Control+z", toggle: zrm_chaifen }
+#使用快捷键Control+z分别开启和关闭辅助码拆分显示
+    - { when: has_menu, accept: "Control+z", toggle: chaifen_switch }
 #使用快捷键Control+a开启和关闭辅助码显示
     - { when: has_menu, accept: "Control+a", toggle: fuzhu_switch }
 #通过快捷键Control+s使得输入码显示音调
@@ -378,8 +359,8 @@ key_binder:
 # 使用 tab 在不同音节之间跳转
     - { when: has_menu, accept: "Tab", send: "Control+Right" }
     - { when: composing, accept: "Tab", send: "Control+Right" }
-#通过super_tips.lua显示到提示框里，用来上屏带/的简码、表情、化学式等等。四码时候前面有词，想要上屏单字也是用/，最好是用句号，这样可以与手机上可以做同样的定义，保持同样的习惯
-    - { match: "[a-z]{1,4}", accept: "/",  send_sequence: "/1" } 
+#通过按下/发送/+1节约一个按键，不冲突的时候可以开启
+    #- { match: "[a-z]{1,4}", accept: "/",  send_sequence: "/1" }
 
 
 

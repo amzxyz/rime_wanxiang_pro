@@ -2,7 +2,7 @@ local charsfilter = {}
 
 function charsfilter.init(env)
    -- 使用 ReverseLookup 方法加载字符集
-   env.charset = ReverseLookup("charset")
+   env.charset = ReverseLookup("wanxiang_charset")
    env.memo = {}
 end
 
