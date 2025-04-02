@@ -8,11 +8,23 @@
 -- 新增功能：
 -- 求解一元一次方程、二元一次方程组、一元二次方程、一元三次方程；
 -- 求解一次、二次函数解析式、圆的方程；
--- 取整函数（包括向上取整和向下取整）、求余函数
--- 已知数列中任意两项，求通项公式(等差或等比);求数列的前n项和(等差或等比)
+-- 取整函数（包括向上取整和向下取整）、求余函数；
+-- 已知数列中任意两项，求通项公式(等差或等比)；求数列的前n项和(等差或等比)；
 -- 已知三角形三边长，求面积；已知正多边形边数n、边长a，求面积
+-- 判断两直线位置关系，给出距离或交点坐标；点到点、点到直线距离求解
+-- 求解两点间线段的垂直平分线方程
 
 -- 功能代码一览：
+-- cbnt = "计算组合数"
+-- pmtt = "计算排列数"
+-- gbs = "计算多个数的最小公倍数"
+-- gys = "计算多个数的最大公因数"
+-- sjxx = "已知三角形三个顶点坐标，求其“心”的坐标"
+-- sjxy1 = "已知三角形三边长，求内切圆半径和外接圆半径"
+-- sjxy2 = "已知三角形三个顶点坐标，求内切圆半径和外接圆半径"
+-- ldjl = "已知两点坐标，求两点间的距离和垂直平分线方程"
+-- lrp = "已知两直线方程，判断它们的位置关系"
+-- ddzx = "已知一点坐标和直线方程Ax + By + C = 0,求点到直线的距离"
 -- sjs = "随机数"
 -- zdbx = "已知边数n与边长a计算正多边形面积"
 -- sjx = "已知三角形的三边长,求三角形面积"
@@ -101,16 +113,9 @@ local methods_desc = {
     ["g"] = "十亿"
 }
 
--- random([m [,n ]]) 返回m-n之间的随机数, n为空则返回1-m之间, 都为空则返回0-1之间的小数
-local function random(...) return math.random(...) end
--- 注册到函数表中
-calc_methods["sjs"] = random
-methods_desc["sjs"] = "随机数"
-
-
 
 -- 保留返回值的非零有效数字(返回结果为数字)
-function f(n)
+function fn(n)
     -- 将数字转换为字符串以便处理
     local s = tostring(n)
 
@@ -166,6 +171,29 @@ function fs(n)
     end
 end
 
+
+-- 计算两个数的最大公因数（GCD）
+function gcd(a, b)
+    while b ~= 0 do
+        local temp = b
+        b = a % b
+        a = temp
+    end
+    return a
+end
+
+
+-- 计算两个数的最小公倍数（LCM）
+function lcm(a, b)
+    return a * b / gcd(a, b)
+end
+
+
+-- random([m [,n ]]) 返回m-n之间的随机数, n为空则返回1-m之间, 都为空则返回0-1之间的小数
+local function random(...) return math.random(...) end
+-- 注册到函数表中
+calc_methods["sjs"] = random
+methods_desc["sjs"] = "随机数"
 
 
 
@@ -426,7 +454,7 @@ local function factorial(x)
     for i = 1, x do
         result = result * i
     end
-
+    result = fn(result)
     return result
 end
 calc_methods["fact"] = factorial
@@ -481,7 +509,7 @@ methods_desc["mod"] = "求余函数"
 
 
 
--- 计算正多边形面积
+-- 已知正多边形边数 n 和边长 a ，计算正多边形面积
 function calculateRegularPolygonArea(n, a)
     -- 检查边数n是否为正整数
     if n ~= math.floor(n) or n <= 0 then
@@ -494,7 +522,7 @@ function calculateRegularPolygonArea(n, a)
 
     -- 计算正多边形的面积
     local s = (n * a^2) / (4 * math.tan(math.pi / n))
-    s = f(s)
+    s = fn(s)
     return s
 end
 calc_methods["zdbx"] = calculateRegularPolygonArea
@@ -517,7 +545,7 @@ function geometricSeriesSum(a1, q, n)
     else
         -- 正常计算前n项和
         local s = a1 * (1-q^n)/(1-q)
-        s = f(s)
+        s = fn(s)
         return s
     end
 end
@@ -538,7 +566,7 @@ function ArithmeticSeriesSum(a1, d, n)
     else
         -- 正常计算前n项和
         local s = n*a1 + n*(n-1)*d/2
-        s = f(s)
+        s = fn(s)
         return s
     end
 end
@@ -562,8 +590,8 @@ function findSequenceFormula(ai, i, ak, k, b)
     local function arithmeticSequence(ai, i, ak, k)
         local d = (ak - ai) / (k - i)
         local a1 = ai - (i - 1) * d
-        d = f(d)
-        a1 = f(a1)
+        d = fn(d)
+        a1 = fn(a1)
         -- 根据公差d的正负调整公式
         if d >= 0 then
             return "aₙ=" .. a1 .. "+(n-1)*" .. d
@@ -593,8 +621,8 @@ function findSequenceFormula(ai, i, ak, k, b)
             return "无法计算通项公式"
         end
         local a1 = ai / (s ^ (i - 1)) -- 计算首项 a1
-        s = f(s)
-        a1 = f(a1)
+        s = fn(s)
+        a1 = fn(a1)
 
         -- 根据公比s的正负调整公式
         if s < 0 then
@@ -636,7 +664,7 @@ function CircleEquationsxr(h, k, r)
 
     -- 计算r^2的具体数值
     local r_squared = r^2
-    r_squared= f(r_squared)
+    r_squared= fn(r_squared)
 
     -- 圆的标准方程
     local standardEquation
@@ -672,7 +700,7 @@ function CircleEquationsxr(h, k, r)
     local D = -2 * h
     local E = -2 * k
     local F = h^2 + k^2 - r^2
-    F= f(F)
+    F= fn(F)
     local generalEquation = "x²+y²"
 
     -- 处理D项
@@ -738,7 +766,7 @@ function CircleEquationsxl(h ,k ,x1, y1, x2, y2)
 
     -- 计算r^2的具体数值
     local r_squared = r^2
-    r_squared= f(r_squared)
+    r_squared= fn(r_squared)
 
     -- 圆的标准方程
     local standardEquation
@@ -778,7 +806,7 @@ function CircleEquationsxl(h ,k ,x1, y1, x2, y2)
     local D = -2 * h
     local E = -2 * k
     local F = h^2 + k^2 - r_squared
-    F= f(F)
+    F= fn(F)
     local generalEquation = "x²+y²"
 
     -- 处理D项
@@ -871,9 +899,9 @@ function CircleEquationssd(x1, y1, x2, y2, x3, y3)
     local D = detAD / detA
     local E = detAE / detA
     local F = detAF / detA
-    D= f(D)
-    E= f(E)
-    F= f(F)
+    D= fn(D)
+    E= fn(E)
+    F= fn(F)
 
     local generalEquation = "x²+y²"
 
@@ -919,12 +947,12 @@ function CircleEquationssd(x1, y1, x2, y2, x3, y3)
     -- 由D、E、F求得圆心(h, k)的值
     local h = -D / 2
     local k = -E / 2
-    h= f(h)
-    k= f(k)
+    h= fn(h)
+    k= fn(k)
 
     -- 计算半径r的平方
     local r_squared = h^2 + k^2 - F
-    r_squared= f(r_squared)
+    r_squared= fn(r_squared)
 
     -- 根据圆心和半径写出标准方程
     local standardEquation
@@ -981,7 +1009,7 @@ function solveLinearEquation(a, b)
     else
         -- 计算x的值
         local x = -b / a
-        x = f(x)
+        x = fn(x)
         return "x=" .. x
     end
 end
@@ -1007,8 +1035,8 @@ function solveLinearSystem(a, b, c, d, e, f)
     -- 计算x和y
     local x = (d * e - b * f) / D
     local y = (a * f - c * e) / D
-    x= fs(x)
-    y= fs(y)
+    x= fn(x)
+    y= fn(y)
     -- 返回解的字符串表示
     return "x=" .. x .. ",y=" .. y
     
@@ -1020,7 +1048,7 @@ methods_desc["eyyc"] = "求解二元一次方程组"
 
 
 -- 点斜法求解一次函数解析式
--- 定义函数，输入斜率k和点的坐标x1, y1
+-- 定义函数，输入斜率k和点的坐标(x1, y1)
 function pointSlopeForm(k, x1, y1)
     -- 特殊情况：平行于y轴
     if k == nil then
@@ -1078,7 +1106,7 @@ function twoPointsForm(x1, y1, x2, y2)
 
     -- 计算斜率k
     local k = (y2 - y1) / (x2 - x1)
-    k = f(k)
+    k = fn(k)
     local b
 
     -- 特殊情况处理
@@ -1120,7 +1148,7 @@ methods_desc["ldf"] = "两点法求解一次函数解析式"
 
 
 
--- 求解一元二次方程
+-- 求解一元二次方程ax²+bx+c=0
 function solveQuadraticEquation(a, b, c)
     -- 检查二次项系数是否为0
     if a == 0 then
@@ -1135,13 +1163,13 @@ function solveQuadraticEquation(a, b, c)
         return "无实根，有复数解"
     elseif discriminant == 0 then
         local x = -b / (2 * a)
-        x = f(x)
+        x = fn(x)
         return "x₁=x₂=" .. x
     else
         local x1 = (-b + math.sqrt(discriminant)) / (2 * a)
         local x2 = (-b - math.sqrt(discriminant)) / (2 * a)
-        x1 = f(x1)
-        x2 = f(x2)
+        x1 = fn(x1)
+        x2 = fn(x2)
         return "x₁=" .. x1 .. ",x₂=" .. x2
     end
 end
@@ -1151,7 +1179,7 @@ methods_desc["yyec"] = "求解一元二次方程"
 
 
 
--- 求解一元三次方程
+-- 求解一元三次方程ax³+bx²+cx+d=0
 function solveCubicEquation(a, b, c, d)
     -- 检查参数正确性
     if type(a) ~= "number" or type(b) ~= "number" or type(c) ~= "number" or type(d) ~= "number" then
@@ -1165,19 +1193,19 @@ function solveCubicEquation(a, b, c, d)
     local A = b^2 - 3*a*c
     local B = b*c - 9*a*d
     local C = c^2 - 3*b*d
-    A = f(A)
-    B = f(B)
-    C = f(C)
+    A = fn(A)
+    B = fn(B)
+    C = fn(C)
 
     -- 计算总判别式
     local Delta = B^2 - 4*A*C
-    Delta = f(Delta)
+    Delta = fn(Delta)
 
     -- 根据盛金公式进行求解
     if A == 0 and B == 0 then
         -- 条件一：A = B = 0，方程有一个三重实根
         local x = -b / (3*a)
-        x = f(x)
+        x = fn(x)
         return "x₁=x₂=x₃=" .. x
     elseif Delta > 0 then
         -- 条件二：Delta > 0，方程有一个实根和一对共轭虚根
@@ -1186,22 +1214,45 @@ function solveCubicEquation(a, b, c, d)
         local y1 = nth_root(Y1, 3)
         local y2 = nth_root(Y2, 3)
         local x1 = (-b - y1 - y2) / (3*a)
-        x1 = f(x1)
+        x1 = fn(x1)
         local P = (-b+0.5*(y1+y2)) / (3*a)
-        P = f(P)
+        P = fn(P)
         local Q = (0.5*math.sqrt(3)*(y1-y2))/ (3*a)
-        Q = f(Q)
-        Q = Q .. "i"
-        local x2 = P + Q
-        local x3 = P - Q
+        Q = fn(Q)
+        local x2
+        local x3
+        if P == 0 then
+            if Q == 1 then
+                x2 = "i"
+                x3 = "-i"
+            elseif Q == -1 then
+                x2 = "-i"
+                x3 = "i"
+            else
+                x2 = Q .. "i"
+                x3 = -Q .. "i"
+            end
+        elseif P ~= 0 and Q == 1 then
+            x2 = P .. "+i"
+            x3 = P .. "-i"
+        elseif P ~= 0 and Q == -1 then
+            x2 = P .. "-i"
+            x3 = P .. "+i"
+        elseif P ~= 0 and Q > 0 then
+            x2 = P .. "+" .. Q .. "i"
+            x3 = P .. "-" .. Q .. "i"
+        elseif P ~= 0 and Q < 0 then
+            x2 = P .. "-".. -Q .. "i"
+            x3 = P .. "+".. -Q .. "i"
+        end
         return "x₁=" .. x1 .. ",x₂=" .. x2 .. ",x₃=" .. x3
     elseif Delta == 0 and A ~= 0 then
         -- 条件三：Delta = 0，方程有三个实根，其中有一个两重根
         local K = B / A
         local x1 = -b / a + K
         local x2 = -0.5 * K
-        x1 = f(x1)
-        x2 = f(x2)
+        x1 = fn(x1)
+        x2 = fn(x2)
         return "x₁=" .. x1 .. ",x₂=x₃=" .. x2
     elseif Delta < 0 and A > 0 then
         -- 条件四：Delta < 0，方程有三个不相等的实根
@@ -1212,9 +1263,9 @@ function solveCubicEquation(a, b, c, d)
         local x1 = (-b - 2*math.sqrt(A)*S) / (3*a)
         local x2 = (-b + math.sqrt(A)*(S + math.sqrt(3)*R)) / (3*a)
         local x3 = (-b + math.sqrt(A)*(S - math.sqrt(3)*R)) / (3*a)
-        x1 = f(x1)
-        x2 = f(x2)
-        x3 = f(x3)
+        x1 = fn(x1)
+        x2 = fn(x2)
+        x3 = fn(x3)
         return "x₁=" .. x1 .. ",x₂=" .. x2 .. ",x₃=" .. x3
     end
 end
@@ -1236,9 +1287,9 @@ function getQuadraticEquationdd(x1, y1, x2, y2)
     local a = (y2 - y1) / (x2 - x1)^2
     local b = -2 * a * x1
     local c = y1 + a * x1^2
-    a = f(a)
-    b = f(b)
-    c = f(c)
+    a = fn(a)
+    b = fn(b)
+    c = fn(c)
 
     -- 定义一个局部函数用于格式化系数
     local function formatCoefficient(a, b, c)
@@ -1325,9 +1376,9 @@ function getQuadraticEquationy(x1, y1, x2, y2, x3, y3)
     local a = detAx / detA
     local b = detAy / detA
     local c = detAz / detA
-    a = f(a)
-    b = f(b)
-    c = f(c)
+    a = fn(a)
+    b = fn(b)
+    c = fn(c)
 
     -- 定义一个局部函数用于格式化系数
     local function formatCoefficient(a, b, c)
@@ -1391,11 +1442,295 @@ function calculateTriangleArea(a, b, c)
 
     -- 使用海伦公式计算面积
     local s = math.sqrt(p * (p - a) * (p - b) * (p - c))
-    s = f(s)
+    s = fn(s)
     return s
 end
 calc_methods["sjx"] = calculateTriangleArea
 methods_desc["sjx"] = "已知三角形的三边长,求三角形面积"
+
+
+
+
+-- 已知一点(x1, y1)和直线方程Ax + By + C = 0,求点到直线的距离
+function point_to_line_distance(x1, y1, A, B, C)
+    -- 检查参数正确性
+    if type(x1) ~= "number" or type(y1) ~= "number" or type(A) ~= "number" or type(B) ~= "number" or type(C) ~= "number" then
+        return "错误：参数必须是数字。"
+    end
+    -- 判断点是否在直线上
+    local S = A*x1 + B*y1 + C
+    S = fn(S)
+    if S == 0 then
+        return "点在直线上，距离为0。"
+    end
+    -- 计算点到直线的距离
+    local D = math.abs(S) / math.sqrt(A^2 + B^2)
+    D = fn(D)
+    return "点到直线距离为" .. D
+end
+calc_methods["ddzx"] = point_to_line_distance
+methods_desc["ddzx"] = "已知一点坐标和直线方程Ax + By + C = 0,求点到直线的距离"
+
+
+
+
+-- 已知两点(x1, y1)和(x2, y2)，求两点间的距离和垂直平分线方程
+function calculateDistance(x1, y1, x2, y2)
+    -- 检查参数正确性
+    if type(x1) ~= "number" or type(y1) ~= "number" or type(x2) ~= "number" or type(y2) ~= "number" then
+        return "错误：参数必须是数字。"
+    end
+    -- 判断两点是否重合
+    if x1 == x2 and y1 == y2 then
+        return "两点重合，距离为0。"
+    end
+    -- 计算两点间的距离
+    local D = math.sqrt((x2 - x1)^2 + (y2 - y1)^2)
+    D = fn(D)
+    -- 两点所成线段的中点坐标
+    local x3 = (x1 + x2) / 2
+    local y3 = (y1 + y2) / 2
+    local k = (y2 - y1) / (x2 - x1)
+    local kl = -1/k
+    x3 = fn(x3)
+    y3 = fn(y3)
+    kl = fn(kl)
+    local l = ""
+    if x1 == x2 then
+        l = l .. "y=" .. y3
+    elseif y1 == y2 then
+        l = l .. "x=" .. x3
+    else
+        l = l .. pointSlopeForm(kl, x3, y3)
+    end
+    return "两点间的距离为" .. D .. "，垂直平分线方程为" .. l
+end
+calc_methods["ldjl"] = calculateDistance
+methods_desc["ldjl"] = "已知两点坐标，求两点间的距离和垂直平分线方程"
+
+
+
+
+-- 已知两条直线方程 A1x + B1y + C1 = 0和 A2x + B2y + C2 = 0，判断它们的位置关系
+function lines_relationship(A1, B1, C1, A2, B2, C2)
+    -- 参数正确性检查
+    if A1 == 0 and B1 == 0 or A2 == 0 and B2 == 0 then
+        return "直线方程的系数不能同时为零！"
+    end
+
+    -- 判断两直线是否平行或重合
+    local px = (A1 * B2 == A2 * B1) and (A1 * C2 ~= A2 * C1)
+    local ch = (A1 * B2 == A2 * B1) and (C1 * B2 == C2 * B1) and (C1 * A2 == C2 * A1)
+
+    if ch then
+        -- 两直线重合
+        return "两直线重合，距离为0"
+    elseif px then
+        -- 两直线平行但不重合
+        if B1 ~= B2 then
+            local k = math.max(B1,B2) / math.min(B1,B2)
+            if B1 < B2 then
+                A1 = A1 * k
+                B1 = B1 * k
+                C1 = C1 * k
+            else
+                A2 = A2 * k
+                B2 = B2 * k
+                C2 = C2 * k
+            end
+        end
+        local D = math.abs(C2 - C1) / math.sqrt(A1^2 + B1^2)
+        D = fn(D)
+        return "两直线平行，距离为" .. D
+    else
+        -- 两直线相交，计算交点坐标
+        local x = (B1 * C2 - B2 * C1) / (A1 * B2 - A2 * B1)
+        local y = (C1 * A2 - C2 * A1) / (A1 * B2 - A2 * B1)
+        x = fn(x)
+        y = fn(y)
+        return "两直线相交，交点坐标为(" .. x .. ", " .. y .. ")"
+    end
+end
+calc_methods["lrp"] = lines_relationship
+methods_desc["lrp"] = "已知两直线方程，判断它们的位置关系"
+
+
+
+
+-- 已知三角形的三边a、b、c，求内切圆半径和外接圆半径
+function triangle_circles(a, b, c)
+    -- 参数正确性检查
+    if a <= 0 or b <= 0 or c <= 0 then
+        return "边长必须为正数！"
+    end
+    -- 检查能否构成三角形
+    if a + b <= c or a + c <= b or b + c <= a then
+        return "给定的边长不能构成三角形！"
+    end
+    -- 计算半周长
+    local s = (a + b + c) / 2
+    -- 计算面积
+    local A = math.sqrt(s * (s - a) * (s - b) * (s - c))
+    -- 计算内切圆半径
+    local r = A / s
+    r = fn(r)
+    -- 计算外接圆半径
+    local R = (a * b * c) / (4 * A)
+    R = fn(R)
+    return "内切圆半径为" .. r .. "，外接圆半径为" .. R
+end
+calc_methods["sjxy1"] = triangle_circles
+methods_desc["sjxy1"] = "已知三角形三边长，求内切圆半径和外接圆半径"
+
+
+
+
+-- 已知三角形三个顶点坐标(x1, y1)，(x2, y2)，(x3, y3)，求其内切圆半径和外接圆半径
+function triangle_circles_by_points(x1, y1, x2, y2, x3, y3)
+    -- 参数正确性检查
+    if type(x1) ~= "number" or type(y1) ~= "number" or type(x2) ~= "number" or type(y2) ~= "number" or type(x3) ~= "number" or type(y3) ~= "number" then
+        return "错误：参数必须是数字。"
+    end
+    local determinant = x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)
+    if determinant == 0 then
+        return "错误：三个点共线或重合，无法构成三角形。"
+    end
+    -- 计算三边长
+    local a = calculateDistance(x1, y1, x2, y2)
+    local b = calculateDistance(x2, y2, x3, y3)
+    local c = calculateDistance(x1, y1, x3, y3)
+    -- 调用已知三边长的函数计算内切圆半径和外接圆半径
+    return triangle_circles(a, b, c)
+end
+calc_methods["sjxy2"] = triangle_circles_by_points
+methods_desc["sjxy2"] = "已知三角形三个顶点坐标，求内切圆半径和外接圆半径"
+
+
+
+
+-- 已知三角形三个顶点坐标A(x1, y1)，B(x2, y2)，C(x3, y3)，求其“心”的坐标
+function triangle_centers(x1, y1, x2, y2, x3, y3)
+    -- 参数正确性检查
+    if type(x1) ~= "number" or type(y1) ~= "number" or type(x2) ~= "number" or type(y2) ~= "number" or type(x3) ~= "number" or type(y3) ~= "number" then
+        return "错误：参数必须是数字。"
+    end
+    local determinant = x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)
+    if determinant == 0 then
+        return "错误：三个点共线或重合，无法构成三角形。"
+    end
+    -- 计算三边长
+    local a = calculateDistance(x2, y2, x3, y3)
+    local b = calculateDistance(x1, y1, x3, y3)
+    local c = calculateDistance(x1, y1, x2, y2)
+    -- 计算重心坐标
+    local xg = (x1 + x2 + x3) / 3
+    local yg = (y1 + y2 + y3) / 3
+    xg = fn(xg)
+    yg = fn(yg)
+    -- 计算内心坐标
+    local xn = (a*x1 + b*x2 + c*x3) / (a + b + c)
+    local yn = (a*y1 + b*y2 + c*y3) / (a + b + c)
+    xn = fn(xn)
+    yn = fn(yn)
+    -- 计算外心坐标
+    local d1 = 2 * determinant
+    local xw = ((x1^2 + y1^2) * (y2 - y3) + (x2^2 + y2^2) * (y3 - y1) + (x3^2 + y3^2) * (y1 - y2)) / d1
+    local yw = ((x1^2 + y1^2) * (x3 - x2) + (x2^2 + y2^2) * (x1 - x3) + (x3^2 + y3^2) * (x2 - x1)) / d1
+    xw = fn(xw)
+    yw = fn(yw)
+    -- 计算垂心坐标
+    local d2 = x1*(y3 - y2) + x2*(y1 - y3) + x3*(y2 - y1)
+    local d3 = -d2
+    if d2 == 0 then
+        return "无法计算垂心，分母为零！"
+    end
+    local s1 = x1*(x2*(y1-y2)+x3*(y3-y1))+(y2-y3)*(x2*x3+(y1-y2)*(y1-y3))
+    local s2 = x1^2*(x2-x3)+x1*(x3^2-x2^2+y1*y2-y1*y3)+x2^2*x3-x2*(x3^2+y1*y2-y2*y3)+x3*y3*(y1-y2)
+    local xc = s1/d2
+    local yc = s2/d3
+    xc = fn(xc)
+    yc = fn(yc)
+    return "重心(" .. xg .. ", " .. yg .. ")；内心(" .. xn .. ", " .. yn .. ")；外心(" .. xw .. ", " .. yw .. ")；垂心(" .. xc .. ", " .. yc .. ")"
+end
+calc_methods["sjxx"] = triangle_centers
+methods_desc["sjxx"] = "已知三角形三个顶点坐标A(x1, y1)，B(x2, y2)，C(x3, y3)，求其“心”的坐标"
+
+
+
+
+-- 计算多个数的最大公因数
+function gcd_multiple(...)
+    local nums = {...}
+    local result = nums[1]
+    for i = 2, #nums do
+        result = gcd(result, nums[i])
+    end
+    return result
+end
+calc_methods["gys"] = gcd_multiple
+methods_desc["gys"] = "计算多个数的最大公因数"
+
+
+
+
+-- 计算多个数的最小公倍数
+function lcm_multiple(...)
+    local nums = {...}
+    local result = nums[1]
+    for i = 2, #nums do
+        result = lcm(result, nums[i])
+    end
+    result = fn(result)
+    return result
+end
+calc_methods["gbs"] = lcm_multiple
+methods_desc["gbs"] = "计算多个数的最小公倍数"
+
+
+
+
+-- 计算排列数
+function permutation(n, r)
+    -- 检查参数
+    if type(n) ~= "number" or type(r) ~= "number" then
+        return "参数必须为数字"
+    end
+    if n < 0 or r < 0 then
+        return "参数必须为非负整数"
+    end
+    if r > n then
+        return "第二个参数不能大于第一个参数"
+    end
+    -- 计算排列数
+    local result = factorial(n) / factorial(n - r)
+    result = fn(result)
+    return result
+end
+calc_methods["pmtt"] = permutation
+methods_desc["pmtt"] = "计算排列数"
+
+
+
+
+-- 计算组合数
+function combination(n, r)
+    -- 检查参数
+    if type(n) ~= "number" or type(r) ~= "number" then
+        return "参数必须为数字"
+    end
+    if n < 0 or r < 0 then
+        return "参数必须为非负整数"
+    end
+    if r > n then
+        return "第二个参数不能大于第一个参数"
+    end
+    -- 计算组合数
+    local result = factorial(n) / (factorial(r) * factorial(n - r))
+    result = fn(result)
+    return result
+end
+calc_methods["cbnt"] = combination
+methods_desc["cbnt"] = "计算组合数"
 
 
 
