@@ -79,10 +79,15 @@ function M.func(input, env)
     local first_cand_match = first_cand and db:fetch(first_cand.text)
     local tips = stick_phrase or first_cand_match
 
+    env.last_tips = env.last_tips or ""
+
     if is_super_tips and tips and tips ~= "" then
+        env.last_tips = tips
         segment.prompt = "〔" .. tips .. "〕"
     else
-        segment.prompt = ""
+        if segment.prompt == "〔" .. env.last_tips .. "〕" then
+            segment.prompt = ""
+        end
     end
 
     for _, cand in ipairs(candidates) do
