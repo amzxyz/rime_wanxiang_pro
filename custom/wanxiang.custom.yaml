@@ -1,9 +1,21 @@
 patch:
+  speller/algebra:
+    __patch:
+    - wanxiang.schema:/小鹤双拼            # 可选输入方案名称：全拼, 自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
+    - wanxiang.schema:/fuzhu_moqi         #可选辅助码有：fuzhu_kong，fuzhu_hanxin, fuzhu_moqi, fuzhu_flypy, fuzhu_zrm, fuzhu_tiger, fuzhu_wubi    选择一个填入
+  # 中英混合词汇，要与你的双拼类型一样
+  cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
+  #通过下面的设置可以让你自己的文件引入而与仓库custom_phrase.txt不同，以后可以大胆覆盖更新
+  custom_phrase/user_dict: custom_phrase  # 需要手动创建 custom_phrase222.txt 文件
+    #下面是候选数量
   menu/page_size: 6
-  schema/+:
-    icon: "icons/zhong.ico"
-    ascii_icon: "icons/ying.ico"
-
+  #下面用来改变你的windows小狼毫右下角软件图标
+  #schema/+:
+  #  icon: "icons/zhong.ico"
+  #  ascii_icon: "icons/ying.ico"
+  #下面这个可以改变tips上屏的按键
+  key_binder/tips_key: "period"   #修改时候去default找，默认是句号
+  #下面这个是修改快符的映射，按自己需求来
   quick_symbol_text:
     q: "‰"
     w: "？"
@@ -41,53 +53,8 @@ patch:
     "8": "⑧"
     "9": "⑨"
     "0": "⓪"
-  translator/disable_user_dict_for_patterns: "^[a-z]{1,6}"
+  #下面这两个是快符的引导符号，前者用来引导符号、双击重复上屏符号，后者双击重复上屏汉字
   recognizer/patterns/quick_symbol: "^'.*$"
   recognizer/patterns/quick_text: "^;.*$"
-  speller/algebra:
-    - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
-    - xform/^ng(;.*)/eng$1/
-    - xform/ńg|ňg|ǹg/eng/
-    - xform/ń|ň|ǹ/en/ 
-    - derive/^([jqxy])u(;.*)$/$1v$2/
-    - derive/^([aoe])([ioun])(;.*)$/$1$1$2$3/
-    - xform/^([aoe])(ng)?(;.*)$/$1$1$2$3/
-    - xform/^(\w+?)iu(;.*)/$1Ⓠ$2/
-    - xform/^(\w+?)ei(;.*)/$1Ⓦ$2/
-    - xform/^(\w+?)uan(;.*)/$1Ⓡ$2/
-    - xform/^(\w+?)[uv]e(;.*)/$1Ⓣ$2/
-    - xform/^(\w+?)un(;.*)/$1Ⓨ$2/
-    - xform/^(\w+?)uo(;.*)/$1Ⓞ$2/
-    - xform/^(\w+?)ie(;.*)/$1Ⓟ$2/
-    - xform/^(\w+?)i?ong(;.*)/$1Ⓢ$2/
-    - xform/^(\w+?)ing(;.*)/$1Ⓚ$2/
-    - xform/^(\w+?)uai(;.*)/$1Ⓚ$2/
-    - xform/^(\w+?)ai(;.*)/$1Ⓓ$2/
-    - xform/^(\w+?)eng(;.*)/$1Ⓖ$2/
-    - xform/^(\w+?)en(;.*)/$1Ⓕ$2/
-    - xform/^(\w+?)[iu]ang(;.*)/$1Ⓛ$2/
-    - xform/^(\w+?)ang(;.*)/$1Ⓗ$2/
-    - xform/^(\w+?)ian(;.*)/$1Ⓜ$2/
-    - xform/^(\w+?)an(;.*)/$1Ⓙ$2/
-    - xform/^(\w+?)ou(;.*)/$1Ⓩ$2/
-    - xform/^(\w+?)iao(;.*)/$1Ⓝ$2/
-    - xform/^(\w+?)[iu]a(;.*)/$1Ⓧ$2/
-    - xform/^(\w+?)ao(;.*)/$1Ⓒ$2/
-    - xform/^(\w+?)ui(;.*)/$1Ⓥ$2/
-    - xform/^(\w+?)in(;.*)/$1Ⓑ$2/
-    - xform/^sh/Ⓤ/
-    - xform/^ch/Ⓘ/
-    - xform/^zh/Ⓥ/
-    - xlit/ⓆⓌⓇⓉⓎⓊⒾⓄⓅⓈⒹⒻⒼⒽⒿⓀⓁⓏⓍⒸⓋⒷⓃⓂ/qwrtyuiopsdfghjklzxcvbnm/
-    - derive|^(.+);.*$|$1| # 纯双拼的情况
-    - abbrev|^(.+);(\w).*$|$1$2| # 双拼+一位辅助码的情况
-    - abbrev|^(.+);(\w)(\w).*$|$1$2$3| # 双拼+2位辅助码的情况
-    - derive|^(.+);(\w)(\w).*$|$1$2$3/| # 双拼+2位辅助码+/
-    - derive|^(.+);(\w)(\w).*$|$1$2$3o| # 双拼\+2位辅助码\+o，主要用来应对小企鹅这类输入法没法使用符号的场景，但同时有些辅助码会出现异常，如：ui uio>uiuio，手机小企鹅使用时开启
-      #分号后面第二组辅助码
-    - abbrev/^(.+);.*?,(\w).*$/$1$2/
-    - abbrev/^(.+);.*?,(\w)(\w).*$/$1$2$3/
-    - derive|^(.+);.*?,(\w)(\w).*$|$1$2$3/|
-    - derive/^(.+);.*?,(\w)(\w).*$/$1$2$3o/
-    - xform/◯/;/  #对于微软双拼、搜狗双拼，前面将分号保护了起来，现在放出来让其发挥作用
-    - erase/^(.+);(.+)$/    # 删除原始编码加速检索
+  #下面这个用来设置开启调频的时候哪些内容不调频
+  translator/disable_user_dict_for_patterns: "^[a-z]{1,6}"

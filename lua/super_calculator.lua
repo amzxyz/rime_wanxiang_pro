@@ -13,8 +13,12 @@
 -- 已知三角形三边长，求面积；已知正多边形边数n、边长a，求面积
 -- 判断两直线位置关系，给出距离或交点坐标；点到点、点到直线距离求解
 -- 求解两点间线段的垂直平分线方程
+-- 组合数、排列数、最大公因数、最小公倍数求解
+-- 点关于直线的对称点坐标、直线关于直线(或点)的对称直线方程求解；
+
 
 -- 功能代码一览：
+-- syl = "已知直线l₁:A₁x+B₁y+C₁=0和l₂:A₂x+B₂y+C₂=0，求l₁关于l₂的对称直线l₃的方程"
 -- cbnt = "计算组合数"
 -- pmtt = "计算排列数"
 -- gbs = "计算多个数的最小公倍数"
@@ -24,7 +28,8 @@
 -- sjxy2 = "已知三角形三个顶点坐标，求内切圆半径和外接圆半径"
 -- ldjl = "已知两点坐标，求两点间的距离和垂直平分线方程"
 -- lrp = "已知两直线方程，判断它们的位置关系"
--- ddzx = "已知一点坐标和直线方程Ax + By + C = 0,求点到直线的距离"
+-- dyzx1 = "已知一点坐标和直线方程,求点到直线的距离及对称点坐标"
+-- dyzx2 = "已知一点P(x1,y1)和直线l:Ax+By+C=0，求直线l关于点P的对称直线l'的方程"
 -- sjs = "随机数"
 -- zdbx = "已知边数n与边长a计算正多边形面积"
 -- sjx = "已知三角形的三边长,求三角形面积"
@@ -1451,25 +1456,34 @@ methods_desc["sjx"] = "已知三角形的三边长,求三角形面积"
 
 
 
--- 已知一点(x1, y1)和直线方程Ax + By + C = 0,求点到直线的距离
-function point_to_line_distance(x1, y1, A, B, C)
+-- 已知一点(x1, y1)和直线方程Ax + By + C = 0,求点到直线的距离和它关于直线的对称点坐标
+function dyzx1(x1, y1, A, B, C)
     -- 检查参数正确性
     if type(x1) ~= "number" or type(y1) ~= "number" or type(A) ~= "number" or type(B) ~= "number" or type(C) ~= "number" then
-        return "错误：参数必须是数字。"
+        return "错误：参数必须是数字"
+    end
+    if A == 0 and B == 0 then
+        return "直线方程的系数不能同时为零"
     end
     -- 判断点是否在直线上
     local S = A*x1 + B*y1 + C
     S = fn(S)
     if S == 0 then
-        return "点在直线上，距离为0。"
+        return "点在直线上，距离为0，无法求解对称点坐标"
     end
     -- 计算点到直线的距离
     local D = math.abs(S) / math.sqrt(A^2 + B^2)
     D = fn(D)
-    return "点到直线距离为" .. D
+    -- 计算对称点坐标
+    local s = S / (A^2 + B^2)
+    local x = x1 - 2*A*s
+    local y = y1 - 2*B*s
+    x = fn(x)
+    y = fn(y)
+    return "点到直线距离为" .. D .. "，点关于直线的对称点坐标为(" .. x .. ", " .. y .. ")"
 end
-calc_methods["ddzx"] = point_to_line_distance
-methods_desc["ddzx"] = "已知一点坐标和直线方程Ax + By + C = 0,求点到直线的距离"
+calc_methods["dyzx1"] = dyzx1
+methods_desc["dyzx1"] = "已知一点坐标和直线方程,求点到直线的距离及对称点坐标"
 
 
 
@@ -1514,7 +1528,7 @@ methods_desc["ldjl"] = "已知两点坐标，求两点间的距离和垂直平�
 -- 已知两条直线方程 A1x + B1y + C1 = 0和 A2x + B2y + C2 = 0，判断它们的位置关系
 function lines_relationship(A1, B1, C1, A2, B2, C2)
     -- 参数正确性检查
-    if A1 == 0 and B1 == 0 or A2 == 0 and B2 == 0 then
+    if (A1 == 0 and B1 == 0) or (A2 == 0 and B2 == 0) then
         return "直线方程的系数不能同时为零！"
     end
 
@@ -1534,8 +1548,6 @@ function lines_relationship(A1, B1, C1, A2, B2, C2)
                 B1 = B1 * k
                 C1 = C1 * k
             else
-                A2 = A2 * k
-                B2 = B2 * k
                 C2 = C2 * k
             end
         end
@@ -1731,6 +1743,122 @@ function combination(n, r)
 end
 calc_methods["cbnt"] = combination
 methods_desc["cbnt"] = "计算组合数"
+
+
+
+
+-- 已知直线l₁:A₁x+B₁y+C₁=0和l₂:A₂x+B₂y+C₂=0，求l₁关于l₂的对称直线l₃的方程
+function symmetry_line(A1, B1, C1, A2, B2, C2)
+    -- 检查参数正确性
+    if type(A1) ~= "number" or type(B1) ~= "number" or type(C1) ~= "number" or type(A2) ~= "number" or type(B2) ~= "number" or type(C2) ~= "number" then
+        return "错误：参数必须是数字"
+    end
+    if A1 == 0 and B1 == 0 or A2 == 0 and B2 == 0 then
+        return "直线方程的系数不能同时为零"
+    end
+    -- 计算对称直线方程的系数
+    local a = A2^2 + B2^2
+    local b = 2*(A1*A2 + B1*B2)
+    local A3 = a*A1 - b*A2
+    local B3 = a*B1 - b*B2
+    local C3 = a*C1 - b*C2
+    A3 = fn(A3)
+    B3 = fn(B3)
+    C3 = fn(C3)
+    local result = ""
+        -- 格式化A3的值
+    if A3 ~= 0 then
+        if A3 == 1 then
+            result = result .. "x"
+        elseif A3 == -1 then
+            result = result .. "-x"
+        else
+            result = result .. A3 .. "x"
+        end
+    end
+
+        -- 格式化B3的值
+    if B3 ~= 0 then
+        if B3 == 1 then
+            result = result .. "+y"
+        elseif B3 == -1 then
+            result = result .. "-y"
+        elseif B3 > 0 then
+            result = result .. "+" .. B3 .. "y"
+        else
+            result = result .. "-" .. -B3 .. "y"
+        end
+    end
+
+        -- 格式化C3的值
+    if C3 ~= 0 then
+        if C3 > 0 then
+            result = result .. "+" .. C3
+        else
+            result = result .. "-" .. -C3
+        end
+    end
+    return "直线l₁关于l₂的对称直线l₃的方程为：" .. result .. "=0"
+end
+calc_methods["syl"] = symmetry_line
+methods_desc["syl"] = "已知直线l₁:A₁x+B₁y+C₁=0和l₂:A₂x+B₂y+C₂=0，求l₁关于l₂的对称直线l₃的方程"
+
+
+
+
+-- 已知一点P(x1,y1)和直线l:Ax+By+C=0，求直线l关于点P的对称直线l'的方程
+function dyzx2(x1, y1, A, B, C)
+    -- 检查参数正确性
+    if type(x1) ~= "number" or type(y1) ~= "number" or type(A) ~= "number" or type(B) ~= "number" or type(C) ~= "number" then
+        return "错误：参数必须是数字"
+    end
+    if A == 0 and B == 0 then
+        return "直线方程的系数不能同时为零"
+    end
+    -- 计算对称直线方程的系数
+    local A1 = A
+    local B1 = B
+    local C1 = -(2*A*x1 + 2*B*y1 + C)
+    A1 = fn(A1)
+    B1 = fn(B1)
+    C1 = fn(C1)
+    local result = ""
+        -- 格式化A1的值
+    if A1 ~= 0 then
+        if A1 == 1 then
+            result = result .. "x"
+        elseif A1 == -1 then
+            result = result .. "-x"
+        else
+            result = result .. A1 .. "x"
+        end
+    end
+
+        -- 格式化B1的值
+    if B1 ~= 0 then
+        if B1 == 1 then
+            result = result .. "+y"
+        elseif B1 == -1 then
+            result = result .. "-y"
+        elseif B1 > 0 then
+            result = result .. "+" .. B1 .. "y"
+        else
+            result = result .. "-" .. -B1 .. "y"
+        end
+    end
+
+        -- 格式化C1的值
+    if C1 ~= 0 then
+        if C1 > 0 then
+            result = result .. "+" .. C1
+        else
+            result = result .. "-" .. -C1
+        end
+    end
+    return "直线l关于点P的对称直线l'的方程为：" .. result .. "=0"
+end
+calc_methods["dyzx2"] = dyzx2
+methods_desc["dyzx2"] = "已知一点P(x1,y1)和直线l:Ax+By+C=0，求直线l关于点P的对称直线l'的方程"
 
 
 
