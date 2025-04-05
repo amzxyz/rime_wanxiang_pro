@@ -142,7 +142,7 @@ set_shuru_schema:
 
  **字符集过滤：** 默认开启过滤，写在charset.dict.yaml的就是可以通过的字表，默认为8105+𰻞𰻞，如果你想什么字在小字集模式可以通过可以写在这里，配套开关【小、大】，快捷键Ctrl+g
 
- ![思维导图]https://github.com/amzxyz/rime_wanxiang_pro/blob/main/.github/%E4%B8%87%E8%B1%A1%E8%BE%93%E5%85%A5%E6%B3%95.png
+ ![思维导图](https://github.com/amzxyz/rime_wanxiang_pro/blob/main/.github/%E4%B8%87%E8%B1%A1%E8%BE%93%E5%85%A5%E6%B3%95.png)
 
 #### Rime输入框架下万象拼音、词库设计思路拆解
 ##### 痛点：
