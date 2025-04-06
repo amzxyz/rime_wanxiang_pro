@@ -3,7 +3,7 @@
 #https://github.com/amzxyz/RIME-LMDG
 ---
 name: chars
-version: "2025-04-05 16:00"
+version: "2025-04-06 17:22"
 sort: by_weight
 ...
 啊	a;kk;kk;ka;oj;rr;dz;kb;kk	915
@@ -43596,8 +43596,10 @@ sort: by_weight
 意	yì;lx;lx;xy,lx;cn;yp;xh;uj;lx	831
 已	yǐ;kv;vv;vg,ag;tt;su,xu;vi;nn;vv	806
 宜	yí;bq;bq;bq;iu;jm;wf;pe;gq	800
+一	yí;aa;aa;aa;dd;mm;fi;gg;aa	793
 亦	yì;wb;wd;wb,wy,dd;if;yc;zc;yo;wd	792
 易	yì;ow;ow;ow;vi;ah;oe;jq;ow	788
+一	yì;aa;aa;aa;dd;mm;fi;gg;aa	785
 议	yì;yy;yy;yy;cy;ik;sb;yy;yy	784
 医	yī;ku;ku;ku;dr;sk;no;at;kd	784
 义	yì;dx;dx;di,id;yh;ik,xk;ib;yq;dx	767
