@@ -4,7 +4,7 @@
 #错音错字对照表
 ---
 name: corrections
-version: "2025-04-06 17:22"
+version: "2025-04-06 22:47"
 sort: by_weight
 ...
 株木琅玛	zhū;mw;mv;mv;we;dd;ea;sr;lv mù;ur;un;ad;ww;dd;em;ss;un láng;wl;wl;wl;ah;mv;ni;gy;wh mǎ;wm;wm;wm;az;mm;nn;gc;wm	12	(有声)
@@ -22,7 +22,22 @@ sort: by_weight
 美丽冻人	měi;yd;yd;dy,yd;fx;tk;gm;ug;ed lì;ad;ad;ad;dh;mb;fv;gm;ad dòng;dd;dd;dd;ff;id;wy;ua;dd rén;pn;pn;pd;ee;oo;jr;ww;pn	123	(俏皮话)
 老肩巨滑	lǎo;lb;lb;bl,lb;ga;jp;ql;ft;ub jiān;ho;ho;ho,oh;ql;hb,ib;mv;yn;ho jù;kk;ka;kk,aa;dr;ss;nn;an;ka huá;do;dg;dg;kc;eb;kf;im;do	233	(玩笑语)
 食话食说	shí;rg;rl;rl,pd;eh;ov;qs;wy;rh huà;yu;yk;yu;co;ir;sa;yt;yk shí;rg;rl;rl,pd;eh;ov;qs;wy;rh shuō;yx;ye;yd;ck;iu;sp;yu;ye	247	(节目)
+大栅栏	da;ar;un;ad;xx;kk;md;dd;an zha;mc;mc;mc;ed;dm;ei;sm;lc lan;ml;ms;ml;wu;dm;et;su;ls	232	dà shí làn
+东庠岛	dong;ax;ad;ad,qx;af;kd;ry;ai;ad yang;gy;gy;gy;rp;iq;xg;yu;gy dao;nu;pe;nu,un;up;pu;xv;qy;ps	98	东庠(xiáng)岛
+东庠	dong;ax;ad;ad,qx;af;kd;ry;ai;ad yang;gy;gy;gy;rp;iq;xg;yu;gy	234	dōng xiáng
+莒县	lü;ck;ck;cl;zo;tr;ld;ak;ck xian;qs;qs;sq,qs;pp;bi;fk;eg;qv	437	jǔ xiàn
+浚县	jun;dw;dw;dj,dw;kj;ee;kh;ic;dw xian;qs;qs;sq,qs;pp;bi;fk;eg;qv	387	xùn xiàn
+郯城	ye;he;he;ey;tb;fl;ct;oo;he cheng;ti;ti;ti;gh;gs;ga;fd;tg	387	tán chéng
+丽水	lí;ad;ad;ad;dh;mb;fv;gm;ad shuǐ;ln;ln;ad,uv;oo;ee;ks;ii;vn	531	lí shuǐ
+珲春	hui;wi;wi;wj;at;mq;ny;gp;wi chun;io;fo;of,fo;uv;qa;ao;dw;ao	462	hún chūn
+甪直	yong;py;py;py;up;hq;tt;te;py zhi;uq;uq;aa,uq;su;jm;nf;fh;ua	436	lù zhí
+五厍	wu;aw;aa;aa;gg;mm;wu;gg;aa ku;ii;ii;ii;rt;mq,xq;xy;dl;ii	358	wú shè
+台州	tāi;sk;sk;sk;po;ir;kd;ck;vk zhōu;dl;dl;id,da;hp;il;oo;yt;da	593	tāi zhōu
 膻中	shan;od;oa;od;ld;bm;vf;ey;od zhong;kl;ll;aa,ka;op;ll;dg;kh;aa	364	膻(dàn)中
+渑池	yin;dd;dd;dd,dm;kr;eu;kd;ik;dd chi;dy;dy;dy;kr;ed;ke;ib;dy	400	miǎn chí
+渑池	sheng;dd;dd;dd,dm;kr;eu;kd;ik;dd chi;dy;dy;dy;kr;ed;ke;ib;dy	400	miǎn chí
+铅山	qian;jk;jk;jk;do;or;zd;qm;jk shan;kl;lk;aa;pp;uu;vs;mm;aa	345	yán shān
+铅山县	qian;jk;jk;jk;do;or;zd;qm;jk shan;kl;lk;aa;pp;uu;vs;mm;aa xian;qs;qs;sq,qs;pp;bi;fk;eg;qv	182	铅(yán)山县
 按耐	àn;fn;fn;fa;jy;qv;ub;rp;fn nài;ec;ec;ce;ek;mi;lk;dm;ec	0	按捺(nà)
 甭介	béng;by;by;by;dp;mq;ct;gi;by jie;rl;rl;ra,rd;ep;ol;jp;wj;ra	56	甭价(jie)
 别介	bié;kd;kd;dl;oi;rn,xn;dp;kl;kd jie;rl;rl;ra,rd;ep;ol;jp;wj;ra	31	别价(jie)
