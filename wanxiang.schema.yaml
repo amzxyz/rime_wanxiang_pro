@@ -368,7 +368,17 @@ key_binder:
 #通过按下/发送/+1节约一个按键，不冲突的时候可以开启
     #- { match: "[a-z]{1,4}", accept: "/",  send_sequence: "/1" }
 
-
+editor:
+   bindings:
+     space: confirm                        # 空格键：上屏候选项
+     Return: commit_raw_input              # 回车键：上屏原始输入
+     Control+Return: commit_script_text    # Ctrl+回车键：上屏变换后输入（经过 preedit转换的）
+     Control+Shift+Return: commit_comment  # Ctrl+Shift+回车键：上屏 comment
+     BackSpace: revert                     # 退格键：向前删除（撤消上次输入）
+     Delete: delete                        # Delete 键：向后删除
+     Control+BackSpace: back_syllable      # Ctrl+退格键：删除一个音节
+     Control+Delete: delete_candidate      # Ctrl+Delete键：删除或降权候选项
+     Escape: cancel                        # Esc 键：取消输入
 
 # 拼写设定
 speller:

@@ -4,7 +4,7 @@
 #错音错字对照表
 ---
 name: corrections
-version: "2025-04-07 12:26"
+version: "2025-04-07 14:21"
 sort: by_weight
 ...
 株木琅玛	zhū;mw;mv;mv;we;dd;ea;sr;lv mù;ur;un;ad;ww;dd;em;ss;un láng;wl;wl;wl;ah;mv;ni;gy;wh mǎ;wm;wm;wm;az;mm;nn;gc;wm	12	(有声)
@@ -100,6 +100,11 @@ sort: by_weight
 六安县	liu;wb;wb;wb,dd,db;if;yc;al;uy;wb an;bn;bn;bn;iy;jv;wb;pv;gn xian;qs;qs;sq,qs;pp;bi;fk;eg;qv	3	lù ān xiàn
 六合区	liu;wb;wb;wb,dd,db;if;yc;al;uy;wb he;rk;rk;rk;eo;or;jd;wg;rk qū;kx;kx;ki;dr;sk;nb;aq;kx	3	lù hé qū
 螺蛳粉	luo;ix;ix;il;ff;lf;ci;jl;ix shi;ij;ij;iu;fy;lb;cr;jj;ij fen;mf;md;mf;lu;fh;pp;ow;md	645	luó sī fěn
+温庭筠	wen;dm;dm;dm,dw;ka;et;ka;ij;dm ting;gw;gz;gt;rq;ig;xu;yt;gr jun;vy;vd;vj;nf;hm;rw;tf;vd	212	温庭筠(yún)
+关卡	guan;bt;bt;bt,qd;fx;tk;hm;ud;et ka;ub;ub;bx,ub;ph;yy;yy;hh;ub	640	guān qiǎ
+三昧真火	san;ae;ae;aa;uu;mm;ts;dg;ae wei;ow;ow;ow;ve;ad;oa;jf;ow zhen;ub;ub;uj;sf;jc;nh;fh;ub huo;br,rb;dr;dd;tt;ff;ch;oo;dr	439	三昧(mèi)真火
+优惠券	you;ry;ry;ry;xh;ou;jo;wd;ry hui;ix;ax;xh,hx;dn;jp;nh;gj;ax juan;jd;jd;df,jd;fi;fh;hp;ud;dd	418	优惠券(quàn)
+没食子	mei;du;dy;du;kl;ee;kr;im;dy shi;rg;rl;rl,pd;eh;ov;qs;wy;rh zi;la;va;aa,vh;aa;nd;hi;bb;va	66	没(mò)食子
 魔蝎座	mó;gg;gg;gm,mg;dp;ii;za;ys;gv xiē;ir;iv;ih;fr;lv;cf;jj;iv zuò;gr;gt;gz;rg;ig;xg;yw;gt	0	摩羯(jié)座
 鄱阳湖	pan;ce;pe;ef;hb;hl;tt;to;fe yang;eo;eo;eo;bv;na;to;bj;eo hu;do;do;dh;kl;eb;kv;id;do	1336	pó yáng hú
 比萨饼	pi;bb;bb;bb;aa;pp;vv;xx;bb sa;ci;ci;ci;zr;th;lx;ab;ci bing;uk;uk;ub;gp;nt;ql;qn;uk	23	bǐ sà bǐng
