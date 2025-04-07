@@ -10,14 +10,24 @@
 -- 求解一次、二次函数解析式、圆的方程；
 -- 取整函数（包括向上取整和向下取整）、求余函数；
 -- 已知数列中任意两项，求通项公式(等差或等比)；求数列的前n项和(等差或等比)；
--- 已知三角形三边长，求面积；已知正多边形边数n、边长a，求面积
--- 判断两直线位置关系，给出距离或交点坐标；点到点、点到直线距离求解
--- 求解两点间线段的垂直平分线方程
--- 组合数、排列数、最大公因数、最小公倍数求解
+-- 已知三角形三边长，求面积；已知正多边形边数n、边长a，求面积；
+-- 判断两直线位置关系，给出距离或交点坐标；点到点、点到直线距离求解；
+-- 求解两点间线段的垂直平分线方程；
+-- 组合数、排列数、最大公因数、最小公倍数求解；
 -- 点关于直线的对称点坐标、直线关于直线(或点)的对称直线方程求解；
+-- 连续自然数的幂方求和，包括平方和、立方和、4次方之和；前n个奇数或偶数的平方和、立方和、4次方之和
 
 
 -- 功能代码一览：
+-- sq = "连续自然数平方和"
+-- cb = "连续自然数立方和"
+-- fp = "连续自然数4次方之和"
+-- osq = "前n个奇数的平方和"
+-- esq = "前n个偶数的平方和"
+-- ocb = "前n个奇数的立方和"
+-- ecb = "前n个偶数的立方和"
+-- ofp = "前n个奇数的4次方之和"
+-- efp = "前n个偶数的4次方之和"
 -- syl = "已知直线l₁:A₁x+B₁y+C₁=0和l₂:A₂x+B₂y+C₂=0，求l₁关于l₂的对称直线l₃的方程"
 -- cbnt = "计算组合数"
 -- pmtt = "计算排列数"
@@ -26,16 +36,16 @@
 -- sjxx = "已知三角形三个顶点坐标，求其“心”的坐标"
 -- sjxy1 = "已知三角形三边长，求内切圆半径和外接圆半径"
 -- sjxy2 = "已知三角形三个顶点坐标，求内切圆半径和外接圆半径"
--- ldjl = "已知两点坐标，求两点间的距离和垂直平分线方程"
--- lrp = "已知两直线方程，判断它们的位置关系"
+-- ldj = "已知两点坐标，求两点间的距离和垂直平分线方程"
+-- lrp = "已知两直线方程A₁x+B₁y+C₁=0和A₂x+B₂y+C₂=0，判断它们的位置关系"
 -- dyzx1 = "已知一点坐标和直线方程,求点到直线的距离及对称点坐标"
--- dyzx2 = "已知一点P(x1,y1)和直线l:Ax+By+C=0，求直线l关于点P的对称直线l'的方程"
+-- dyzx2 = "已知一点P(x1,y1)和直线l:A₁x+B₁y+C₁=0，求直线l关于点P的对称直线l'的方程"
 -- sjs = "随机数"
 -- zdbx = "已知边数n与边长a计算正多边形面积"
 -- sjx = "已知三角形的三边长,求三角形面积"
 -- dbsl = "已知等比数列的首项a1,公比q ,求指定的前n项和"
 -- dcsl = "已知等差数列的首项a1,公差d ,求指定的前n项和"
--- txgs = "已知数列的任意两项,求其通项公式"
+-- txgs = "已知数列的任意两项aᵢ、aₖ,求其通项公式"
 -- cexr = "已知圆心坐标和半径求圆的方程"
 -- cexl = "已知圆心和圆上不同两点的坐标求圆方程"
 -- cesd = "已知圆上不同三点的坐标，求圆方程"
@@ -123,20 +133,17 @@ local methods_desc = {
 function fn(n)
     -- 将数字转换为字符串以便处理
     local s = tostring(n)
-
     -- 查找小数点的位置
     local i = string.find(s, "%.")
     if i == nil then
         -- 如果没有小数点，直接返回原数字
         return n
     end
-
     -- 去除小数点后的尾随零
     local j = string.len(s)
     while j > i and string.sub(s, j, j) == "0" do
         j = j - 1
     end
-
     -- 如果小数点后没有数字了，移除小数点
     if j == i then
         -- 返回整数部分
@@ -152,20 +159,17 @@ end
 function fs(n)
     -- 将数字转换为字符串以便处理
     local s = tostring(n)
-
     -- 查找小数点的位置
     local i = string.find(s, "%.")
     if i == nil then
         -- 如果没有小数点，直接返回原数字
         return n
     end
-
     -- 去除小数点后的尾随零
     local j = string.len(s)
     while j > i and string.sub(s, j, j) == "0" do
         j = j - 1
     end
-
     -- 如果小数点后没有数字了，移除小数点
     if j == i then
         -- 返回整数部分
@@ -175,6 +179,8 @@ function fs(n)
         return string.sub(s, 1, j)
     end
 end
+
+
 
 
 -- 计算两个数的最大公因数（GCD）
@@ -188,10 +194,14 @@ function gcd(a, b)
 end
 
 
+
+
 -- 计算两个数的最小公倍数（LCM）
 function lcm(a, b)
     return a * b / gcd(a, b)
 end
+
+
 
 
 -- random([m [,n ]]) 返回m-n之间的随机数, n为空则返回1-m之间, 都为空则返回0-1之间的小数
@@ -514,10 +524,363 @@ methods_desc["mod"] = "求余函数"
 
 
 
+-- 连续自然数平方和
+function sum_of_squares(n)
+    -- 检查参数
+    if type(n) ~= "number" or n < 1 or n~= floor(n) then
+        return "参数必须为正整数"
+    end
+    -- 计算平方和
+    local result = n*(n+1)*(2*n+1) / 6
+    result = fn(result)
+    return result
+end
+calc_methods["sq"] = sum_of_squares
+methods_desc["sq"] = "连续自然数平方和"
+
+
+
+
+-- 连续自然数立方和
+function sum_of_cubes(n)
+    -- 检查参数
+    if type(n) ~= "number" or n < 1 or n~= floor(n) then
+        return "参数必须为正整数"
+    end
+    -- 计算立方和
+    local result = (n*(n+1))^2 / 4
+    result = fn(result)
+    return result
+end
+calc_methods["cb"] = sum_of_cubes
+methods_desc["cb"] = "连续自然数立方和"
+
+
+
+
+-- 连续自然数4次方之和
+function sum_of_fourth_powers(n)
+    -- 检查参数
+    if type(n) ~= "number" or n < 1 or n~= floor(n) then
+        return "参数必须为正整数"
+    end
+    -- 计算4次方和
+    local result = n*(n+1)*(2*n+1)*(3*n^2+3*n-1) / 30
+    result = fn(result)
+    return result
+end
+calc_methods["fp"] = sum_of_fourth_powers
+methods_desc["fp"] = "连续自然数4次方之和"
+
+
+
+
+-- 前n个奇数的平方和
+function sum_of_odd_squares(n)
+    -- 检查参数
+    if type(n) ~= "number" or n < 1 or n~= floor(n) then
+        return "参数必须为正整数"
+    end
+    -- 计算平方和
+    local result = n*(4*n^2-1) / 3
+    result = fn(result)
+    return result
+end
+calc_methods["osq"] = sum_of_odd_squares
+methods_desc["osq"] = "前n个奇数的平方和"
+
+
+
+
+-- 前n个偶数的平方和
+function sum_of_even_squares(n)
+    -- 检查参数
+    if type(n) ~= "number" or n < 1 or n~= floor(n) then
+        return "参数必须为正整数"
+    end
+    -- 计算平方和
+    local result = 2*n*(n+1)*(2*n+1) / 3
+    result = fn(result)
+    return result
+end
+calc_methods["esq"] = sum_of_even_squares
+methods_desc["esq"] = "前n个偶数的平方和"
+
+
+
+
+-- 前n个奇数的立方和
+function sum_of_odd_cubes(n)
+    -- 检查参数
+    if type(n) ~= "number" or n < 1 or n~= floor(n) then
+        return "参数必须为正整数"
+    end
+    -- 计算立方和
+    local result = n^2*(2*n^2-1)
+    result = fn(result)
+    return result
+end
+calc_methods["ocb"] = sum_of_odd_cubes
+methods_desc["ocb"] = "前n个奇数的立方和"
+
+
+
+
+-- 前n个偶数的立方和
+function sum_of_even_cubes(n)
+    -- 检查参数
+    if type(n) ~= "number" or n < 1 or n~= floor(n) then
+        return "参数必须为正整数"
+    end
+    -- 计算立方和
+    local result = 2*(n*(n+1))^2
+    result = fn(result)
+    return result
+end
+calc_methods["ecb"] = sum_of_even_cubes
+methods_desc["ecb"] = "前n个偶数的立方和"
+
+
+
+
+-- 前n个奇数的4次方之和
+function sum_of_odd_fourth_powers(n)
+    -- 检查参数
+    if type(n) ~= "number" or n < 1 or n~= floor(n) then
+        return "参数必须为正整数"
+    end
+    -- 计算4次方和
+    local result = (48*n^5-40*n^3+7*n) / 15
+    result = fn(result)
+    return result
+end
+calc_methods["ofp"] = sum_of_odd_fourth_powers
+methods_desc["ofp"] = "前n个奇数的4次方之和"
+
+
+
+
+-- 前n个偶数的4次方之和
+function sum_of_even_fourth_powers(n)
+    -- 检查参数
+    if type(n) ~= "number" or n < 1 or n~= floor(n) then
+        return "参数必须为正整数"
+    end
+    -- 计算4次方和
+    local result = 8*n*(n+1)*(2*n+1)*(3*n^2+3*n-1) / 15
+    result = fn(result)
+    return result
+end
+calc_methods["efp"] = sum_of_even_fourth_powers
+methods_desc["efp"] = "前n个偶数的4次方之和"
+
+
+
+
+-- 圆的标准方程的表达式优化
+local function CircleStandardEquation(h, k, r_squared)
+    local standardEquation
+    if h == 0 then
+        if k > 0 then
+            standardEquation = "x²+(y-" .. k .. ")²=" .. r_squared
+        elseif k == 0 then
+            standardEquation = "x²+y²=" .. r_squared
+        else
+            standardEquation = "x²+(y+" .. -k .. ")²=" .. r_squared
+        end
+    elseif k == 0 then
+        if h > 0 then
+            standardEquation = "(x-" .. h .. ")²+y²=" .. r_squared
+        elseif h == 0 then
+            standardEquation = "x²+y²=" .. r_squared
+        else
+            standardEquation = "(x+" .. -h .. ")²+y²=" .. r_squared
+        end
+    else
+        if h > 0 and k > 0 then
+            standardEquation = "(x-" .. h .. ")²+(y-" .. k .. ")²=" .. r_squared
+        elseif h > 0 and k < 0 then
+            standardEquation = "(x-" .. h .. ")²+(y+" .. -k .. ")²=" .. r_squared
+        elseif h < 0 and k > 0 then
+            standardEquation = "(x+" .. -h .. ")²+(y-" .. k .. ")²=" .. r_squared
+        else
+            standardEquation = "(x+" .. -h .. ")²+(y+" .. -k ..")²=" .. r_squared
+        end
+    end
+    return standardEquation
+end
+
+
+
+
+-- 圆的一般方程表达式优化
+local function CircleGeneralEquation(D, E, F)
+    local generalEquation = "x²+y²"
+    -- 处理D项
+    if D ~= 0 then
+        if D == -1 then
+            generalEquation = generalEquation .. "-x"
+        elseif D == 1 then
+            generalEquation = generalEquation .. "+x"
+        elseif D > 0 then
+            generalEquation = generalEquation .. "+" .. D .. "x"
+        else
+            generalEquation = generalEquation .. "-" .. -D .. "x"
+        end
+    end
+    -- 处理E项
+    if E ~= 0 then
+        if E == -1 then
+            generalEquation = generalEquation .. "-y"
+        elseif E == 1 then
+            generalEquation = generalEquation .. "+y"
+        elseif E > 0 then
+            generalEquation = generalEquation .. "+" .. E .. "y"
+        else
+            generalEquation = generalEquation .. "-" .. -E .. "y"
+        end
+    end
+    -- 处理F项
+    if F ~= 0 then
+        if F > 0 then
+            generalEquation = generalEquation .. "+" .. F .. "=0"
+        else
+            generalEquation = generalEquation .. "-" .. -F .. "=0"
+        end
+    end
+    return generalEquation
+end
+
+
+
+
+-- 直线方程(斜截式)表达式优化
+local function LineEquation(x1, y1, k)
+    local equation
+    -- 特殊情况
+    if k == nil then
+        return "x=".. x1
+    else
+        equation = "y="
+    end
+    if k == 0 then
+        equation = equation .. y1
+        return equation
+    end
+    -- 计算截距b
+    local b = y1 - k * x1
+    b = fn(b)
+    -- 优化k的表示
+    if k ~= 0 then
+        if k == -1 then
+            equation = equation .. "-x"
+        elseif k == 1 then
+            equation = equation .. "x"
+        else
+            if k > 0 then
+                equation = equation .. k .. "x"
+            else
+                equation = equation .. "-" .. -k .. "x"
+            end
+        end
+    end
+    -- 优化b的表示
+    if b ~= 0 then
+        if b > 0 then
+            equation = equation .. "+" .. b
+        else
+            equation = equation .. "-" .. -b
+        end
+    end
+    return equation
+end
+
+
+
+
+
+-- 直线方程(一般式)表达式优化
+local function LineGeneralEquation(A, B, C)
+    local result = ""
+    -- 格式化A3的值
+    if A ~= 0 then
+        if A == 1 then
+            result = result .. "x"
+        elseif A == -1 then
+            result = result .. "-x"
+        else
+            result = result .. A .. "x"
+        end
+    end
+    -- 格式化B3的值
+    if B ~= 0 then
+        if B == 1 then
+            result = result .. "+y"
+        elseif B == -1 then
+            result = result .. "-y"
+        elseif B > 0 then
+            result = result .. "+" .. B .. "y"
+        else
+            result = result .. "-" .. -B .. "y"
+        end
+    end
+    -- 格式化C3的值
+    if C ~= 0 then
+        if C > 0 then
+            result = result .. "+" .. C
+        else
+            result = result .. "-" .. -C
+        end
+    end
+    return result .. "=0"
+end
+
+
+
+
+-- 二次函数表达式优化
+local function QuadraticEquation(a,b,c)
+    local result = "y="
+    -- 格式化a的值
+    if a ~= 0 then
+        if a == 1 then
+            result = result .. "x²"
+        elseif a == -1 then
+            result = result .. "-x²"
+        else
+            result = result .. a .. "x²"
+        end
+    end
+    -- 格式化b的值
+    if b ~= 0 then
+        if b == 1 then
+            result = result .. "+x"
+        elseif b == -1 then
+            result = result .. "-x"
+        elseif b > 0 then
+            result = result .. "+" .. b .. "x"
+        else
+            result = result .. "-" .. -b .. "x"
+        end
+    end
+    -- 格式化c的值
+    if c ~= 0 then
+        if c > 0 then
+            result = result .. "+" .. c
+        else
+            result = result .. "-" .. -c
+        end
+    end
+    return result
+end
+
+
+
+
 -- 已知正多边形边数 n 和边长 a ，计算正多边形面积
 function calculateRegularPolygonArea(n, a)
     -- 检查边数n是否为正整数
-    if n ~= math.floor(n) or n <= 0 then
+    if type(n) ~= "munber" or n ~= floor(n) or n < 1 then
         return "错误：边数n必须为正整数。"
     end
     -- 检查边长a是否为正数
@@ -581,16 +944,19 @@ methods_desc["dcsl"] = "已知等差数列的首项a1,公差d ,求指定的前n�
 
 
 
--- 已知数列中任意两项,求通项公式(等差或等比),b=0为等差数列,b=1为等比数列
+-- 已知数列中任意两项aᵢ、aₖ,求通项公式(等差或等比),b=0为等差数列,b=1为等比数列
 function findSequenceFormula(ai, i, ak, k, b)
     -- 检查参数正确性
-    if i ~= math.floor(i) or i <= 0 or k ~= math.floor(k) or k<= 0 then
+    if type(i) ~= "number" or i ~= floor(i) or i < 1 or type(k) ~= "munber" or k ~= floor(k) or k < 1 then
         return "i 和 k 必须是正整数"
     end
     if ai == ak and i == k then
-        return "ai 、 ak 和对应的项数不能同时相等"
+        return "aᵢ、aₖ 和对应的项数不能同时相等"
     end
-
+    -- 检查是否为常数列
+    if ai == ak and i ~= k then
+        return "aₙ=" .. ai
+    end
     -- 计算等差数列的通项公式
     local function arithmeticSequence(ai, i, ak, k)
         local d = (ak - ai) / (k - i)
@@ -598,37 +964,23 @@ function findSequenceFormula(ai, i, ak, k, b)
         d = fn(d)
         a1 = fn(a1)
         -- 根据公差d的正负调整公式
-        if d >= 0 then
+        if d > 0 then
             return "aₙ=" .. a1 .. "+(n-1)*" .. d
         else
             return "aₙ=" .. a1 .. "-(n-1)*" .. -d
         end
     end
-
     -- 计算等比数列的通项公式
     local function geometricSequence(ai, i, ak, k)
         local q = ak/ai
-        local n = k-i
-
-        -- 计算 x 开 n 次方
-        local function nth_root(x, n)
-            if n % 2 == 0 and x < 0 then
-                return nil -- 开偶次方时负数没有实数解
-            elseif x < 0 then
-                return -((-x) ^ (1 / n))
-            else
-                return x ^ (1 / n)
-            end
+        local n = k-i        
+        local s = nth_root(q, n) 
+        if s == nil or s== 0 then
+            return "公比为0或不存在,无法计算通项公式"
         end
-        
-        local s = nth_root(q, n) -- 使用 nth_root 函数计算 q 的 n 次方根
-        if s == nil then
-            return "无法计算通项公式"
-        end
-        local a1 = ai / (s ^ (i - 1)) -- 计算首项 a1
+        local a1 = ai / (s ^ (i - 1)) 
         s = fn(s)
         a1 = fn(a1)
-
         -- 根据公比s的正负调整公式
         if s < 0 then
             return "aₙ=" .. a1 .. "*(" .. s .. ")ⁿ⁻¹"
@@ -636,12 +988,6 @@ function findSequenceFormula(ai, i, ak, k, b)
             return "aₙ=" .. a1 .. "*" .. s .. "ⁿ⁻¹"
         end
     end
-
-    -- 检查是否为常数列
-    if ai == ak and i ~= k then
-        return "aₙ=" .. ai
-    end
-
     -- 根据b值返回通项公式
     if b == 0 then
         return arithmeticSequence(ai, i, ak, k)
@@ -655,7 +1001,7 @@ function findSequenceFormula(ai, i, ak, k, b)
     end
 end
 calc_methods["txgs"] = findSequenceFormula
-methods_desc["txgs"] = "已知数列的任意两项,求其通项公式"
+methods_desc["txgs"] = "已知数列的任意两项aᵢ、aₖ,求其通项公式"
 
 
 
@@ -666,85 +1012,21 @@ function CircleEquationsxr(h, k, r)
     if r <= 0 then
         return "半径必须大于0"
     end
-
     -- 计算r^2的具体数值
     local r_squared = r^2
     r_squared= fn(r_squared)
-
     -- 圆的标准方程
-    local standardEquation
-    if h == 0 then
-        if k > 0 then
-            standardEquation = "x²+(y-" .. k .. ")²=" .. r_squared
-        elseif k == 0 then
-            standardEquation = "x²+y²=" .. r_squared
-        else
-            standardEquation = "x²+(y+" .. -k .. ")²=" .. r_squared
-        end
-    elseif k == 0 then
-        if h > 0 then
-            standardEquation = "(x-" .. h .. ")²+y²=" .. r_squared
-        elseif h == 0 then
-            standardEquation = "x²+y²=" .. r_squared
-        else
-            standardEquation = "(x+" .. -h .. ")²+y²=" .. r_squared
-        end
-    else
-        if h > 0 and k > 0 then
-            standardEquation = "(x-" .. h .. ")²+(y - " .. k .. ")²=" .. r_squared
-        elseif h > 0 and k < 0 then
-            standardEquation = "(x-" .. h .. ")²+(y + " .. -k .. ")²=" .. r_squared
-        elseif h < 0 and k > 0 then
-            standardEquation = "(x+" .. -h .. ")²+(y - " .. k .. ")²=" .. r_squared
-        else
-            standardEquation = "(x+" .. -h .. ")²+(y+" .. -k ..")²=" .. r_squared
-        end
-    end
-
+    local se = CircleStandardEquation(h, k, r_squared)
     -- 圆的一般方程
     local D = -2 * h
     local E = -2 * k
     local F = h^2 + k^2 - r^2
+    D= fn(D)
+    E= fn(E)
     F= fn(F)
-    local generalEquation = "x²+y²"
-
-    -- 处理D项
-    if D ~= 0 then
-        if D == -1 then
-            generalEquation = generalEquation .. "-x"
-        elseif D == 1 then
-            generalEquation = generalEquation .. "+x"
-        elseif D > 0 then
-            generalEquation = generalEquation .. "+" .. D .. "x"
-        else
-            generalEquation = generalEquation .. "-" .. -D .. "x"
-        end
-    end
-
-    -- 处理E项
-    if E ~= 0 then
-        if E == -1 then
-            generalEquation = generalEquation .. "-y"
-        elseif E == 1 then
-            generalEquation = generalEquation .. "+y"
-        elseif E > 0 then
-            generalEquation = generalEquation .. "+" .. E .. "y"
-        else
-            generalEquation = generalEquation .. "-" .. -E .. "y"
-        end
-    end
-
-    -- 处理F项
-    if F ~= 0 then
-        if F > 0 then
-            generalEquation = generalEquation .. "+" .. F .. "=0"
-        else
-            generalEquation = generalEquation .. "-" .. -F .. "=0"
-        end
-    end
-
+    local ge = CircleGeneralEquation(D, E, F)
     -- 返回两个方程
-    return "标准方程: " .. standardEquation .. "\n一般方程: " .. generalEquation
+    return "标准方程: " .. se .. "\n一般方程: " .. ge
 end
 calc_methods["cexr"] = CircleEquationsxr
 methods_desc["cexr"] = "已知圆心坐标和半径求圆的方程"
@@ -758,103 +1040,29 @@ function CircleEquationsxl(h ,k ,x1, y1, x2, y2)
     if (x1 == x2 and y1 == y2) or (x1 == h and y1 == k) or (x2 == h and y2 == k) then
         return "错误：三个坐标中不能有任意两个点坐标完全相同。"
     end
-
     -- 计算两点到圆心的距离，并检查是否相等
     local distance1 = math.sqrt((x1 - h)^2 + (y1 - k)^2)
     local distance2 = math.sqrt((x2 - h)^2 + (y2 - k)^2)
     if distance1 ~= distance2 then
         return "错误：给定的圆心坐标和两个点无法构成圆。"
     end
-
     -- 计算半径
     local r = distance1
-
     -- 计算r^2的具体数值
     local r_squared = r^2
     r_squared= fn(r_squared)
-
     -- 圆的标准方程
-    local standardEquation
-    if h == 0 then
-        if k == 0 then
-            standardEquation = "x²+y²=" .. r_squared
-        else
-            if k > 0 then
-                standardEquation = "x²+(y-" .. k .. ")²=" .. r_squared
-            else
-                standardEquation = "x²+(y+" .. -k .. ")²=" .. r_squared
-            end
-        end
-    elseif k == 0 then
-        if h == 0 then
-            standardEquation = "x²+y²=" .. r_squared
-        else
-            if h > 0 then
-                standardEquation = "(x-" .. h .. ")²+y²=" .. r_squared
-            else
-                standardEquation = "(x+" .. -h .. ")²+y²=" .. r_squared
-            end
-        end
-    else
-        if h > 0 and k > 0 then
-            standardEquation = "(x-" .. h .. ")²+(y-" .. k .. ")²=" .. r_squared
-        elseif h > 0 and k < 0 then
-            standardEquation = "(x-" .. h .. ")²+(y+" .. -k .. ")²=" .. r_squared
-        elseif h < 0 and k > 0 then
-            standardEquation = "(x+" .. -h .. ")²+(y-" .. k .. ")²=" .. r_squared
-        else
-            standardEquation = "(x+" .. -h .. ")²+(y+" .. -k .. ")²=" .. r_squared
-        end
-    end
-
+    local se = CircleStandardEquation(h, k, r_squared)
     -- 圆的一般方程
     local D = -2 * h
     local E = -2 * k
     local F = h^2 + k^2 - r_squared
+    D= fn(D)
+    E= fn(E)
     F= fn(F)
-    local generalEquation = "x²+y²"
-
-    -- 处理D项
-    if D ~= 0 then
-        if D == -1 then
-            generalEquation = generalEquation .. "-x"
-        elseif D == 1 then
-            generalEquation = generalEquation .. "+x"
-        else
-            if D > 0 then
-                generalEquation = generalEquation .. "+" .. D .. "x"
-            else
-                generalEquation = generalEquation .. "-" .. -D .. "x"
-            end
-        end
-    end
-
-    -- 处理E项
-    if E ~= 0 then
-        if E == -1 then
-            generalEquation = generalEquation .. "-y"
-        elseif E == 1 then
-            generalEquation = generalEquation .. "+y"
-        else
-            if E > 0 then
-                generalEquation = generalEquation .. "+" .. E .. "y"
-            else
-                generalEquation = generalEquation .. "-" .. -E .. "y"
-            end
-        end
-    end
-
-    -- 处理F项
-    if F ~= 0 then
-        if F > 0 then
-            generalEquation = generalEquation .. "+" .. F .. "=0"
-        else
-            generalEquation = generalEquation .. "-" .. -F .. "=0"
-        end
-    end
-
+    local ge = CircleGeneralEquation(D, E, F)
     -- 返回两个方程
-    return "标准方程: " .. standardEquation .. "\n一般方程: " .. generalEquation
+    return "标准方程: " .. se .. "\n一般方程: " .. ge
 end
 calc_methods["cexl"] = CircleEquationsxl
 methods_desc["cexl"] = "已知圆心和圆上不同两点的坐标求圆方程"
@@ -907,94 +1115,19 @@ function CircleEquationssd(x1, y1, x2, y2, x3, y3)
     D= fn(D)
     E= fn(E)
     F= fn(F)
-
-    local generalEquation = "x²+y²"
-
-    -- 处理D项
-    if D ~= 0 then
-        if D == -1 then
-            generalEquation = generalEquation .. "-x"
-        elseif D == 1 then
-            generalEquation = generalEquation .. "+x"
-        else
-            if D > 0 then
-                generalEquation = generalEquation .. "+" .. D .. "x"
-            else
-                generalEquation = generalEquation .. "-" .. -D .. "x"
-            end
-        end
-    end
-
-    -- 处理E项
-    if E ~= 0 then
-        if E == -1 then
-            generalEquation = generalEquation .. "-y"
-        elseif E == 1 then
-            generalEquation = generalEquation .. "+y"
-        else
-            if E > 0 then
-                generalEquation = generalEquation .. "+" .. E .. "y"
-            else
-                generalEquation = generalEquation .. "-" .. -E .. "y"
-            end
-        end
-    end
-
-    -- 处理F项
-    if F ~= 0 then
-        if F > 0 then
-            generalEquation = generalEquation .. "+" .. F .. "=0"
-        else
-            generalEquation = generalEquation .. "-" .. -F .. "=0"
-        end
-    end
-
-    -- 由D、E、F求得圆心(h, k)的值
+    -- 圆的一般方程
+    local ge = CircleGeneralEquation(D, E, F)
+    -- 由D、E、F求得圆心(h, k)及r的值
     local h = -D / 2
     local k = -E / 2
+    local r_squared = h^2 + k^2 - F
     h= fn(h)
     k= fn(k)
-
-    -- 计算半径r的平方
-    local r_squared = h^2 + k^2 - F
     r_squared= fn(r_squared)
-
-    -- 根据圆心和半径写出标准方程
-    local standardEquation
-    if h == 0 then
-        if k == 0 then
-            standardEquation = "x²+y²=" .. r_squared
-        else
-            if k > 0 then
-                standardEquation = "x²+(y-" .. k .. ")²=" .. r_squared
-            else
-                standardEquation = "x²+(y+" .. -k .. ")²=" .. r_squared
-            end
-        end
-    elseif k == 0 then
-        if h == 0 then
-            standardEquation = "y²+x²=" .. r_squared
-        else
-            if h > 0 then
-                standardEquation = "(x-" .. h .. ")²+y²=" .. r_squared
-            else
-                standardEquation = "(x+" .. -h .. ")²+y²=" .. r_squared
-            end
-        end
-    else
-        if h > 0 and k > 0 then
-            standardEquation = "(x-" .. h .. ")²+(y-" .. k .. ")²=" .. r_squared
-        elseif h > 0 and k < 0 then
-            standardEquation = "(x-" .. h .. ")²+(y+ " .. -k .. ")²=" .. r_squared
-        elseif h < 0 and k > 0 then
-            standardEquation = "(x+".. -h .. ")²+(y-" .. k .. ")²=" .. r_squared
-        else
-            standardEquation = "(x+" .. -h .. ")²+(y+" .. -k .. ")²=" .. r_squared
-        end
-    end
-
+    -- 圆的标准方程
+    local se = CircleStandardEquation(h, k, r_squared)
     -- 返回两个方程
-    return "标准方程: " .. standardEquation .. "\n一般方程: " .. generalEquation
+    return "标准方程: " .. se .. "\n一般方程: " .. ge
 end
 calc_methods["cesd"] = CircleEquationssd
 methods_desc["cesd"] = "已知圆上不同三点的坐标，求圆方程"
@@ -1055,45 +1188,8 @@ methods_desc["eyyc"] = "求解二元一次方程组"
 -- 点斜法求解一次函数解析式
 -- 定义函数，输入斜率k和点的坐标(x1, y1)
 function pointSlopeForm(k, x1, y1)
-    -- 特殊情况：平行于y轴
-    if k == nil then
-        return "x=" .. x1
-    end
-
-    -- 特殊情况：平行于x轴
-    if k == 0 then
-        return "y=" .. y1
-    end
-
-    -- 计算截距b
-    local b = y1 - k * x1
-
-    -- 构建直线方程
-    local equation = "y"
-
-    -- 优化k的表示
-    if k == -1 then
-        equation = equation .. "=-x"
-    elseif k == 1 then
-        equation = equation .. "=x"
-    else
-        if k > 0 then
-            equation = equation .. "=" .. k .. "x"
-        else
-            equation = equation .. "=-" .. -k .. "x"
-        end
-    end
-
-    -- 优化b的表示
-    if b == 0 then
-        -- b为0，不添加b项
-    elseif b > 0 then
-        equation = equation .. "+" .. b
-    else
-        equation = equation .. "-" .. -b
-    end
-
-    return equation
+    local le = LineEquation(x1, y1, k)
+    return "直线方程: " .. le
 end
 calc_methods["dxf"] = pointSlopeForm
 methods_desc["dxf"] = "点斜法求解一次函数解析式"
@@ -1108,44 +1204,16 @@ function twoPointsForm(x1, y1, x2, y2)
     if x1 == x2 and y1 == y2 then
         return "两点坐标完全相同，无法确定直线方程。"
     end
-
     -- 计算斜率k
-    local k = (y2 - y1) / (x2 - x1)
-    k = fn(k)
-    local b
-
-    -- 特殊情况处理
-    if k == 0 then
-        -- 平行于x轴的直线
-        return "y=" .. y1
-    elseif x2 == x1 then
-        -- 平行于y轴的直线
-        return "x=" .. x1
+    local k
+    if x1 == x2 then
+        k = nil
     else
-        -- 计算截距b
-        b = y1 - k * x1
-
-        -- 格式化斜率k
-        if k == -1 then
-            k = "-x"
-        elseif k == 1 then
-            k = "x"
-        else
-            k = k .. "x"
-        end
-
-        -- 格式化截距b
-        if b == 0 then
-            b = ""
-        elseif b > 0 then
-            b = "+" .. b
-        else
-            b = b
-        end
-
-        -- 组合直线方程
-        return "y=" .. k .. b
+        k = (y2 - y1) / (x2 - x1)
+        k = fn(k)
     end
+    local le = LineEquation(x1, y1, k)
+    return "直线方程: " .. le
 end
 calc_methods["ldf"] = twoPointsForm
 methods_desc["ldf"] = "两点法求解一次函数解析式"
@@ -1295,49 +1363,8 @@ function getQuadraticEquationdd(x1, y1, x2, y2)
     a = fn(a)
     b = fn(b)
     c = fn(c)
-
-    -- 定义一个局部函数用于格式化系数
-    local function formatCoefficient(a, b, c)
-        local result = ""
-
-        -- 格式化a的值
-        if a > 0 and a ~= 1 then
-            result = result .. a .. "x²" -- a大于0且不等于1时，保持a不变
-        elseif a == 1 then
-            result = result .. "x²" -- a等于1时，省略a
-        elseif a < 0 and a ~= -1 then
-            result = result .. a .. "x²" -- a小于0且不等于-1时，保持a不变
-        elseif a == -1 then
-            result = result .. "-x²" -- a等于-1时，在x²前面加负号
-        end
-
-        -- 格式化b的值
-        if b ~= 0 then
-            if b == 1 then
-                result = result .. "+x"
-            elseif b == -1 then
-                result = result .. "-x"
-            elseif b > 0 then
-                result = result .. "+" .. b .. "x"
-            else
-                result = result .. "-" .. -b .. "x"
-            end
-        end
-    
-        -- 格式化c的值
-        if c ~= 0 then
-            if c > 0 then
-                result = result .. "+" .. c
-            else
-                result = result .. "-" .. -c
-            end
-        end
-
-        return result
-    end
-
-    -- 使用格式化函数并返回解析式
-    return "y=" .. formatCoefficient(a, b, c)
+    local qe = QuadraticEquation(a,b,c)
+    return "二次函数解析式为：" .. qe
 end
 calc_methods["dds"] = getQuadraticEquationdd
 methods_desc["dds"] = "顶点式求解二次函数解析式"
@@ -1384,50 +1411,8 @@ function getQuadraticEquationy(x1, y1, x2, y2, x3, y3)
     a = fn(a)
     b = fn(b)
     c = fn(c)
-
-    -- 定义一个局部函数用于格式化系数
-    local function formatCoefficient(a, b, c)
-        local result = ""
-
-        -- 格式化a的值
-        if a ~= 0 then
-            if a == 1 then
-                result = result .. "x²"
-            elseif a == -1 then
-                result = result .. "-x²"
-            else
-                result = result .. a .. "x²"
-            end
-        end
-
-        -- 格式化b的值
-        if b ~= 0 then
-            if b == 1 then
-                result = result .. "+x"
-            elseif b == -1 then
-                result = result .. "-x"
-            elseif b > 0 then
-                result = result .. "+" .. b .. "x"
-            else
-                result = result .. "-" .. -b .. "x"
-            end
-        end
-
-        -- 格式化c的值
-        if c ~= 0 then
-            if c > 0 then
-                result = result .. "+" .. c
-            else
-                result = result .. "-" .. -c
-            end
-        end
-
-        return result
-    end
-
-    -- 使用格式化函数并返回解析式
-    local equation = "y=" .. formatCoefficient(a, b, c)
-    return equation
+    local qe = QuadraticEquation(a,b,c)
+    return "二次函数解析式为：" .. qe
 end
 calc_methods["ybs"] = getQuadraticEquationy
 methods_desc["ybs"] = "一般式求解二次函数解析式"
@@ -1441,10 +1426,8 @@ function calculateTriangleArea(a, b, c)
     if a + b <= c or a + c <= b or b + c <= a then
         return "不能构成三角形"
     end
-
     -- 计算半周长
     local p = (a + b + c) / 2
-
     -- 使用海伦公式计算面积
     local s = math.sqrt(p * (p - a) * (p - b) * (p - c))
     s = fn(s)
@@ -1456,7 +1439,7 @@ methods_desc["sjx"] = "已知三角形的三边长,求三角形面积"
 
 
 
--- 已知一点(x1, y1)和直线方程Ax + By + C = 0,求点到直线的距离和它关于直线的对称点坐标
+-- 已知一点(x1, y1)和直线方程Ax+By+C=0,求点到直线的距离和它关于直线的对称点坐标
 function dyzx1(x1, y1, A, B, C)
     -- 检查参数正确性
     if type(x1) ~= "number" or type(y1) ~= "number" or type(A) ~= "number" or type(B) ~= "number" or type(C) ~= "number" then
@@ -1504,28 +1487,32 @@ function calculateDistance(x1, y1, x2, y2)
     -- 两点所成线段的中点坐标
     local x3 = (x1 + x2) / 2
     local y3 = (y1 + y2) / 2
-    local k = (y2 - y1) / (x2 - x1)
-    local kl = -1/k
     x3 = fn(x3)
     y3 = fn(y3)
-    kl = fn(kl)
-    local l = ""
+    local k
+    local kl
     if x1 == x2 then
-        l = l .. "y=" .. y3
-    elseif y1 == y2 then
-        l = l .. "x=" .. x3
+        k = nil
+        kl = 0
     else
-        l = l .. pointSlopeForm(kl, x3, y3)
+        k = (y2 - y1) / (x2 - x1)
+        if k == 0 then
+            kl = nil
+        else
+            kl = -1 / k
+            kl = fn(kl)
+        end
     end
-    return "两点间的距离为" .. D .. "，垂直平分线方程为" .. l
+    local se = LineEquation(x3, y3, kl)
+    return "两点间的距离为" .. D .. "，垂直平分线方程为" .. se
 end
-calc_methods["ldjl"] = calculateDistance
-methods_desc["ldjl"] = "已知两点坐标，求两点间的距离和垂直平分线方程"
+calc_methods["ldj"] = calculateDistance
+methods_desc["ldj"] = "已知两点坐标，求两点间的距离和垂直平分线方程"
 
 
 
 
--- 已知两条直线方程 A1x + B1y + C1 = 0和 A2x + B2y + C2 = 0，判断它们的位置关系
+-- 已知两条直线方程 A₁x+B₁y+C₁=0和 A₂x+B₂y+C₂=0，判断它们的位置关系
 function lines_relationship(A1, B1, C1, A2, B2, C2)
     -- 参数正确性检查
     if (A1 == 0 and B1 == 0) or (A2 == 0 and B2 == 0) then
@@ -1564,7 +1551,7 @@ function lines_relationship(A1, B1, C1, A2, B2, C2)
     end
 end
 calc_methods["lrp"] = lines_relationship
-methods_desc["lrp"] = "已知两直线方程，判断它们的位置关系"
+methods_desc["lrp"] = "已知两直线方程A₁x+B₁y+C₁=0和A₂x+B₂y+C₂=0，判断它们的位置关系"
 
 
 
@@ -1759,46 +1746,14 @@ function symmetry_line(A1, B1, C1, A2, B2, C2)
     -- 计算对称直线方程的系数
     local a = A2^2 + B2^2
     local b = 2*(A1*A2 + B1*B2)
-    local A3 = a*A1 - b*A2
-    local B3 = a*B1 - b*B2
-    local C3 = a*C1 - b*C2
-    A3 = fn(A3)
-    B3 = fn(B3)
-    C3 = fn(C3)
-    local result = ""
-        -- 格式化A3的值
-    if A3 ~= 0 then
-        if A3 == 1 then
-            result = result .. "x"
-        elseif A3 == -1 then
-            result = result .. "-x"
-        else
-            result = result .. A3 .. "x"
-        end
-    end
-
-        -- 格式化B3的值
-    if B3 ~= 0 then
-        if B3 == 1 then
-            result = result .. "+y"
-        elseif B3 == -1 then
-            result = result .. "-y"
-        elseif B3 > 0 then
-            result = result .. "+" .. B3 .. "y"
-        else
-            result = result .. "-" .. -B3 .. "y"
-        end
-    end
-
-        -- 格式化C3的值
-    if C3 ~= 0 then
-        if C3 > 0 then
-            result = result .. "+" .. C3
-        else
-            result = result .. "-" .. -C3
-        end
-    end
-    return "直线l₁关于l₂的对称直线l₃的方程为：" .. result .. "=0"
+    local A = a*A1 - b*A2
+    local B = a*B1 - b*B2
+    local C = a*C1 - b*C2
+    A = fn(A)
+    B = fn(B)
+    C = fn(C)
+    local ge = LineGeneralEquation(A, B, C)
+    return "直线l₁关于l₂的对称直线l₃的方程为：" .. ge
 end
 calc_methods["syl"] = symmetry_line
 methods_desc["syl"] = "已知直线l₁:A₁x+B₁y+C₁=0和l₂:A₂x+B₂y+C₂=0，求l₁关于l₂的对称直线l₃的方程"
@@ -1806,59 +1761,31 @@ methods_desc["syl"] = "已知直线l₁:A₁x+B₁y+C₁=0和l₂:A₂x+B₂y+C�
 
 
 
--- 已知一点P(x1,y1)和直线l:Ax+By+C=0，求直线l关于点P的对称直线l'的方程
-function dyzx2(x1, y1, A, B, C)
+-- 已知一点P(x1,y1)和直线l:A₁x+B₁y+C₁=0，求直线l关于点P的对称直线l'的方程
+function dyzx2(x1, y1, A1, B1, C1)
     -- 检查参数正确性
-    if type(x1) ~= "number" or type(y1) ~= "number" or type(A) ~= "number" or type(B) ~= "number" or type(C) ~= "number" then
+    if type(x1) ~= "number" or type(y1) ~= "number" or type(A1) ~= "number" or type(B1) ~= "number" or type(C1) ~= "number" then
         return "错误：参数必须是数字"
     end
-    if A == 0 and B == 0 then
+    if A1 == 0 and B1 == 0 then
         return "直线方程的系数不能同时为零"
     end
     -- 计算对称直线方程的系数
-    local A1 = A
-    local B1 = B
-    local C1 = -(2*A*x1 + 2*B*y1 + C)
-    A1 = fn(A1)
-    B1 = fn(B1)
-    C1 = fn(C1)
-    local result = ""
-        -- 格式化A1的值
-    if A1 ~= 0 then
-        if A1 == 1 then
-            result = result .. "x"
-        elseif A1 == -1 then
-            result = result .. "-x"
-        else
-            result = result .. A1 .. "x"
-        end
-    end
-
-        -- 格式化B1的值
-    if B1 ~= 0 then
-        if B1 == 1 then
-            result = result .. "+y"
-        elseif B1 == -1 then
-            result = result .. "-y"
-        elseif B1 > 0 then
-            result = result .. "+" .. B1 .. "y"
-        else
-            result = result .. "-" .. -B1 .. "y"
-        end
-    end
-
-        -- 格式化C1的值
-    if C1 ~= 0 then
-        if C1 > 0 then
-            result = result .. "+" .. C1
-        else
-            result = result .. "-" .. -C1
-        end
-    end
-    return "直线l关于点P的对称直线l'的方程为：" .. result .. "=0"
+    local A = A1
+    local B = B1
+    local C = -(2*A1*x1 + 2*B1*y1 + C1)
+    A = fn(A)
+    B = fn(B)
+    C = fn(C)
+    local ge = LineGeneralEquation(A, B, C)
+    return "直线l关于点P的对称直线l'的方程为：" .. ge
 end
 calc_methods["dyzx2"] = dyzx2
-methods_desc["dyzx2"] = "已知一点P(x1,y1)和直线l:Ax+By+C=0，求直线l关于点P的对称直线l'的方程"
+methods_desc["dyzx2"] = "已知一点P(x1,y1)和直线l:A₁x+B₁y+C₁=0，求直线l关于点P的对称直线l'的方程"
+
+
+
+
 
 
 
