@@ -4,7 +4,7 @@
 #错音错字对照表
 ---
 name: corrections
-version: "2025-04-06 22:47"
+version: "2025-04-07 12:15"
 sort: by_weight
 ...
 株木琅玛	zhū;mw;mv;mv;we;dd;ea;sr;lv mù;ur;un;ad;ww;dd;em;ss;un láng;wl;wl;wl;ah;mv;ni;gy;wh mǎ;wm;wm;wm;az;mm;nn;gc;wm	12	(有声)
@@ -24,6 +24,10 @@ sort: by_weight
 食话食说	shí;rg;rl;rl,pd;eh;ov;qs;wy;rh huà;yu;yk;yu;co;ir;sa;yt;yk shí;rg;rl;rl,pd;eh;ov;qs;wy;rh shuō;yx;ye;yd;ck;iu;sp;yu;ye	247	(节目)
 大栅栏	da;ar;un;ad;xx;kk;md;dd;an zha;mc;mc;mc;ed;dm;ei;sm;lc lan;ml;ms;ml;wu;dm;et;su;ls	232	dà shí làn
 东庠岛	dong;ax;ad;ad,qx;af;kd;ry;ai;ad yang;gy;gy;gy;rp;iq;xg;yu;gy dao;nu;pe;nu,un;up;pu;xv;qy;ps	98	东庠(xiáng)岛
+刚劲	gang;kd;kd;dg;oi;bn;mp;mq;gd jin;jl;vl;lg;ru;ns;rs;ca;vl	415	gāng jìng
+井陉	jing;ac,el;al;aa,ep;up;tt;qj;fj;aa jing;ej;eg;eg;bp;nm;tu;bc;eg	418	jǐng xíng
+猇亭	hu;qj;qj;qh;bi;kn,ku;mz;qt;qj ting;wd;wd;wd,db,dd;ij;yn,xn;ga;yp;wd	342	xiāo tíng
+猇亭区	hu;qj;qj;qh;bi;kn,ku;mz;qt;qj ting;wd;wd;wd,db,dd;ij;yn,xn;ga;yp;wd qu;kx;kx;ki;dr;sk;nb;aq;kx	128	猇(xiāo)亭区
 东庠	dong;ax;ad;ad,qx;af;kd;ry;ai;ad yang;gy;gy;gy;rp;iq;xg;yu;gy	234	dōng xiáng
 莒县	lü;ck;ck;cl;zo;tr;ld;ak;ck xian;qs;qs;sq,qs;pp;bi;fk;eg;qv	437	jǔ xiàn
 浚县	jun;dw;dw;dj,dw;kj;ee;kh;ic;dw xian;qs;qs;sq,qs;pp;bi;fk;eg;qv	387	xùn xiàn
