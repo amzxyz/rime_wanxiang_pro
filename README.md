@@ -7,7 +7,7 @@ _自6.0起，请不要克隆和下载仓库，仓库涵盖8种辅助码，除非
 
 **万象系列方案：** 
 
-本方案为万象增强版   [>>万象基础版,支持同文9、14、18键](https://github.com/amzxyz/rime_wanxiang)  
+本方案为万象增强版(辅助码)   [>>万象基础版,支持同文9、14、18键](https://github.com/amzxyz/rime_wanxiang)  
 ---------------------
  [为什么默认关闭调频的说明](https://github.com/amzxyz/RIME-LMDG/wiki/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%85%B3%E9%97%AD%E8%B0%83%E9%A2%91%E4%BB%A5%E5%8F%8A%E4%B8%8E%E4%B9%8B%E5%85%B3%E8%81%94%E7%9A%84%E6%8E%AA%E6%96%BD%E6%9C%89%E5%93%AA%E4%BA%9B)   ```enable_user_dict: false # 是否开启自动调频，true为开启```
 
