@@ -3,7 +3,7 @@
 #https://github.com/amzxyz/RIME-LMDG
 ---
 name: chars
-version: "2025-04-09 08:35"
+version: "2025-04-09 09:19"
 sort: by_weight
 ...
 啊	a;kk;kk;ka;oj;rr;dz;kb;kk	915
@@ -6021,8 +6021,8 @@ sort: by_weight
 𪒙	cuō;ly;hy;hz;;we;pr;lf;	1
 𪘓	cuó;rr;rk;iz,zi;;ou;jl;wd;	1
 棤	cuò;mo;mo;mx;wv;da;eo;sa;lo	1
-大	dà;ar;un;ad;xx;kk;md;dd;an	900
-打	dǎ;fd;fd;fd;jj;qn;ua;rs;fd	804
+打	dǎ;fd;fd;fd;jj;qn;ua;rs;fd	904
+大	dà;ar;un;ad;xx;kk;md;dd;an	800
 达	dá;zd;zd;zd;xq;yk,xk;mu;dp;zd	788
 答	dá;vk;vk;vh;no;hr;rd;tw;vk	774
 搭	dā;fk;fk;fd,fh;jo;qr;ud;ra;fk	710
@@ -10591,11 +10591,11 @@ sort: by_weight
 𪔘	gāo;tq;uq;gi;;gp;hr;fk;	1
 𫌲	gào;;wc	1
 个	gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra	896
+哥	gē;kk;dk;kd,kk,dk;jj;mr;zz;sk;ak	826
 格	gé;mk;mk;mg;wo;dr;es;st;lk	810
 各	gè;wk;wk;wk;jo;hr;sg;tk;wk	796
 歌	gē;kq;dr;qg;je;mo;ze;sk;gr	746
 革	gé;cu;nl;aa,ca;vs;tj;tg;af;ca	717
-哥	gē;kk;dk;kd,kk,dk;jj;mr;zz;sk;ak	716
 隔	gé;eg;el;eg;bp;nb;tn;bg;ea	685
 割	gē;bd;bd;dh;ii;jn;wp;pd;gd	658
 阁	gé;mk;mk;mg;oo;lr;as;ut;mk	620
