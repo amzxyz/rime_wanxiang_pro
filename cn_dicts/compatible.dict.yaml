@@ -4,7 +4,7 @@
 #兼容词库，对于多字词汇两种读音的场景，手动维护到本表以及一些其他的杂项
 ---
 name: compatible
-version: "2025-04-08 14:13"
+version: "2025-04-09 08:35"
 sort: by_weight
 ...
 攒个	cuán;fb;fr;fz;jm;qo,xo;uo;rt;fr gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra	391
@@ -58,7 +58,7 @@ sort: by_weight
 闲着	xián;mm;mm;mm;ow;ld;ae;us;ml zhāo;yo;yo;yo;fs;tu;gq;ud;em	367
 闲着	xián;mm;mm;mm;ow;ld;ae;us;ml zhe;yo;yo;yo;fs;tu;gq;ud;em	567
 琢磨	zuó;wu;wn;wd,wi;ah;mo;ni;ge;wn mo;gu;gu;mu,um;rt;ir;zm;ys;gk	619
-琢磨	zhuó;wu;wn;wd,wi;ah;mo;ni;ge;wn mó;gu;gu;mu,um;rt;ir;zm;ys;gk	433
+琢磨	zhuó;wu;wn;wd,wi;ah;mo;ni;ge;wn mó;gu;gu;mu,um;rt;ir;zm;ys;gk	460
 线长	xiàn;sj;sj;sj;ea;vj;ip;xg;sg zhǎng;pn;pn;pd;uh;po;pc;ta;pn	463
 看好	kàn;uo;uo;ou,uo;us;hu;uq;rh;pm hǎo;nz;nz;nz;ya;vd;bh;vb;nz	706
 看好	kān;uo;uo;ou,uo;us;hu;uq;rh;pm hǎo;nz;nz;nz;ya;vd;bh;vb;nz	606
