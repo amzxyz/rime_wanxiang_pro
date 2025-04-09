@@ -55,6 +55,7 @@ function M.init(env)
     end
 
     file:close()
+    collectgarbage()
     db:close()
 end
 
@@ -66,28 +67,22 @@ function M.func(input, env)
     local input_text = env.engine.context.input
     env.settings = { super_tips = env.engine.context:get_option("super_tips") } or true
     local is_super_tips = env.settings.super_tips
-
     local db = wrapLevelDb("tips", false)
     local stick_phrase = db:fetch(input_text)
-
     local first_cand, candidates = nil, {}
     for cand in input:iter() do
         if not first_cand then first_cand = cand end
         table.insert(candidates, cand)
     end
-
     local first_cand_match = first_cand and db:fetch(first_cand.text)
+    collectgarbage()
+    db:close()
     local tips = stick_phrase or first_cand_match
 
-    env.last_tips = env.last_tips or ""
-
     if is_super_tips and tips and tips ~= "" then
-        env.last_tips = tips
         segment.prompt = "〔" .. tips .. "〕"
     else
-        if segment.prompt == "〔" .. env.last_tips .. "〕" then
-            segment.prompt = ""
-        end
+        segment.prompt = ""
     end
 
     for _, cand in ipairs(candidates) do
