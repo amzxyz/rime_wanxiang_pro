@@ -1,0 +1,12 @@
+# Rime schema settings
+# encoding: utf-8
+
+schema:
+  schema_id: wanxiang_tips
+  name: 超级提示滤镜
+  version: "1.0"
+
+engine:
+
+translator:
+  dictionary: wanxiang_tips
