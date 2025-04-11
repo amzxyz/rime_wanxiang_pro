@@ -176,11 +176,11 @@ _自6.0起，请不要克隆和下载仓库，仓库涵盖8种辅助码，除非
 - 简化选择，但又不能完全放弃选择，让用户有一个词库可选，却有多种方案可用。于是首先想到的是合并词库，每个方案都有自己的特定词库，他们编码方式不一样，词库内容和词频不一样，如果将其合并为一个词库，并解决这个词库的丰富度，解决词频问题，那将成为可扩展的元词库，我们将其称为——万象词库。
 
   ```yaml
-  #词库解码顺序为：全拼拼音；墨奇;鹤形;自然码;简单鹤;仓颉首末;虎码首末;五笔前2
-  万 wàn;av;ap;ag,ap;du;ms;fp;dn; 87991
-  象 xiàng;du;dn;du,pd,ua;gh;no;wx;qj; 3107
-  拼 pīn;fk;fk;fb;jp;qt,qj;ul;ru; 5904
-  音 yīn;lo;lo;lo;cc;ya;xy;uj; 13619
+  #词库解码顺序为：全拼拼音；墨奇码；鹤形；自然码；简单鹤；仓颉；虎码首末；五笔前2
+  万	wàn;av;ap;ag,ap;du;ms;fp;dn;	87991
+  象	xiàng;du;dn;du,pd,ua;gh;no;wx;qj;	3107
+  拼	pīn;fk;fk;fb;jp;qt,qj;ul;ru;	5904
+  音	yīn;lo;lo;lo;cc;ya;xy;uj;	13619
   ```
 
   这样的编码方式使用全拼作为基础意味着他能转换为任意一种双拼编码，有了共同的基底，后面通过分号隔开分别列举多种辅助码方式，我们可以通过运算规则来调用不同的辅助码。
@@ -233,11 +233,11 @@ _自6.0起，请不要克隆和下载仓库，仓库涵盖8种辅助码，除非
   此时获得的输出是：
 
   ```YAML
-  #词库解码顺序为：全拼拼音；墨奇;鹤形;自然码;简单鹤;仓颉首末;虎码首末;五笔前2
-  万 wj;av;ap;ag,ap;du;ms;fp;dn; 87991
-  象 xd;du;dn;du,pd,ua;gh;no;wx;qj; 3107
-  拼 pn;fk;fk;fb;jp;qt,qj;ul;ru; 5904
-  音 yn;lo;lo;lo;cc;ya;xy;uj; 13619
+  #词库解码顺序为：全拼拼音；墨奇码；鹤形；自然码；简单鹤；仓颉；虎码首末；五笔前2
+  万	wj;av;ap;ag,ap;du;ms;fp;dn;	87991
+  象	xd;du;dn;du,pd,ua;gh;no;wx;qj;	3107
+  拼	pn;fk;fk;fb;jp;qt,qj;ul;ru;	5904
+  音	yn;lo;lo;lo;cc;ya;xy;uj;	13619
   ```
 
   在此基础之上对于辅助码进行运算，这里针对不同位置的辅助码分别写了提取规则，但是提取之后则采用了统一格式的运算，这就大大减小了运算难度:
@@ -271,10 +271,10 @@ _自6.0起，请不要克隆和下载仓库，仓库涵盖8种辅助码，除非
   输出：
 
   ```YAML
-  万 wj;ag,ap 87991
-  象 xd;du,pd,ua 3107
-  拼 pn;fb 5904
-  音 yn;lo 13619
+  万	wj;ag,ap	87991
+  象	xd;du,pd,ua	3107
+  拼	pn;fb	5904
+  音	yn;lo	13619
   ```
 
   没错用逗号隔开的是辅助容错码，不管输入哪两个都可以打出这个字，这样大部分时候靠猜测也能利用起来辅助码，这个场景也做了兼容。
@@ -282,15 +282,15 @@ _自6.0起，请不要克隆和下载仓库，仓库涵盖8种辅助码，除非
   最后通过运算规则这个“万”字就有了以下几种组合可以输出：
 
   ```YAML
-  万 wj
-  万 wja
-  万 wjag
-  万 wjap
+  万	wj
+  万	wja
+  万	wjag
+  万	wjap
   为了增强整句中单字性能，通过增加o或者/的方式还可以获得以下输出
-  万 wjago
-  万 wjapo#o其实为了一些手机输入法不方便使用符号作为增强按键，但是可能会存在 类似于：你心理想的： ui uio，实际的：uiuio只输出一个字
-  万 wjag/
-  万 wjap/
+  万	wjago
+  万	wjapo#o其实为了一些手机输入法不方便使用符号作为增强按键，但是可能会存在 类似于：你心理想的： ui uio，实际的：uiuio只输出一个字
+  万	wjag/
+  万	wjap/
   ```
 
 #### 缝合
@@ -303,7 +303,7 @@ _自6.0起，请不要克隆和下载仓库，仓库涵盖8种辅助码，除非
 set_shuru_schema: #配置此项就是选择什么输入法,同时拆分反查和中英文混输也将匹配该输入方案
   __include: algebra_zrm  #可选解码规则有   algebra_pinyin, algebra_zrm, algebra_flypy,  algebra_ziguang, algebra_sogou, algebra_mspy, algebra_abc  选择一个填入
 set_algebra_fuzhu:#配置此项就是选择什么辅助码
-  __include: fuzhu_zrm#可选辅助码有：fuzhu_kong，fuzhu_moqi, fuzhu_zrm, fuzhu_flypy, fuzhu_tiger, fuzhu_cj, fuzhu_wubi, fuzhu_jdh 选择一个填入
+  __include: fuzhu_zrm #可选辅助码有：fuzhu_kong，fuzhu_moqi, fuzhu_zrm, fuzhu_flypy, fuzhu_tiger, fuzhu_cj, fuzhu_wubi, fuzhu_jdh 选择一个填入
 #Lua 配置: 超级注释模块
 pro_comment_format:   # 超级注释，子项配置 true 开启，false 关闭
   candidate_length: 1 # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理
@@ -328,7 +328,7 @@ auto_select: true
   algebra:
 __patch:
   - set_shuru_schema #拼音转双拼码
-  - set_algebra_fuzhu#辅助码部分
+  - set_algebra_fuzhu #辅助码部分
 ```
 
 至此只需要模块化分别列举出不同的双拼方案，不同的辅助码形态交叉调用即可实现自然码+鹤形，小鹤+自然码，搜狗+五笔，甚至全拼+辅助码的形态等各种奇怪的组合。
