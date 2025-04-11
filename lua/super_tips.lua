@@ -76,7 +76,7 @@ local function is_mobile_device()
     end
     -- 补充判断：路径中出现 mobile/Android/手机特征
     local lower_path = user_data_dir:lower()
-    if lower_path:find("/Android/") or lower_path:find("/mobile/") or lower_path:find("/sdcard/") then
+    if lower_path:find("/android/") or lower_path:find("/mobile/") or lower_path:find("/sdcard/") then
         return true
     end
     return false
