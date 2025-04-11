@@ -31,7 +31,6 @@ schema:
     - wanxiang_lookup    #辅助码拆分注释、翻译注释、行政区划匹配、车牌、等等注释类显示滤镜，Lua专用：super_comment
     - wanxiang_en        #英文输入
     - wanxiang_charset   #字符集过滤器
-    - wanxiang_tips      #超级提示滤镜
 
 # 开关
 # reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。
