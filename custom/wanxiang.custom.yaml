@@ -2,11 +2,11 @@ patch:
   speller/algebra:
     __patch:
     - wanxiang.schema:/小鹤双拼            # 可选输入方案名称：全拼, 自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
-    - wanxiang.schema:/fuzhu_moqi         #可选辅助码有：fuzhu_kong，fuzhu_hanxin, fuzhu_moqi, fuzhu_flypy, fuzhu_zrm, fuzhu_tiger, fuzhu_wubi    选择一个填入
+    - wanxiang.schema:/fuzhu_moqi          # 可选辅助码有：fuzhu_kong，fuzhu_hanxin, fuzhu_moqi, fuzhu_flypy, fuzhu_zrm, fuzhu_tiger, fuzhu_wubi    选择一个填入
   # 中英混合词汇，要与你的双拼类型一样
-  cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
+  cn_en/user_dict: en_dicts/flypy          # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
   #通过下面的设置可以让你自己的文件引入而与仓库custom_phrase.txt不同，以后可以大胆覆盖更新
-  custom_phrase/user_dict: custom_phrase  # 需要手动创建 custom_phrase222.txt 文件
+  custom_phrase/user_dict: custom_phrase   # 如果在这里填了 custom222 则需要在配置的根目录手动创建 custom222.txt 文件
   #下面是候选数量
   menu/page_size: 6
   #下面用来改变你的windows小狼毫右下角软件图标
