@@ -1,7 +1,4 @@
 
-
-
-
 # Rime YAML Custom Patch 语法指南
 
 ## 语法表格
@@ -21,6 +18,7 @@
 ---
 
 ## 1. **新增值 (`/+`)**
+
 ```yaml
 patch:
   schema_list/+: 
@@ -34,8 +32,6 @@ patch:
   更多方式参考rime文档
 
 ```
-
-
 
 # Rime YAML Patch 机制解析
 
@@ -65,8 +61,6 @@ menu:
 patch:
   menu/page_size: 10
 ```
-
-
 
 **错误写法（会删除 `settings`）就是全局替换：**
 
@@ -139,7 +133,7 @@ patch:
 
 在engine模块下面的选项是有顺序的，所以想要新增一个行，需要判断添加到末尾是否可用，如果是一个引导器就不能下面这样添加，这会导致这一行排列在最后，导致功能不能使用
 
-```
+```yaml
 #追加新的内容
 patch:
   engine/translators/+:   #这种方式将把新增值自动加在列表末尾，导致功能失效
@@ -148,11 +142,10 @@ patch:
 
 应该使用**特定行追加**  engine/translator/@before 5 意思就是放到translator下面的第6行，而原来第6行的值会移到第7行，其他的依次后移
 
-```
+```yaml
 patch:
   engine/translator/@before 5:  #这种方式将在第5行后面新增一行，后面的行后移
     table_translator@custom_phrase   #注意前面不能加短线了，这样才是一个值，而不是一个表
   engine/translator/@5:    #这种方式将替换第6行的值
     table_translator@custom_phrase   #注意前面不能加短线了，这样才是一个值，而不是一个表
 ```
-

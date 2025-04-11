@@ -7,7 +7,7 @@ patch:
   cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
   #通过下面的设置可以让你自己的文件引入而与仓库custom_phrase.txt不同，以后可以大胆覆盖更新
   custom_phrase/user_dict: custom_phrase  # 需要手动创建 custom_phrase222.txt 文件
-    #下面是候选数量
+  #下面是候选数量
   menu/page_size: 6
   #下面用来改变你的windows小狼毫右下角软件图标
   #schema/+:
