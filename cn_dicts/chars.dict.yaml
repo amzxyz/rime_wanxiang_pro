@@ -3,7 +3,7 @@
 #https://github.com/amzxyz/RIME-LMDG
 ---
 name: chars
-version: "2025-04-11 21:57"
+version: "2025-04-12 10:32"
 sort: by_weight
 ...
 啊	a;kk;kk;ka;oj;rr;dz;kb;kk	915
@@ -35819,6 +35819,7 @@ sort: by_weight
 𥌩	tè;ox;ox;od;;bp;qh;ht;	1
 𦗟	tè;ex;ex;ex;;sp;qh;bf;	1
 𧎢	tè;;ib	1
+忒	tēi;yx;yx;xy,yx;ha;ip,xp;ph;an;xg	198
 腾	téng;om;om;om;lz;bm;vn;eu;om	672
 疼	téng;bd;bd;bd;mh;ky;aw;ut;bd	665
 藤	téng;cu;cu;ct;zo;te;lk;ae;cu	621
@@ -36931,6 +36932,7 @@ sort: by_weight
 頺	tuí;hy;hb;yx;;hc;xw;te;	105
 侻	tuì;rx;re;rd;;ou;jp;wu;	101
 娧	tuì;nx;ne;nd;;vu;bp;vu;	92
+忒	tuī;yx;yx;xy,yx;ha;ip,xp;ph;an;xg	92
 骽	tuǐ;gn;gn;gt;;bv;fb;me;	82
 駾	tuì;mx;me;md;;su;np;cu;	60
 蘈	tuí;cy;cb;ct;;tc;lw;at;	60
@@ -36943,7 +36945,6 @@ sort: by_weight
 僓	tuí;rb;rb;rg;;oc;jo;wk;	1
 墤	tuí;tb;tb;tg;;gc;go;fk;	1
 弟	tuí;bd;bp;bp;fu;ch;ht;ux;ep	1
-忒	tuī;yx;yx;xy,yx;ha;ip,xp;ph;an;xg	1
 橔	tuí;mw;mw;md;;dk;eh;sy;	1
 聉	tuǐ;ei;ei;ei;;su;qm;bb;	1
 螁	tuì;ig;iz;it;;lv;cu;jv;	1
