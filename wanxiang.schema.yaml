@@ -354,6 +354,8 @@ key_binder:
 # 使用 tab 在不同音节之间跳转
     - { when: has_menu, accept: "Tab", send: "Control+Right" }
     - { when: composing, accept: "Tab", send: "Control+Right" }
+#当tab第一个字补码正确后，可以使用Ctrl+tab进行上屏并依次补码
+    - { when: composing, accept: "Control+Tab", send_sequence: '{Home}{Shift+Right}{1}{Shift+Right}' }
 #启用光标回退至特定音节后、补充辅助码的功能。补充完辅助码后，可以再按一次tab回到整句检查
     - { when: composing, accept: Control+1, send_sequence: '{Home}{Shift+Right}' }
     - { when: composing, accept: Control+2, send_sequence: '{Home}{Shift+Right}{Shift+Right}' }
@@ -620,10 +622,11 @@ speller:
     - xform/ńg|ňg|ǹg/eng/
     - xform/ń|ň|ǹ/en/
     - derive/^([jqxy])u(;.*)$/$1v$2/
-    - xform/^([aoe].*)(;.*)$/Ⓞ$1$2/
+    - xform/^([aoe].*)(;.*)$/o$1$2/
     - xform/^(\w+?)en(;.*)$/$1Ⓦ$2/
     - xform/^(\w+?)eng(;.*)$/$1Ⓣ$2/
-    - xform/^(\w+?)in$|uai(;.*)$/$1Ⓨ$2/
+    - xform/^(\w+?)in(;.*)$/$1Ⓨ$2/
+    - xform/^(\w+?)uai(;.*)$/$1Ⓨ$2/
     - xform/^(\w+?)uo(;.*)$/$1Ⓞ$2/
     - xform/^(\w+?)ai(;.*)$/$1Ⓟ$2/
     - xform/^(\w+?)[iu]ang(;.*)$/$1Ⓖ$2/
