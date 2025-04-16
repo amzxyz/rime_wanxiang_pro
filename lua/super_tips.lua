@@ -28,9 +28,9 @@ local S = {}
 function M.init(env)
     local config = env.engine.schema.config
 
-    local db = wrapLevelDb('tips', true)
-    local user_path = rime_api.get_user_data_dir() .. "/jm_dicts/tips_show.txt"
-    local shared_path = rime_api.get_shared_data_dir() .. "/jm_dicts/tips_show.txt"
+    local db = wrapLevelDb('lua/tips', true)
+    local user_path = rime_api.get_user_data_dir() .. "/lua/data/tips_show.txt"
+    local shared_path = rime_api.get_shared_data_dir() .. "/lua/data/tips_show.txt"
     local path = nil
 
     local f = io.open(user_path, "r")
@@ -48,7 +48,6 @@ function M.init(env)
         db:close()
         return
     end
-
     local file = io.open(path, "r")
     if not file then 
         db:close()
@@ -63,8 +62,8 @@ function M.init(env)
         end
     end
     file:close()
-    db:close()  -- 初始化完毕后关闭
     collectgarbage()
+    db:close()  -- 初始化完毕后关闭
 end
 -- 判断是否为手机设备，通过路径来判断（可以根据实际路径修改判断方式）
 local function is_mobile_device()
@@ -85,14 +84,14 @@ end
 function M.func(input, env)
     local segment = env.engine.context.composition:back()
     if not segment then
-        return 2  -- 直接返回，不关库
+        return 2
     end
     env.settings = { super_tips = env.engine.context:get_option("super_tips") } or true
     local is_super_tips = env.settings.super_tips
 
     -- 手机设备：读取数据库并输出候选
     if is_mobile_device() then
-        local db = wrapLevelDb("tips", false)
+        local db = wrapLevelDb("lua/tips", false)
         local input_text = env.engine.context.input or ""
         local stick_phrase = db:fetch(input_text)
 
@@ -135,12 +134,7 @@ end
 function S.func(key, env)
     local context = env.engine.context
     local segment = context.composition:back()
-    -- 在 Processor 中判断无候选 or 空输入, 再关数据库
-    if not segment or context.input == "" then
-        local db = _db_pool["tips"]
-        if db then
-            db:close()  -- 没有输入，关闭 db
-        end
+    if not segment then
         return 2
     end
     env.settings = { super_tips = context:get_option("super_tips") }
@@ -149,7 +143,7 @@ function S.func(key, env)
     local tipsph
     -- 电脑设备：直接处理按键事件并使用数据库
     if not is_mobile_device() then
-        local db = wrapLevelDb("tips", false)
+        local db = wrapLevelDb("lua/tips", false)
         local input_text = context.input or ""
         local stick_phrase = db:fetch(input_text)
         local selected_cand = context:get_selected_candidate()
