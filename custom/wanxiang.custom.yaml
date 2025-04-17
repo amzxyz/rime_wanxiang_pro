@@ -54,7 +54,6 @@ patch:
     "9": "⑨"
     "0": "⓪"
   #下面这两个是快符的引导符号，前者用来引导符号、双击重复上屏符号，后者双击重复上屏汉字
-  recognizer/patterns/quick_symbol: "^'.*$"
-  recognizer/patterns/quick_text: "^;.*$"
+  recognizer/patterns/quick_symbol: "^;.*$"
   #下面这个用来设置开启调频的时候哪些内容不调频
   translator/disable_user_dict_for_patterns: "^[a-z]{1,6}"
