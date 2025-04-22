@@ -77,7 +77,7 @@ engine:
     - predictor                                 #联想处理器
     - chord_composer                            #并击处理器
     #- lua_processor@*select_character          # 以词定字，有了辅助码了，想开启可以注释掉
-    - lua_processor@*cold_word_drop.processor
+    - lua_processor@*super_sequence*P
     - lua_processor@*quick_symbol_text         #快符引导以及重复上屏
     - lua_processor@*super_tips*S              #超级提示模块：表情、简码、翻译、化学式、等等靠你想象，这里负责兼容手机，手机上开启这个
     - lua_processor@*userdb_sync_delete        #通过输入 /del 触发,用于清理自定义同步目录下txt用户词典里被标记c<0的词条
@@ -118,8 +118,8 @@ engine:
     - lua_translator@*force_gc          # 暴力 GC 降低内存
   filters:
     - lua_filter@*chars_filter                      #字符集过滤
-    - lua_filter@*cold_word_drop.filter
     - lua_filter@*assist_sort                       #配合abbrev辅助码派生配合辅助码逻辑四码时候词组优先、匹配四码的单字紧随其后，并且肩负着中文、英文、数字候选之间的排序关系
+    - lua_filter@*super_sequence*F                  #手动排序放在assist_sort 后面，高亮候选 ctrl+j左移动 ctrl+k 右移动 ctrl+0 移除位移
     - lua_filter@*autocap_filter                    # 英文自动大写
     - reverse_lookup_filter@radical_reverse_lookup  # 部件拆字滤镜，放在super_comment前面，进一步被超级注释处理以获得拼音编码+辅助码的提示
     - lua_filter@*super_preedit                     #输入码显示全拼并带上音调

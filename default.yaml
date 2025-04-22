@@ -123,7 +123,7 @@ key_binder:
     # - { when: composing, accept: Control+a, send: Home }
     # - { when: composing, accept: Control+e, send: End }
     # - { when: composing, accept: Control+d, send: Delete }
-    - { when: composing, accept: Control+k, send: Shift+Delete }
+    #- { when: composing, accept: Control+k, send: Shift+Delete }
     # - { when: composing, accept: Control+h, send: BackSpace }
     # - { when: composing, accept: Control+g, send: Escape }
     # - { when: composing, accept: Control+bracketleft, send: Escape }

@@ -24,9 +24,24 @@ end
 local M = {}
 local S = {}
 
+local function ensure_dir_exist(dir)
+    -- 获取系统路径分隔符
+    local sep = package.config:sub(1,1)
+
+    dir = dir:gsub([["]], [[\"]])  -- 处理双引号
+
+    if sep == "/" then
+        local cmd = 'mkdir -p "'..dir..'" 2>/dev/null'
+	local success = os.execute(cmd)
+    end
+end
+
 -- 初始化词典（写模式，把 txt 加载进 db）
 function M.init(env)
     local config = env.engine.schema.config
+
+    local user_lua_dir = rime_api.get_user_data_dir() .. "/lua"
+    ensure_dir_exist(user_lua_dir)
 
     local db = wrapLevelDb('lua/tips', true)
     local user_path = rime_api.get_user_data_dir() .. "/lua/data/tips_show.txt"
@@ -88,10 +103,9 @@ function M.func(input, env)
     end
     env.settings = { super_tips = env.engine.context:get_option("super_tips") } or true
     local is_super_tips = env.settings.super_tips
-
+    local db = wrapLevelDb("lua/tips", false)
     -- 手机设备：读取数据库并输出候选
     if is_mobile_device() then
-        local db = wrapLevelDb("lua/tips", false)
         local input_text = env.engine.context.input or ""
         local stick_phrase = db:fetch(input_text)
 
@@ -130,6 +144,7 @@ end
 function S.init(env)
     local config = env.engine.schema.config
     S.tips_key = config:get_string("key_binder/tips_key")
+    local db = wrapLevelDb("lua/tips", false)
 end
 function S.func(key, env)
     local context = env.engine.context
@@ -137,13 +152,13 @@ function S.func(key, env)
     if not segment then
         return 2
     end
+    local db = wrapLevelDb("lua/tips", false)
     env.settings = { super_tips = context:get_option("super_tips") }
     local is_super_tips = env.settings.super_tips
     local tipspc
     local tipsph
     -- 电脑设备：直接处理按键事件并使用数据库
     if not is_mobile_device() then
-        local db = wrapLevelDb("lua/tips", false)
         local input_text = context.input or ""
         local stick_phrase = db:fetch(input_text)
         local selected_cand = context:get_selected_candidate()
