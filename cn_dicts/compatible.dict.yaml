@@ -4,7 +4,7 @@
 #兼容词库，对于多字词汇两种读音的场景，手动维护到本表以及一些其他的杂项
 ---
 name: compatible
-version: "2025-04-23 00:11"
+version: "2025-04-23 09:58"
 sort: by_weight
 ...
 攒个	cuán;fb;fr;fz;jm;qo,xo;uo;rt;fr gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra	391
@@ -18,6 +18,7 @@ sort: by_weight
 调回来	tiáo;yk;yk;yv;co;ir;sd;ym;yk huí;kk;kk;kk;no;wr;rd;lk;wk lái;am;an;am,wb;dl;dt;ah;go;an	187
 调回了	tiáo;yk;yk;yv;co;ir;sd;ym;yk huí;kk;kk;kk;no;wr;rd;lk;wk le;al;vl;aa,vu;rp;nn;rl;bn;vv	151
 调回去	tiáo;yk;yk;yv;co;ir;sd;ym;yk huí;kk;kk;kk;no;wr;rd;lk;wk qù;ts;ts;ts;gp;gi;gk;fc;tv	137
+炸锅	zhá;hv;hv;hv;tu;fs;cw;ot;hv guō;jn;jn;jg,jn;de;ob;zj;qk;jn	465
 调回	tiáo;yk;yk;yv;co;ir;sd;ym;yk huí;kk;kk;kk;no;wr;rd;lk;wk	513
 掉色	diào;fu;fu;fv;js;qj;un;rh;fu sè;db;db;db;gt;nu;xm;qc;eb	552
 掉色	diào;fu;fu;fv;js;qj;un;rh;fu shǎi;db;db;db;gt;nu;xm;qc;eb	552
