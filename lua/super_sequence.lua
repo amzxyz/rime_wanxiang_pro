@@ -11,8 +11,8 @@ function write_word_to_file(env, record_type)
     end
     local serialize_str = ""  --返回数据部分
     -- 遍历表中的每个元素并格式化
-    for candidate_key, entry in pairs(env.seq_words) do
-        serialize_str = serialize_str .. string.format('    ["%s"] = {%d},\n', candidate_key, entry[1])  -- entry[1]为偏移量
+    for phrase, entry in pairs(env.seq_words) do
+        serialize_str = serialize_str .. string.format('    ["%s"] = {%d},\n', phrase, entry[1])  -- entry[1]为偏移量
     end
     -- 构造完整的 record 内容
     local record = "local seq_words = {\n" .. serialize_str .. "}\nreturn seq_words"
@@ -41,33 +41,32 @@ function P.func(key_event, env)
     local selected_candidate = context:get_selected_candidate()
     local phrase = selected_candidate.text
     local preedit = selected_candidate.preedit
-    local candidate_key = preedit .. "_" .. phrase
-    local current_position = env.seq_words[candidate_key] and env.seq_words[candidate_key][1]  -- 获取对应的偏移量
+    local current_position = env.seq_words[phrase] and env.seq_words[phrase][1]  -- 获取对应的偏移量
     -- 判断按下的键
     if key_event.keycode == 0x6A then  -- ctrl + j (向左移动 1 个)
         if current_position == nil then
-            env.seq_words[candidate_key] = { -1 }
+            env.seq_words[phrase] = { -1 }
         else
             local new_position = current_position - 1
             if new_position == 0 then
-                env.seq_words[candidate_key] = nil
+                env.seq_words[phrase] = nil
             else
-                env.seq_words[candidate_key][1] = new_position  -- 更新偏移量
+                env.seq_words[phrase][1] = new_position  -- 更新偏移量
             end
         end
     elseif key_event.keycode == 0x6B then  -- ctrl + k (向右移动 1 个)
         if current_position == nil then
-            env.seq_words[candidate_key] = { 1 }
+            env.seq_words[phrase] = { 1 }
         else
             local new_position = current_position + 1
             if new_position == 0 then
-                env.seq_words[candidate_key] = nil
+                env.seq_words[phrase] = nil
             else
-                env.seq_words[candidate_key][1] = new_position  -- 更新偏移量
+                env.seq_words[phrase][1] = new_position  -- 更新偏移量
             end
         end
     elseif key_event.keycode == 0x30 then  -- ctrl + 0 (删除位移信息)
-        env.seq_words[candidate_key] = nil
+        env.seq_words[phrase] = nil
     else
         return 2
     end
@@ -76,62 +75,83 @@ function P.func(key_event, env)
     context:refresh_non_confirmed_composition()
     return 1
 end
-function sort_candidates(input, env)
-    local final_list = {}
-    local adjusted_positions = {}
 
-    -- 遍历输入一次，分类和准备候选词
+
+local F = {}
+local MAX_CANDIDATES = 20  -- 最大候选处理数，可根据需求调整
+
+function F.init(env)
+    env.seq_words = require("seq_words") or {}
+end
+
+function F.func(input, env)
+    local seen = {}
+    local result = {}
+    local occupied = {}
+    local fallback = {}
+
     local index = 1
-    for cand in input:iter() do
-        local key = cand.preedit .. "_" .. cand.text
-        local displacement = env.seq_words[key] and env.seq_words[key][1]  -- env.seq_words[key][1]是偏移量
+    local count = 0
+    local max_pos = 0
 
-        if displacement then
+    -- 一次遍历完成偏移处理和分组
+    for cand in input:iter() do
+        if count >= MAX_CANDIDATES then break end
+
+        local text = cand.text
+        if not seen[text] then
+            seen[text] = true
+            count = count + 1
+
+            local displacement = env.seq_words[text] and env.seq_words[text][1] or 0
             local target_pos = index + displacement
             target_pos = math.max(target_pos, 1)
+            target_pos = math.min(target_pos, MAX_CANDIDATES)
 
-            -- 确保目标位置是空的
-            while adjusted_positions[target_pos] do
-                target_pos = target_pos + 1
+            -- 顺移寻找空位
+            local inserted = false
+            for try = target_pos, MAX_CANDIDATES do
+                if not occupied[try] then
+                    result[try] = cand
+                    occupied[try] = true
+                    if try > max_pos then max_pos = try end
+                    inserted = true
+                    break
+                end
             end
 
-            final_list[target_pos] = cand
-            adjusted_positions[target_pos] = true
-        else
-            -- 如果没有偏移量，插入原始候选词
-            while adjusted_positions[index] do
-                index = index + 1  -- 跳过已经填充的目标位置
+            if not inserted then
+                table.insert(fallback, cand)
             end
 
-            final_list[index] = cand
-            adjusted_positions[index] = true
             index = index + 1
         end
     end
 
-    -- 转换最终的候选词列表
-    local sorted = {}
-    for pos = 1, #final_list do
-        if final_list[pos] then
-            table.insert(sorted, final_list[pos])
+    -- 插入 fallback 候选，填补空位
+    local insert_pos = 1
+    for _, cand in ipairs(fallback) do
+        while insert_pos <= MAX_CANDIDATES and occupied[insert_pos] do
+            insert_pos = insert_pos + 1
+        end
+        if insert_pos > MAX_CANDIDATES then break end
+        result[insert_pos] = cand
+        occupied[insert_pos] = true
+        if insert_pos > max_pos then max_pos = insert_pos end
+    end
+
+    -- 直接 yield 输出排序结果
+    local yielded = false
+    for i = 1, max_pos do
+        local cand = result[i]
+        if cand then
+            yield(cand)
+            yielded = true
         end
     end
 
-    return sorted
-end
-local F = {}
--- 初始化时加载数据
-function F.init(env)
-    local config = env.engine.schema.config
-    env.seq_words = require("seq_words") or {} --加载 seq_words 数据
-end
-function F.func(input, env)
-    local sorted = sort_candidates(input, env)
-    for _, cand in ipairs(sorted) do
-        yield(cand)
-    end
-    -- 如果没有排序到任何候选词，回退到默认行为
-    if #sorted == 0 then
+    -- 若无输出，则 fallback 回原始候选流
+    if not yielded then
         for cand in input:iter() do
             yield(cand)
         end
