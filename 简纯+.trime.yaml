@@ -3205,9 +3205,11 @@ preset_keyboards:
       - {
           click: 'j',
           long_click: 'zkhy',
+          swipe_down: leftyi,
+          hint: '左移',
           __include: styl/key,
         }
-      - { click: 'k', long_click: '(', __include: styl/key }
+      - { click: 'k', long_click: '(', __include: styl/key, swipe_down: rightyi, hint: '右移' }
       - { click: 'l', long_click: ")", __include: styl/key }
       # 第 3 行
       - { click: Shift_L, composing: split_word, width: 15 }   
@@ -3904,6 +3906,8 @@ preset_keys:
   share_text: { label: 分享文本, send: Control+Alt+s } #>=Android 6.0
   redo: { label: 重做, send: Control+y } #>=Android 6.0
   undo: { label: 撤销, send: Control+z } #>=Android 6.0
+  leftyi: { label: 左移, send: Control+j }
+  rightyi: { label: 右移, send: Control+k }
 #liquidkeyboard剪切板相关
   liquid_keyboard_switch: { label: 更多, send: function, command: liquid_keyboard, option: "更多" }
   liquid_keyboard_exit: {label: 返回, send: function, command: liquid_keyboard, option: "-1"}  #退出liquidkeyboard
