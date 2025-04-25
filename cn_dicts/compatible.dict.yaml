@@ -4,7 +4,7 @@
 #兼容词库，对于多字词汇两种读音的场景，手动维护到本表以及一些其他的杂项
 ---
 name: compatible
-version: "2025-04-25 17:20"
+version: "2025-04-25 23:25"
 sort: by_weight
 ...
 攒个	cuán;fb;fr;fz;jm;qo,xo;uo;rt;fr gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra	391
@@ -2144,6 +2144,572 @@ sort: by_weight
 做这事	zuò;rw;rw;rg;xj;ok;jh;wd;rw zhèi;zw;zw;zw;jq;yk;vu;yp;zx shì;gy;al;aa;dp;jn;fb;gk;av	379
 做这些	zuò;rw;rw;rg;xj;ok;jh;wd;rw zhèi;zw;zw;zw;jq;yk;vu;yp;zx xiē;ve;ve;ec;ru;ym;sm;hx;ve	540
 做这种	zuò;rw;rw;rg;xj;ok;jh;wd;rw zhèi;zw;zw;zw;jq;yk;vu;yp;zx zhǒng;hv;hv;hv;up;hl;xg;tk;hv	520
+谙熟	ān;yo;yo;yy;cv;ia;sx;yu;yo shóu;wh;wh;hu;in;yf;gc;yb;we	372
+半熟	bàn;bf;dl;bf;fs;fq;hu;uf;da shóu;wh;wh;hu;in;yf;gc;yb;we	491
+保熟	bǎo;rm;rm;rd;xw;od;je;wk;rl shóu;wh;wh;hu;in;yf;gc;yb;we	406
+背熟	bèi;bo;lo;ob;ll;lb;av;ux;bo shóu;wh;wh;hu;in;yf;gc;yb;we	461
+变熟	biàn;wy;wy;wy,yy;il;ye;zr;yo;wy shóu;wh;wh;hu;in;yf;gc;yb;we	374
+不熟	bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	576
+常熟	cháng;xj;xj;jk,xd,dd;hy;fb;sr;ip;ej shóu;wh;wh;hu;in;yf;gc;yb;we	533
+炒熟	chǎo;hu;hu;hu;tu;fh;ct;oi;hu shóu;wh;wh;hu;in;yf;gc;yb;we	571
+成熟	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	740
+初熟	chū;pd;pd;yd;hi;lh;tp;pu;pd shóu;wh;wh;hu;in;yf;gc;yb;we	248
+纯熟	chún;st;st;st;er;vu;is;xg;st shóu;wh;wh;hu;in;yf;gc;yb;we	493
+醇熟	chún;yz;yz;yx;pa;md;yh;sg;yz shóu;wh;wh;hu;in;yf;gc;yb;we	360
+催熟	cuī;rv;rf;rc;xa;og;ju;wm;ra shóu;wh;wh;hu;in;yf;gc;yb;we	479
+大熟	dà;ar;un;ad;xx;kk;md;dd;an shóu;wh;wh;hu;in;yf;gc;yb;we	264
+蛋熟	dàn;zi;vi;ip,pi;rf;ni;tc;nh;vi shóu;wh;wh;hu;in;yf;gc;yb;we	375
+读熟	dú;yd;yd;ym;cx;ik;sm;yf;yd shóu;wh;wh;hu;in;yf;gc;yb;we	359
+炖熟	dùn;ht;ht;ht;tr;fu;cs;og;ht shóu;wh;wh;hu;in;yf;gc;yb;we	442
+耳熟	ěr;ol;aa;aa;du;sj;qe;bg;aa shóu;wh;wh;hu;in;yf;gc;yb;we	424
+腐熟	fǔ;gr;gr;gr,rf;re;ib;xj;yw;gr shóu;wh;wh;hu;in;yf;gc;yb;we	430
+刚熟	gāng;kd;kd;dg;oi;bn;mp;mq;gd shóu;wh;wh;hu;in;yf;gc;yb;we	358
+搞熟	gǎo;fk;fk;fg;jo;qb;ug;ry;fk shóu;wh;wh;hu;in;yf;gc;yb;we	227
+瓜熟	guā;in,vd;pn;pd;uh;ho;yg;rc;pn shóu;wh;wh;hu;in;yf;gc;yb;we	291
+过熟	guò;zc;zc;zc;kq;yi;ku;fp;zc shóu;wh;wh;hu;in;yf;gc;yb;we	443
+果熟	guǒ;tm;ln;ad,tm;vw;wd;qe;js;an shóu;wh;wh;hu;in;yf;gc;yb;we	322
+很熟	hěn;rg;ig;xg;hh;hv;wi;tv;rh shóu;wh;wh;hu;in;yf;gc;yb;we	552
+湖熟	hú;do;do;dh;kl;eb;kv;id;do shóu;wh;wh;hu;in;yf;gc;yb;we	384
+混熟	hùn;db;db;dk;ka;ep;kv;ij;db shóu;wh;wh;hu;in;yf;gc;yb;we	457
+记熟	jì;yj;yj;yj;ct;iu;sv;yn;yj shóu;wh;wh;hu;in;yf;gc;yb;we	395
+即熟	jí;ge;ge;eg,ge;rb;al;iz;vc;ve shóu;wh;wh;hu;in;yf;gc;yb;we	391
+较熟	jiào;if;ix;ij;ty;kk;yb;lu;ix shóu;wh;wh;hu;in;yf;gc;yb;we	295
+精熟	jīng;mo;mo;mq;ll;fb;pv;og;mo shóu;wh;wh;hu;in;yf;gc;yb;we	365
+烤熟	kǎo;hk;hv;hk;tr;fs;ca;of;hk shóu;wh;wh;hu;in;yf;gc;yb;we	557
+快熟	kuài;xg;xg;xd,xg;ne;pk;hj;nn;xn shóu;wh;wh;hu;in;yf;gc;yb;we	397
+烂熟	làn;hl;hs;hl;tu;fm;ct;ou;hs shóu;wh;wh;hu;in;yf;gc;yb;we	494
+老熟	lǎo;lb;lb;bl,lb;ga;jp;ql;ft;ub shóu;wh;wh;hu;in;yf;gc;yb;we	361
+脸熟	liǎn;oq;oa;oa,oq;ld;bm;vf;ew;oa shóu;wh;wh;hu;in;yf;gc;yb;we	454
+练熟	liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd shóu;wh;wh;hu;in;yf;gc;yb;we	395
+两熟	liǎng;ar;ad;ad;de;mb;ml;gm;ad shóu;wh;wh;hu;in;yf;gc;yb;we	302
+蛮熟	mán;wi;wi;iy,yi;if;yi;zc;yo;wi shóu;wh;wh;hu;in;yf;gc;yb;we	294
+没熟	méi;du;dy;du;kl;ee;kr;im;dy shóu;wh;wh;hu;in;yf;gc;yb;we	490
+面熟	miàn;ao;aa;aa;du;ml;bm;dm;aa shóu;wh;wh;hu;in;yf;gc;yb;we	400
+摸熟	mō;fd;fd;fm;jx;qk;um;ra;fd shóu;wh;wh;hu;in;yf;gc;yb;we	312
+轻熟	qīng;ij;ig;ig;tp;km;yu;lc;ig shóu;wh;wh;hu;in;yf;gc;yb;we	419
+全熟	quán;rw;rw;rw;ea;og;jn;wg;rw shóu;wh;wh;hu;in;yf;gc;yb;we	525
+稔熟	rěn;hx;hx;hn;un;hp;xh;tw;hx shóu;wh;wh;hu;in;yf;gc;yb;we	257
+软熟	ruǎn;iq;ir;iq;te;ko;ye;lq;ir shóu;wh;wh;hu;in;yf;gc;yb;we	380
+杀熟	shā;xm;xm;mi,im;yf;kd,xd;be;qs;xx shóu;wh;wh;hu;in;yf;gc;yb;we	414
+烧熟	shāo;hw;hw;hy;tk;fu;cp;oa;he shóu;wh;wh;hu;in;yf;gc;yb;we	450
+生熟	shēng;pf;pf;na;eg;hm;ls;tg;pa shóu;wh;wh;hu;in;yf;gc;yb;we	475
+手熟	shǒu;pf;pl;pa,ub;up;qq;us;rt;pv shóu;wh;wh;hu;in;yf;gc;yb;we	413
+熟啊	shóu;wh;wh;hu;in;yf;gc;yb;we a;kk;kk;ka;oj;rr;dz;kb;kk	460
+熟谙	shóu;wh;wh;hu;in;yf;gc;yb;we ān;yo;yo;yy;cv;ia;sx;yu;yo	380
+熟背	shóu;wh;wh;hu;in;yf;gc;yb;we bèi;bo;lo;ob;ll;lb;av;ux;bo	377
+熟菜	shóu;wh;wh;hu;in;yf;gc;yb;we cài;cc;cm;cc;zw;td;le;ae;cl	471
+熟茶	shóu;wh;wh;hu;in;yf;gc;yb;we chá;cm;cm;cm;zf;td;le;aw;cx	501
+熟成	shóu;wh;wh;hu;in;yf;gc;yb;we chéng;wv;wv;gg,wg;rh;is;na;dn;vg	459
+熟词	shóu;wh;wh;hu;in;yf;gc;yb;we cí;yk;yk;ys;co;ir;sd;yn;yk	375
+熟的	shóu;wh;wh;hu;in;yf;gc;yb;we de;bu;bu;bu;sh;hi,xx;ui;rq;bu	640
+熟得	shóu;wh;wh;hu;in;yf;gc;yb;we de;rc;ic;xc;hk;hi;wk;tj;rc	373
+熟地	shóu;wh;wh;hu;in;yf;gc;yb;we dì;ty;ty;ty;ga;gd;ge;fb;ty	483
+熟点	shóu;wh;wh;hu;in;yf;gc;yb;we diǎn;vh;lh;hv;pn;yf,xf;yc;hk;ve	277
+熟读	shóu;wh;wh;hu;in;yf;gc;yb;we dú;yd;yd;ym;cx;ik;sm;yf;yd	524
+熟度	shóu;wh;wh;hu;in;yf;gc;yb;we dù;gy;gy;gy;rl;ie;xr;ya;gy	476
+熟饭	shóu;wh;wh;hu;in;yf;gc;yb;we fàn;uy;uy;uf;gl;ne;qr;qn;uy	335
+熟果	shóu;wh;wh;hu;in;yf;gc;yb;we guǒ;tm;ln;ad,tm;vw;wd;qe;js;an	332
+熟后	shóu;wh;wh;hu;in;yf;gc;yb;we hòu;ik;pk;pk;uo;hr;xd;rg;pk	526
+熟化	shóu;wh;wh;hu;in;yf;gc;yb;we huà;rb;rb;rb;xa;op;jv;wx;rb	399
+熟记	shóu;wh;wh;hu;in;yf;gc;yb;we jì;yj;yj;yj;ct;iu;sv;yn;yj	721
+熟筋	shóu;wh;wh;hu;in;yf;gc;yb;we jīn;vl;vl;vl;nu;hs;rs;te;vl	341
+熟客	shóu;wh;wh;hu;in;yf;gc;yb;we kè;bk;bk;bg;io;jr;ws;pt;gk	533
+熟烂	shóu;wh;wh;hu;in;yf;gc;yb;we làn;hl;hs;hl;tu;fm;ct;ou;hs	480
+熟了	shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	597
+熟练	shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd	679
+熟脸	shóu;wh;wh;hu;in;yf;gc;yb;we liǎn;oq;oa;oa,oq;ld;bm;vf;ew;oa	359
+熟料	shóu;wh;wh;hu;in;yf;gc;yb;we liào;md;mu;md;lh;fj;pj;ou;mu	454
+熟路	shóu;wh;wh;hu;in;yf;gc;yb;we lù;zk;zk;zg;go;rr;ps;kh;zk	317
+熟络	shóu;wh;wh;hu;in;yf;gc;yb;we luò;sk;sk;sg;eo;vr;is;xt;sk	477
+熟虑	shóu;wh;wh;hu;in;yf;gc;yb;we lǜ;hx;hx;hx,xh;pn;yp;zh;ha;ax	316
+熟女	shóu;wh;wh;hu;in;yf;gc;yb;we nǚ;va;va;aa,vh;yy;vv;bn;vv;va	515
+熟皮	shóu;wh;wh;hu;in;yf;gc;yb;we pí;py;vy;ad,ay,vd,vy,ya;rl;de;rp;hc;vy	219
+熟普	shóu;wh;wh;hu;in;yf;gc;yb;we pǔ;bo;bo;ob,bo;fv;ta;ho;uo;eo	369
+熟人	shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn	640
+熟稔	shóu;wh;wh;hu;in;yf;gc;yb;we rěn;hx;hx;hn;un;hp;xh;tw;hx	436
+熟肉	shóu;wh;wh;hu;in;yf;gc;yb;we ròu;nr;nr;ad,kr;oe;oo;mj;mw;nr	450
+熟食	shóu;wh;wh;hu;in;yf;gc;yb;we shí;rg;rl;rl,pd;eh;ov;qs;wy;rh	590
+熟识	shóu;wh;wh;hu;in;yf;gc;yb;we shí;yv;yb;yv;cf;ic;sh;yk;yb	527
+熟时	shóu;wh;wh;hu;in;yf;gc;yb;we shí;oc;oc;oc;vk;ai;ok;jf;oc	455
+熟手	shóu;wh;wh;hu;in;yf;gc;yb;we shǒu;pf;pl;pa,ub;up;qq;us;rt;pv	440
+熟睡	shóu;wh;wh;hu;in;yf;gc;yb;we shuì;ot;oi;oi;sg;bm;qg;ht;mi	504
+熟水	shóu;wh;wh;hu;in;yf;gc;yb;we shuǐ;ln;ln;ad,uv;oo;ee;ks;ii;vn	281
+熟铁	shóu;wh;wh;hu;in;yf;gc;yb;we tiě;jf;ju;ju;de;oo;zh;qr;ju	373
+熟透	shóu;wh;wh;hu;in;yf;gc;yb;we tòu;zn;zn;zx;uq;ys;xu;te;zn	602
+熟悉	shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	731
+熟习	shóu;wh;wh;hu;in;yf;gc;yb;we xí;vd;vd;ga;dd;sm;zx;nu;vd	381
+熟虾	shóu;wh;wh;hu;in;yf;gc;yb;we xiā;ix;ix;ix;fh;ly;cy;jg;ix	328
+熟用	shóu;wh;wh;hu;in;yf;gc;yb;we yòng;kf,ol;kl;kf;lp;bq;ty;et;pa	353
+熟油	shóu;wh;wh;hu;in;yf;gc;yb;we yóu;dy;dy;dy;kp;ew;kd;im;dy	389
+熟语	shóu;wh;wh;hu;in;yf;gc;yb;we yǔ;yk;yk;yw;co;ir;sd;yg;yk	387
+熟知	shóu;wh;wh;hu;in;yf;gc;yb;we zhī;uk;uk;uk,ku;eo;or;od;td;uk	573
+熟制	shóu;wh;wh;hu;in;yf;gc;yb;we zhì;nd;pd;dg,dv;bi;hn;qp;rm;pd	349
+睡熟	shuì;ot;oi;oi;sg;bm;qg;ht;mi shóu;wh;wh;hu;in;yf;gc;yb;we	372
+太熟	tài;dd;dd;dd;xh;ki;mi;dy;dd shóu;wh;wh;hu;in;yf;gc;yb;we	429
+挺熟	tǐng;fw;fz;ft;jq;qg;uu;rt;fr shóu;wh;wh;hu;in;yf;gc;yb;we	365
+晚熟	wǎn;oe;ov;om;vk;au;op;jq;om shóu;wh;wh;hu;in;yf;gc;yb;we	412
+玩熟	wán;wy;we;wy;ak;mu;np;gf;we shóu;wh;wh;hu;in;yf;gc;yb;we	333
+完熟	wán;by;be;by;ik;ju;wp;pf;ge shóu;wh;wh;hu;in;yf;gc;yb;we	269
+未熟	wèi;am;an;ex,ad;ee;jd;aw;fi;an shóu;wh;wh;hu;in;yf;gc;yb;we	433
+我熟	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg shóu;wh;wh;hu;in;yf;gc;yb;we	337
+娴熟	xián;nm;nm;nx;yw;vd;be;vu;nl shóu;wh;wh;hu;in;yf;gc;yb;we	561
+相熟	xiāng;mo;mo;mo;ws;du;eq;sh;lm shóu;wh;wh;hu;in;yf;gc;yb;we	481
+眼熟	yǎn;og;og;og;sh;bv;qi;hv;mh shóu;wh;wh;hu;in;yf;gc;yb;we	533
+一熟	yì;aa;aa;aa;dd;mm;fi;gg;aa shóu;wh;wh;hu;in;yf;gc;yb;we	316
+用熟	yòng;kf,ol;kl;kf;lp;bq;ty;et;pa shóu;wh;wh;hu;in;yf;gc;yb;we	354
+圆熟	yuán;kb;kr;ky;nm;wo;ro;lk;wr shóu;wh;wh;hu;in;yf;gc;yb;we	329
+再熟	zài;ar;ar;aa,at;dd;mb;fg;gm;ar shóu;wh;wh;hu;in;yf;gc;yb;we	329
+早熟	zǎo;ou;ou;ou;vs;aj;on;jh;ou shóu;wh;wh;hu;in;yf;gc;yb;we	514
+炸熟	zhà;hv;hv;hv;tu;fs;cw;ot;hv shóu;wh;wh;hu;in;yf;gc;yb;we	452
+蒸熟	zhēng;ch;ch;hv,ch;zn;tf;lc;ab;ce shóu;wh;wh;hu;in;yf;gc;yb;we	555
+至熟	zhì;gt;at;tv,vt;dg;mg;yi;gc;at shóu;wh;wh;hu;in;yf;gc;yb;we	519
+煮熟	zhǔ;lh;lh;hv;gn;jf;qc;ft;ue shóu;wh;wh;hu;in;yf;gc;yb;we	683
+最熟	zuì;oy;oy;oq;vl;ae;or;jb;oy shóu;wh;wh;hu;in;yf;gc;yb;we	274
+八成熟	bā;pn;pn;pd;ff;ho;hb;wt;pn chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	226
+八分熟	bā;pn;pn;pd;ff;ho;hb;wt;pn fēn;bd;bd;bd,db;fi;ch;hp;wv;bd shóu;wh;wh;hu;in;yf;gc;yb;we	270
+把熟睡	bǎ;fb;fb;fb;jt;qu;um;rc;fb shóu;wh;wh;hu;in;yf;gc;yb;we shuì;ot;oi;oi;sg;bm;qg;ht;mi	101
+把蒸熟	bǎ;fb;fb;fb;jt;qu;um;rc;fb zhēng;ch;ch;hv,ch;zn;tf;lc;ab;ce shóu;wh;wh;hu;in;yf;gc;yb;we	100
+把煮熟	bǎ;fb;fb;fb;jt;qu;um;rc;fb zhǔ;lh;lh;hv;gn;jf;qc;ft;ue shóu;wh;wh;hu;in;yf;gc;yb;we	135
+半成熟	bàn;bf;dl;bf;fs;fq;hu;uf;da chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	134
+扮成熟	bàn;ff;fd;ff;ju;qh;up;rw;fd chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	102
+半生熟	bàn;bf;dl;bf;fs;fq;hu;uf;da shēng;pf;pf;na;eg;hm;ls;tg;pa shóu;wh;wh;hu;in;yf;gc;yb;we	166
+半熟蛋	bàn;bf;dl;bf;fs;fq;hu;uf;da shóu;wh;wh;hu;in;yf;gc;yb;we dàn;zi;vi;ip,pi;rf;ni;tc;nh;vi	179
+半熟的	bàn;bf;dl;bf;fs;fq;hu;uf;da shóu;wh;wh;hu;in;yf;gc;yb;we de;bu;bu;bu;sh;hi,xx;ui;rq;bu	212
+半熟练	bàn;bf;dl;bf;fs;fq;hu;uf;da shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd	117
+半熟人	bàn;bf;dl;bf;fs;fq;hu;uf;da shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn	147
+半熟时	bàn;bf;dl;bf;fs;fq;hu;uf;da shóu;wh;wh;hu;in;yf;gc;yb;we shí;oc;oc;oc;vk;ai;ok;jf;oc	53
+被催熟	bèi;pp;py;yp;hl;le;tr;pu;py cuī;rv;rf;rc;xa;og;ju;wm;ra shóu;wh;wh;hu;in;yf;gc;yb;we	125
+被烤熟	bèi;pp;py;yp;hl;le;tr;pu;py kǎo;hk;hv;hk;tr;fs;ca;of;hk shóu;wh;wh;hu;in;yf;gc;yb;we	136
+背熟了	bèi;bo;lo;ob;ll;lb;av;ux;bo shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	167
+被煮熟	bèi;pp;py;yp;hl;le;tr;pu;py zhǔ;lh;lh;hv;gn;jf;qc;ft;ue shóu;wh;wh;hu;in;yf;gc;yb;we	120
+比较熟	bǐ;bb;bb;bb;aa;pp;vv;xx;bb jiào;if;ix;ij;ty;kk;yb;lu;ix shóu;wh;wh;hu;in;yf;gc;yb;we	8
+变成熟	biàn;wy;wy;wy,yy;il;ye;zr;yo;wy chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	192
+并不熟	bìng;bk;bk;bk,qc;fz;tt,xt;hl;ua;ek bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	162
+不成熟	bù;ab;ad;ad,ax;dh;mf;cb;gi;ad chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	309
+不催熟	bù;ab;ad;ad,ax;dh;mf;cb;gi;ad cuī;rv;rf;rc;xa;og;ju;wm;ra shóu;wh;wh;hu;in;yf;gc;yb;we	79
+不熟啊	bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we a;kk;kk;ka;oj;rr;dz;kb;kk	133
+不熟吧	bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we ba;kb;kb;kb;ot;ru;dm;kc;kb	162
+不熟练	bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd	248
+不熟悉	bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	316
+不太熟	bú;ab;ad;ad,ax;dh;mf;cb;gi;ad tài;dd;dd;dd;xh;ki;mi;dy;dd shóu;wh;wh;hu;in;yf;gc;yb;we	234
+不娴熟	bù;ab;ad;ad,ax;dh;mf;cb;gi;ad xián;nm;nm;nx;yw;vd;be;vu;nl shóu;wh;wh;hu;in;yf;gc;yb;we	148
+不眼熟	bù;ab;ad;ad,ax;dh;mf;cb;gi;ad yǎn;og;og;og;sh;bv;qi;hv;mh shóu;wh;wh;hu;in;yf;gc;yb;we	88
+菜熟了	cài;cc;cm;cc;zw;td;le;ae;cl shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	100
+常熟的	cháng;xj;xj;jk,xd,dd;hy;fb;sr;ip;ej shóu;wh;wh;hu;in;yf;gc;yb;we de;bu;bu;bu;sh;hi,xx;ui;rq;bu	188
+常熟话	cháng;xj;xj;jk,xd,dd;hy;fb;sr;ip;ej shóu;wh;wh;hu;in;yf;gc;yb;we huà;yu;yk;yu;co;ir;sa;yt;yk	95
+常熟路	cháng;xj;xj;jk,xd,dd;hy;fb;sr;ip;ej shóu;wh;wh;hu;in;yf;gc;yb;we lù;zk;zk;zg;go;rr;ps;kh;zk	190
+常熟人	cháng;xj;xj;jk,xd,dd;hy;fb;sr;ip;ej shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn	168
+常熟市	cháng;xj;xj;jk,xd,dd;hy;fb;sr;ip;ej shóu;wh;wh;hu;in;yf;gc;yb;we shì;wj;wj;wj;iy;yb;zr;ym;wj	302
+常熟县	cháng;xj;xj;jk,xd,dd;hy;fb;sr;ip;ej shóu;wh;wh;hu;in;yf;gc;yb;we xiàn;qs;qs;sq,qs;pp;bi;fk;eg;qv	182
+常熟有	cháng;xj;xj;jk,xd,dd;hy;fb;sr;ip;ej shóu;wh;wh;hu;in;yf;gc;yb;we yǒu;uo;uo;ou,uo;sl;kb;nv;de;ao	56
+常熟站	cháng;xj;xj;jk,xd,dd;hy;fb;sr;ip;ej shóu;wh;wh;hu;in;yf;gc;yb;we zhàn;lv;lk;lv;bo;yr;id;uh;lk	82
+炒不熟	chǎo;hu;hu;hu;tu;fh;ct;oi;hu bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	127
+炒熟后	chǎo;hu;hu;hu;tu;fh;ct;oi;hu shóu;wh;wh;hu;in;yf;gc;yb;we hòu;ik;pk;pk;uo;hr;xd;rg;pk	222
+炒熟了	chǎo;hu;hu;hu;tu;fh;ct;oi;hu shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	158
+成熟啊	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we a;kk;kk;ka;oj;rr;dz;kb;kk	148
+成熟吧	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we ba;kb;kb;kb;ot;ru;dm;kc;kb	149
+成熟的	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we de;bu;bu;bu;sh;hi,xx;ui;rq;bu	418
+成熟点	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we diǎn;vh;lh;hv;pn;yf,xf;yc;hk;ve	186
+成熟度	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we dù;gy;gy;gy;rl;ie;xr;ya;gy	280
+成熟范	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we fàn;cv;cv;ce,cf;zt;tu;lz;ai;cv	49
+成熟风	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we fēng;jx;jx;ji;iy;hk;ob;mq;jx	136
+成熟感	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we gǎn;wx;xx;xx;hn;ip;nh;dg;kx	171
+成熟好	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we hǎo;nz;nz;nz;ya;vd;bh;vb;nz	71
+成熟很	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we hěn;rg;ig;xg;hh;hv;wi;tv;rh	120
+成熟后	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we hòu;ik;pk;pk;uo;hr;xd;rg;pk	258
+成熟化	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we huà;rb;rb;rb;xa;op;jv;wx;rb	178
+成熟季	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we jì;hz;hz;hz;ua;hd;xh;tb;hz	122
+成熟了	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	340
+成熟脸	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we liǎn;oq;oa;oa,oq;ld;bm;vf;ew;oa	56
+成熟林	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we lín;mm;mm;mm;ww;dd;ee;ss;ll	71
+成熟美	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we měi;yd;yd;dy,yd;fx;tk;gm;ug;ed	144
+成熟蜜	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we mì;bi;bi;ib,bi;if;ji;wc;pn;gi	148
+成熟男	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we nán;tl;tl;tl;wu;ws;qs;ll;tl	172
+成熟女	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we nǚ;va;va;aa,vh;yy;vv;bn;vv;va	146
+成熟期	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we qí;co;qo;oq,qo;vl;tb;zv;ad;qo	264
+成熟前	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we qián;bd;bd;bd,qd;fi;tn;hp;ue;ed	156
+成熟区	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we qū;kx;kx;ki;dr;sk;nb;aq;kx	100
+成熟人	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn	118
+成熟乳	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we rǔ;vv;pv;gf,fg;hr;bu;ya;eb;pv	120
+成熟时	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we shí;oc;oc;oc;vk;ai;ok;jf;oc	258
+成熟体	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we tǐ;rb;rb;rb;xd;om;jf;ws;rb	94
+成熟些	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we xiē;ve;ve;ec;ru;ym;sm;hx;ve	167
+成熟性	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we xìng;xu;xu;xu;na;pm;hl;nt;xu	235
+成熟型	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we xíng;kt;kt;tx;ug;mg;fg;ga;kt	185
+成熟早	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we zǎo;ou;ou;ou;vs;aj;on;jh;ou	126
+成熟中	chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we zhōng;kl;ll;aa,ka;op;ll;dg;kh;aa	153
+吃熟食	chī;kv;kv;kq;or;rn;da;kt;ky shóu;wh;wh;hu;in;yf;gc;yb;we shí;rg;rl;rl,pd;eh;ov;qs;wy;rh	168
+初熟的	chū;pd;pd;yd;hi;lh;tp;pu;pd shóu;wh;wh;hu;in;yf;gc;yb;we de;bu;bu;bu;sh;hi,xx;ui;rq;bu	89
+从熟睡	cóng;rr;rr;rr;ee;oo;jj;ww;rr shóu;wh;wh;hu;in;yf;gc;yb;we shuì;ot;oi;oi;sg;bm;qg;ht;mi	45
+从熟悉	cóng;rr;rr;rr;ee;oo;jj;ww;rr shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	25
+催熟剂	cuī;rv;rf;rc;xa;og;ju;wm;ra shóu;wh;wh;hu;in;yf;gc;yb;we jì;qd;wd;dq;ji;yn;qp;yj;wd	186
+大家熟	dà;ar;un;ad;xx;kk;md;dd;an jiā;bu;bu;bu;ih;jo;wj;pe;gn shóu;wh;wh;hu;in;yf;gc;yb;we	88
+到常熟	dào;gd;ad;dv;di;mn;yp;gc;vd cháng;xj;xj;jk,xd,dd;hy;fb;sr;ip;ej shóu;wh;wh;hu;in;yf;gc;yb;we	239
+的熟了	de;bu;bu;bu;sh;hi,xx;ui;rq;bu shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	168
+等熟了	děng;vc;vc;vs;nk;hi;rk;tf;vc shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	188
+地不熟	dì;ty;ty;ty;ga;gd;ge;fb;ty bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	479
+东京熟	dōng;ax;ad;ad,qx;af;kd;ry;ai;ad jīng;wx;wx;wx;if;yf;gy;yi;wx shóu;wh;wh;hu;in;yf;gc;yb;we	50
+都不熟	dōu;le;le;ev;gb;jl;qt;ft;ue bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	242
+都成熟	dōu;le;le;ev;gb;jl;qt;ft;ue chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	148
+都熟了	dōu;le;le;ev;gb;jl;qt;ft;ue shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	85
+都熟悉	dōu;le;le;ev;gb;jl;qt;ft;ue shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	212
+都早熟	dōu;le;le;ev;gb;jl;qt;ft;ue zǎo;ou;ou;ou;vs;aj;on;jh;ou shóu;wh;wh;hu;in;yf;gc;yb;we	79
+多熟了	duō;xx;xx;xx;ff;ni;ll;qq;xx shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	175
+多熟期	duō;xx;xx;xx;ff;ni;ll;qq;xx shóu;wh;wh;hu;in;yf;gc;yb;we qī;co;qo;oq,qo;vl;tb;zv;ad;qo	229
+多熟悉	duō;xx;xx;xx;ff;ni;ll;qq;xx shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	172
+二回熟	èr;aa;aa;aa;uu;mm;me;fg;aa huí;kk;kk;kk;no;wr;rd;lk;wk shóu;wh;wh;hu;in;yf;gc;yb;we	164
+耳熟啊	ěr;ol;aa;aa;du;sj;qe;bg;aa shóu;wh;wh;hu;in;yf;gc;yb;we a;kk;kk;ka;oj;rr;dz;kb;kk	139
+耳熟吧	ěr;ol;aa;aa;du;sj;qe;bg;aa shóu;wh;wh;hu;in;yf;gc;yb;we ba;kb;kb;kb;ot;ru;dm;kc;kb	174
+耳熟了	ěr;ol;aa;aa;du;sj;qe;bg;aa shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	137
+非常熟	fēi;ls;la;aa;up;ly;rf;dj;aa cháng;xj;xj;jk,xd,dd;hy;fb;sr;ip;ej shóu;wh;wh;hu;in;yf;gc;yb;we	160
+分熟吧	fēn;bd;bd;bd,db;fi;ch;hp;wv;bd shóu;wh;wh;hu;in;yf;gc;yb;we ba;kb;kb;kb;ot;ru;dm;kc;kb	163
+分熟了	fēn;bd;bd;bd,db;fi;ch;hp;wv;bd shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	158
+干熟么	gàn;au;au;aa;ss;mj;eg;fg;au shóu;wh;wh;hu;in;yf;gc;yb;we me;ps;ps;ps;up;hi;tk;tc;pv	78
+搞熟了	gǎo;fk;fk;fg;jo;qb;ug;ry;fk shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	79
+更成熟	gèng;an;an;ad,ag;dh;mk;fb;gj;an chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	244
+更熟练	gèng;an;an;ad,ag;dh;mk;fb;gj;an shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd	165
+更熟悉	gèng;an;an;ad,ag;dh;mk;fb;gj;an shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	222
+够成熟	gòu;jx;bx;jd,xj;if;pn;gl;qk;jx chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	128
+过熟的	guò;zc;zc;zc;kq;yi;ku;fp;zc shóu;wh;wh;hu;in;yf;gc;yb;we de;bu;bu;bu;sh;hi,xx;ui;rq;bu	142
+过熟了	guò;zc;zc;zc;kq;yi;ku;fp;zc shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	166
+果熟期	guǒ;tm;ln;ad,tm;vw;wd;qe;js;an shóu;wh;wh;hu;in;yf;gc;yb;we qī;co;qo;oq,qo;vl;tb;zv;ad;qo	124
+过熟期	guò;zc;zc;zc;kq;yi;ku;fp;zc shóu;wh;wh;hu;in;yf;gc;yb;we qī;co;qo;oq,qo;vl;tb;zv;ad;qo	84
+还不熟	hái;zb;zb;zb;dq;yf;cu;gi;zb bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	182
+还算熟	hái;zb;zb;zb;dq;yf;cu;gi;zb suàn;vc;vc;vc;nz;ht;rl;th;va shóu;wh;wh;hu;in;yf;gc;yb;we	102
+好成熟	hǎo;nz;nz;nz;ya;vd;bh;vb;nz chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	73
+好耳熟	hǎo;nz;nz;nz;ya;vd;bh;vb;nz ěr;ol;aa;aa;du;sj;qe;bg;aa shóu;wh;wh;hu;in;yf;gc;yb;we	119
+好面熟	hǎo;nz;nz;nz;ya;vd;bh;vb;nz miàn;ao;aa;aa;du;ml;bm;dm;aa shóu;wh;wh;hu;in;yf;gc;yb;we	135
+好熟悉	hǎo;nz;nz;nz;ya;vd;bh;vb;nz shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	186
+好眼熟	hǎo;nz;nz;nz;ya;vd;bh;vb;nz yǎn;og;og;og;sh;bv;qi;hv;mh shóu;wh;wh;hu;in;yf;gc;yb;we	186
+很成熟	hěn;rg;ig;xg;hh;hv;wi;tv;rh chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	254
+很纯熟	hěn;rg;ig;xg;hh;hv;wi;tv;rh chún;st;st;st;er;vu;is;xg;st shóu;wh;wh;hu;in;yf;gc;yb;we	234
+很耳熟	hěn;rg;ig;xg;hh;hv;wi;tv;rh ěr;ol;aa;aa;du;sj;qe;bg;aa shóu;wh;wh;hu;in;yf;gc;yb;we	190
+很面熟	hěn;rg;ig;xg;hh;hv;wi;tv;rh miàn;ao;aa;aa;du;ml;bm;dm;aa shóu;wh;wh;hu;in;yf;gc;yb;we	151
+很熟啊	hěn;rg;ig;xg;hh;hv;wi;tv;rh shóu;wh;wh;hu;in;yf;gc;yb;we a;kk;kk;ka;oj;rr;dz;kb;kk	144
+很熟吧	hěn;rg;ig;xg;hh;hv;wi;tv;rh shóu;wh;wh;hu;in;yf;gc;yb;we ba;kb;kb;kb;ot;ru;dm;kc;kb	130
+很熟但	hěn;rg;ig;xg;hh;hv;wi;tv;rh shóu;wh;wh;hu;in;yf;gc;yb;we dàn;rd;ra;rd;xd;om;jf;wj;rd	302
+很熟很	hěn;rg;ig;xg;hh;hv;wi;tv;rh shóu;wh;wh;hu;in;yf;gc;yb;we hěn;rg;ig;xg;hh;hv;wi;tv;rh	352
+很熟了	hěn;rg;ig;xg;hh;hv;wi;tv;rh shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	242
+很熟练	hěn;rg;ig;xg;hh;hv;wi;tv;rh shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd	236
+很熟络	hěn;rg;ig;xg;hh;hv;wi;tv;rh shóu;wh;wh;hu;in;yf;gc;yb;we luò;sk;sk;sg;eo;vr;is;xt;sk	297
+很熟稔	hěn;rg;ig;xg;hh;hv;wi;tv;rh shóu;wh;wh;hu;in;yf;gc;yb;we rěn;hx;hx;hn;un;hp;xh;tw;hx	344
+很熟识	hěn;rg;ig;xg;hh;hv;wi;tv;rh shóu;wh;wh;hu;in;yf;gc;yb;we shí;yv;yb;yv;cf;ic;sh;yk;yb	224
+很熟悉	hěn;rg;ig;xg;hh;hv;wi;tv;rh shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	294
+很娴熟	hěn;rg;ig;xg;hh;hv;wi;tv;rh xián;nm;nm;nx;yw;vd;be;vu;nl shóu;wh;wh;hu;in;yf;gc;yb;we	320
+很眼熟	hěn;rg;ig;xg;hh;hv;wi;tv;rh yǎn;og;og;og;sh;bv;qi;hv;mh shóu;wh;wh;hu;in;yf;gc;yb;we	80
+很早熟	hěn;rg;ig;xg;hh;hv;wi;tv;rh zǎo;ou;ou;ou;vs;aj;on;jh;ou shóu;wh;wh;hu;in;yf;gc;yb;we	178
+后熟期	hòu;ik;pk;pk;uo;hr;xd;rg;pk shóu;wh;wh;hu;in;yf;gc;yb;we qī;co;qo;oq,qo;vl;tb;zv;ad;qo	81
+回常熟	huí;kk;kk;kk;no;wr;rd;lk;wk cháng;xj;xj;jk,xd,dd;hy;fb;sr;ip;ej shóu;wh;wh;hu;in;yf;gc;yb;we	239
+会熟练	huì;ry;rs;ry;ep;oi;jb;wf;rv shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd	200
+混脸熟	hùn;db;db;dk;ka;ep;kv;ij;db liǎn;oq;oa;oa,oq;ld;bm;vf;ew;oa shóu;wh;wh;hu;in;yf;gc;yb;we	172
+混熟吧	hùn;db;db;dk;ka;ep;kv;ij;db shóu;wh;wh;hu;in;yf;gc;yb;we ba;kb;kb;kb;ot;ru;dm;kc;kb	184
+混熟了	hùn;db;db;dk;ka;ep;kv;ij;db shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	168
+混眼熟	hùn;db;db;dk;ka;ep;kv;ij;db yǎn;og;og;og;sh;bv;qi;hv;mh shóu;wh;wh;hu;in;yf;gc;yb;we	102
+几成熟	jǐ;pv;pv;py;ii;hn;oj;mt;pv chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	192
+几分熟	jǐ;pv;pv;py;ii;hn;oj;mt;pv fēn;bd;bd;bd,db;fi;ch;hp;wv;bd shóu;wh;wh;hu;in;yf;gc;yb;we	258
+记熟了	jì;yj;yj;yj;ct;iu;sv;yn;yj shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	162
+将熟时	jiāng;lc;dc;dc,jc,pc;lk;li;ak;uq;dc shóu;wh;wh;hu;in;yf;gc;yb;we shí;oc;oc;oc;vk;ai;ok;jf;oc	268
+将熟睡	jiāng;lc;dc;dc,jc,pc;lk;li;ak;uq;dc shóu;wh;wh;hu;in;yf;gc;yb;we shuì;ot;oi;oi;sg;bm;qg;ht;mi	241
+将蒸熟	jiāng;lc;dc;dc,jc,pc;lk;li;ak;uq;dc zhēng;ch;ch;hv,ch;zn;tf;lc;ab;ce shóu;wh;wh;hu;in;yf;gc;yb;we	277
+将煮熟	jiāng;lc;dc;dc,jc,pc;lk;li;ak;uq;dc zhǔ;lh;lh;hv;gn;jf;qc;ft;ue shóu;wh;wh;hu;in;yf;gc;yb;we	128
+较成熟	jiào;if;ix;ij;ty;kk;yb;lu;ix chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	184
+九成熟	jiǔ;pv;pv;py;ur;kn;kj;vt;pv chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	174
+九分熟	jiǔ;pv;pv;py;ur;kn;kj;vt;pv fēn;bd;bd;bd,db;fi;ch;hp;wv;bd shóu;wh;wh;hu;in;yf;gc;yb;we	132
+就熟了	jiù;wy;wy;yj;ih;yu;go;yi;wy shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	156
+就熟时	jiù;wy;wy;yj;ih;yu;go;yi;wy shóu;wh;wh;hu;in;yf;gc;yb;we shí;oc;oc;oc;vk;ai;ok;jf;oc	312
+就熟悉	jiù;wy;wy;yj;ih;yu;go;yi;wy shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	152
+看熟了	kàn;uo;uo;ou,uo;us;hu;uq;rh;pm shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	177
+烤熟后	kǎo;hk;hv;hk;tr;fs;ca;of;hk shóu;wh;wh;hu;in;yf;gc;yb;we hòu;ik;pk;pk;uo;hr;xd;rg;pk	200
+烤熟了	kǎo;hk;hv;hk;tr;fs;ca;of;hk shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	160
+可成熟	kě;dk;dk;dk;jj;mr;zk;sk;av chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	126
+可熟了	kě;dk;dk;dk;jj;mr;zk;sk;av shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	87
+可熟悉	kě;dk;dk;dk;jj;mr;zk;sk;av shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	134
+快熟了	kuài;xg;xg;xd,xg;ne;pk;hj;nn;xn shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	144
+快熟面	kuài;xg;xg;xd,xg;ne;pk;hj;nn;xn shóu;wh;wh;hu;in;yf;gc;yb;we miàn;ao;aa;aa;du;ml;bm;dm;aa	102
+快熟时	kuài;xg;xg;xd,xg;ne;pk;hj;nn;xn shóu;wh;wh;hu;in;yf;gc;yb;we shí;oc;oc;oc;vk;ai;ok;jf;oc	118
+来常熟	lái;am;an;am,wb;dl;dt;ah;go;an cháng;xj;xj;jk,xd,dd;hy;fb;sr;ip;ej shóu;wh;wh;hu;in;yf;gc;yb;we	239
+来熟了	lái;am;an;am,wb;dl;dt;ah;go;an shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	168
+烂熟时	làn;hl;hs;hl;tu;fm;ct;ou;hs shóu;wh;wh;hu;in;yf;gc;yb;we shí;oc;oc;oc;vk;ai;ok;jf;oc	482
+老熟客	lǎo;lb;lb;bl,lb;ga;jp;ql;ft;ub shóu;wh;wh;hu;in;yf;gc;yb;we kè;bk;bk;bg;io;jr;ws;pt;gk	140
+老熟人	lǎo;lb;lb;bl,lb;ga;jp;ql;ft;ub shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn	209
+脸熟吧	liǎn;oq;oa;oa,oq;ld;bm;vf;ew;oa shóu;wh;wh;hu;in;yf;gc;yb;we ba;kb;kb;kb;ot;ru;dm;kc;kb	187
+脸熟了	liǎn;oq;oa;oa,oq;ld;bm;vf;ew;oa shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	172
+练熟了	liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	162
+两次熟	liǎng;ar;ad;ad;de;mb;ml;gm;ad cì;dq;dr;dq;fe;io,mo;we;uq;dr shóu;wh;wh;hu;in;yf;gc;yb;we	50
+六分熟	liù;wb;wb;wb,dd,db;if;yc;al;uy;wb fēn;bd;bd;bd,db;fi;ch;hp;wv;bd shóu;wh;wh;hu;in;yf;gc;yb;we	158
+路不熟	lù;zk;zk;zg;go;rr;ps;kh;zk bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	159
+卖熟食	mài;ud;ud;um;sx;jk;nm;fn;ud shóu;wh;wh;hu;in;yf;gc;yb;we shí;rg;rl;rl,pd;eh;ov;qs;wy;rh	174
+没炒熟	méi;du;dy;du;kl;ee;kr;im;dy chǎo;hu;hu;hu;tu;fh;ct;oi;hu shóu;wh;wh;hu;in;yf;gc;yb;we	94
+没成熟	méi;du;dy;du;kl;ee;kr;im;dy chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	133
+没烤熟	méi;du;dy;du;kl;ee;kr;im;dy kǎo;hk;hv;hk;tr;fs;ca;of;hk shóu;wh;wh;hu;in;yf;gc;yb;we	444
+没烧熟	méi;du;dy;du;kl;ee;kr;im;dy shāo;hw;hw;hy;tk;fu;cp;oa;he shóu;wh;wh;hu;in;yf;gc;yb;we	65
+没熟吧	méi;du;dy;du;kl;ee;kr;im;dy shóu;wh;wh;hu;in;yf;gc;yb;we ba;kb;kb;kb;ot;ru;dm;kc;kb	81
+没熟就	méi;du;dy;du;kl;ee;kr;im;dy shóu;wh;wh;hu;in;yf;gc;yb;we jiù;wy;wy;yj;ih;yu;go;yi;wy	50
+美熟女	měi;yd;yd;dy,yd;fx;tk;gm;ug;ed shóu;wh;wh;hu;in;yf;gc;yb;we nǚ;va;va;aa,vh;yy;vv;bn;vv;va	183
+没熟人	méi;du;dy;du;kl;ee;kr;im;dy shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn	498
+没熟似	méi;du;dy;du;kl;ee;kr;im;dy shóu;wh;wh;hu;in;yf;gc;yb;we sì;rr;rr;ry;xe;oo;jj;wn;rr	226
+没熟透	méi;du;dy;du;kl;ee;kr;im;dy shóu;wh;wh;hu;in;yf;gc;yb;we tòu;zn;zn;zx;uq;ys;xu;te;zn	57
+没有熟	méi;du;dy;du;kl;ee;kr;im;dy yǒu;uo;uo;ou,uo;sl;kb;nv;de;ao shóu;wh;wh;hu;in;yf;gc;yb;we	388
+没蒸熟	méi;du;dy;du;kl;ee;kr;im;dy zhēng;ch;ch;hv,ch;zn;tf;lc;ab;ce shóu;wh;wh;hu;in;yf;gc;yb;we	116
+没煮熟	méi;du;dy;du;kl;ee;kr;im;dy zhǔ;lh;lh;hv;gn;jf;qc;ft;ue shóu;wh;wh;hu;in;yf;gc;yb;we	114
+面熟吧	miàn;ao;aa;aa;du;ml;bm;dm;aa shóu;wh;wh;hu;in;yf;gc;yb;we ba;kb;kb;kb;ot;ru;dm;kc;kb	189
+摸熟了	mō;fd;fd;fm;jx;qk;um;ra;fd shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	165
+能成熟	néng;sb;sb;sb;pa;ip;kv;ce;vb chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	116
+能熟练	néng;sb;sb;sb;pa;ip;kv;ce;vb shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd	244
+你不熟	nǐ;rx;rx;re;xf;of;jy;wq;rx bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	100
+你成熟	nǐ;rx;rx;re;xf;of;jy;wq;rx chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	143
+你很熟	nǐ;rx;rx;re;xf;of;jy;wq;rx hěn;rg;ig;xg;hh;hv;wi;tv;rh shóu;wh;wh;hu;in;yf;gc;yb;we	302
+你熟练	nǐ;rx;rx;re;xf;of;jy;wq;rx shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd	134
+你熟人	nǐ;rx;rx;re;xf;of;jy;wq;rx shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn	104
+你熟睡	nǐ;rx;rx;re;xf;of;jy;wq;rx shóu;wh;wh;hu;in;yf;gc;yb;we shuì;ot;oi;oi;sg;bm;qg;ht;mi	160
+你熟悉	nǐ;rx;rx;re;xf;of;jy;wq;rx shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	202
+你熟知	nǐ;rx;rx;re;xf;of;jy;wq;rx shóu;wh;wh;hu;in;yf;gc;yb;we zhī;uk;uk;uk,ku;eo;or;od;td;uk	86
+你眼熟	nǐ;rx;rx;re;xf;of;jy;wq;rx yǎn;og;og;og;sh;bv;qi;hv;mh shóu;wh;wh;hu;in;yf;gc;yb;we	178
+你最熟	nǐ;rx;rx;re;xf;of;jy;wq;rx zuì;oy;oy;oq;vl;ae;or;jb;oy shóu;wh;wh;hu;in;yf;gc;yb;we	108
+您熟悉	nín;rx;rx;xn;xn;op;jh;wq;rx shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	165
+弄熟了	nòng;wc;wc;cw,wc;az;mt;nl;ga;wa shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	174
+偏成熟	piān;rc;rc;rb;xd;ob;ji;wy;rc chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	170
+七成熟	qī;av;av;ag;aa;ju;rq;ag;av chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	150
+七分熟	qī;av;av;ag;aa;ju;rq;ag;av fēn;bd;bd;bd,db;fi;ch;hp;wv;bd shóu;wh;wh;hu;in;yf;gc;yb;we	50
+情况熟	qíng;xo;xo;xq;nl;pb;hv;ng;xo kuàng;dx;de;dx;fk;iu;wp;uk;de shóu;wh;wh;hu;in;yf;gc;yb;we	92
+轻熟风	qīng;ij;ig;ig;tp;km;yu;lc;ig shóu;wh;wh;hu;in;yf;gc;yb;we fēng;jx;jx;ji;iy;hk;ob;mq;jx	154
+轻熟感	qīng;ij;ig;ig;tp;km;yu;lc;ig shóu;wh;wh;hu;in;yf;gc;yb;we gǎn;wx;xx;xx;hn;ip;nh;dg;kx	82
+轻熟龄	qīng;ij;ig;ig;tp;km;yu;lc;ig shóu;wh;wh;hu;in;yf;gc;yb;we líng;vs;vs;il;rp;yi,xi;lk;hw;vv	142
+轻熟男	qīng;ij;ig;ig;tp;km;yu;lc;ig shóu;wh;wh;hu;in;yf;gc;yb;we nán;tl;tl;tl;wu;ws;qs;ll;tl	130
+轻熟女	qīng;ij;ig;ig;tp;km;yu;lc;ig shóu;wh;wh;hu;in;yf;gc;yb;we nǚ;va;va;aa,vh;yy;vv;bn;vv;va	218
+去常熟	qù;ts;ts;ts;gp;gi;gk;fc;tv cháng;xj;xj;jk,xd,dd;hy;fb;sr;ip;ej shóu;wh;wh;hu;in;yf;gc;yb;we	239
+去熟悉	qù;ts;ts;ts;gp;gi;gk;fc;tv shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	176
+全熟吧	quán;rw;rw;rw;ea;og;jn;wg;rw shóu;wh;wh;hu;in;yf;gc;yb;we ba;kb;kb;kb;ot;ru;dm;kc;kb	176
+全熟了	quán;rw;rw;rw;ea;og;jn;wg;rw shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	170
+人不熟	rén;pn;pn;pd;ee;oo;jr;ww;pn bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	102
+人熟人	rén;pn;pn;pd;ee;oo;jr;ww;pn shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn	39
+容易熟	róng;bg;bk;bg;io;jr;wh;pw;gk yì;ow;ow;ow;vi;ah;oe;jq;ow shóu;wh;wh;hu;in;yf;gc;yb;we	188
+三分熟	sān;ae;ae;aa;uu;mm;ts;dg;ae fēn;bd;bd;bd,db;fi;ch;hp;wv;bd shóu;wh;wh;hu;in;yf;gc;yb;we	190
+烧熟了	shāo;hw;hw;hy;tk;fu;cp;oa;he shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	160
+生变熟	shēng;pf;pf;na;eg;hm;ls;tg;pa biàn;wy;wy;wy,yy;il;ye;zr;yo;wy shóu;wh;wh;hu;in;yf;gc;yb;we	90
+生吃熟	shēng;pf;pf;na;eg;hm;ls;tg;pa chī;kv;kv;kq;or;rn;da;kt;ky shóu;wh;wh;hu;in;yf;gc;yb;we	164
+生熟地	shēng;pf;pf;na;eg;hm;ls;tg;pa shóu;wh;wh;hu;in;yf;gc;yb;we dì;ty;ty;ty;ga;gd;ge;fb;ty	160
+是常熟	shì;oz;or;op,ov;ve;ao;ot;jg;or cháng;xj;xj;jk,xd,dd;hy;fb;sr;ip;ej shóu;wh;wh;hu;in;yf;gc;yb;we	130
+十成熟	shí;al;al;aa;ss;jj;ns;fg;aa chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	132
+十分熟	shí;al;al;aa;ss;jj;ns;fg;aa fēn;bd;bd;bd,db;fi;ch;hp;wv;bd shóu;wh;wh;hu;in;yf;gc;yb;we	126
+是熟么	shì;oz;or;op,ov;ve;ao;ot;jg;or shóu;wh;wh;hu;in;yf;gc;yb;we me;ps;ps;ps;up;hi;tk;tc;pv	102
+熟不熟	shóu;wh;wh;hu;in;yf;gc;yb;we bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	176
+熟菜油	shóu;wh;wh;hu;in;yf;gc;yb;we cài;cc;cm;cc;zw;td;le;ae;cl yóu;dy;dy;dy;kp;ew;kd;im;dy	151
+熟吃好	shóu;wh;wh;hu;in;yf;gc;yb;we chī;kv;kv;kq;or;rn;da;kt;ky hǎo;nz;nz;nz;ya;vd;bh;vb;nz	128
+熟大黄	shóu;wh;wh;hu;in;yf;gc;yb;we dài;ar;un;ad;xx;kk;md;dd;an huáng;cb;cb;ad,cb;zf;tc;nh;am;cb	71
+熟蛋黄	shóu;wh;wh;hu;in;yf;gc;yb;we dàn;zi;vi;ip,pi;rf;ni;tc;nh;vi huáng;cb;cb;ad,cb;zf;tc;nh;am;cb	154
+熟当时	shóu;wh;wh;hu;in;yf;gc;yb;we dāng;xe;xe;xx;hs;fm;yb;iv;ea shí;oc;oc;oc;vk;ai;ok;jf;oc	100
+熟的吧	shóu;wh;wh;hu;in;yf;gc;yb;we de;bu;bu;bu;sh;hi,xx;ui;rq;bu ba;kb;kb;kb;ot;ru;dm;kc;kb	156
+熟得快	shóu;wh;wh;hu;in;yf;gc;yb;we de;rc;ic;xc;hk;hi;wk;tj;rc kuài;xg;xg;xd,xg;ne;pk;hj;nn;xn	166
+熟的了	shóu;wh;wh;hu;in;yf;gc;yb;we de;bu;bu;bu;sh;hi,xx;ui;rq;bu le;al;vl;aa,vu;rp;nn;rl;bn;vv	135
+熟地黄	shóu;wh;wh;hu;in;yf;gc;yb;we dì;ty;ty;ty;ga;gd;ge;fb;ty huáng;cb;cb;ad,cb;zf;tc;nh;am;cb	214
+熟读了	shóu;wh;wh;hu;in;yf;gc;yb;we dú;yd;yd;ym;cx;ik;sm;yf;yd le;al;vl;aa,vu;rp;nn;rl;bn;vv	150
+熟归熟	shóu;wh;wh;hu;in;yf;gc;yb;we guī;le;le;ax,dx;ps;lm;pb;jv;aa shóu;wh;wh;hu;in;yf;gc;yb;we	110
+熟过头	shóu;wh;wh;hu;in;yf;gc;yb;we guò;zc;zc;zc;kq;yi;ku;fp;zc tóu;dd;dd;dd;hx;yk,xk;wm;ud;dd	152
+熟花生	shóu;wh;wh;hu;in;yf;gc;yb;we huā;cb;cb;ch;za;tp;lv;aw;cb shēng;pf;pf;na;eg;hm;ls;tg;pa	174
+熟火腿	shóu;wh;wh;hu;in;yf;gc;yb;we huǒ;br,rb;dr;dd;tt;ff;ch;oo;dr tuǐ;og;oz;ot;lq;bv;vu;ev;oh	168
+熟鸡蛋	shóu;wh;wh;hu;in;yf;gc;yb;we jī;yn;yn;ny,yn;lc;em;rx;cq;yn dàn;zi;vi;ip,pi;rf;ni;tc;nh;vi	212
+熟客吧	shóu;wh;wh;hu;in;yf;gc;yb;we kè;bk;bk;bg;io;jr;ws;pt;gk ba;kb;kb;kb;ot;ru;dm;kc;kb	167
+熟烂时	shóu;wh;wh;hu;in;yf;gc;yb;we làn;hl;hs;hl;tu;fm;ct;ou;hs shí;oc;oc;oc;vk;ai;ok;jf;oc	67
+熟了吧	shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv ba;kb;kb;kb;ot;ru;dm;kc;kb	232
+熟了后	shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv hòu;ik;pk;pk;uo;hr;xd;rg;pk	166
+熟了吗	shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv ma;km;kk;km;oz;rm;dn;kc;km	102
+熟了么	shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv me;ps;ps;ps;up;hi;tk;tc;pv	76
+熟了没	shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv méi;du;dy;du;kl;ee;kr;im;dy	113
+熟梨糕	shóu;wh;wh;hu;in;yf;gc;yb;we lí;hm;hm;ml;uw;hd,xd;xe;tj;hl gāo;mh;mh;mg;ln;ff;pc;ou;me	119
+熟练啊	shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd a;kk;kk;ka;oj;rr;dz;kb;kk	142
+熟练吧	shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd ba;kb;kb;kb;ot;ru;dm;kc;kb	149
+熟练地	shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd de;ty;ty;ty;ga;gd;ge;fb;ty	338
+熟练的	shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd de;bu;bu;bu;sh;hi,xx;ui;rq;bu	288
+熟练度	shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd dù;gy;gy;gy;rl;ie;xr;ya;gy	258
+熟练工	shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd gōng;aa;aa;aa;pp;mm;ug;aa;aa	212
+熟练后	shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd hòu;ik;pk;pk;uo;hr;xd;rg;pk	206
+熟练活	shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd huó;du;dk;du;ko;er;ka;it;dk	13
+熟练了	shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd le;al;vl;aa,vu;rp;nn;rl;bn;vv	152
+熟练那	shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd nà;ve;ve;el;rb;sl;at;vf;ve	63
+熟练时	shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd shí;oc;oc;oc;vk;ai;ok;jf;oc	172
+熟练性	shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd xìng;xu;xu;xu;na;pm;hl;nt;xu	112
+熟练于	shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd yú;au;al;aa;ss;md;fn;gf;av	90
+熟练者	shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd zhě;lo;lo;lo,ol;gv;ja;qo;ft;uo	137
+熟龄肌	shóu;wh;wh;hu;in;yf;gc;yb;we líng;vs;vs;il;rp;yi,xi;lk;hw;vv jī;oj;oj;oj;li;bn;vo;em;oj	125
+熟络了	shóu;wh;wh;hu;in;yf;gc;yb;we luò;sk;sk;sg;eo;vr;is;xt;sk le;al;vl;aa,vu;rp;nn;rl;bn;vv	147
+熟没熟	shóu;wh;wh;hu;in;yf;gc;yb;we méi;du;dy;du;kl;ee;kr;im;dy shóu;wh;wh;hu;in;yf;gc;yb;we	123
+熟米饭	shóu;wh;wh;hu;in;yf;gc;yb;we mǐ;bm;dm;dd;ll;fd;pm;oy;dl fàn;uy;uy;uf;gl;ne;qr;qn;uy	177
+熟面孔	shóu;wh;wh;hu;in;yf;gc;yb;we miàn;ao;aa;aa;du;ml;bm;dm;aa kǒng;zv;zv;zg;ar;nu;ha;bn;zv	199
+熟牛排	shóu;wh;wh;hu;in;yf;gc;yb;we niú;pu;pl;pa;bb;hq;qn;rh;pa pái;ff;ff;ff;jp;qy;ur;rd;ff	161
+熟牛肉	shóu;wh;wh;hu;in;yf;gc;yb;we niú;pu;pl;pa;bb;hq;qn;rh;pa ròu;nr;nr;ad,kr;oe;oo;mj;mw;nr	191
+熟女网	shóu;wh;wh;hu;in;yf;gc;yb;we nǚ;va;va;aa,vh;yy;vv;bn;vv;va wǎng;kx;kx;ki;oy;bk;mb;mq;ax	174
+熟女系	shóu;wh;wh;hu;in;yf;gc;yb;we nǚ;va;va;aa,vh;yy;vv;bn;vv;va xì;px;px;ps;uf;hf;ti;tx;px	127
+熟螃蟹	shóu;wh;wh;hu;in;yf;gc;yb;we páng;if;if;ip;ff;ls;cl;ju;if xiè;di;di;ij;gf;ni;xc;qe;ei	100
+熟朋友	shóu;wh;wh;hu;in;yf;gc;yb;we péng;oo;oo;oo;ll;bb;vv;ee;oo yǒu;uy;uy;yu,uy;sl;ke;nr;dc;ay	107
+熟苹果	shóu;wh;wh;hu;in;yf;gc;yb;we píng;cp;cp;cp;zf;tj;lh;ag;cu guǒ;tm;ln;ad,tm;vw;wd;qe;js;an	146
+熟起来	shóu;wh;wh;hu;in;yf;gc;yb;we qǐ;tj;tj;zj;gt;gu;pv;fh;tj lái;am;an;am,wb;dl;dt;ah;go;an	170
+熟人啊	shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn a;kk;kk;ka;oj;rr;dz;kb;kk	129
+熟人吧	shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn ba;kb;kb;kb;ot;ru;dm;kc;kb	158
+熟人带	shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn dài;cj;fj;jb;zy;tb;lr;gk;aj	150
+熟人多	shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn duō;xx;xx;xx;ff;ni;ll;qq;xx	140
+熟人间	shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn jiān;mo;mo;mo,om;ov;la;ao;uj;mo	185
+熟稔了	shóu;wh;wh;hu;in;yf;gc;yb;we rěn;hx;hx;hn;un;hp;xh;tw;hx le;al;vl;aa,vu;rp;nn;rl;bn;vv	142
+熟人了	shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn le;al;vl;aa,vu;rp;nn;rl;bn;vv	141
+熟人们	shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn men;rm;rm;rm;xo;os;ja;wu;rm	102
+熟人圈	shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn quān;kv;kv;kj;nt;wu;rz;lu;wv	160
+熟三七	shóu;wh;wh;hu;in;yf;gc;yb;we sān;ae;ae;aa;uu;mm;ts;dg;ae qī;av;av;ag;aa;ju;rq;ag;av	95
+树上熟	shù;mc;mc;md;wk;di;ek;sc;lc shàng;ba;la;aa,ba;pu;ym;yf;hh;aa shóu;wh;wh;hu;in;yf;gc;yb;we	79
+熟食吧	shóu;wh;wh;hu;in;yf;gc;yb;we shí;rg;rl;rl,pd;eh;ov;qs;wy;rh ba;kb;kb;kb;ot;ru;dm;kc;kb	172
+熟食店	shóu;wh;wh;hu;in;yf;gc;yb;we shí;rg;rl;rl,pd;eh;ov;qs;wy;rh diàn;gv;gk;gv;ro;ir;xd;yh;gk	280
+熟石膏	shóu;wh;wh;hu;in;yf;gc;yb;we shí;ak;ak;kp,aa,ak,pk;tt;mr;ms;dg;ak gāo;wo;wo;og,ok,wo;il;yb;gv;yp;wo	126
+熟食柜	shóu;wh;wh;hu;in;yf;gc;yb;we shí;rg;rl;rl,pd;eh;ov;qs;wy;rh guì;mj;mj;mj;wr;ds;en;sa;lj	82
+熟石灰	shóu;wh;wh;hu;in;yf;gc;yb;we shí;ak;ak;kp,aa,ak,pk;tt;mr;ms;dg;ak huī;uh;uh;hu,uh;st;kf;nc;do;ah	167
+熟识了	shóu;wh;wh;hu;in;yf;gc;yb;we shí;yv;yb;yv;cf;ic;sh;yk;yb le;al;vl;aa,vu;rp;nn;rl;bn;vv	147
+熟食类	shóu;wh;wh;hu;in;yf;gc;yb;we shí;rg;rl;rl,pd;eh;ov;qs;wy;rh lèi;md;md;md;lx;fk;pm;od;md	151
+熟食品	shóu;wh;wh;hu;in;yf;gc;yb;we shí;rg;rl;rl,pd;eh;ov;qs;wy;rh pǐn;kk;kk;kk;oo;rr;dd;kk;kk	168
+熟食区	shóu;wh;wh;hu;in;yf;gc;yb;we shí;rg;rl;rl,pd;eh;ov;qs;wy;rh qū;kx;kx;ki;dr;sk;nb;aq;kx	182
+熟熟的	shóu;wh;wh;hu;in;yf;gc;yb;we shóu;wh;wh;hu;in;yf;gc;yb;we de;bu;bu;bu;sh;hi,xx;ui;rq;bu	98
+熟睡的	shóu;wh;wh;hu;in;yf;gc;yb;we shuì;ot;oi;oi;sg;bm;qg;ht;mi de;bu;bu;bu;sh;hi,xx;ui;rq;bu	293
+熟睡了	shóu;wh;wh;hu;in;yf;gc;yb;we shuì;ot;oi;oi;sg;bm;qg;ht;mi le;al;vl;aa,vu;rp;nn;rl;bn;vv	147
+熟睡时	shóu;wh;wh;hu;in;yf;gc;yb;we shuì;ot;oi;oi;sg;bm;qg;ht;mi shí;oc;oc;oc;vk;ai;ok;jf;oc	84
+熟睡中	shóu;wh;wh;hu;in;yf;gc;yb;we shuì;ot;oi;oi;sg;bm;qg;ht;mi zhōng;kl;ll;aa,ka;op;ll;dg;kh;aa	221
+熟铜棍	shóu;wh;wh;hu;in;yf;gc;yb;we tóng;jk;jk;jt;do;or;zd;qm;jk gùn;mb;mb;mk;wa;dp;ev;sj;lb	70
+熟桐油	shóu;wh;wh;hu;in;yf;gc;yb;we tóng;mk;mk;mt;wo;dr;ed;sm;lk yóu;dy;dy;dy;kp;ew;kd;im;dy	82
+熟透后	shóu;wh;wh;hu;in;yf;gc;yb;we tòu;zn;zn;zx;uq;ys;xu;te;zn hòu;ik;pk;pk;uo;hr;xd;rg;pk	193
+熟透了	shóu;wh;wh;hu;in;yf;gc;yb;we tòu;zn;zn;zx;uq;ys;xu;te;zn le;al;vl;aa,vu;rp;nn;rl;bn;vv	214
+熟透时	shóu;wh;wh;hu;in;yf;gc;yb;we tòu;zn;zn;zx;uq;ys;xu;te;zn shí;oc;oc;oc;vk;ai;ok;jf;oc	245
+熟悉啊	shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px a;kk;kk;ka;oj;rr;dz;kb;kk	178
+熟悉吧	shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px ba;kb;kb;kb;ot;ru;dm;kc;kb	117
+熟悉不	shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px bù;ab;ad;ad,ax;dh;mf;cb;gi;ad	166
+熟悉的	shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px de;bu;bu;bu;sh;hi,xx;ui;rq;bu	367
+熟悉度	shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px dù;gy;gy;gy;rl;ie;xr;ya;gy	209
+熟悉感	shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px gǎn;wx;xx;xx;hn;ip;nh;dg;kx	213
+熟悉很	shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px hěn;rg;ig;xg;hh;hv;wi;tv;rh	81
+熟悉后	shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px hòu;ik;pk;pk;uo;hr;xd;rg;pk	200
+熟悉了	shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px le;al;vl;aa,vu;rp;nn;rl;bn;vv	341
+熟悉吗	shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px ma;km;kk;km;oz;rm;dn;kc;km	180
+熟悉你	shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px nǐ;rx;rx;re;xf;of;jy;wq;rx	168
+熟悉人	shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px rén;pn;pn;pd;ee;oo;jr;ww;pn	123
+熟悉时	shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px shí;oc;oc;oc;vk;ai;ok;jf;oc	119
+熟悉他	shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px tā;ry;ry;ry;xr;od;je;wb;ry	172
+熟悉下	shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px xià;ab;ab;ab,ad;dh;my;fy;gh;ab	181
+熟一个	shóu;wh;wh;hu;in;yf;gc;yb;we yí;aa;aa;aa;dd;mm;fi;gg;aa gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra	90
+熟一些	shóu;wh;wh;hu;in;yf;gc;yb;we yì;aa;aa;aa;dd;mm;fi;gg;aa xiē;ve;ve;ec;ru;ym;sm;hx;ve	12
+熟语料	shóu;wh;wh;hu;in;yf;gc;yb;we yǔ;yk;yk;yw;co;ir;sd;yg;yk liào;md;mu;md;lh;fj;pj;ou;mu	764
+熟玉米	shóu;wh;wh;hu;in;yf;gc;yb;we yù;wd;wd;ad,wd;aa;mi;ni;gy;wd mǐ;bm;dm;dd;ll;fd;pm;oy;dl	111
+熟知的	shóu;wh;wh;hu;in;yf;gc;yb;we zhī;uk;uk;uk,ku;eo;or;od;td;uk de;bu;bu;bu;sh;hi,xx;ui;rq;bu	308
+熟芝麻	shóu;wh;wh;hu;in;yf;gc;yb;we zhī;cv;cv;cv;zh;to;lr;ap;cv má;gm;gm;gl;rw;id,ic;zm;ys;gl	206
+熟制品	shóu;wh;wh;hu;in;yf;gc;yb;we zhì;nd;pd;dg,dv;bi;hn;qp;rm;pd pǐn;kk;kk;kk;oo;rr;dd;kk;kk	105
+熟猪油	shóu;wh;wh;hu;in;yf;gc;yb;we zhū;qo;qo;qv;bv;ka;mo;qt;qo yóu;dy;dy;dy;kp;ew;kd;im;dy	212
+睡不熟	shuì;ot;oi;oi;sg;bm;qg;ht;mi bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	98
+睡熟了	shuì;ot;oi;oi;sg;bm;qg;ht;mi shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	161
+四书熟	sì;ke;ke;aa,ke;nk;wc;ys;lh;we shū;vd;vd;ad,vd;rh;is;ai;nn;vd shóu;wh;wh;hu;in;yf;gc;yb;we	16
+所熟悉	suǒ;hj;pj;hj,jh;up;hl;mt;rn;pj shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	218
+所熟知	suǒ;hj;pj;hj,jh;up;hl;mt;rn;pj shóu;wh;wh;hu;in;yf;gc;yb;we zhī;uk;uk;uk,ku;eo;or;od;td;uk	288
+他不熟	tā;ry;ry;ry;xr;od;je;wb;ry bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	114
+他成熟	tā;ry;ry;ry;xr;od;je;wb;ry chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	204
+他很熟	tā;ry;ry;ry;xr;od;je;wb;ry hěn;rg;ig;xg;hh;hv;wi;tv;rh shóu;wh;wh;hu;in;yf;gc;yb;we	67
+他混熟	tā;ry;ry;ry;xr;od;je;wb;ry hùn;db;db;dk;ka;ep;kv;ij;db shóu;wh;wh;hu;in;yf;gc;yb;we	78
+他熟读	tā;ry;ry;ry;xr;od;je;wb;ry shóu;wh;wh;hu;in;yf;gc;yb;we dú;yd;yd;ym;cx;ik;sm;yf;yd	166
+他熟练	tā;ry;ry;ry;xr;od;je;wb;ry shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd	188
+他熟络	tā;ry;ry;ry;xr;od;je;wb;ry shóu;wh;wh;hu;in;yf;gc;yb;we luò;sk;sk;sg;eo;vr;is;xt;sk	94
+他熟稔	tā;ry;ry;ry;xr;od;je;wb;ry shóu;wh;wh;hu;in;yf;gc;yb;we rěn;hx;hx;hn;un;hp;xh;tw;hx	101
+他熟识	tā;ry;ry;ry;xr;od;je;wb;ry shóu;wh;wh;hu;in;yf;gc;yb;we shí;yv;yb;yv;cf;ic;sh;yk;yb	66
+他熟睡	tā;ry;ry;ry;xr;od;je;wb;ry shóu;wh;wh;hu;in;yf;gc;yb;we shuì;ot;oi;oi;sg;bm;qg;ht;mi	160
+他熟悉	tā;ry;ry;ry;xr;od;je;wb;ry shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	120
+他熟知	tā;ry;ry;ry;xr;od;je;wb;ry shóu;wh;wh;hu;in;yf;gc;yb;we zhī;uk;uk;uk,ku;eo;or;od;td;uk	72
+他睡熟	tā;ry;ry;ry;xr;od;je;wb;ry shuì;ot;oi;oi;sg;bm;qg;ht;mi shóu;wh;wh;hu;in;yf;gc;yb;we	253
+他太熟	tā;ry;ry;ry;xr;od;je;wb;ry tài;dd;dd;dd;xh;ki;mi;dy;dd shóu;wh;wh;hu;in;yf;gc;yb;we	160
+他娴熟	tā;ry;ry;ry;xr;od;je;wb;ry xián;nm;nm;nx;yw;vd;be;vu;nl shóu;wh;wh;hu;in;yf;gc;yb;we	118
+他相熟	tā;ry;ry;ry;xr;od;je;wb;ry xiāng;mo;mo;mo;ws;du;eq;sh;lm shóu;wh;wh;hu;in;yf;gc;yb;we	71
+他眼熟	tā;ry;ry;ry;xr;od;je;wb;ry yǎn;og;og;og;sh;bv;qi;hv;mh shóu;wh;wh;hu;in;yf;gc;yb;we	118
+他早熟	tā;ry;ry;ry;xr;od;je;wb;ry zǎo;ou;ou;ou;vs;aj;on;jh;ou shóu;wh;wh;hu;in;yf;gc;yb;we	150
+太成熟	tài;dd;dd;dd;xh;ki;mi;dy;dd chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	198
+太熟了	tài;dd;dd;dd;xh;ki;mi;dy;dd shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	204
+太熟练	tài;dd;dd;dd;xh;ki;mi;dy;dd shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd	151
+太熟悉	tài;dd;dd;dd;xh;ki;mi;dy;dd shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	252
+太早熟	tài;dd;dd;dd;xh;ki;mi;dy;dd zǎo;ou;ou;ou;vs;aj;on;jh;ou shóu;wh;wh;hu;in;yf;gc;yb;we	112
+烫熟后	tàng;dh;dh;ht;kt;ef,xf;kc;in;dh shóu;wh;wh;hu;in;yf;gc;yb;we hòu;ik;pk;pk;uo;hr;xd;rg;pk	170
+烫熟了	tàng;dh;dh;ht;kt;ef,xf;kc;in;dh shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	126
+特眼熟	tè;nc;nc;ns;bk;hi;qk;tr;nc yǎn;og;og;og;sh;bv;qi;hv;mh shóu;wh;wh;hu;in;yf;gc;yb;we	84
+挺成熟	tǐng;fw;fz;ft;jq;qg;uu;rt;fr chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	136
+托熟人	tuō;fq;fq;fq,ft;jr;qp;ur;rt;fq shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn	158
+晚熟的	wǎn;oe;ov;om;vk;au;op;jq;om shóu;wh;wh;hu;in;yf;gc;yb;we de;bu;bu;bu;sh;hi,xx;ui;rq;bu	148
+玩熟了	wán;wy;we;wy;ak;mu;np;gf;we shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	183
+晚熟期	wǎn;oe;ov;om;vk;au;op;jq;om shóu;wh;wh;hu;in;yf;gc;yb;we qī;co;qo;oq,qo;vl;tb;zv;ad;qo	229
+喂不熟	wèi;ky;kn;kw;oh;rv;dt;kl;kh bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	117
+未成熟	wèi;am;an;ex,ad;ee;jd;aw;fi;an chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	220
+未熟的	wèi;am;an;ex,ad;ee;jd;aw;fi;an shóu;wh;wh;hu;in;yf;gc;yb;we de;bu;bu;bu;sh;hi,xx;ui;rq;bu	172
+未熟透	wèi;am;an;ex,ad;ee;jd;aw;fi;an shóu;wh;wh;hu;in;yf;gc;yb;we tòu;zn;zn;zx;uq;ys;xu;te;zn	170
+未煮熟	wèi;am;an;ex,ad;ee;jd;aw;fi;an zhǔ;lh;lh;hv;gn;jf;qc;ft;ue shóu;wh;wh;hu;in;yf;gc;yb;we	210
+我不熟	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	170
+我成熟	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	146
+我都熟	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg dōu;le;le;ev;gb;jl;qt;ft;ue shóu;wh;wh;hu;in;yf;gc;yb;we	202
+我很熟	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg hěn;rg;ig;xg;hh;hv;wi;tv;rh shóu;wh;wh;hu;in;yf;gc;yb;we	87
+我们熟	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg men;rm;rm;rm;xo;os;ja;wu;rm shóu;wh;wh;hu;in;yf;gc;yb;we	175
+我熟得	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg shóu;wh;wh;hu;in;yf;gc;yb;we de;rc;ic;xc;hk;hi;wk;tj;rc	82
+我熟的	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg shóu;wh;wh;hu;in;yf;gc;yb;we de;bu;bu;bu;sh;hi,xx;ui;rq;bu	66
+我熟练	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg shóu;wh;wh;hu;in;yf;gc;yb;we liàn;sd;sd;sd,sj;ef;vc,vd;iy;xa;sd	122
+我熟识	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg shóu;wh;wh;hu;in;yf;gc;yb;we shí;yv;yb;yv;cf;ic;sh;yk;yb	124
+我熟睡	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg shóu;wh;wh;hu;in;yf;gc;yb;we shuì;ot;oi;oi;sg;bm;qg;ht;mi	112
+我熟悉	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	128
+我熟知	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg shóu;wh;wh;hu;in;yf;gc;yb;we zhī;uk;uk;uk,ku;eo;or;od;td;uk	132
+我睡熟	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg shuì;ot;oi;oi;sg;bm;qg;ht;mi shóu;wh;wh;hu;in;yf;gc;yb;we	85
+我相熟	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg xiāng;mo;mo;mo;ws;du;eq;sh;lm shóu;wh;wh;hu;in;yf;gc;yb;we	52
+我眼熟	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg yǎn;og;og;og;sh;bv;qi;hv;mh shóu;wh;wh;hu;in;yf;gc;yb;we	108
+我早熟	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg zǎo;ou;ou;ou;vs;aj;on;jh;ou shóu;wh;wh;hu;in;yf;gc;yb;we	144
+五成熟	wǔ;aw;aa;aa;gg;mm;wu;gg;aa chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	195
+五分熟	wǔ;aw;aa;aa;gg;mm;wu;gg;aa fēn;bd;bd;bd,db;fi;ch;hp;wv;bd shóu;wh;wh;hu;in;yf;gc;yb;we	222
+显成熟	xiǎn;oy;oy;oy;vd;ac;oc;jo;oy chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	148
+娴熟地	xián;nm;nm;nx;yw;vd;be;vu;nl shóu;wh;wh;hu;in;yf;gc;yb;we dì;ty;ty;ty;ga;gd;ge;fb;ty	200
+娴熟了	xián;nm;nm;nx;yw;vd;be;vu;nl shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	138
+先熟悉	xiān;ne;ne;ne,en;bk;hu;qp;tf;pe shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	203
+相熟了	xiāng;mo;mo;mo;ws;du;eq;sh;lm shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	138
+小成熟	xiǎo;lb;ld;ad;pf;nc;yx;ih;vd chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	92
+性成熟	xìng;xu;xu;xu;na;pm;hl;nt;xu chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	233
+性早熟	xìng;xu;xu;xu;na;pm;hl;nt;xu zǎo;ou;ou;ou;vs;aj;on;jh;ou shóu;wh;wh;hu;in;yf;gc;yb;we	248
+眼熟啊	yǎn;og;og;og;sh;bv;qi;hv;mh shóu;wh;wh;hu;in;yf;gc;yb;we a;kk;kk;ka;oj;rr;dz;kb;kk	141
+眼熟吧	yǎn;og;og;og;sh;bv;qi;hv;mh shóu;wh;wh;hu;in;yf;gc;yb;we ba;kb;kb;kb;ot;ru;dm;kc;kb	170
+眼熟了	yǎn;og;og;og;sh;bv;qi;hv;mh shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	135
+眼熟吗	yǎn;og;og;og;sh;bv;qi;hv;mh shóu;wh;wh;hu;in;yf;gc;yb;we ma;km;kk;km;oz;rm;dn;kc;km	168
+养不熟	yǎng;yl;yl;ya,yd;fp;tl;gp;ud;ea bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	139
+也不熟	yě;vv;vv;gg;rr;pd;ey;bn;vv bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	234
+也熟了	yě;vv;vv;gg;rr;pd;ey;bn;vv shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	83
+也熟悉	yě;vv;vv;gg;rr;pd;ey;bn;vv shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	164
+已成熟	yǐ;kv;vv;vg,ag;tt;su,xu;vi;nn;vv chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	194
+一锅熟	yì;aa;aa;aa;dd;mm;fi;gg;aa guō;jn;jn;jg,jn;de;ob;zj;qk;jn shóu;wh;wh;hu;in;yf;gc;yb;we	102
+异熟果	yì;sc;sc;cs,sc;tz;rt,st;vl;na;va shóu;wh;wh;hu;in;yf;gc;yb;we guǒ;tm;ln;ad,tm;vw;wd;qe;js;an	134
+异熟识	yì;sc;sc;cs,sc;tz;rt,st;vl;na;va shóu;wh;wh;hu;in;yf;gc;yb;we shí;yv;yb;yv;cf;ic;sh;yk;yb	104
+用熟了	yòng;kf,ol;kl;kf;lp;bq;ty;et;pa shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	175
+又不熟	yòu;vn;vn;vd,ad;ll;nk;ry;cc;vn bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	162
+有熟人	yǒu;uo;uo;ou,uo;sl;kb;nv;de;ao shóu;wh;wh;hu;in;yf;gc;yb;we rén;pn;pn;pd;ee;oo;jr;ww;pn	231
+园梅熟	yuán;ky;ke;ky;nk;wu;rp;lf;we méi;mm;mm;mm;wh;dy;ek;st;lm shóu;wh;wh;hu;in;yf;gc;yb;we	4
+在常熟	zài;ut;ut;ta,ut;sg;kg;ng;dh;at cháng;xj;xj;jk,xd,dd;hy;fb;sr;ip;ej shóu;wh;wh;hu;in;yf;gc;yb;we	239
+在成熟	zài;ut;ut;ta,ut;sg;kg;ng;dh;at chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	250
+再成熟	zài;ar;ar;aa,at;dd;mb;fg;gm;ar chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	153
+再熟了	zài;ar;ar;aa,at;dd;mb;fg;gm;ar shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	172
+再熟悉	zài;ar;ar;aa,at;dd;mb;fg;gm;ar shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	246
+早成熟	zǎo;ou;ou;ou;vs;aj;on;jh;ou chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	100
+早熟吧	zǎo;ou;ou;ou;vs;aj;on;jh;ou shóu;wh;wh;hu;in;yf;gc;yb;we ba;kb;kb;kb;ot;ru;dm;kc;kb	185
+早熟的	zǎo;ou;ou;ou;vs;aj;on;jh;ou shóu;wh;wh;hu;in;yf;gc;yb;we de;bu;bu;bu;sh;hi,xx;ui;rq;bu	219
+早熟禾	zǎo;ou;ou;ou;vs;aj;on;jh;ou shóu;wh;wh;hu;in;yf;gc;yb;we hé;pm;pm;pd,pm;sf;hd;xh;tt;qn	196
+早熟梨	zǎo;ou;ou;ou;vs;aj;on;jh;ou shóu;wh;wh;hu;in;yf;gc;yb;we lí;hm;hm;ml;uw;hd,xd;xe;tj;hl	102
+早熟性	zǎo;ou;ou;ou;vs;aj;on;jh;ou shóu;wh;wh;hu;in;yf;gc;yb;we xìng;xu;xu;xu;na;pm;hl;nt;xu	112
+这么熟	zhè;zw;zw;zw;jq;yk;vu;yp;zx me;ps;ps;ps;up;hi;tk;tc;pv shóu;wh;wh;hu;in;yf;gc;yb;we	166
+真不熟	zhēn;ub;ub;uj;sf;jc;nh;fh;ub bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	92
+蒸不熟	zhēng;ch;ch;hv,ch;zn;tf;lc;ab;ce bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	123
+蒸熟的	zhēng;ch;ch;hv,ch;zn;tf;lc;ab;ce shóu;wh;wh;hu;in;yf;gc;yb;we de;bu;bu;bu;sh;hi,xx;ui;rq;bu	236
+蒸熟后	zhēng;ch;ch;hv,ch;zn;tf;lc;ab;ce shóu;wh;wh;hu;in;yf;gc;yb;we hòu;ik;pk;pk;uo;hr;xd;rg;pk	234
+蒸熟了	zhēng;ch;ch;hv,ch;zn;tf;lc;ab;ce shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	160
+中晚熟	zhōng;kl;ll;aa,ka;op;ll;dg;kh;aa wǎn;oe;ov;om;vk;au;op;jq;om shóu;wh;wh;hu;in;yf;gc;yb;we	110
+中早熟	zhōng;kl;ll;aa,ka;op;ll;dg;kh;aa zǎo;ou;ou;ou;vs;aj;on;jh;ou shóu;wh;wh;hu;in;yf;gc;yb;we	50
+煮不熟	zhǔ;lh;lh;hv;gn;jf;qc;ft;ue bù;ab;ad;ad,ax;dh;mf;cb;gi;ad shóu;wh;wh;hu;in;yf;gc;yb;we	206
+煮熟后	zhǔ;lh;lh;hv;gn;jf;qc;ft;ue shóu;wh;wh;hu;in;yf;gc;yb;we hòu;ik;pk;pk;uo;hr;xd;rg;pk	287
+煮熟了	zhǔ;lh;lh;hv;gn;jf;qc;ft;ue shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	235
+煮熟时	zhǔ;lh;lh;hv;gn;jf;qc;ft;ue shóu;wh;wh;hu;in;yf;gc;yb;we shí;oc;oc;oc;vk;ai;ok;jf;oc	82
+装成熟	zhuāng;ly;dy;yv;lk;lv;at;uf;dh chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	137
+自来熟	zì;po;po;pa,po;ss;hu;oi;th;pm lái;am;an;am,wb;dl;dt;ah;go;an shóu;wh;wh;hu;in;yf;gc;yb;we	206
+自然熟	zì;po;po;pa,po;ss;hu;oi;th;pm rán;xh;ph;hq;fn;bf;vc;qd;pe shóu;wh;wh;hu;in;yf;gc;yb;we	129
+最成熟	zuì;oy;oy;oq;vl;ae;or;jb;oy chéng;wv;wv;gg,wg;rh;is;na;dn;vg shóu;wh;wh;hu;in;yf;gc;yb;we	39
+最熟的	zuì;oy;oy;oq;vl;ae;or;jb;oy shóu;wh;wh;hu;in;yf;gc;yb;we de;bu;bu;bu;sh;hi,xx;ui;rq;bu	156
+最熟悉	zuì;oy;oy;oq;vl;ae;or;jb;oy shóu;wh;wh;hu;in;yf;gc;yb;we xī;cx;px;xm,xb;hn;hp;th;to;px	228
+做熟了	zuò;rw;rw;rg;xj;ok;jh;wd;rw shóu;wh;wh;hu;in;yf;gc;yb;we le;al;vl;aa,vu;rp;nn;rl;bn;vv	102
 爱谁	ài;vy;py;vy;hl;be;yr;ep;py shéi;yv;yf;yv;ca;ig;su;yw;ya	423
 把谁	bǎ;fb;fb;fb;jt;qu;um;rc;fb shéi;yv;yf;yv;ca;ig;su;yw;ya	382
 帮谁	bāng;fj;fj;jb;uy;qb;ar;dt;bj shéi;yv;yf;yv;ca;ig;su;yw;ya	335
