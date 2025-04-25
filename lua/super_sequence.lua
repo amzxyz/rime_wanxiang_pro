@@ -78,7 +78,7 @@ end
 
 
 local F = {}
-local MAX_CANDIDATES = 20
+local MAX_CANDIDATES = 300
 
 function F.init(env)
     env.seq_words = require("seq_words") or {}
