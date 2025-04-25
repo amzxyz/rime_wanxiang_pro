@@ -78,7 +78,7 @@ end
 
 
 local F = {}
-local MAX_CANDIDATES = 20  -- 最大候选处理数，可根据需求调整
+local MAX_CANDIDATES = 20
 
 function F.init(env)
     env.seq_words = require("seq_words") or {}
@@ -86,41 +86,27 @@ end
 
 function F.func(input, env)
     local seen = {}
-    local result = {}
-    local occupied = {}
-    local fallback = {}
+    local displaced = {}   -- 有偏移项
+    local fallback = {}    -- 无偏移项
+    local result = {}      -- 最终结果
+    local occupied = {}    -- 位置是否已被占用
+    local original_positions = {}  -- 记录每个候选的原始 index
 
-    local index = 1
-    local count = 0
-    local max_pos = 0
-
-    -- 一次遍历完成偏移处理和分组
+    local index = 1  -- 原始顺序编号
     for cand in input:iter() do
-        if count >= MAX_CANDIDATES then break end
-
+        if index > MAX_CANDIDATES then break end
         local text = cand.text
         if not seen[text] then
             seen[text] = true
-            count = count + 1
+            original_positions[text] = index
 
-            local displacement = env.seq_words[text] and env.seq_words[text][1] or 0
-            local target_pos = index + displacement
-            target_pos = math.max(target_pos, 1)
-            target_pos = math.min(target_pos, MAX_CANDIDATES)
-
-            -- 顺移寻找空位
-            local inserted = false
-            for try = target_pos, MAX_CANDIDATES do
-                if not occupied[try] then
-                    result[try] = cand
-                    occupied[try] = true
-                    if try > max_pos then max_pos = try end
-                    inserted = true
-                    break
-                end
-            end
-
-            if not inserted then
+            local displacement = env.seq_words[text] and env.seq_words[text][1]
+            if displacement then
+                local pos = index + displacement
+                pos = math.max(pos, 1)  -- 限制左移最小为 1
+                pos = math.min(pos, MAX_CANDIDATES) -- 限制右移最大不超边界
+                table.insert(displaced, {candidate = cand, target_pos = pos})
+            else
                 table.insert(fallback, cand)
             end
 
@@ -128,33 +114,48 @@ function F.func(input, env)
         end
     end
 
-    -- 插入 fallback 候选，填补空位
+    local candidate_count = index - 1
+    local max_pos = 0
+
+    -- 插入有偏移量的候选
+    for _, item in ipairs(displaced) do
+        local pos = math.min(item.target_pos, candidate_count)
+        while occupied[pos] do
+            pos = pos + 1
+            if pos > candidate_count then
+                break
+            end
+        end
+        if pos <= candidate_count then
+            result[pos] = item.candidate
+            occupied[pos] = true
+            if pos > max_pos then max_pos = pos end
+        else
+            table.insert(fallback, item.candidate)
+        end
+    end
+
+    -- 填充剩余候选
     local insert_pos = 1
     for _, cand in ipairs(fallback) do
-        while insert_pos <= MAX_CANDIDATES and occupied[insert_pos] do
+        while occupied[insert_pos] do
             insert_pos = insert_pos + 1
         end
-        if insert_pos > MAX_CANDIDATES then break end
         result[insert_pos] = cand
         occupied[insert_pos] = true
         if insert_pos > max_pos then max_pos = insert_pos end
     end
 
-    -- 直接 yield 输出排序结果
-    local yielded = false
+    -- 输出排序结果
+    local sorted = {}
     for i = 1, max_pos do
-        local cand = result[i]
-        if cand then
-            yield(cand)
-            yielded = true
+        if result[i] then
+            table.insert(sorted, result[i])
         end
     end
 
-    -- 若无输出，则 fallback 回原始候选流
-    if not yielded then
-        for cand in input:iter() do
-            yield(cand)
-        end
+    for _, cand in ipairs(sorted) do
+        yield(cand)
     end
 end
 return { F = F, P = P }

@@ -1,8 +1,5 @@
 
---万象为了降低1位辅助码权重保证分词，提升2位辅助码权重为了4码高效，但是有些时候单字超越了词组，如自然码中：jmma 睑 剑麻，于是调序 剑麻 睑
---abbrev下根据辅助码提权匹配编码的单字，并且根据编码调整了中文、英文、数字候选之间的关系
 local M = {}
-
 -- **获取辅助码**
 function M.run_fuzhu(cand, env, initial_comment)
     local patterns = {
@@ -15,7 +12,6 @@ function M.run_fuzhu(cand, env, initial_comment)
         wubi = "[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;([^;]*);",
         hanxin = "[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;([^;]*)"
     }
-
     local pattern = patterns[env.settings.fuzhu_type]
     if not pattern then return {}, {} end  
 
@@ -33,114 +29,58 @@ function M.run_fuzhu(cand, env, initial_comment)
             end
         end
     end
-
     return full_fuzhu_list, first_fuzhu_list
 end
--- **初始化**
-function M.init(env)
-    local config = env.engine.schema.config
-    env.settings = {
-        fuzhu_type = config:get_string("super_comment/fuzhu_type") or ""
-    }
-end
-    -- **判断是否为字母或数字和特定符号**
-local function is_alnum(text)
-    return text:match("[%w%s.·-_']") ~= nil
-end
--- **主逻辑**
+-- 主逻辑
 function M.func(input, env)
     local input_code = env.engine.context.input
     local input_len = utf8.len(input_code)
-
-    -- **缓存候选项，防止迭代器被消耗**
-    local first_cand = nil
-    local candidates = {}
-
+    -- 如果输入长度小于3或大于4，直接返回所有候选
+    if input_len < 3 or input_len > 4 then
+        for cand in input:iter() do
+            yield(cand)
+        end
+        return
+    end
+    local last_two = input_code:sub(-2)                -- 最后两位：用于 full 匹配
+    local second_last_char = input_code:sub(-2, -2)    -- 倒数第二位：用于 first 匹配
+    local moved, reordered, others, otherss = {}, {}, {}, {}
+    -- 遍历候选并进行匹配，避免存储候选到额外数组中
     for cand in input:iter() do
-        if not first_cand then first_cand = cand end
-        table.insert(candidates, cand)
-    end
-
-    -- **如果输入码长 > 4，则直接输出默认排序**
-    if input_len > 4 then
-        for _, cand in ipairs(candidates) do yield(cand) end
-        return
-    end
-    -- **如果第一个候选是字母/数字，则直接返回默认候选**
-    if first_cand and is_alnum(first_cand.text) then
-        for _, cand in ipairs(candidates) do yield(cand) end
-        return
-    end
-    local single_char_cands, alnum_cands, other_cands = {}, {}, {}
-
-    if input_len >= 3 and input_len <= 4 then
-        -- **分类候选**
-        for _, cand in ipairs(candidates) do
-            if is_alnum(cand.text) then
-                table.insert(alnum_cands, cand)
-            elseif utf8.len(cand.text) == 1 then
-                table.insert(single_char_cands, cand)
-            else
-                table.insert(other_cands, cand)
-            end
-        end
-
-        local last_char = input_code:sub(-1)
-        local last_two = input_code:sub(-2)
-        local has_match = false
-        local moved, reordered = {}, {}
-
-        -- **如果 `other_cands` 为空，说明所有非字母数字候选都是单字**
-        if #other_cands == 0 then
-            for _, cand in ipairs(single_char_cands) do
-                table.insert(moved, cand)
-                has_match = true
-            end
-        else
-            -- **匹配 `first` 和 `full`**
-            for _, cand in ipairs(single_char_cands) do
-                local full, first = M.run_fuzhu(cand, env, cand.comment or "")
-                local matched = false
-
-                if input_len == 4 then
-                    for _, code in ipairs(full) do
-                        if code == last_two then
-                            matched = true
-                            has_match = true
-                            break
-                        end
-                    end
-                else
-                    for _, code in ipairs(first) do
-                        if code == last_char then
-                            matched = true
-                            has_match = true
-                            break
-                        end
-                    end
-                end
-
-                if matched then
-                    table.insert(moved, cand)
-                else
-                    table.insert(reordered, cand)
+        local text_len = utf8.len(cand.text)
+        if text_len == 1 then
+            local full, first = M.run_fuzhu(cand, cand.comment or "")
+            local matched = false
+            -- 完全匹配（双位辅助码）
+            for _, code in ipairs(full) do
+                if code == last_two then
+                    matched = true
+                    table.insert(moved, cand)  -- 完全匹配，优先排序
+                    break
                 end
             end
-        end
-        -- **动态排序逻辑**
-        if has_match then
-            for _, v in ipairs(other_cands) do yield(v) end
-            for _, v in ipairs(moved) do yield(v) end
-            for _, v in ipairs(reordered) do yield(v) end
-            for _, v in ipairs(alnum_cands) do yield(v) end
+            -- 部分匹配（单位辅助码）
+            if not matched then
+                for _, code in ipairs(first) do
+                    if code == second_last_char then
+                        matched = true
+                        table.insert(reordered, cand)  -- 部分匹配，次优排序
+                        break
+                    end
+                end
+            end
+            -- 如果都没有匹配，放到其他组
+            if not matched then
+                table.insert(others, cand)
+            end
         else
-            for _, v in ipairs(other_cands) do yield(v) end
-            for _, v in ipairs(alnum_cands) do yield(v) end
-            for _, v in ipairs(moved) do yield(v) end
-            for _, v in ipairs(reordered) do yield(v) end
+            table.insert(otherss, cand)  -- 多字词直接放到其他组
         end
-    else  -- **处理 input_len < 3 的情况**
-        for _, cand in ipairs(candidates) do yield(cand) end
     end
+    -- 确保输出顺序：先完全匹配，再部分匹配，最后未匹配的
+    for _, v in ipairs(otherss) do yield(v) end
+    for _, v in ipairs(moved) do yield(v) end
+    for _, v in ipairs(reordered) do yield(v) end
+    for _, v in ipairs(others) do yield(v) end
 end
 return M
