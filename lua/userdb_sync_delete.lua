@@ -1,13 +1,5 @@
---欢迎使用带声调的词库:飞声词库
---https://github.com/amzxyz/rime_feisheng
---@amzxyz
---引入方式: - lua_processor@*userdb_sync_delete
---这个脚本通过输入 /del 触发,用于清理自定义同步目录下txt用户词典里被标记c<0的词条,同时删除rime目录下的*.userdb目录,之后手动执行重新部署以彻底删除由Ctrl+del删除的用户词
---⚠️使用前先执行同步保存现有的用户词,再执行/del,等待提示完成清理多少条,即完成清理,之后重新部署一下刷新数据,最后执行同步才能加载回来清理后的用户词,这部分工作单靠lua无法完成
--- 兼容linux windows ,有通知；安卓同文输入法测试通过,无通知
 -- 初始化函数
 function init(env)
-    log.info("用户词库清理程序初始化成功")
     if not env.initialized then
         env.initialized = true
         env.os_type = detect_os_type()  -- 全局变量，存储系统类型
@@ -32,7 +24,6 @@ function detect_os_type()
     -- 打开 installation.yaml 文件
     local file, err = io.open(yaml_path, "r")
     if not file then
-        log.error("无法打开 installation.yaml 文件: " .. tostring(err))
         return "unknown"
     end
 
@@ -56,7 +47,6 @@ function detect_os_type()
     end
 
     file:close()  -- 关闭文件
-    log.info("检测到的操作系统类型为: " .. os_type)
     return os_type
 end
 
@@ -76,7 +66,6 @@ function get_sync_path_from_yaml(env)
     -- 使用标准 Lua io.open 打开文件
     local file, err = io.open(yaml_path, "r")
     if not file then
-        log.error("无法打开 installation.yaml 文件: " .. tostring(err))
         return nil, "无法打开 installation.yaml 文件"
     end
 
@@ -95,16 +84,12 @@ function get_sync_path_from_yaml(env)
     file:close()  -- 关闭文件
 
     if sync_dir then
-        log.info("获取的 sync_dir 路径为: " .. sync_dir)
         return sync_dir, nil
     else
         local default_sync_dir = user_data_dir .. "/sync"  -- 与 installation.yaml 同级的 sync 目录
-        log.info("未能从 installation.yaml 获取到 sync_dir，使用默认路径: " .. default_sync_dir)
         return default_sync_dir, nil
     end
 end
-
-
 
 -- 捕获输入并执行相应的操作
 function UserDictCleaner_process(key_event, env)
@@ -114,26 +99,37 @@ function UserDictCleaner_process(key_event, env)
 
     -- 检查是否输入 /del
     if input == "/del" and env.initialized then
-        log.info("检测到 /del 输入，开始执行清理操作...")
         env.total_deleted = 0  -- 重置计数器
 
         local success, err = pcall(trigger_sync_cleanup, env)
         if not success then
-            log.error("清理操作失败: " .. tostring(err))
             send_user_notification(0, env)  -- 清理操作失败时发送0
         else
-            log.info("清理操作完成。")
             send_user_notification(env.total_deleted, env)
         end
-
         -- 清空输入内容，防止输入保留
         context:clear()
         return 1  -- 返回 1 表示已处理该事件
     end
-
     return 2  -- 返回 2 继续处理其它输入
 end
 
+-- 发送通知反馈函数，使用动态生成的消息
+function send_user_notification(deleted_count, env)
+    if env.os_type == "windows" then
+        local ansi_message = generate_ansi_message(deleted_count)
+        os.execute('msg * "' .. ansi_message .. '"')
+    elseif env.os_type == "linux" then
+        local utf8_message = generate_utf8_message(deleted_count)
+        os.execute('notify-send "' .. utf8_message .. '"')
+    elseif env.os_type == "macos" then
+        local utf8_message = generate_utf8_message(deleted_count)
+        os.execute('osascript -e \'display notification "' .. utf8_message .. '"\'')
+    elseif env.os_type == "android" then
+        local utf8_message = generate_utf8_message(deleted_count)
+        os.execute('notify "' .. utf8_message .. '"')
+    end
+end
 -- 定义固定部分的ANSI编码
 local base_message = "\xD3\xC3\xBB\xA7\xB4\xCA\xB5\xE4\xB9\xB2\xC7\xE5\xC0\xED\x20" -- "用户词典共清理 "（注意结尾有一个空格）
 local end_message = "\x20\xD0\xD0\xCE\xDE\xD0\xA7\xB4\xCA\xCC\xF5" -- " 行无效词条"（前面带一个空格）
@@ -167,31 +163,11 @@ function generate_utf8_message(deleted_count)
     return "用户词典共清理 " .. tostring(deleted_count) .. " 行无效词条"
 end
 
--- 发送通知反馈函数，使用动态生成的消息
-function send_user_notification(deleted_count, env)
-    if env.os_type == "windows" then
-        local ansi_message = generate_ansi_message(deleted_count)
-        os.execute('msg * "' .. ansi_message .. '"')
-    elseif env.os_type == "linux" then
-        local utf8_message = generate_utf8_message(deleted_count)
-        os.execute('notify-send "' .. utf8_message .. '"')
-    elseif env.os_type == "macos" then
-        local utf8_message = generate_utf8_message(deleted_count)
-        os.execute('osascript -e \'display notification "' .. utf8_message .. '"\'')
-    elseif env.os_type == "android" then
-        local utf8_message = generate_utf8_message(deleted_count)
-        os.execute('notify "' .. utf8_message .. '"')
-    else
-        log.info("无法发送通知，未识别的操作系统")
-    end
-end
-
 -- 使用 os 执行不同的命令，列出文件
 function list_files(path, env)
     local command = env.os_type == "windows" and ('dir "' .. path .. '" /b') or ('ls -1 "' .. path .. '"')
     local handle = io.popen(command)
     if not handle then
-        log.error("无法遍历路径: " .. path)
         return nil, "无法遍历路径: " .. path
     end
 
@@ -209,7 +185,6 @@ function delete_userdb_folders(env)
     local files, err = list_files(user_data_dir, env)
 
     if not files then
-        log.error("无法列出文件夹")
         return
     end
 
@@ -217,13 +192,11 @@ function delete_userdb_folders(env)
     for _, file in ipairs(files) do
         if file:match("%.userdb$") then
             local full_path = user_data_dir .. "/" .. file
-            log.info("发现并删除 userdb 文件夹: " .. full_path)
             if env.os_type == "windows" then
                 os.execute('rmdir /S /Q "' .. full_path .. '"')
             else
                 os.execute('rm -rf "' .. full_path .. '"')
             end
-            log.info("删除 userdb 文件夹完成: " .. full_path)
         end
     end
 end
@@ -232,7 +205,6 @@ end
 function collect_directories(path, env)
     local directories, err = list_files(path, env)
     if not directories then
-        log.error("收集目录失败: " .. tostring(err))
         return
     end
 
@@ -247,15 +219,11 @@ end
 function process_collected_directories(env)
     while #env.pending_directories > 0 do
         local directory = table.remove(env.pending_directories)
-        log.info("处理目录: " .. directory)
-
         local files, err = list_files(directory, env)
         if not files then
-            log.error("处理目录失败: " .. tostring(err))
         else
             for _, file in ipairs(files) do
                 if file:match("%.userdb%.txt$") then
-                    log.info("发现 userdb 文件: " .. directory .. "/" .. file)
                     process_userdb_file(directory .. "/" .. file, env)
                 end
             end
@@ -265,18 +233,14 @@ end
 
 -- 处理 .userdb.txt 文件并删除 c < 0 条目的函数
 function process_userdb_file(file_path, env)
-    log.info("开始处理 userdb 文件: " .. file_path)
-
     local file, err = io.open(file_path, "r")
     if not file then
-        log.error("无法打开文件: " .. file_path .. " 错误: " .. tostring(err))
         return
     end
 
     local temp_file_path = file_path .. ".tmp"
     local temp_file = io.open(temp_file_path, "w")
     if not temp_file then
-        log.error("无法创建临时文件: " .. temp_file_path .. " 错误: " .. tostring(err))
         file:close()
         return
     end
@@ -290,7 +254,6 @@ function process_userdb_file(file_path, env)
             if c_value > 0 then
                 temp_file:write(line .. "\n")
             else
-                log.info("删除条目: " .. line:sub(1, 30) .. "...")
                 entries_deleted = true
                 delete_count = delete_count + 1
             end
@@ -303,13 +266,11 @@ function process_userdb_file(file_path, env)
     temp_file:close()
 
     if entries_deleted then
-        log.info("已删除 " .. tostring(delete_count) .. " 个条目，替换原文件。")
         os.remove(file_path)
         os.rename(temp_file_path, file_path)
         -- 更新总删除计数
         env.total_deleted = env.total_deleted + delete_count
     else
-        log.info("没有发现无效条目，跳过文件替换。")
         os.remove(temp_file_path)
     end
 end
@@ -318,7 +279,6 @@ end
 function trigger_sync_cleanup(env)
     local sync_path, err = get_sync_path_from_yaml(env)
     if not sync_path then
-        log.error(err)
         send_user_notification(0, env)
         return
     end
