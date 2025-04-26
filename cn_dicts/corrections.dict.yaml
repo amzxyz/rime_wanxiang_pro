@@ -4,7 +4,7 @@
 #错音错字对照表
 ---
 name: corrections
-version: "2025-04-26 14:18"
+version: "2025-04-26 21:19"
 sort: by_weight
 ...
 株木琅玛	zhū;mw;mv;mv;we;dd;ea;sr;lv mù;ur;un;ad;ww;dd;em;ss;un láng;wl;wl;wl;ah;mv;ni;gy;wh mǎ;wm;wm;wm;az;mm;nn;gc;wm	12	(有声)
@@ -45,7 +45,7 @@ sort: by_weight
 渑池	sheng;dd;dd;dd,dm;kr;eu;kd;ik;dd chi;dy;dy;dy;kr;ed;ke;ib;dy	400	miǎn chí
 铅山	qian;jk;jk;jk;do;or;zd;qm;jk shan;kl;lk;aa;pp;uu;vs;mm;aa	345	yán shān
 铅山县	qian;jk;jk;jk;do;or;zd;qm;jk shan;kl;lk;aa;pp;uu;vs;mm;aa xian;qs;qs;sq,qs;pp;bi;fk;eg;qv	182	铅(yán)山县
-按耐	àn;fn;fn;fa;jy;qv;ub;rp;fn nài;ec;ec;ce;ek;mi;lk;dm;ec	0	按捺(nà)
+按耐	àn;fn;fn;fa;jy;qv;ub;rp;fn nài;ec;ec;ce;ek;mi;lk;dm;ec	30	按捺(nà)
 甭介	béng;by;by;by;dp;mq;ct;gi;by jie;rl;rl;ra,rd;ep;ol;jp;wj;ra	56	甭价(jie)
 别介	bié;kd;kd;dl;oi;rn,xn;dp;kl;kd jie;rl;rl;ra,rd;ep;ol;jp;wj;ra	31	别价(jie)
 槟榔	bin;mb;mb;mb;wf;dc;eh;sp;lb lang;me;me;ml;wb;dl;et;sy;le	633	bīng láng
@@ -56,14 +56,14 @@ sort: by_weight
 龇牙	ci;vb;vb;ic;ra;yp,xm;lv;hw;vb ya;gp,ac;ap;ap;du;mh;ly;ah;ap	62	zī yá
 凑活	còu;dt;dt;dz;fx;ik;wm;ud;dt huo;du;dk;du;ko;er;ka;it;dk	246	凑合(he)
 道行	dao;zz;zz;zu;fq;yu;hu;ut;zm hang;rd;ii;xd,xi;hp;hn;px;tf;rd	270	dào héng
-给予	gei;sk;sk;sh;eo;vr;id;xw;sk yu;sl;sl;sa,aa;pp;nn;iv;cb;vv	11349	jǐ yǔ
+给予	gei;sk;sk;sh;eo;vr;id;xw;sk yu;sl;sl;sa,aa;pp;nn;iv;cb;vv	349	jǐ yǔ
 厚朴	hou;iz;iz;iz;ra;md;xh;dj;iz pu;mb;mb;mb;wh;dy;ey;sh;lb	52	hòu pò
-馄饨	hun;ub;ub;uk;ga;np;qv;qn;ub dun;ut;ut;ut;gr;nu;qs;qn;ut	898	hún tun
-角色	jiao;dy;dl,dy;dy;gp;ng,nq;xt;qe;ey se;db;db;db;gt;nu;xm;qc;eb	20102	jué sè
+馄饨	hun;ub;ub;uk;ga;np;qv;qn;ub dun;ut;ut;ut;gr;nu;qs;qn;ut	400	hún tun
+角色	jiao;dy;dl,dy;dy;gp;ng,nq;xt;qe;ey se;db;db;db;gt;nu;xm;qc;eb	201	jué sè
 结扎	jie;sk;sk;sj;eo;vr;id;xf;sk zha;fv;fv;fg;jr;qu,xu;ua;rn;fv	126	jié zā
 钜惠	jù;jj;jj;jj;dr;os;zn;qa;jj huì;ix;ax;xh,hx;dn;jp;nh;gj;ax	549	(巨)惠
 六安	liu;wb;wb;wb,dd,db;if;yc;al;uy;wb an;bn;bn;bn;iy;jv;wb;pv;gn	110	lù ān
-埋怨	mai;tl;tl;tl;gg;gg;gd;fj;tl yuan;xx;xx;xe,xy;fn;np;lh;qb;xx	1138	mán yuàn
+埋怨	mai;tl;tl;tl;gg;gg;gd;fj;tl yuan;xx;xx;xe,xy;fn;np;lh;qb;xx	138	mán yuàn
 模板	mo;md;md;mm;wx;dk;em;sa;ld ban;my;my;mf;wl;de,xe;er;sr;ly	14674	mú bǎn
 模具	mo;md;md;mm;wx;dk;em;sa;ld ju;qb;qb;ba,bq,qb;pf;bc;qh;hw;ab	1935	mú jù
 模样	mo;md;md;mm;wx;dk;em;sa;ld yang;my;my;my;wp;dq;eg;su;ly	5185	mú yàng

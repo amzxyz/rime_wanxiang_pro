@@ -118,7 +118,6 @@ engine:
     - lua_translator@*force_gc          # 暴力 GC 降低内存
   filters:
     - lua_filter@*chars_filter                      #字符集过滤
-    - lua_filter@*assist_sort                       #单字辅助码匹配得会优先其它单字
     - lua_filter@*super_sequence*F                  #手动排序放在assist_sort 后面，高亮候选 ctrl+j左移动 ctrl+k 右移动 ctrl+0 移除位移
     - lua_filter@*autocap_filter                    # 英文自动大写
     - reverse_lookup_filter@radical_reverse_lookup  # 部件拆字滤镜，放在super_comment前面，进一步被超级注释处理以获得拼音编码+辅助码的提示
@@ -395,11 +394,11 @@ speller:
 #      - mohuyin             #模糊音选择性开启
       - set_algebra_fuzhu    #辅助码部分
 ###############################以下是拼写运算规则中全拼转双拼码以及形码的过程，按照不同的方案规则划分段落###########################
-#全拼: 
-#  __append: 
-#    - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
-#    - xform/ńg|ňg|ǹg/en/
-#    - xform/ń|ň|ǹ/en/
+全拼: 
+  __append: 
+    - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
+    - xform/ńg|ňg|ǹg/en/
+    - xform/ń|ň|ǹ/en/
 自然码: 
   __append:
     - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/

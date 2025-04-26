@@ -87,7 +87,7 @@ local function is_mobile_device()
     local dist = rime_api.get_distribution_code_name() or ""
     local user_data_dir = rime_api.get_user_data_dir() or ""
     -- 主判断：trime 或 hamster
-    if dist == "trime" or dist == "hamster" then
+    if dist == "trime" or dist == "hamster" or dist == "Squirrel" then
         return true
     end
     -- 补充判断：路径中出现 mobile/Android/手机特征
