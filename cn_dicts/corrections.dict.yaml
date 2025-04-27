@@ -4,7 +4,7 @@
 #错音错字对照表
 ---
 name: corrections
-version: "2025-04-27 13:21"
+version: "2025-04-27 17:39"
 sort: by_weight
 ...
 株木琅玛	zhū;mw;mv;mv;we;dd;ea;sr;lv mù;ur;un;ad;ww;dd;em;ss;un láng;wl;wl;wl;ah;mv;ni;gy;wh mǎ;wm;wm;wm;az;mm;nn;gc;wm	12	(有声)
@@ -17,7 +17,7 @@ sort: by_weight
 毁人不倦	huǐ;ju;jy;jy,ug;sl;he;pr;va;jy rén;pn;pn;pd;ee;oo;jr;ww;pn bú;ab;ad;ad,ax;dh;mf;cb;gi;ad juàn;rv;rv;rj;xt;ou;jz;wu;rv	431	(歌曲名)
 满山遍野	mǎn;dl;dl;dl;ke;eb;km;ia;dl shān;kl;lk;aa;pp;uu;vs;mm;aa biàn;zc;zc;zb;qq;yb;mu;yn;zc yě;ly;ll;ly,yl;vp;wn;di;jf;ly	519	(漫)山遍野
 佛教胜地	fó;rf;rf;rf;xp;on;jt;wx;rf jiào;lw;lw;wx;gj;jk;qh;ft;uw shèng;ou;ou;ou;lg;bm;vl;et;ou dì;ty;ty;ty;ga;gd;ge;fb;ty	1	佛教(圣)地
-杉杉来吃	shān;mp;mp;mp;wu;dh;ee;se;lp shān;mp;mp;mp;wu;dh;ee;se;lp lái;am;an;am,wb;dl;dt;ah;go;an chī;kv;kv;kq;or;rn;da;kt;ky	424	(玩笑语)
+杉杉来吃	shān;mp;mp;mp;wu;dh;ee;se;lp shān;mp;mp;mp;wu;dh;ee;se;lp lái;am;an;am,wb;dl;dt;ah;go;an chī;kv;kv;kq;or;rn;da;kt;ky	424	(书名)
 一泄千里	yī;aa;aa;aa;dd;mm;fi;gg;aa xiè;du;du;du;kr;et;ka;ia;du qiān;pu;pu;pa;ss;hj;lq;tf;pu lǐ;tt;la;aa,tt;vg;wg;dl;jf;aa	315	(玩笑语)
 美丽冻人	měi;yd;yd;dy,yd;fx;tk;gm;ug;ed lì;ad;ad;ad;dh;mb;fv;gm;ad dòng;dd;dd;dd;ff;id;wy;ua;dd rén;pn;pn;pd;ee;oo;jr;ww;pn	123	(俏皮话)
 老肩巨滑	lǎo;lb;lb;bl,lb;ga;jp;ql;ft;ub jiān;ho;ho;ho,oh;ql;hb,ib;mv;yn;ho jù;kk;ka;kk,aa;dr;ss;nn;an;ka huá;do;dg;dg;kc;eb;kf;im;do	233	(玩笑语)
@@ -72,7 +72,6 @@ sort: by_weight
 弄堂	nong;wc;wc;cw,wc;az;mt;nl;ga;wa tang;xt;xt;tk,dt,xt;hg;fg;sg;ip;et	126	lòng táng
 暖和	nuan;oy;oy;oy;vl;ae;or;je;oy he;hk;hk;hk;uo;hr;xd;tk;hk	590	nuǎn huo
 偌大	nuo;rk;rk;rr;xo;or;jd;wa;rk da;ar;un;ad;xx;kk;md;dd;an	680	偌(ruò)大
-比萨	pi;bb;bb;bb;aa;pp;vv;xx;bb sa;ci;ci;ci;zr;th;lx;ab;ci	197	bǐ sà
 强劲	qiang;gi;gi;gs;rf;ni;bc;xk;gi jin;jl;vl;lg;ru;ns;rs;ca;vl	1505	qiáng jìng
 热列	rè;fh;fh;hv;jn;qf;uc;rv;fe liè;dd;dd;dd;fi;mn;gp;gq;dd	1	(烈)
 说服	shui;yx;ye;yd;ck;iu;sp;yu;ye fu;oy;oy;oy;ll;be;vr;eb;oy	5642	shuō fú
@@ -89,11 +88,9 @@ sort: by_weight
 嵊州	cheng;ur;en;ui;pu;up;vv;mt;si zhou;dl;dl;id,da;hp;il;oo;yt;da	436	shèng zhōu
 吱声	zhi;kv;ky;kv;ol;re;dc;kf;ky sheng;tu;up;um;gp;gh;gc;fn;up	217	zī shēng
 主角	zhu;wt;dw;dw;ha;yg;in;yg;wt jiao;dy;dl,dy;dy;gp;ng,nq;xt;qe;ey	24115	zhǔ jué
-比萨饼	bǐ;bb;bb;bb;aa;pp;vv;xx;bb sà;ci;ci;ci;zr;th;lx;ab;ci bǐng;uk;uk;ub;gp;nt;ql;qn;uk	23
 脖颈儿	bo;oz;oz;ob,oz;la;bd;vh;ef;oz jing;jy;vr;yg;rm;no;rw;ca;vr er;pv;pv;pg;kk;lu;pe;qt;pv	10	bó gěng er
 草薙剑	cao;cu;cu;cz;zs;tj;ln;aj;cu zhi;cv;cf;cv;za;tg;lu;at;cv jian;qd,rd;rd;da,dq;ei;on;jp;wg;rd	17	cǎo tì jiàn
 草薙京	cao;cu;cu;cz;zs;tj;ln;aj;cu zhi;cv;cf;cv;za;tg;lu;at;cv jing;wx;wx;wx;if;yf;gy;yi;wx	144	cǎo tì jīng
-吃比萨	chi;kv;kv;kq;or;rn;da;kt;ky pi;bb;bb;bb;aa;pp;vv;xx;bb sa;ci;ci;ci;zr;th;lx;ab;ci	5	chī bǐ sà
 龇着牙	ci;vb;vb;ic;ra;yp,xm;lv;hw;vb zhe;yo;yo;yo;fs;tu;gq;ud;em ya;gp,ac;ap;ap;du;mh;ly;ah;ap	14	zī zhe yá
 大宛马	da;ar;un;ad;xx;kk;md;dd;an wan;bv;bv;be,by;it;ju;wz;pq;gv ma;va;va;aa,vh;zz;nm;nm;cn;va	9	dà yuān mǎ
 独乐乐	du;qi;qi;qi;bf;ki;mc;qt;qi le;px;pd;pd,px;uf;hd;by;qi;pd le;px;pd;pd,px;uf;hd;by;qi;pd	13	dú yuè lè
@@ -111,7 +108,6 @@ sort: by_weight
 没食子	mei;du;dy;du;kl;ee;kr;im;dy shi;rg;rl;rl,pd;eh;ov;qs;wy;rh zi;la;va;aa,vh;aa;nd;hi;bb;va	66	没(mò)食子
 魔蝎座	mó;gg;gg;gm,mg;dp;ii;za;ys;gv xiē;ir;iv;ih;fr;lv;cf;jj;iv zuò;gr;gt;gz;rg;ig;xg;yw;gt	0	摩羯(jié)座
 鄱阳湖	pan;ce;pe;ef;hb;hl;tt;to;fe yang;eo;eo;eo;bv;na;to;bj;eo hu;do;do;dh;kl;eb;kv;id;do	1336	pó yáng hú
-比萨饼	pi;bb;bb;bb;aa;pp;vv;xx;bb sa;ci;ci;ci;zr;th;lx;ab;ci bing;uk;uk;ub;gp;nt;ql;qn;uk	23	bǐ sà bǐng
 契科夫	qī;fd;fd;dd;ax;qk;am;dh;fd kē;hd;hu;hd;us;hj;xj;tu;hu fū;er;an;ad,er;ee;qo;hf;fw;an	0	契诃(hē)夫
 荨麻疹	qian;cc;cc;cx;zk;ti,xi;lk;av;cc ma;gm;gm;gl;rw;id,ic;zm;ys;gl zhen;bp;bp;bp;mu;kh;ae;uw;bp	198	xún má zhěn
 太行山	tai;dd;dd;dd;xh;ki;mi;dy;dd xing;rd;ii;xd,xi;hp;hn;px;tf;rd shan;kl;lk;aa;pp;uu;vs;mm;aa	390	tài háng shān
