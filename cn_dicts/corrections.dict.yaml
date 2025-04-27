@@ -4,7 +4,7 @@
 #错音错字对照表
 ---
 name: corrections
-version: "2025-04-26 21:19"
+version: "2025-04-27 09:26"
 sort: by_weight
 ...
 株木琅玛	zhū;mw;mv;mv;we;dd;ea;sr;lv mù;ur;un;ad;ww;dd;em;ss;un láng;wl;wl;wl;ah;mv;ni;gy;wh mǎ;wm;wm;wm;az;mm;nn;gc;wm	12	(有声)
@@ -63,6 +63,7 @@ sort: by_weight
 结扎	jie;sk;sk;sj;eo;vr;id;xf;sk zha;fv;fv;fg;jr;qu,xu;ua;rn;fv	126	jié zā
 钜惠	jù;jj;jj;jj;dr;os;zn;qa;jj huì;ix;ax;xh,hx;dn;jp;nh;gj;ax	549	(巨)惠
 六安	liu;wb;wb;wb,dd,db;if;yc;al;uy;wb an;bn;bn;bn;iy;jv;wb;pv;gn	110	lù ān
+女主角	nv;va;va;aa,vh;yy;vv;bn;vv;va zhu;wt;dw;dw;ha;yg;in;yg;wt jiao;dy;dl,dy;dy;gp;ng,nq;xt;qe;ey	196	女主角(jué)
 埋怨	mai;tl;tl;tl;gg;gg;gd;fj;tl yuan;xx;xx;xe,xy;fn;np;lh;qb;xx	138	mán yuàn
 模板	mo;md;md;mm;wx;dk;em;sa;ld ban;my;my;mf;wl;de,xe;er;sr;ly	14674	mú bǎn
 模具	mo;md;md;mm;wx;dk;em;sa;ld ju;qb;qb;ba,bq,qb;pf;bc;qh;hw;ab	1935	mú jù
