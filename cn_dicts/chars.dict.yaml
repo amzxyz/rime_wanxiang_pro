@@ -3,7 +3,7 @@
 #https://github.com/amzxyz/RIME-LMDG
 ---
 name: chars
-version: "2025-04-27 23:56"
+version: "2025-04-28 20:04"
 sort: by_weight
 ...
 啊	a;kk;kk;ka;oj;rr;dz;kb;kk	915
@@ -8675,7 +8675,6 @@ sort: by_weight
 呃	e;kv;kv;ke;ot;ru;dz;kd;kv	1
 诶	éi;yu;yu;yu,yy;cx;ik;so;yc;yd	534
 誒	éi;yu;wu;yy;;yk;so;yc;	281
-壘	éi;tt;tt;tl;;wg;qg;ll;	1
 欸	èi;sq;sr;qy;pe;io;ke;ct;vr	1
 欸	éi;sq;sr;qy;pe;io;ke;ct;vr	1
 欸	ēi;sq;sr;qy;pe;io;ke;ct;vr	1
@@ -20586,6 +20585,7 @@ sort: by_weight
 蠝	lěi;it;it;il,it;;lw;cq;jl;	23
 讄	lěi;yt;wt;yl;;yw;sq;yl;	23
 虆	léi;cx;cx;cl,cs;;tf;li;al;	23
+壘	léi;tt;tt;tl;;wg;qg;ll;	10
 儽	léi;rx;rx;rl,rs;;of;ji;wl;	1
 頛	lèi;ly;lb;yl;;qc;aw;di;	1
 𧒽	léi;it;it;il;;lw;cq;jf;	1
