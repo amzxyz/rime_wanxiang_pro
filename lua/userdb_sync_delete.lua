@@ -12,7 +12,7 @@ end
 local os_detection_patterns = {
     windows = { "weasel", "Weasel" },    -- Windows 的标识符列表
     linux = { "fcitx%-rime" },           -- Linux 的标识符
-    macos = { "squirrel" },              -- macOS 的标识符
+    macos = { "squirrel", "Squirrel" },  -- macOS 的标识符
     android = { "trime" }                -- android 的标识符
 }
 
@@ -124,7 +124,7 @@ function send_user_notification(deleted_count, env)
         os.execute('notify-send "' .. utf8_message .. '"')
     elseif env.os_type == "macos" then
         local utf8_message = generate_utf8_message(deleted_count)
-        os.execute('osascript -e \'display notification "' .. utf8_message .. '"\'')
+        os.execute('osascript -e \'display notification "' .. utf8_message .. '" with title "万象输入法"\'')
     elseif env.os_type == "android" then
         local utf8_message = generate_utf8_message(deleted_count)
         os.execute('notify "' .. utf8_message .. '"')

@@ -151,7 +151,11 @@ end
 function S.func(key, env)
     local context = env.engine.context
     local segment = context.composition:back()
+    local input_text = context.input or ""
     if not segment then
+        return 2
+    end
+    if string.match(input_text, "^V") or string.match(input_text, "^R") or string.match(input_text, "^N") then
         return 2
     end
     local db = wrapLevelDb("lua/tips", false)
