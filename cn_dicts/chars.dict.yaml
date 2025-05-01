@@ -3,7 +3,7 @@
 #https://github.com/amzxyz/RIME-LMDG
 ---
 name: chars
-version: "2025-04-29 22:15"
+version: "2025-05-01 20:17"
 sort: by_weight
 ...
 啊	a;kk;kk;ka;oj;rr;dz;kb;kk	915
@@ -1067,6 +1067,7 @@ sort: by_weight
 苝	bèi;cb;cb;cb;;tp;lv;au;	192
 糒	bèi;my;my;my;lp;fb;pt;oa;my	171
 桮	bēi;mk;mk;mf;;dr;ed;sg;	163
+浿	bèi;db;db;db;;ec;ko;im;	146
 狽	bèi;qb;qb;qb;;kc;mo;qt;	141
 骳	bèi;gp;gy;gp;;be;fr;me;	113
 誖	bèi;yz;wz;yb,yz;;yd;sh;yf;	101
@@ -27399,7 +27400,6 @@ sort: by_weight
 斾	pèi;fj;fj;fj;;yb;lr;yt;	173
 嶏	pèi;uj;ej;up;;uu,xu;vv;md;	170
 肧	pēi;ob;ob;ob;;bf;vc;eg;	156
-浿	pèi;db;db;db;;ec;ko;im;	146
 轡	pèi;xk;yk;ik,ks;;vr;id;xl;	116
 馷	pèi;mj;ml;mf,mj;;sb;nr;cg;	105
 衃	pēi;pb;xb;xb;uh;hf;tc;tl;xb	101
@@ -38344,6 +38344,8 @@ sort: by_weight
 𩡓	wěng;hx;hx;xw;;hm;xz;tj;	1
 𩮬	wěng;ex;ax;iw;;sm;pz;de;	1
 𩰎	wēng;mg;dg,lg;dg;;li;jp;jg;	1
+𥥈	wèng;bs;bs;xh;;ji;ek;pw;	1
+𥦷	wèng;;bs	1
 我	wǒ;ga;pd;pd,pp;ua;hi,zz;tp;tr;pg	905
 握	wò;ft;ft;fw;jg;qg;uy;rn;ft	691
 沃	wò;dy;dy;dy;kx;ek;km;it;dy	652
@@ -38455,8 +38457,6 @@ sort: by_weight
 𪁾	wò;cn;cn;na,cn,ny;;tf;lx;at;	1
 𪎤	wò;dm;dv;mw,wm;;ed,ec;kz;it;	1
 𪑱	wò;lt;ht;hw;;wg;py;lf;	1
-𥥈	wòng;bs;bs;xh;;ji;ek;pw;	1
-𥦷	wòng;;bs	1
 无	wú;ay;ay;ag,ay,ee;ur;mu;du;fq;av	898
 五	wǔ;aw;aa;aa;gg;mm;wu;gg;aa	889
 伍	wǔ;rw;rw;rw;xg;om;jw;wg;rw	864
