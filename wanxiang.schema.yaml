@@ -80,6 +80,7 @@ engine:
     - lua_processor@*super_sequence*P
     - lua_processor@*quick_symbol_text         #快符引导以及重复上屏
     - lua_processor@*super_tips*S              #超级提示模块：表情、简码、翻译、化学式、等等靠你想象，这里负责兼容手机，手机上开启这个
+    - lua_processor@*limit_repeated             #用于限制最大候选长度以及最大重复输入声母编码长度，避免性能异常
     - lua_processor@*userdb_sync_delete        #通过输入 /del 触发,用于清理自定义同步目录下txt用户词典里被标记c<0的词条
     - ascii_composer
     - recognizer
