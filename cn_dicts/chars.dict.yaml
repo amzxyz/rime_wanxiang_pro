@@ -3,7 +3,7 @@
 #https://github.com/amzxyz/RIME-LMDG
 ---
 name: chars
-version: "2025-05-02 10:12"
+version: "2025-05-02 14:59"
 sort: by_weight
 ...
 啊	a;kk;kk;ka;oj;rr;dz;kb;kk	915
@@ -179,6 +179,7 @@ sort: by_weight
 𪵇	ài;;dr	1
 𪺾	ái;;qt	1
 𫎽	ǎi;;tm	1
+騃	ái;mu;mu;my;;sk;no;cc;	1
 按	àn;fn;fn;fa;jy;qv;ub;rp;fn	812
 安	ān;bn;bn;bn;iy;jv;wb;pv;gn	784
 案	àn;bm;bm;bm,ma;iw;jd;we;pv;gl	771
@@ -632,6 +633,7 @@ sort: by_weight
 𩹏	bà;yq;aq;bq;;nk;wm;qo;	1
 𩽷	bà;yo;ao;yb;;nb;wv;qo;	1
 𫓥	bā;;jb	1
+䶕	bà;vb;vb;ib;;yu;lm;hb;	1
 白	bái;po;po;pa,po;ss;ha;ub;rr;po	785
 百	bǎi;ab;ab;ab;ds;ma;fu;dj;ab	758
 佰	bǎi;rb;rb;rb;xs;oa;ju;wd;ro	712
@@ -12762,6 +12764,7 @@ sort: by_weight
 篕	hé;vm;vm;vh,vm;;ht;ra;tf;	50
 煂	hè;hg;hg;hg;;fj;ct;oa;	50
 靍	hè;yn;yn;yn;;mf;tx;fw;	38
+餲	hé;ur;rv;uh;;ov;qf;wp,wy;	11
 麧	hé;lv;lq;mq;;jn;ea;sw;	1
 碋	hè;uk;uk;uk;;mr;mz;dm;	1
 鑉	hé;jm;jm;jg,jm;;ct;za;qa;	1
@@ -27054,7 +27057,6 @@ sort: by_weight
 㞎	pá;ub;ub;ub;qt;su;cm;nc;ub	1
 䔤	pā;cb;cb;cb;;ta;lu;ar;	1
 䯲	pá;eb;ab;ib;;su;pm;de;	1
-䶕	pá;vb;vb;ib;;yu;lm;hb;	1
 𣚒	pá;mb;mb;mb,mp;;du;em;sg;	1
 𣧜	pā;db;db;db;;mu;gm;gq;	1
 𣱺	pā;ub;ub;ub;;ec;kh;iw;	1
@@ -34228,6 +34230,7 @@ sort: by_weight
 孠	sì;vz;vz;zs;;sd;ah;ng;	23
 泀	sī;dk;dk;ds;;er;kd;in;	23
 磃	sī;uj;uj;uh;;mn,mu;mz;dr;	23
+𫘤	sì;;mu	1
 瀃	sì;dw;dw;dc;;eh;ke;im;	1
 緦	sī;sx;yx;ss;;vp;ih;xl;	1
 𣏌	sì;;ms	1
