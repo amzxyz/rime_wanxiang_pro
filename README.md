@@ -339,7 +339,7 @@ __patch:
 
 ## 鸣谢
 
-- 项目英文词库及部分lua来自"[rime-ice](https://github.com/iDvel/rime-ice)"
+- 项目英文词库部分来自"[rime-ice](https://github.com/iDvel/rime-ice)"
 - 拼音标注来自万象词库与语法模型项目，并在该项目下进行鸣谢！
 - 感谢网友的热情提报问题，使得模型和词库体验进一步提升。
 
