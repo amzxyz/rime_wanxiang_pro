@@ -4,7 +4,7 @@
 #兼容词库，对于多字词汇两种读音的场景，手动维护到本表以及一些其他的杂项
 ---
 name: compatible
-version: "2025-05-05 08:06"
+version: "2025-05-05 09:57"
 sort: by_weight
 ...
 攒个	cuán;fb;fr;fz;jm;qo,xo;uo;rt;fr gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra	391
@@ -126,7 +126,7 @@ sort: by_weight
 便宜	biàn;rg;rg;rg;xy;ok;jb;wg;rg yí;bq;bq;bq;iu;jm;wf;pe;gq	201
 不长	bǔ;ab;ad;ad,ax;dh;mf;cb;gi;ad cháng;pn;pn;pd;uh;po;pc;ta;pn	570
 不为	bú;ab;ad;ad,ax;dh;mf;cb;gi;ad wèi;ld;dd;dd;uu;ii;ii;yl;dd	609
-不为	bù;ab;ad;ad,ax;dh;mf;cb;gi;ad wéi;ld;dd;dd;uu;ii;ii;yl;dd	600
+不为	bù;ab;ad;ad,ax;dh;mf;cb;gi;ad wéi;ld;dd;dd;uu;ii;ii;yl;dd	623
 不长	bù;ab;ad;ad,ax;dh;mf;cb;gi;ad zhǎng;pn;pn;pd;uh;po;pc;ta;pn	329
 长的	cháng;pn;pn;pd;uh;po;pc;ta;pn de;bu;bu;bu;sh;hi,xx;ui;rq;bu	802
 长牙	cháng;pn;pn;pd;uh;po;pc;ta;pn yá;gp,ac;ap;ap;du;mh;ly;ah;ap	84
