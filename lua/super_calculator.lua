@@ -6,7 +6,7 @@
 -- 计算n次方根、平均值、方差、阶乘、角度与弧度的相互转化
 
 -- 新增功能：
--- 求解一元一次方程、二元一次方程组、一元二次方程、一元三次方程；
+-- 求解一元一次方程、二元一次方程组、一元二次方程、一元三次方程、一元四次方程；
 -- 求解一次、二次函数解析式、圆的方程；
 -- 取整函数（包括向上取整和向下取整）、求余函数；
 -- 已知数列中任意两项，求通项公式(等差或等比)；求数列的前n项和(等差或等比)；
@@ -21,6 +21,7 @@
 -- cb = "连续自然数立方和(从1开始)"
 -- fp = "连续自然数4次方之和(从1开始)"
 -- sq = "连续自然数平方和(从1开始)"
+-- tx = "已知数列的任意两项aᵢ、aₖ，求其通项公式"
 -- avg = "平均值"
 -- cos = "余弦"
 -- deg = "弧度转换为角度"
@@ -71,9 +72,7 @@
 -- tanh = "双曲正切"
 -- tcr1 = "已知两圆一般方程x²+y²+D₁x+E₁y+F₁=0和x²+y²+D₂x+E₂y+F₂=0，判断它们的位置关系"
 -- tcr2 = "已知两圆标准方程(x-x₁)²+(y-y₁)²=r₁²和(x-x₂)²+(y-y₂)²=r₂²，判断它们的位置关系"
--- tx = "已知数列的任意两项aᵢ、aₖ，求其通项公式"
 -- yyec = "求解一元二次方程"
--- yysc = "求解一元三次方程"
 -- yyyc = "求解一元一次方程"
 -- xsqz = "向上取整"
 -- xxqz = "向下取整"
@@ -85,6 +84,8 @@
 -- nroot = "计算 x 开 N 次方"
 -- sjxy1 = "已知三角形三边长，求内切圆半径和外接圆半径"
 -- sjxy2 = "已知三角形三个顶点坐标，求内切圆半径和外接圆半径"
+-- yysc1 = "求解一元三次方程"
+-- yysc2 = "求解一元四次方程"
 
 
 local T = {}
@@ -191,8 +192,6 @@ function round(m,n)
     local factor = 10 ^ n
     return floor(m * factor + 0.5) / factor
 end
-
-
 
 
 
@@ -1237,7 +1236,7 @@ function solveLinearSystem(a, b, c, d, e, f)
     x= fn(x)
     y= fn(y)
     -- 返回解的字符串表示
-    return "x=" .. x .. "，y=" .. y
+    return "x=" .. x .. "\ny=" .. y
     
 end
 calc_methods["eyyc"] = solveLinearSystem
@@ -1304,7 +1303,7 @@ function solveQuadraticEquation(a, b, c)
         local x2 = (-b - math.sqrt(discriminant)) / (2 * a)
         x1 = fn(x1)
         x2 = fn(x2)
-        return "x₁=" .. x1 .. "，x₂=" .. x2
+        return "x₁=" .. x1 .. "\nx₂=" .. x2
     end
 end
 calc_methods["yyec"] = solveQuadraticEquation
@@ -1323,35 +1322,28 @@ function solveCubicEquation(a, b, c, d)
         return "错误：系数a不能为零"
     end
     -- 计算重根判别式
-    local A = b^2 - 3*a*c
-    local B = b*c - 9*a*d
-    local C = c^2 - 3*b*d
-    A = fn(A)
-    B = fn(B)
-    C = fn(C)
+    local A,B,C,Delta
+    A = b^2-3*a*c
+    B = b*c-9*a*d
+    C = c^2-3*b*d
     -- 计算总判别式
-    local Delta = B^2 - 4*A*C
-    Delta = fn(Delta)
+    Delta = B^2-4*A*C
     -- 根据盛金公式进行求解
     if A == 0 and B == 0 then
-        -- 条件一：A = B = 0，方程有一个三重实根
-        local x = -b / (3*a)
+        -- 情况1：A = B = 0，方程有一个三重实根
+        local x = -b/(3*a)
         x = fn(x)
         return "x₁=x₂=x₃=" .. x
     elseif Delta > 0 then
-        -- 条件二：Delta > 0，方程有一个实根和一对共轭虚根
-        local Y1 = A * b + 3 * a * (-B + math.sqrt(Delta)) / 2
-        local Y2 = A * b + 3 * a * (-B - math.sqrt(Delta)) / 2
-        local y1 = nth_root(Y1, 3)
-        local y2 = nth_root(Y2, 3)
-        local x1 = (-b - y1 - y2) / (3*a)
-        x1 = fn(x1)
-        local P = (-b+0.5*(y1+y2)) / (3*a)
-        P = fn(P)
-        local Q = (0.5*math.sqrt(3)*(y1-y2))/ (3*a)
-        Q = fn(Q)
-        local x2
-        local x3
+        -- 情况2：Delta > 0，方程有一个实根和一对共轭虚根
+        local Y1,Y2,y1,y2,x1,x2,x3,P,Q
+        Y1 = A*b + 3*a*(-B + math.sqrt(Delta)) / 2
+        Y2 = A*b + 3*a*(-B - math.sqrt(Delta)) / 2
+        y1 = nth_root(Y1, 3)
+        y2 = nth_root(Y2, 3)
+        x1 = fn((-b-y1-y2)/(3*a))
+        P = fn((-b+0.5*(y1+y2))/(3*a))
+        Q = fn((0.5*math.sqrt(3)*(y1-y2))/(3*a))
         if P == 0 then
             if Q == 1 then
                 x2 = "i"
@@ -1376,32 +1368,397 @@ function solveCubicEquation(a, b, c, d)
             x2 = P .. "-".. -Q .. "i"
             x3 = P .. "+".. -Q .. "i"
         end
-        return "x₁=" .. x1 .. "，x₂=" .. x2 .. "，x₃=" .. x3
+        return "x₁=" .. x1 .. "\nx₂=" .. x2 .. "\nx₃=" .. x3
     elseif Delta == 0 and A ~= 0 then
-        -- 条件三：Delta = 0，方程有三个实根，其中有一个两重根
-        local K = B / A
-        local x1 = -b / a + K
-        local x2 = -0.5 * K
-        x1 = fn(x1)
-        x2 = fn(x2)
-        return "x₁=" .. x1 .. "，x₂=x₃=" .. x2
+        -- 情况3：Delta = 0，方程有三个实根，其中有一个两重根
+        local K,x1,x2
+        K = B/A
+        x1 = fn(-b/a+K)
+        x2 = fn(-0.5*K)
+        return "x₁=" .. x1 .. "\nx₂=x₃=" .. x2
     elseif Delta < 0 and A > 0 then
-        -- 条件四：Delta < 0，方程有三个不相等的实根
-        local T = (2*A*b - 3*a*B) / (2*math.sqrt(A^3))
-        local M = math.acos(T)
-        local S = math.cos(M/3)
-        local R = math.sin(M/3)
-        local x1 = (-b - 2*math.sqrt(A)*S) / (3*a)
-        local x2 = (-b + math.sqrt(A)*(S + math.sqrt(3)*R)) / (3*a)
-        local x3 = (-b + math.sqrt(A)*(S - math.sqrt(3)*R)) / (3*a)
-        x1 = fn(x1)
-        x2 = fn(x2)
-        x3 = fn(x3)
-        return "x₁=" .. x1 .. "，x₂=" .. x2 .. "，x₃=" .. x3
+        -- 情况4：Delta < 0，方程有三个不相等的实根
+        local T,M,S,R,x1,x2,x3
+        T = (2*A*b - 3*a*B) / (2*math.sqrt(A^3))
+        M = acos(T)
+        S = cos(M/3)
+        R = sin(M/3)
+        x1 = fn((-b-2*math.sqrt(A)*S)/(3*a))
+        x2 = fn((-b+math.sqrt(A)*(S+math.sqrt(3)*R))/(3*a))
+        x3 = fn((-b+math.sqrt(A)*(S-math.sqrt(3)*R))/(3*a))
+        return "x₁=" .. x1 .. "\nx₂=" .. x2 .. "\nx₃=" .. x3
     end
 end
-calc_methods["yysc"] = solveCubicEquation
-methods_desc["yysc"] = "求解一元三次方程"
+calc_methods["yysc1"] = solveCubicEquation
+methods_desc["yysc1"] = "求解一元三次方程"
+
+
+
+
+-- 求解一元四次方程ax⁴+bx³+cx²+dx+e=0
+function solveQuarticEquation(a, b, c, d, e)
+    -- 检查参数正确性
+    if type(a) ~= "number" or type(b) ~= "number" or type(c) ~= "number" or type(d) ~= "number" or type(e) ~= "number" then
+        return "错误：系数必须是数字"
+    end
+    if a == 0 then
+        return "错误：系数a不能为零"
+    end
+    -- 计算重根判别式
+    local D,E,F,A,B,C,Delta
+    D = 3*b^2 - 8*a*c
+    E = -b^3 + 4*a*b*c - 8*a^2*d
+    F = 3*b^4 + 16*a^2*c^2 - 16*a*b^2*c + 16*a^2*b*d - 64*a^3*e
+    A = D^2 - 3*F
+    B = D*F - 9*E^2
+    C = F^2 - 3*D*E^2
+    -- 计算总判别式
+    Delta = B^2 - 4*A*C
+    -- 符号因子函数
+    local function sgn(x)
+        if x == 0 then
+            return 0
+        else
+            return fn(math.abs(x)/x)
+        end
+    end
+    -- 根据天珩公式求解四次方程
+    -- 情况1:当D=E=F=0时，方程有一个四重实根
+    if D == 0 and E == 0 and F == 0 then
+        local x
+        x = fn(-b/(4*a))
+        return "x₁=x₂=x₃=x₄="..x
+    end
+    -- 情况2:当DEF≠0，A=B=C=0时，方程有四个实根，其中有一个三重根
+    if (D*E*F ~= 0) and (A == 0 and B == 0 and C == 0) then
+        local x1,x2
+        x1 = fn((-b*D+9*E)/(4*a*D))
+        x2 = fn((-b*D-3*E)/(4*a*D))
+        return "x₁="..x1 .."\nx₂=x₃=x₄="..x2
+    end
+    -- 情况3:当E=F=0，D≠0时，方程有两对二重根；若D＞0，根为实数；若D＜0，根为虚数
+    if E == 0 and F == 0 and D ~= 0 then
+        local x1,x2,P,Q
+        if D > 0 then
+            x1 = fn((-b+math.sqrt(D))/(4*a))
+            x2 = fn((-b-math.sqrt(D))/(4*a))
+        else
+            P = fn(-b/(4*a))
+            Q = fn(math.sqrt(-D)/(4*a))
+            if P == 0 then
+                if Q == 1 then
+                    x1 = "i"
+                    x2 = "-i"
+                elseif Q == -1 then
+                    x1 = "-i"
+                    x2 = "i"
+                else
+                    x1 = Q.."i"
+                    x2 = -Q.."i"
+                end
+            else
+                if Q == 1 then
+                    x1 = P.."+i"
+                    x2 = P.."-i"
+                elseif Q == -1 then
+                    x1 = P.."-i"
+                    x2 = P.."+i"
+                elseif Q > 0 then
+                    x1 = P.."+"..Q.."i"
+                    x2 = P.."-"..Q.."i"
+                else
+                    x1 = P.."-"..-Q.."i"
+                    x2 = P.."+"..-Q.."i"
+                end
+            end
+        end
+        return "x₁=x₂="..x1.."\nx₃=x₄="..x2
+    end
+    -- 情况4:当ABC≠0，Δ=0时，方程有一对二重实根；
+    -- 若AB＞0，则其余两根为不等实根；若AB＜0，则其余两根为共轭虚根
+    if (A*B*C ~= 0) and (Delta == 0) then
+        local P,Q,R,x1,x2,x3
+        P = -b/(4*a)
+        Q = 2*A*E/(4*a*B)
+        x1 = fn(P-Q)
+        if A*B > 0 then
+            R = math.sqrt(2*B/A)/(4*a)
+            x2 = fn(P+Q+R)
+            x3 = fn(P+Q-R)
+        else
+            R = fn(math.sqrt(-2*B/A)/(4*a))
+            if (P+Q) == 0 then
+                if R == 1 then
+                    x2 = "i"
+                    x3 = "-i"
+                elseif R == -1 then
+                    x2 = "-i"
+                    x3 = "i"
+                else
+                    x2 = R.."i"
+                    x3 = -R.."i"
+                end
+            else
+                if R == 1 then
+                    x2 = fn(P+Q).."+i"
+                    x3 = fn(P+Q).."-i"
+                elseif R == -1 then
+                    x2 = fn(P+Q).."-i"
+                    x3 = fn(P+Q).."+i"
+                elseif R > 0 then
+                    x2 = fn(P+Q).."+"..R.."i"
+                    x3 = fn(P+Q).."-"..R.."i"
+                else
+                    x2 = fn(P+Q).."-"..-R.."i"
+                    x3 = fn(P+Q).."+"..-R.."i"
+                end
+            end
+        end
+        return "x₁=x₂="..x1.."\nx₃="..x2.."\nx₄="..x3
+    end
+    -- 情况5:当Δ>0时，方程有两个不等实根和一对共轭虚根
+    if Delta > 0 then
+        local z,z1,z2,z3,x1,x2,x3,x4,P,Q,R1,R2
+        z1 = A*D + 3*((-B+math.sqrt(Delta))/2)
+        z2 = A*D + 3*((-B-math.sqrt(Delta))/2)
+        z3 = nth_root(z1,3) + nth_root(z2,3)
+        z = D^2 - D*z3 + z3^2 -3*A
+        P = -b/(4*a)
+        Q = sgn(E)*math.sqrt((D+z3)/3)/(4*a)
+        R1 = math.sqrt((2*D-z3+2*math.sqrt(z))/3)/(4*a)
+        R2 = fn(math.sqrt((-2*D+z3+2*math.sqrt(z))/3)/(4*a))
+        x1 = fn(P+Q+R1)
+        x2 = fn(P+Q-R1)
+        if (P-Q) == 0 then
+            if R2 == 1 then
+                x3 = "i"
+                x4 = "-i"
+            elseif R2 == -1 then
+                x3 = "-i"
+                x4 = "i"
+            else
+                x3 = R2.."i"
+                x4 = -R2.."i"
+            end
+        else
+            if R2 == 1 then
+                x3 = fn(P-Q).."+i"
+                x4 = fn(P-Q).."-i"
+            elseif R2 == -1 then
+                x3 = fn(P-Q).."-i"
+                x4 = fn(P-Q).."+i"
+            elseif R2 > 0 then
+                x3 = fn(P-Q).."+"..R2.."i"
+                x4 = fn(P-Q).."-"..R2.."i"
+            else
+                x3 = fn(P-Q).."-"..-R2.."i"
+                x4 = fn(P-Q).."+"..-R2.."i"
+            end
+        end
+        return "x₁="..x1.."\nx₂="..x2.."\nx₃="..x3.."\nx₄="..x4
+    end
+    -- 情况6:当Δ<0时，若D与F均为正数，则方程有四个不等实根；否则方程有两对不等共轭虚根
+    if Delta < 0 then
+        local T,M,N,O,y1,y2,y3,x1,x2,x3,x4,P,Q1,Q2,Q3
+        T = (3*B-2*A*D)/(2*A*math.sqrt(A))
+        M = acos(T)
+        N = cos(M/3)
+        O = sin(M/3)
+        y1 = (D-2*math.sqrt(A)*N)/3
+        y2 = (D+math.sqrt(A)*(N+math.sqrt(3)*O))/3
+        y3 = (D+math.sqrt(A)*(N-math.sqrt(3)*O))/3
+        -- 情况6.1:若E=0,D>0,F>0,方程有四实根
+        if E == 0 and D > 0 and F > 0 then
+            x1 = fn((-b+math.sqrt(D+2*math.sqrt(F)))/(4*a))
+            x2 = fn((-b-math.sqrt(D+2*math.sqrt(F)))/(4*a))
+            x3 = fn((-b+math.sqrt(D-2*math.sqrt(F)))/(4*a))
+            x4 = fn((-b-math.sqrt(D-2*math.sqrt(F)))/(4*a))
+        -- 情况6.2:若E=0,D<0,F>0,方程有两对共轭虚根
+        elseif E == 0 and D < 0 and F > 0 then
+            P = fn(-b/(4*a))
+            Q1 = fn(math.sqrt(-D+2*math.sqrt(F))/(4*a))
+            Q2 = fn(math.sqrt(-D-2*math.sqrt(F))/(4*a))
+            if P == 0 then
+                if Q1 == 1 then
+                    x1 = "i"
+                    x2 = "-i"
+                elseif Q1 == -1 then
+                    x1 = "-i"
+                    x2 = "i"
+                else
+                    x1 = Q1.."i"
+                    x2 = -Q1.."i"
+                end
+                if Q2 == 1 then
+                    x3 = "i"
+                    x4 = "-i"
+                elseif Q2 == -1 then
+                    x3 = "-i"
+                    x4 = "i"
+                else
+                    x3 = Q2.."i"
+                    x4 = -Q2.."i"
+                end
+            else
+                if Q1 == 1 then
+                    x1 = P.."+i"
+                    x2 = P.."-i"
+                elseif Q1 == -1 then
+                    x1 = P.."-i"
+                    x2 = P.."+i"
+                elseif Q1 > 0 then
+                    x1 = P.."+"..Q1.."i"
+                    x2 = P.."-"..Q1.."i"
+                else
+                    x1 = P.."-"..-Q1.."i"
+                    x2 = P.."+"..-Q1.."i"
+                end
+                if Q2 == 1 then
+                    x3 = P.."+i"
+                    x4 = P.."-i"
+                elseif Q2 == -1 then
+                    x3 = P.."-i"
+                    x4 = P.."+i"
+                elseif Q2 > 0 then
+                    x3 = P.."+"..Q2.."i"
+                    x4 = P.."-"..Q2.."i"
+                else
+                    x3 = P.."-"..-Q2.."i"
+                    x4 = P.."+"..-Q2.."i"
+                end
+            end
+        -- 情况6.3:若E=0,F<0,方程有两对共轭虚根
+        elseif E == 0 and F < 0 then
+            P = -b/(4*a)
+            Q1 = math.sqrt(2*D+2*math.sqrt(A-F))/(8*a)
+            Q2 = fn(math.sqrt(-2*D+2*math.sqrt(A-F))/(8*a))
+            if (P+Q1) == 0 then
+                if Q2 == 1 then
+                    x1 = "i"
+                    x2 = "-i"
+                elseif Q2 == -1 then
+                    x1 = "-i"
+                    x2 = "i"
+                else
+                    x1 = Q2.."i"
+                    x2 = -Q2.."i"
+                end
+            else
+                if Q2 == 1 then
+                    x1 = fn(P+Q1).."+i"
+                    x2 = fn(P+Q1).."-i"
+                elseif Q2 == -1 then
+                    x1 = fn(P+Q1).."-i"
+                    x2 = fn(P+Q1).."+i"
+                elseif Q2 > 0 then
+                    x1 = fn(P+Q1).."+"..Q2.."i"
+                    x2 = fn(P+Q1).."-"..Q2.."i"
+                else
+                    x1 = fn(P+Q1).."-"..-Q2.."i"
+                    x2 = fn(P+Q1).."+"..-Q2.."i"
+                end
+            end
+            if (P-Q1) == 0 then
+                if Q2 == 1 then
+                    x3 = "i"
+                    x4 = "-i"
+                elseif Q2 == -1 then
+                    x3 = "-i"
+                    x4 = "i"
+                else
+                    x3 = Q2.."i"
+                    x4 = -Q2.."i"
+                end
+            else
+                if Q2 == 1 then
+                    x3 = fn(P-Q1).."+i"
+                    x4 = fn(P-Q1).."-i"
+                elseif Q2 == -1 then
+                    x3 = fn(P-Q1).."-i"
+                    x4 = fn(P-Q1).."+i"
+                elseif Q2 > 0 then
+                    x3 = fn(P-Q1).."+"..Q2.."i"
+                    x4 = fn(P-Q1).."-"..Q2.."i"
+                else
+                    x3 = fn(P-Q1).."-"..-Q2.."i"
+                    x4 = fn(P-Q1).."+"..-Q2.."i"
+                end
+            end
+        -- 情况6.4:若E≠0,当D与F均为正时，方程有四实根；否则方程有两对共轭虚根
+        elseif E ~= 0 then
+            if D > 0 and F > 0 then
+                P = -b/(4*a)
+                Q1 = sgn(E)*math.sqrt(y1)/(4*a)
+                Q2 = (math.sqrt(y2)+math.sqrt(y3))/(4*a)
+                Q3 = (math.sqrt(y2)-math.sqrt(y3))/(4*a)
+                x1 = fn(P+Q1+Q2)
+                x2 = fn(P+Q1-Q2)
+                x3 = fn(P-Q1+Q3)
+                x4 = fn(P-Q1-Q3)
+            else
+                P = -b/(4*a)
+                Q1 = math.sqrt(y2)/(4*a)
+                Q2 = sgn(E)*math.sqrt(-y1)/(4*a)
+                Q3 = math.sqrt(-y3)/(4*a)
+                if (P-Q1) == 0 then
+                    if (Q2+Q3) == 1 then
+                        x1 = "i"
+                        x2 = "-i"
+                    elseif (Q2+Q3) == -1 then
+                        x1 = "-i"
+                        x2 = "i"
+                    else
+                        x1 = fn(Q2+Q3).."i"
+                        x2 = -fn(Q2+Q3).."i"                    
+                    end
+                else
+                    if fn(Q2+Q3) == 1 then
+                        x1 = fn(P-Q1).."+i"
+                        x2 = fn(P-Q1).."-i"
+                    elseif fn(Q2+Q3) == -1 then
+                        x1 = fn(P-Q1).."-i"
+                        x2 = fn(P-Q1).."+i"
+                    elseif fn(Q2+Q3) > 0 then
+                        x1 = fn(P-Q1).."+"..fn(Q2+Q3).."i"
+                        x2 = fn(P-Q1).."-"..fn(Q2+Q3).."i"
+                    else
+                        x1 = fn(P-Q1).."-"..-fn(Q2+Q3).."i"
+                        x2 = fn(P-Q1).."+"..-fn(Q2+Q3).."i"
+                    end
+                end
+                if (P+Q1) == 0 then
+                    if fn(Q2-Q3) == 1 then
+                        x3 = "i"
+                        x4 = "-i"
+                    elseif fn(Q2-Q3) == -1 then
+                        x3 = "-i"
+                        x4 = "i"
+                    else
+                        x3 = fn(Q2-Q3).."i"
+                        x4 = -fn(Q2-Q3).."i"
+                    end
+                else
+                    if fn(Q2-Q3) == 1 then
+                        x3 = fn(P+Q1).."+i"
+                        x4 = fn(P+Q1).."-i"
+                    elseif fn(Q2-Q3) == -1 then
+                        x3 = fn(P+Q1).."-i"
+                        x4 = fn(P+Q1).."+i"
+                    elseif fn(Q2-Q3) > 0 then
+                        x3 = fn(P+Q1).."+"..fn(Q2-Q3).."i"
+                        x4 = fn(P+Q1).."-"..fn(Q2-Q3).."i"
+                    else
+                        x3 = fn(P+Q1).."-"..-fn(Q2-Q3).."i"
+                        x4 = fn(P+Q1).."+"..-fn(Q2-Q3).."i"
+                    end
+                end
+            end
+        end
+        return "x₁="..x1.."\nx₂="..x2.."\nx₃="..x3.."\nx₄="..x4
+    end
+end
+calc_methods["yysc2"] = solveQuarticEquation
+methods_desc["yysc2"] = "求解一元四次方程"
 
 
 
@@ -1519,7 +1876,7 @@ function dyzx1(x1, y1, A, B, C)
     local y = y1 - 2*B*s
     x = fn(x)
     y = fn(y)
-    return "点到直线距离为" .. D .. "，点关于直线的对称点坐标为(" .. x .. ", " .. y .. ")"
+    return "点到直线距离为" .. D .. "\n点关于直线的对称点坐标为(" .. x .. "," .. y .. ")"
 end
 calc_methods["dyzx1"] = dyzx1
 methods_desc["dyzx1"] = "已知一点坐标和直线方程，求点到直线的距离及对称点坐标"
@@ -1613,11 +1970,9 @@ function lines_relationship(A1, B1, C1, A2, B2, C2)
     if (A1 == 0 and B1 == 0) or (A2 == 0 and B2 == 0) then
         return "直线方程的系数不能同时为零！"
     end
-
     -- 判断两直线是否平行或重合
     local px = (A1 * B2 == A2 * B1) and (A1 * C2 ~= A2 * C1)
     local ch = (A1 * B2 == A2 * B1) and (C1 * B2 == C2 * B1) and (C1 * A2 == C2 * A1)
-
     if ch then
         -- 两直线重合
         return "两直线重合，距离为0"
@@ -1671,7 +2026,7 @@ function triangle_circles(a, b, c)
     -- 计算外接圆半径
     local R = (a * b * c) / (4 * A)
     R = fn(R)
-    return "内切圆半径为" .. r .. "，外接圆半径为" .. R
+    return "内切圆半径为" .. r .. "\n外接圆半径为" .. R
 end
 calc_methods["sjxy1"] = triangle_circles
 methods_desc["sjxy1"] = "已知三角形三边长，求内切圆半径和外接圆半径"
@@ -1744,7 +2099,7 @@ function triangle_centers(x1, y1, x2, y2, x3, y3)
     local yc = s2/d3
     xc = fn(xc)
     yc = fn(yc)
-    return "重心(" .. xg .. ", " .. yg .. ")；内心(" .. xn .. ", " .. yn .. ")；外心(" .. xw .. ", " .. yw .. ")；垂心(" .. xc .. ", " .. yc .. ")"
+    return "重心(" .. xg .. ", " .. yg .. ")\n内心(" .. xn .. ", " .. yn .. ")\n外心(" .. xw .. ", " .. yw .. ")\n垂心(" .. xc .. ", " .. yc .. ")"
 end
 calc_methods["sjxx"] = triangle_centers
 methods_desc["sjxx"] = "已知三角形三个顶点坐标，求其“心”的坐标"
@@ -1850,7 +2205,7 @@ function symmetry_line(A1, B1, C1, A2, B2, C2)
     local B4 = a2*B2 - b*B1
     local C4 = a2*C2 - b*C1
     local ge2 = LineGeneralEquation(A4, B4, C4)
-    return "直线l₁关于l₂的对称直线l₃的方程为：" .. ge1.. "，直线l₂关于l₁的对称直线l₄的方程为：".. ge2
+    return "直线l₁关于l₂的对称直线l₃的方程为：" .. ge1.. "\n直线l₂关于l₁的对称直线l₄的方程为：".. ge2
 end
 calc_methods["lzx2"] = symmetry_line
 methods_desc["lzx2"] = "已知直线l₁:A₁x+B₁y+C₁=0和l₂:A₂x+B₂y+C₂=0，求两条直线以彼此为轴的对称直线方程"
@@ -1955,11 +2310,11 @@ function tcr2(x1, y1, r1, x2, y2, r2)
     dj = fn(dj)
     -- 判断相切或相交，并给出交点坐标、圆心距和相交弦长
     if d == (r1 + r2) then
-        return "两圆外切，圆心距为".. d .. "，交点坐标为(".. xj1 .. ",".. yj1 .. ")"
+        return "两圆外切，圆心距为".. d .. "\n交点坐标为(".. xj1 .. ",".. yj1 .. ")"
     elseif d == math.abs(r1 - r2) then
-        return "两圆内切，圆心距为".. d .. "，交点坐标为(".. xj1 .. ",".. yj1 .. ")"
+        return "两圆内切，圆心距为".. d .. "\n交点坐标为(".. xj1 .. ",".. yj1 .. ")"
     elseif math.abs(r1 - r2) < d and d < (r1 + r2) then
-        return "两圆相交，圆心距为".. d .. "，交点坐标为(".. xj1 .. ",".. yj1 .. ")和(".. xj2 .. ",".. yj2 .. ")，相交弦弦长为".. dj
+        return "两圆相交，圆心距为".. d .. "\n交点坐标为(".. xj1 .. ",".. yj1 .. ")和(".. xj2 .. ",".. yj2 .. ")\n相交弦弦长为".. dj
     end
 end
 calc_methods["tcr2"] = tcr2
