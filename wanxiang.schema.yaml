@@ -3,7 +3,7 @@
 #本方案匹配词库解码顺序为：全拼拼音；墨奇码；鹤形；自然码；简单鹤；仓颉；虎码首末；五笔前2；汉心码
 #############DIY你想要的方案组合,试试搭配一个自然码+墨奇辅助的方案吧！###########################
 set_shuru_schema:              #配置此项就是选择什么输入法,同时拆分反查和中英文混输也将匹配该输入方案
-  __include: 自然码             #可选解码规则有   自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼    选择一个填入
+  __include: 自然码             #可选解码规则有   自然码, 自然龙, 汉心龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼    选择一个填入
 set_algebra_fuzhu:             #配置此项就是选择什么辅助码
   __include: fuzhu_zrm         #可选辅助码有：fuzhu_kong，fuzhu_hanxin, fuzhu_moqi, fuzhu_flypy, fuzhu_zrm, fuzhu_tiger, fuzhu_wubi    选择一个填入
 set_cn_en:                     #中英混输
@@ -497,6 +497,92 @@ speller:
     - xform/^(.)(uá|uī|ui|ì)(;.*)$/$1T$3/
     - xform/^(.)(ū|u|óu|iàn)(;.*)$/$1A$3/
     - xform/^(.)(āo|ao|iè)(;.*)$/$1Q$3/
+    - xlit/QWERTYUIOPASDFGHMJCKLZXVBN/qwertyuiopasdfghmjcklzxvbn/
+
+汉心龙:    #原作者项目地址： https://hanxinma.gitlab.io/longma/
+  __append:
+    - xform/^ēr/BA/
+    - xform/^ér/BJ/
+    - xform/^ěr/BP/
+    - xform/^èr/BO/
+    - xform/^er/BA/
+    - xform/^(ā|á|ǎ|à)([ioun])/Q$1$2/
+    - xform/^(ō|ó|ǒ|ò)([ioun])/R$1$2/
+    - xform/^(ē|é|ě|è)([ioun])/B$1$2/
+    - xform/^(ā|á|ǎ|à)(ng)/Q$1$2/
+    - xform/^(ō|ó|ǒ|ò)(ng)/R$1$2/
+    - xform/^(ē|é|ě|è)(ng)/B$1$2/
+    - xform/^(ā|á|ǎ|à)/Q$1/
+    - xform/^(ō|ó|ǒ|ò)/R$1/
+    - xform/^(ē|é|ě|è)/B$1/
+    - xform/^([eacj])u(;.*)/$1ü$2/
+    - xform/^([eacj])ū(;.*)/$1ǖ$2/
+    - xform/^([eacj])ú(;.*)/$1ǘ$2/
+    - xform/^([eacj])ǔ(;.*)/$1ǚ$2/
+    - xform/^([eacj])ù(;.*)/$1ǜ$2/
+    - xform/^a(;.*)$/Qā$1/
+    - xform/^o(;.*)$/Rō$1/
+    - xform/^e(;.*)$/Bē$1/
+    - xform/^ǹg/Bèng/
+    - xform/^ňg/Běng/
+    - xform/^ńg/Béng/
+    - xform/^ng/beng/
+    - xform/^ǹ/Bèn/
+    - xform/^ň/Běn/
+    - xform/^ń/Bén/
+    - xform/^n(;.*)/Ben$1/
+    - xform/^sh/T/
+    - xform/^ch/S/
+    - xform/^zh/K/
+    - xform/^a/Q/
+    - xform/^p/W/
+    - xform/^j/E/
+    - xform/^o/R/
+    - xform/^n/Y/
+    - xform/^k/U/
+    - xform/^b/I/
+    - xform/^t/O/
+    - xform/^m/P/
+    - xform/^q/A/
+    - xform/^l/D/
+    - xform/^r/F/
+    - xform/^w/G/
+    - xform/^d/H/
+    - xform/^y/J/
+    - xform/^g/L/
+    - xform/^s/Z/
+    - xform/^c/X/
+    - xform/^x/C/
+    - xform/^f/V/
+    - xform/^e/B/
+    - xform/^z/N/
+    - xform/^h/M/
+    - xform/^(.)(ēn|en|iǎn|ǒng|iáng|uá|ó|án|ǐng)(;.*)$/$1Q$3/
+    - xform/^(.)(ào|èn|èng|iě|iàng)(;.*)$/$1W$3/
+    - xform/^(.)(ǖ|iù|ā|a|uì|uǎng)(;.*)$/$1E$3/
+    - xform/^(.)(ìn|è|à|ě|ǎi|áo)(;.*)$/$1R$3/
+    - xform/^(.)(ō|o|ìòng|ǎo|óu)(;.*)$/$1T$3/
+    - xform/^(.)(én|ià|ang|āng|iú|ǐn|üē|uē|üe)(;.*)$/$1Y$3/
+    - xform/^(.)(àng|iàn|ao|āo)(;.*)$/$1U$3/
+    - xform/^(.)(ù|uán|ué|üé)(;.*)$/$1I$3/
+    - xform/^(.)(éng|iā|ia|ān|an|èr|uè|üè|iū|uài|iáo)(;.*)$/$1O$3/
+    - xform/^(.)(uǒ|iè|iào|ěr|ǎng)(;.*)$/$1P$3/
+    - xform/^(.)(āi|ai|óng|ìng|uāng|uang|á|ēr|er|iǎ)(;.*)$/$1A$3/
+    - xform/^(.)(uō|uo|ǚ|uó|àn|ín|ūn|un|iōng|iong)(;.*)$/$1S$3/
+    - xform/^(.)(ǒu|èi|é|iāo|iao|iá)(;.*)$/$1D$3/
+    - xform/^(.)(ǐ|uān|uan|uà|ò|uǎ)(;.*)$/$1F$3/
+    - xform/^(.)(ī|i|ěn|ěi|uáng)(;.*)$/$1G$3/
+    - xform/^(.)(ǜ|ēng|eng|iē|ie|éi|ún|uāi|uai)(;.*)$/$1H$3/
+    - xform/^(.)(ái|ǒ|ū|u|ér|īng|ing|uǎi)(;.*)$/$1J$3/
+    - xform/^(.)(ē|e|íng|òu|ié)(;.*)$/$1K$3/
+    - xform/^(.)(ì|uī|ui)(;.*)$/$1L$3/
+    - xform/^(.)(uā|ua|òng|uǐ|áng|iǔ|iǎo)(;.*)$/$1Z$3/
+    - xform/^(.)(uò|ōu|iān|ian|ēi|ei|ùn)(;.*)$/$1X$3/
+    - xform/^(.)(ǔ|uàn)(;.*)$/$1C$3/
+    - xform/^(.)(ǎ|uái|ōng|ong|īn|in|ióng|iǒng)(;.*)$/$1V$3/
+    - xform/^(.)(ài|ián|üě|ǔe|uí|uǎn|uàng|ǘ)(;.*)$/$1B$3/
+    - xform/^(.)(í|iǎng|ǎn)(;.*)$/$1N$3/
+    - xform/^(.)(ú|iāng|iang|ěng|ǔn)(;.*)$/$1M$3/
     - xlit/QWERTYUIOPASDFGHMJCKLZXVBN/qwertyuiopasdfghmjcklzxvbn/
 
 小鹤双拼: 
