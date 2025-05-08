@@ -183,7 +183,7 @@ function S.func(key, env)
         tipsph = segment.prompt
     end
     -- 检查是否触发提示上屏
-    if (context:is_composing() or context:has_menu()) and S.tips_key and is_super_tips then
+    if (context:is_composing() or context:has_menu()) and S.tips_key and is_super_tips and (tipspc or tipsph) then
         local trigger = key:repr() == S.tips_key
         local text = selected_cand and selected_cand.text or input_text
         if trigger then
