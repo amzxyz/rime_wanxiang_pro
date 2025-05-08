@@ -1,0 +1,1090 @@
+# Rime schema
+# encoding: utf-8
+#本方案匹配词库解码顺序为：全拼拼音；墨奇码；鹤形；自然码；简单鹤；仓颉；虎码首末；五笔前2；汉心码
+#############DIY你想要的方案组合,试试搭配一个自然码+墨奇辅助的方案吧！###########################
+set_shuru_schema:              #配置此项就是选择什么输入法,同时拆分反查和中英文混输也将匹配该输入方案
+  __include: 自然码             #可选解码规则有   自然码, 自然龙, 汉心龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼    选择一个填入
+set_algebra_fuzhu:             #配置此项就是选择什么辅助码
+  __include: fuzhu_zrm         #可选辅助码有：fuzhu_kong，fuzhu_hanxin, fuzhu_moqi, fuzhu_flypy, fuzhu_zrm, fuzhu_tiger, fuzhu_wubi    选择一个填入
+set_cn_en:                     #中英混输
+  user_dict: en_dicts/pinyin   #可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou， en_dicts/pinyin
+super_comment:                 # 超级注释模块，子项配置 true 开启，false 关闭
+  candidate_length: 1          # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理    
+  fuzhu_type: zrm              # 用于匹配对应的辅助码注释显示，基于默认词典的可选注释类型有：( moqi, flypy, zrm, jdh, cj, tiger, wubi, hanxin) tone (这个参数特殊，在注释里显示声调，不算辅助码，也填入此处)选择一个填入，之所以单独列出是因为这里有更多的可配置性，而真正的辅助码默认只有8种
+  corrector_type: "{comment}"  # 换一种显示类型，比如"({comment})" 
+__include: octagram            #启用语言模型
+#__include: set_chord_composer  #启用并击处理，不懂得不要开启就是了
+########################以下是方案配置######################################################
+
+# 方案说明
+schema:
+  schema_id: wanxiang
+  name: 万象拼音PRO
+  version: "2025-01-01"
+  author:
+    - amzxyz
+  description: |
+    万象拼音 支持常见双拼方案和全拼输入，辅助码同时支持 全拼拼音；墨奇码;鹤形;自然码;简单鹤;仓颉;虎码首末;五笔前2;汉心码; 采用万象归一的词库，换方案不换词库，不丢失用户词！
+  dependencies:
+    - wanxiang_stroke    #笔画反查
+    - wanxiang_radical   #部件拆字，反查及辅码
+    - wanxiang_lookup    #辅助码拆分注释、翻译注释、行政区划匹配、车牌、等等注释类显示滤镜，Lua专用：super_comment
+    - wanxiang_en        #英文输入
+    - wanxiang_charset   #字符集过滤器
+
+# 开关
+# reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。
+# states: 方案选单显示的名称。可以注释掉，仍可以通过快捷键切换。
+# abbrev: 默认的缩写取 states 的第一个字符，abbrev 可自定义一个字符
+switches:
+  - name: ascii_mode
+    states: [ 中, 英 ]
+  - name: ascii_punct  # 中英标点
+    states: [ ¥, $ ]
+  - name: traditionalization
+    states: [ 简, 繁 ]
+  - name: full_shape
+    states: [ 半, 全 ]
+  - name: emoji
+    states: [ 🙃, 😄 ]
+    reset: 0
+  - name: chinese_english
+    states: [ 译, 翻 ]
+  - name: tone_display
+    states: [ 调, 声 ]
+  - name: fuzhu_switch
+    states: [ 助, 辅 ]
+  - name: charset_filter
+    states: [ 小, 大 ]
+    reset: 0
+  - name: chaifen_switch
+    states: [ 然, 自 ]
+    #states: [ 奇, 墨 ]   #这里需要自己更换，wanxiang_lookup.dict.yaml默认放的是自然码的拆分
+  - name: super_tips
+    states: [ off, tips ]
+    reset: 1
+  - name: prediction
+    states: [ 测, 预 ]
+    reset: 0
+  - name: search_single_char  # search.lua 的功能开关，辅码查词时是否单字优先
+    abbrev: [词, 单]
+    states: [正常, 单字]
+
+
+# 输入引擎
+engine:
+  processors:
+    - predictor                                 #联想处理器
+    - chord_composer                            #并击处理器
+    #- lua_processor@*select_character          # 以词定字，有了辅助码了，想开启可以注释掉
+    - lua_processor@*super_sequence*P
+    - lua_processor@*quick_symbol_text         #快符引导以及重复上屏
+    - lua_processor@*super_tips*S              #超级提示模块：表情、简码、翻译、化学式、等等靠你想象，这里负责兼容手机，手机上开启这个
+    - lua_processor@*limit_repeated             #用于限制最大候选长度以及最大重复输入声母编码长度，避免性能异常
+    - lua_processor@*userdb_sync_delete        #通过输入 /del 触发,用于清理自定义同步目录下txt用户词典里被标记c<0的词条
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - lua_processor@*key_binder # 绑定按键扩展能力
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - affix_segmentor@radical_lookup  # 部件拆字自定义 tag
+    - affix_segmentor@reverse_stroke  #笔画反查
+    - affix_segmentor@add_user_dict
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - predict_translator
+    - punct_translator
+    - script_translator
+    - lua_translator@*shijian            # 时间、日期、星期、农历、节气、时辰等等
+    - lua_translator@*unicode            # Unicode
+    - lua_translator@*number_translator  # 数字、金额大写
+    - lua_translator@*super_calculator   # 计算器
+    - table_translator@custom_phrase     # 自定义短语 custom_phrase.txt
+    - table_translator@wanxiang_en          # 英文输入
+    - table_translator@cn_en             # 中英混合词汇
+    - table_translator@chengyu           # 简码成语
+    - table_translator@radical_lookup    # 部件拆字反查
+    - table_translator@reverse_stroke    #笔画反查
+    - script_translator@user_dict_set
+    - script_translator@add_user_dict
+    - lua_translator@*force_gc          # 暴力 GC 降低内存
+  filters:
+    - lua_filter@*chars_filter                      #字符集过滤
+    - lua_filter@*super_sequence*F                  #手动排序放在assist_sort 后面，高亮候选 ctrl+j左移动 ctrl+k 右移动 ctrl+0 移除位移
+    - lua_filter@*autocap_filter                    # 英文自动大写
+    - reverse_lookup_filter@radical_reverse_lookup  # 部件拆字滤镜，放在super_comment前面，进一步被超级注释处理以获得拼音编码+辅助码的提示
+    - lua_filter@*super_preedit                     #输入码显示全拼并带上音调
+    - simplifier@emoji                              # Emoji
+    - simplifier@traditionalize                     # 简繁切换
+    - simplifier@chinese_english                    #中英翻译
+    - lua_filter@*search@wanxiang_radical           # 部件拆字辅码放在简繁转换之后
+    - lua_filter@*super_tips*M                      #超级提示模块：表情、简码、翻译、化学式、等等靠你想象，这里负责兼容手机，手机上开启这个
+    - lua_filter@*super_comment                     #超级注释模块，支持错词提示、辅助码显示，部件组字读音注释，支持个性化配置和关闭相应的功能，详情搜索super_comment进行详细配置
+    - uniquifier                                    # 去重
+
+predictor:
+  db: wanxiang-lts-zh-predict.db
+# 每次最大预测候选数
+# 默认为 0，表示显示所有候选数
+# 您可以将其设置为与 page_size 相同，这样 period 就不会触发下一页
+  max_candidates: 5
+# 最大连续预测次数
+# 默认为 0，表示无限制
+  max_iterations: 1
+#shijian:仅仅作为提示使用，编码已经写死，引导适应性更高，如有需求lua中修改
+#时间：osj 或者 /sj
+#日期：orq 或者 /rq
+#农历：onl 或者 /nl
+#星期：oxq 或者 /xq
+#今年第几周：oww 或者 /ww
+#节气：ojq 或者 /jq
+#日期+时间：ors 或者 /rs
+#时间戳：ott 或者 /tt
+#大写N日期：N20250315
+#节日：ojr 或者 /jr
+#问候模板：/day 或者 oday
+
+#快符lua，lua中有预设，26个字母、10个数字，你可以在这里配置替换默认的值，键可以是一个或多个，值可以是任意字符这里不齐全默认配置将生效
+quick_symbol_text:
+  q: "欢迎使用万象拼音"
+  w: "噢我的天哪！"
+  e: "（"
+  r: "）"
+  t: "~"
+  y: "·"
+  u: "『"
+  i: "』"
+  o: "〖"
+  p: "〗"
+  a: "！"
+  s: "……"
+  d: "、"
+  f: "“"
+  g: "”"
+  h: "‘"
+  j: "’"
+  k: "【"
+  l: "】"
+  z: "。”"
+  x: "？”"
+  c: "！”"
+  v: "——"
+  b: "%"
+  n: "《"
+  m: "》"
+  "1": "①"
+  "2": "②"
+  "3": "③"
+  "4": "④"
+  "5": "⑤"
+  "6": "⑥"
+  "7": "⑦"
+  "8": "⑧"
+  "9": "⑨"
+  "0": "⓪"
+
+# Lua 配置：计算器触发关键字
+calculator:
+  trigger: "V"
+
+# 主翻译器，拼音
+translator:
+  dictionary: wanxiang          # 挂载词库 wanxiang.dict.yaml
+#  prism: double_pinyin          # 多方案共用一个词库时，为避免冲突，需要用 prism 指定一个名字。
+  enable_completion: true  # 启用候选词补全
+#  user_dict: zrm.userdb  # 用户词典的文件名称
+#  db_class: tabledb  #开启后就不会产生zrm.userdb这样的文件夹，会直接输出文本zrm.txt同时无法使用同步能力
+  enable_user_dict: false # 是否开启自动调频
+#  disable_user_dict_for_patterns:
+#    - "^[a-z]{1,6}"    #基本的6码3字不调频
+  enable_correction: false #是否开启自动纠错
+  initial_quality: 3       # 初始质量拼音的权重应该比英文大
+  spelling_hints: 50             # 将注释以词典字符串形式完全暴露，通过super_comment.lua完全接管，灵活配置。
+  always_show_comments: true    # Rime 默认在 preedit 等于 comment 时取消显示 comment，这里强制一直显示，供super_comment.lua做判断用。
+  comment_format: {comment}  #将注释以词典字符串形式完全暴露，通过super_comment.lua完全接管，灵活配置。
+  preedit_format:               # preedit_format 影响到输入框的显示和“Shift+回车”上屏的字符
+
+
+# 自定义短语
+custom_phrase:
+  dictionary: ""
+  user_dict: custom_phrase  # 需要手动创建 custom_phrase.txt 文件
+  db_class: stabledb
+  enable_completion: false # 补全提示
+  enable_sentence: false   # 禁止造句
+  initial_quality: 99      # custom_phrase 的权重应该比 pinyin 和 wanxiang_en 大
+
+# 简码词库导入位于jm_dicts得txt文件词库
+chengyu:
+  dictionary: ""
+  user_dict: jm_dicts/chengyu
+  db_class: stabledb
+  enable_sentence: false
+  enable_completion: false
+  initial_quality: 1.2 #本表词和系统词重码居后
+
+# 次翻译器，英文
+wanxiang_en:
+  dictionary: wanxiang_en     # 挂载词库 wanxiang_en.dict.yaml
+  enable_sentence: false   # 禁止造句
+  enable_user_dict: false  # 禁用用户词典，是否开启自动调频
+  initial_quality: 1.1     # 初始权重
+  comment_format:          # 自定义提示码
+    - xform/.*//           # 清空提示码
+
+
+# 中英混合词汇
+cn_en:
+  dictionary: ""
+  __include: set_cn_en
+  db_class: stabledb
+  enable_completion: true
+  enable_sentence: false
+  initial_quality: 0.5
+  comment_format:
+    - xform/^.+$//
+
+# Emoji
+emoji:
+  option_name: emoji
+  opencc_config: emoji.json
+  inherit_comment: false  # 在 corrector.lua 及反查中，emoji 返回空注释
+
+
+#中文转英文
+chinese_english:
+  option_name: chinese_english
+  opencc_config: chinese_english.json
+  tips: char
+  comment_format:
+    - "xform/-/ /"
+
+# 简繁切换
+traditionalize:
+  option_name: traditionalization
+  opencc_config: s2t.json  # s2t.json | s2hk.json | s2tw.json | s2twp.json
+  tips: none               # 转换提示: all 都显示 | char 仅单字显示 | none 不显示。
+  tags: [ abc, number, gregorian_to_lunar ]  # 限制在对应 tag，不对其他如反查的内容做简繁转换
+
+# 部件拆字反查
+radical_lookup:
+  tag: radical_lookup
+  dictionary: wanxiang_radical
+  enable_user_dict: false
+  prefix: "`"  # 反查前缀（反查时前缀会消失影响打英文所以设定为两个字母，或可改成一个非字母符号），与 recognizer/patterns/radical_lookup 匹配
+  tips: "〔反查：部件|笔画〕"
+  extra_tags:
+    - reverse_stroke
+
+reverse_stroke:
+  tag: reverse_stroke
+  dictionary: wanxiang_stroke
+  db_class: stabledb
+  enable_completion: true
+  suffix: "'"
+  preedit_format:
+    - xlit/hspnz/一丨丿丶乙/
+
+
+# 部件拆字滤镜
+radical_reverse_lookup:
+  tags: [ radical_lookup,reverse_stroke ]
+  overwrite_comment: true
+  dictionary: wanxiang #带音调的词典
+
+
+# 处理符合特定规则的输入码，如网址、反查
+recognizer:
+  import_preset: default  # 从 default.yaml 继承通用的
+  patterns:  # 再增加方案专有的：
+    punct: "^/([0-9]|10|[A-Za-z]+)$"    # 响应 symbols.yaml 的 symbols
+    radical_lookup: "^`[A-Za-z]*$"        # 响应部件拆字与笔画的反查，与 radical_lookup/prefix 匹配
+    add_user_dict: "^ac[A-Za-z/`']*$"      #自造词
+    unicode: "^U[a-f0-9]+"              # 脚本将自动获取第 2 个字符 U 作为触发前缀，响应 lua_translator@unicode，输出 Unicode 字符
+    number: "^R[0-9]+[.]?[0-9]*"        # 脚本将自动获取第 2 个字符 R 作为触发前缀，响应 lua_translator@number_translator，数字金额大写
+    gregorian_to_lunar: "^N[0-9]{1,8}"  # 脚本将自动获取第 2 个字符 N 作为触发前缀，响应 lua_translator@lunar，公历转农历，输入 N20240115 得到「二〇二三年腊月初五」
+    calculator: "^V.*$"                 #计算器功能引导，，，，
+    quick_symbol: "^;.*$"  # 快符引导，例如输入;q 后自动上屏快速符号，双击;;重复上屏
+
+# 标点符号
+# punctuator 下面有三个子项：
+# 设置为一个映射，就自动上屏；设置为多个映射，如 '/' : [ '/', ÷ ] 则进行复选。
+#   full_shape: 全角没改，使用预设值
+#   half_shape: 标点符号全部直接上屏，和 macOS 自带输入法的区别是
+#              '|' 是半角的，
+#              '~' 是半角的，
+#              '`'（反引号）没有改成 '·'（间隔号）。
+#   symbols    Rime 的预设配置是以 '/' 前缀开头输出一系列字符，自定义的修改 symbols.yaml
+punctuator:
+  digit_separators: ":,."  #数字分隔符
+  __include: wanxiang_symbols:/symbol_table         # 从 symbols.yaml 导入配置
+
+# 从 default 继承快捷键
+key_binder:
+  import_preset: default  # 从 default.yaml 继承通用的
+  # Lua 配置: 超级tips上屏按键
+  tips_key: "period"   #修改时候去default找
+  search: "`"             # 辅码引导符，要添加到 speller/alphabet
+  bindings:             # 也可以再增加方案专有的
+    #- { when: composing, accept: Tab, send: '[' } ## 取消注释后：tab引导辅助码
+    - { when: composing, accept: Control+w, send: Control+BackSpace }
+#分号用于次选，微软、搜狗双拼不可启用
+    #- { when: has_menu, accept: semicolon, send: 2 }
+#使用Control+e进入翻译模式
+    - { when: has_menu, accept: "Control+e", toggle: chinese_english }
+#使用快捷键Control+z分别开启和关闭辅助码拆分显示
+    - { when: has_menu, accept: "Control+z", toggle: chaifen_switch }
+#使用快捷键Control+a开启和关闭辅助码显示
+    - { when: has_menu, accept: "Control+a", toggle: fuzhu_switch }
+#通过快捷键Control+s使得输入码显示音调
+    - { when: has_menu, accept: "Control+s", toggle: tone_display }
+#通过快捷键Control+t开启超级tips
+    - { when: has_menu, accept: "Control+t", toggle: super_tips }
+#通过快捷键Control+g开启字符集过滤
+    - { when: has_menu, accept: "Control+g", toggle: charset_filter }
+# 使用 tab 在不同音节之间跳转
+    - { when: has_menu, accept: "Tab", send: "Control+Right" }
+    - { when: composing, accept: "Tab", send: "Control+Right" }
+#当tab第一个字补码正确后，可以使用Ctrl+tab进行上屏并依次补码
+    - { when: composing, accept: "Control+Tab", send_sequence: '{Home}{Shift+Right}{1}{Shift+Right}' }
+#启用光标回退至特定音节后、补充辅助码的功能。补充完辅助码后，可以再按一次tab回到整句检查
+    - { when: composing, accept: Control+1, send_sequence: '{Home}{Shift+Right}' }
+    - { when: composing, accept: Control+2, send_sequence: '{Home}{Shift+Right}{Shift+Right}' }
+    - { when: composing, accept: Control+3, send_sequence: '{Home}{Shift+Right}{Shift+Right}{Shift+Right}' }
+    - { when: composing, accept: Control+4, send_sequence: '{Home}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}' }
+    - { when: composing, accept: Control+5, send_sequence: '{Home}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}' }
+    - { when: composing, accept: Control+6, send_sequence: '{Home}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}' }
+    - { when: composing, accept: Control+7, send_sequence: '{Home}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}' }
+#通过按下/发送/+1节约一个按键，不冲突的时候可以开启
+    #- { match: "[a-z]{1,4}", accept: "/",  send_sequence: "/1" }
+
+editor:
+   bindings:
+     space: confirm                        # 空格键：上屏候选项
+     Return: commit_raw_input              # 回车键：上屏原始输入
+     Control+Return: commit_script_text    # Ctrl+回车键：上屏变换后输入（经过 preedit转换的）
+     Control+Shift+Return: commit_comment  # Ctrl+Shift+回车键：上屏 comment
+     BackSpace: revert                     # 退格键：向前删除（撤消上次输入）
+     Delete: delete                        # Delete 键：向后删除
+     Control+BackSpace: back_syllable      # Ctrl+退格键：删除一个音节
+     Control+Delete: delete_candidate      # Ctrl+Delete键：删除或降权候选项
+     Escape: cancel                        # Esc 键：取消输入
+
+# 拼写设定
+speller:
+# table_translator翻译器，支持自动上屏。例如 “zmhu”可以自动上屏“怎么回事”
+#  auto_select: true
+#  auto_select_pattern: ^[a-z]+/|^[a-df-zA-DF-Z]\w{3}|^e\w{4}
+  # 如果不想让什么标点直接上屏，可以加在 alphabet，或者编辑标点符号为两个及以上的映射
+  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA`;/
+  # initials 定义仅作为始码的按键，排除 ` 让单个的 ` 可以直接上屏
+  initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/
+  delimiter: " '"  # 第一位<空格>是拼音之间的分隔符；第二位<'>表示可以手动输入单引号来分割拼音。
+  algebra:
+    __patch:
+      - set_shuru_schema     #拼音转双拼码
+#      - mohuyin             #模糊音选择性开启
+      - set_algebra_fuzhu    #辅助码部分
+###############################以下是拼写运算规则中全拼转双拼码以及形码的过程，按照不同的方案规则划分段落###########################
+全拼: 
+  __append: 
+    - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
+    - xform/ńg|ňg|ǹg/en/
+    - xform/ń|ň|ǹ/en/
+自然码: 
+  __append:
+    - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
+    - xform/^ng(;.*)/eng$1/
+    - xform/ńg|ňg|ǹg/eng/
+    - xform/ń|ň|ǹ/en/ 
+    - derive/^([jqxy])u(;.*)$/$1v$2/
+    - derive/^([aoe])([ioun])(;.*)$/$1$1$2$3/
+    - xform/^([aoe])(ng)?(;.*)$/$1$1$2$3/
+    - xform/^(\w+?)iu(;.*)$/$1Ⓠ$2/
+    - xform/^(\w+?)[uv]an(;.*)$/$1Ⓡ$2/
+    - xform/^(\w+?)[uv]e(;.*)$/$1Ⓣ$2/
+    - xform/^(\w+?)ing(;.*)$/$1Ⓨ$2/
+    - xform/^(\w+?)uai(;.*)$/$1Ⓨ$2/
+    - xform/^(\w+?)uo(;.*)$/$1Ⓞ$2/
+    - xform/^(\w+?)[uv]n(;.*)$/$1Ⓟ$2/
+    - xform/^(\w+?)i?ong(;.*)$/$1Ⓢ$2/
+    - xform/^(\w+?)[iu]ang(;.*)$/$1Ⓓ$2/
+    - xform/^(\w+?)en(;.*)$/$1Ⓕ$2/
+    - xform/^(\w+?)eng(;.*)$/$1Ⓖ$2/
+    - xform/^(\w+?)ang(;.*)$/$1Ⓗ$2/
+    - xform/^(\w+?)ian(;.*)$/$1Ⓜ$2/
+    - xform/^(\w+?)an(;.*)$/$1Ⓙ$2/
+    - xform/^(\w+?)iao(;.*)$/$1Ⓒ$2/
+    - xform/^(\w+?)ao(;.*)$/$1Ⓚ$2/
+    - xform/^(\w+?)ai(;.*)$/$1Ⓛ$2/
+    - xform/^(\w+?)ei(;.*)$/$1Ⓩ$2/
+    - xform/^(\w+?)ie(;.*)$/$1Ⓧ$2/
+    - xform/^(\w+?)ui(;.*)$/$1Ⓥ$2/
+    - xform/^(\w+?)ou(;.*)$/$1Ⓑ$2/
+    - xform/^(\w+?)in(;.*)$/$1Ⓝ$2/
+    - xform/^(\w+?)[iu]a(;.*)$/$1Ⓦ$2/
+    - xform/^sh/Ⓤ/
+    - xform/^ch/Ⓘ/
+    - xform/^zh/Ⓥ/
+    - xlit/ⓆⓌⓇⓉⓎⓊⒾⓄⓅⓈⒹⒻⒼⒽⓂⒿⒸⓀⓁⓏⓍⓋⒷⓃ/qwrtyuiopsdfghmjcklzxvbn/
+自然龙:    #原作者项目地址： https://github.com/rimeinn/rime-zrlong
+  __append:
+    - xform/^ēr/eQ/
+    - xform/^ér/eK/
+    - xform/^ěr/eU/
+    - xform/^èr/eH/
+    - xform/^er/eQ/
+    - xform/^(ā|á|ǎ|à)([ioun])/a$1$2/
+    - xform/^(ō|ó|ǒ|ò)([ioun])/o$1$2/
+    - xform/^(ē|é|ě|è)([ioun])/e$1$2/
+    - xform/^(ā|á|ǎ|à)(ng)/a$1$2/
+    - xform/^(ō|ó|ǒ|ò)(ng)/o$1$2/
+    - xform/^(ē|é|ě|è)(ng)/e$1$2/
+    - xform/^(ā|á|ǎ|à)/a$1/
+    - xform/^(ō|ó|ǒ|ò)/o$1/
+    - xform/^(ē|é|ě|è)/e$1/
+    - xform/^([jqxy])u(;.*)/$1ü$2/
+    - xform/^([jqxy])ū(;.*)/$1ǖ$2/
+    - xform/^([jqxy])ú(;.*)/$1ǘ$2/
+    - xform/^([jqxy])ǔ(;.*)/$1ǚ$2/
+    - xform/^([jqxy])ù(;.*)/$1ǜ$2/
+    - xform/^a(;.*)$/aā$1/
+    - xform/^o(;.*)$/oō$1/
+    - xform/^e(;.*)$/eē$1/
+    - xform/^ǹg/eèng/
+    - xform/^ňg/eěng/
+    - xform/^ńg/eéng/
+    - xform/^ng/eeng/
+    - xform/^ǹ/eèn/
+    - xform/^ň/eěn/
+    - xform/^ń/eén/
+    - xform/^n(;.*)/een$1/
+    - xform/^sh/U/
+    - xform/^ch/I/
+    - xform/^zh/V/
+    - xform/^(.)(iáo|iǎng|uǎng|ang|āng|ue|uē|üe|ǖe|ǎi|á)(;.*)$/$1U$3/
+    - xform/^(.)(iàng|iǒng|uàng|ēn|en|īng|ing|é|ó)(;.*)$/$1E$3/
+    - xform/^(.)(iǎn|iōng|iong|uǎi|uò|ǎng|ō|o)(;.*)$/$1P$3/
+    - xform/^(.)(uāng|uang|ǐng|ìng|uí|áng)(;.*)$/$1W$3/
+    - xform/^(.)(uǎn|uái||uā|ua|én|uō|uo|ié|ǚ)(;.*)$/$1S$3/
+    - xform/^(.)(uán|ài|ěn|èn|uě|ǚe|ǎn|ǔn|iù)(;.*)$/$1O$3/
+    - xform/^(.)(uān|uan|àng|ái|iā|ia|uè|üè)(;.*)$/$1D$3/
+    - xform/^(.)(iáng|áo|ué|üé|ēi|ei|à|è|ǒ)(;.*)$/$1I$3/
+    - xform/^(.)(uāi|uai|uà|uǎ|ūn|un|ò|ǐ)(;.*)$/$1G$3/
+    - xform/^(.)(éng|èng|uài|èi|uì|ǜ|ún)(;.*)$/$1F$3/
+    - xform/^(.)(ióng|ōng|ong|án|iē|ie)(;.*)$/$1K$3/
+    - xform/^(.)(iào|iǎo|uǒ|uó|a|ā|ě|ú)(;.*)$/$1L$3/
+    - xform/^(.)(uàn|ēng|eng|iá|ín|iě)(;.*)$/$1C$3/
+    - xform/^(.)(iān|ian|òu|éi|ùn|ē|e)(;.*)$/$1R$3/
+    - xform/^(.)(iāng|iang|ěng|òng)(;.*)$/$1Y$3/
+    - xform/^(.)(iao|iāo|ǔ|ǎ|iú|ǘ)(;.*)$/$1M$3/
+    - xform/^(.)(iǎ|íng|ān|an|ǒng)(;.*)$/$1N$3/
+    - xform/^(.)(iòng|īn|in|ǖ|ü|ù)(;.*)$/$1H$3/
+    - xform/^(.)(ǎo|ià|ǐn|ōu|ou)(;.*)$/$1X$3/
+    - xform/^(.)(óng|àn|ěi|ī|i)(;.*)$/$1J$3/
+    - xform/^(.)(ián|ào|ìn|uǐ)(;.*)$/$1V$3/
+    - xform/^(.)(uáng|āi|ai|í)(;.*)$/$1B$3/
+    - xform/^(.)(ǒu|iū|iu|iǔ)(;.*)$/$1Z$3/
+    - xform/^(.)(uá|uī|ui|ì)(;.*)$/$1T$3/
+    - xform/^(.)(ū|u|óu|iàn)(;.*)$/$1A$3/
+    - xform/^(.)(āo|ao|iè)(;.*)$/$1Q$3/
+    - xlit/QWERTYUIOPASDFGHMJCKLZXVBN/qwertyuiopasdfghmjcklzxvbn/
+
+汉心龙:    #原作者项目地址： https://hanxinma.gitlab.io/longma/
+  __append:
+    - xform/^ēr/BA/
+    - xform/^ér/BJ/
+    - xform/^ěr/BP/
+    - xform/^èr/BO/
+    - xform/^er/BA/
+    - xform/^(ā|á|ǎ|à)([ioun])/Q$1$2/
+    - xform/^(ō|ó|ǒ|ò)([ioun])/R$1$2/
+    - xform/^(ē|é|ě|è)([ioun])/B$1$2/
+    - xform/^(ā|á|ǎ|à)(ng)/Q$1$2/
+    - xform/^(ō|ó|ǒ|ò)(ng)/R$1$2/
+    - xform/^(ē|é|ě|è)(ng)/B$1$2/
+    - xform/^(ā|á|ǎ|à)/Q$1/
+    - xform/^(ō|ó|ǒ|ò)/R$1/
+    - xform/^(ē|é|ě|è)/B$1/
+    - xform/^([eacj])u(;.*)/$1ü$2/
+    - xform/^([eacj])ū(;.*)/$1ǖ$2/
+    - xform/^([eacj])ú(;.*)/$1ǘ$2/
+    - xform/^([eacj])ǔ(;.*)/$1ǚ$2/
+    - xform/^([eacj])ù(;.*)/$1ǜ$2/
+    - xform/^a(;.*)$/Qā$1/
+    - xform/^o(;.*)$/Rō$1/
+    - xform/^e(;.*)$/Bē$1/
+    - xform/^ǹg/Bèng/
+    - xform/^ňg/Běng/
+    - xform/^ńg/Béng/
+    - xform/^ng/beng/
+    - xform/^ǹ/Bèn/
+    - xform/^ň/Běn/
+    - xform/^ń/Bén/
+    - xform/^n(;.*)/Ben$1/
+    - xform/^sh/T/
+    - xform/^ch/S/
+    - xform/^zh/K/
+    - xform/^a/Q/
+    - xform/^p/W/
+    - xform/^j/E/
+    - xform/^o/R/
+    - xform/^n/Y/
+    - xform/^k/U/
+    - xform/^b/I/
+    - xform/^t/O/
+    - xform/^m/P/
+    - xform/^q/A/
+    - xform/^l/D/
+    - xform/^r/F/
+    - xform/^w/G/
+    - xform/^d/H/
+    - xform/^y/J/
+    - xform/^g/L/
+    - xform/^s/Z/
+    - xform/^c/X/
+    - xform/^x/C/
+    - xform/^f/V/
+    - xform/^e/B/
+    - xform/^z/N/
+    - xform/^h/M/
+    - xform/^(.)(ēn|en|iǎn|ǒng|iáng|uá|ó|án|ǐng)(;.*)$/$1Q$3/
+    - xform/^(.)(ào|èn|èng|iě|iàng)(;.*)$/$1W$3/
+    - xform/^(.)(ǖ|iù|ā|a|uì|uǎng)(;.*)$/$1E$3/
+    - xform/^(.)(ìn|è|à|ě|ǎi|áo)(;.*)$/$1R$3/
+    - xform/^(.)(ō|o|ìòng|ǎo|óu)(;.*)$/$1T$3/
+    - xform/^(.)(én|ià|ang|āng|iú|ǐn|üē|uē|üe)(;.*)$/$1Y$3/
+    - xform/^(.)(àng|iàn|ao|āo)(;.*)$/$1U$3/
+    - xform/^(.)(ù|uán|ué|üé)(;.*)$/$1I$3/
+    - xform/^(.)(éng|iā|ia|ān|an|èr|uè|üè|iū|uài|iáo)(;.*)$/$1O$3/
+    - xform/^(.)(uǒ|iè|iào|ěr|ǎng)(;.*)$/$1P$3/
+    - xform/^(.)(āi|ai|óng|ìng|uāng|uang|á|ēr|er|iǎ)(;.*)$/$1A$3/
+    - xform/^(.)(uō|uo|ǚ|uó|àn|ín|ūn|un|iōng|iong)(;.*)$/$1S$3/
+    - xform/^(.)(ǒu|èi|é|iāo|iao|iá)(;.*)$/$1D$3/
+    - xform/^(.)(ǐ|uān|uan|uà|ò|uǎ)(;.*)$/$1F$3/
+    - xform/^(.)(ī|i|ěn|ěi|uáng)(;.*)$/$1G$3/
+    - xform/^(.)(ǜ|ēng|eng|iē|ie|éi|ún|uāi|uai)(;.*)$/$1H$3/
+    - xform/^(.)(ái|ǒ|ū|u|ér|īng|ing|uǎi)(;.*)$/$1J$3/
+    - xform/^(.)(ē|e|íng|òu|ié)(;.*)$/$1K$3/
+    - xform/^(.)(ì|uī|ui)(;.*)$/$1L$3/
+    - xform/^(.)(uā|ua|òng|uǐ|áng|iǔ|iǎo)(;.*)$/$1Z$3/
+    - xform/^(.)(uò|ōu|iān|ian|ēi|ei|ùn)(;.*)$/$1X$3/
+    - xform/^(.)(ǔ|uàn)(;.*)$/$1C$3/
+    - xform/^(.)(ǎ|uái|ōng|ong|īn|in|ióng|iǒng)(;.*)$/$1V$3/
+    - xform/^(.)(ài|ián|üě|ǔe|uí|uǎn|uàng|ǘ)(;.*)$/$1B$3/
+    - xform/^(.)(í|iǎng|ǎn)(;.*)$/$1N$3/
+    - xform/^(.)(ú|iāng|iang|ěng|ǔn)(;.*)$/$1M$3/
+    - xlit/QWERTYUIOPASDFGHMJCKLZXVBN/qwertyuiopasdfghmjcklzxvbn/
+
+小鹤双拼: 
+  __append:
+    - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
+    - xform/^ng(;.*)/eng$1/
+    - xform/ńg|ňg|ǹg/eng/
+    - xform/ń|ň|ǹ/en/ 
+    - derive/^([jqxy])u(;.*)$/$1v$2/
+    - derive/^([aoe])([ioun])(;.*)$/$1$1$2$3/
+    - xform/^([aoe])(ng)?(;.*)$/$1$1$2$3/
+    - xform/^(\w+?)iu(;.*)/$1Ⓠ$2/
+    - xform/^(\w+?)ei(;.*)/$1Ⓦ$2/
+    - xform/^(\w+?)uan(;.*)/$1Ⓡ$2/
+    - xform/^(\w+?)[uv]e(;.*)/$1Ⓣ$2/
+    - xform/^(\w+?)un(;.*)/$1Ⓨ$2/
+    - xform/^(\w+?)uo(;.*)/$1Ⓞ$2/
+    - xform/^(\w+?)ie(;.*)/$1Ⓟ$2/
+    - xform/^(\w+?)i?ong(;.*)/$1Ⓢ$2/
+    - xform/^(\w+?)ing(;.*)/$1Ⓚ$2/
+    - xform/^(\w+?)uai(;.*)/$1Ⓚ$2/
+    - xform/^(\w+?)ai(;.*)/$1Ⓓ$2/
+    - xform/^(\w+?)eng(;.*)/$1Ⓖ$2/
+    - xform/^(\w+?)en(;.*)/$1Ⓕ$2/
+    - xform/^(\w+?)[iu]ang(;.*)/$1Ⓛ$2/
+    - xform/^(\w+?)ang(;.*)/$1Ⓗ$2/
+    - xform/^(\w+?)ian(;.*)/$1Ⓜ$2/
+    - xform/^(\w+?)an(;.*)/$1Ⓙ$2/
+    - xform/^(\w+?)ou(;.*)/$1Ⓩ$2/
+    - xform/^(\w+?)iao(;.*)/$1Ⓝ$2/
+    - xform/^(\w+?)[iu]a(;.*)/$1Ⓧ$2/
+    - xform/^(\w+?)ao(;.*)/$1Ⓒ$2/
+    - xform/^(\w+?)ui(;.*)/$1Ⓥ$2/
+    - xform/^(\w+?)in(;.*)/$1Ⓑ$2/
+    - xform/^sh/Ⓤ/
+    - xform/^ch/Ⓘ/
+    - xform/^zh/Ⓥ/
+    - xlit/ⓆⓌⓇⓉⓎⓊⒾⓄⓅⓈⒹⒻⒼⒽⒿⓀⓁⓏⓍⒸⓋⒷⓃⓂ/qwrtyuiopsdfghjklzxcvbnm/
+
+微软双拼: 
+  __append:
+    - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
+    - xform/^ng(;.*)/eng$1/
+    - xform/ńg|ňg|ǹg/eng/
+    - xform/ń|ň|ǹ/en/ 
+    - derive/^([jqxy])u(;.*)$/$1v$2/
+    - derive/^([aoe].*)(;.*)$/o$1$2/
+    - xform/^([ae])(.*)(;.*)$/$1$1$2$3/
+    - xform/^(\w+?)iu(;.*)/$1Ⓠ$2/
+    - xform/^(\w+?)er(;.*)/$1Ⓡ$2/
+    - xform/^(\w+?)[uv]an(;.*)/$1Ⓡ$2/
+    - xform/^(\w+?)[uv]e(;.*)/$1Ⓣ$2/
+    - xform/^(\w+?)v(;.*)/$1Ⓨ$2/
+    - xform/^(\w+?)uai(;.*)/$1Ⓨ$2/
+    - xform/^(\w+?)uo(;.*)/$1Ⓞ$2/
+    - xform/^(\w+?)[uv]n(;.*)/$1Ⓟ$2/
+    - xform/^(\w+?)i?ong(;.*)/$1Ⓢ$2/
+    - xform/^(\w+?)[iu]ang(;.*)/$1Ⓓ$2/
+    - xform/^(\w+?)eng(;.*)/$1Ⓖ$2/
+    - xform/^(\w+?)en(;.*)/$1Ⓕ$2/
+    - xform/^(\w+?)ang(;.*)/$1Ⓗ$2/
+    - xform/^(\w+?)ian(;.*)/$1Ⓜ$2/
+    - xform/^(\w+?)an(;.*)/$1Ⓙ$2/
+    - xform/^(\w+?)iao(;.*)/$1Ⓒ$2/
+    - xform/^(\w+?)ao(;.*)/$1Ⓚ$2/
+    - xform/^(\w+?)ai(;.*)/$1Ⓛ$2/
+    - xform/^(\w+?)ei(;.*)/$1Ⓩ$2/
+    - xform/^(\w+?)ie(;.*)/$1Ⓧ$2/
+    - xform/^(\w+?)ui(;.*)/$1Ⓥ$2/
+    - derive/Ⓣ/Ⓥ/
+    - xform/^(\w+?)ou(;.*)/$1Ⓑ$2/
+    - xform/^(\w+?)ing(;.*)/$1◯$2/  #注意这里的◯用来暂时替换分号
+    - xform/^(\w+?)in(;.*)/$1Ⓝ$2/
+    - xform/^(\w+?)[iu]a(;.*)/$1Ⓦ$2/
+    - xform/^sh/Ⓤ/
+    - xform/^ch/Ⓘ/
+    - xform/^zh/Ⓥ/
+    - xlit/ⓆⓌⓇⓉⓎⓊⒾⓄⓅⓈⒹⒻⒼⒽⓂⒿⒸⓀⓁⓏⓍⓋⒷⓃ/qwrtyuiopsdfghmjcklzxvbn/
+
+搜狗双拼: 
+  __append:
+    - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
+    - xform/^ng(;.*)/eng$1/
+    - xform/ńg|ňg|ǹg/eng/
+    - xform/ń|ň|ǹ/en/
+    - derive/^([jqxy])u(;.*)$/$1v$2/
+    - derive/^([aoe].*)(;.*)$/o$1$2/
+    - xform/^([ae])(.*)(;.*)$/$1$1$2$3/
+    - xform/^(\w+?)iu(;.*)$/$1Ⓠ$2/
+    - xform/^(\w+?)[iu]a(;.*)$/$1Ⓦ$2/
+    - xform/^(\w+?)er(;.*)$/$1Ⓡ$2/
+    - xform/^(\w+?)[uv]an(;.*)$/$1Ⓡ$2/
+    - xform/^(\w+?)[uv]e(;.*)$/$1Ⓣ$2/
+    - xform/^(\w+?)v(;.*)$/$1Ⓨ$2/
+    - xform/^(\w+?)uai(;.*)$/$1Ⓨ$2/
+    - xform/^(\w+?)uo(;.*)$/$1Ⓞ$2/
+    - xform/^(\w+?)[uv]n(;.*)$/$1Ⓟ$2/
+    - xform/^(\w+?)i?ong(;.*)$/$1Ⓢ$2/
+    - xform/^(\w+?)[iu]ang(;.*)$/$1Ⓓ$2/
+    - xform/^(\w+?)en(;.*)$/$1Ⓕ$2/
+    - xform/^(\w+?)eng(;.*)$/$1Ⓖ$2/
+    - xform/^(\w+?)ang(;.*)$/$1Ⓗ$2/
+    - xform/^(\w+?)ian(;.*)$/$1Ⓜ$2/
+    - xform/^(\w+?)an(;.*)$/$1Ⓙ$2/
+    - xform/^(\w+?)iao(;.*)$/$1Ⓒ$2/
+    - xform/^(\w+?)ao(;.*)$/$1Ⓚ$2/
+    - xform/^(\w+?)ai(;.*)$/$1Ⓛ$2/
+    - xform/^(\w+?)ei(;.*)$/$1Ⓩ$2/
+    - xform/^(\w+?)ie(;.*)$/$1Ⓧ$2/
+    - xform/^(\w+?)ui(;.*)$/$1Ⓥ$2/
+    - xform/^(\w+?)ou(;.*)$/$1Ⓑ$2/
+    - xform/^(\w+?)in(;.*)$/$1Ⓝ$2/
+    - xform/^(\w+?)ing(;.*)$/$1◯$2/  #注意这里的◯用来暂时替换分号
+    - xform/^sh/Ⓤ/
+    - xform/^ch/Ⓘ/
+    - xform/^zh/Ⓥ/
+    - xlit/ⓆⓌⓇⓉⓎⓊⒾⓄⓅⓈⒹⒻⒼⒽⓂⒿⒸⓀⓁⓏⓍⓋⒷⓃ/qwrtyuiopsdfghmjcklzxvbn/
+
+紫光双拼: 
+  __append:
+    - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
+    - xform/^ng(;.*)/eng$1/
+    - xform/ńg|ňg|ǹg/eng/
+    - xform/ń|ň|ǹ/en/
+    - derive/^([jqxy])u(;.*)$/$1v$2/
+    - xform/^([aoe].*)(;.*)$/o$1$2/
+    - xform/^(\w+?)en(;.*)$/$1Ⓦ$2/
+    - xform/^(\w+?)eng(;.*)$/$1Ⓣ$2/
+    - xform/^(\w+?)in(;.*)$/$1Ⓨ$2/
+    - xform/^(\w+?)uai(;.*)$/$1Ⓨ$2/
+    - xform/^(\w+?)uo(;.*)$/$1Ⓞ$2/
+    - xform/^(\w+?)ai(;.*)$/$1Ⓟ$2/
+    - xform/^(\w+?)[iu]ang(;.*)$/$1Ⓖ$2/
+    - xform/^(\w+?)ang(;.*)$/$1Ⓢ$2/
+    - xform/^(\w+?)ie(;.*)$/$1Ⓓ$2/
+    - xform/^(\w+?)ian(;.*)$/$1Ⓕ$2/
+    - xform/^(\w+?)i?ong(;.*)$/$1Ⓗ$2/
+    - xform/^(\w+?)er(;.*)$/$1Ⓙ$2/
+    - xform/^(\w+?)iu(;.*)$/$1Ⓙ$2/
+    - xform/^(\w+?)ei(;.*)$/$1Ⓚ$2/
+    - xform/^(\w+?)uan(;.*)$/$1Ⓛ$2/
+    - xform/^(\w+?)ing(;.*)$/$1;$2/
+    - xform/^(\w+?)ou(;.*)$/$1Ⓩ$2/
+    - xform/^(\w+?)[iu]a(;.*)$/$1Ⓧ$2/
+    - xform/^(\w+?)iao(;.*)$/$1Ⓑ$2/
+    - xform/^(\w+?)ue(;.*)$/$1Ⓝ$2/
+    - xform/^(\w+?)ui(;.*)$/$1Ⓝ$2/
+    - xform/^(\w+?)ve(;.*)$/$1Ⓝ$2/
+    - xform/^(\w+?)un(;.*)$/$1Ⓜ$2/
+    - xform/^(\w+?)ao(;.*)$/$1Ⓠ$2/
+    - xform/^(\w+?)an(;.*)$/$1Ⓡ$2/
+    - xform/^zh/Ⓤ/
+    - xform/^sh/Ⓘ/
+    - xform/^ch/Ⓐ/
+    - xlit/ⓌⓉⓎⓊⒾⓄⓅⒶⒼⓈⒹⒻⒽⒿⓀⓁⓏⓍⒷⓃⓂⓆⓇ/wtyuiopagsdfhjklzxbnmqr/
+
+智能ABC: 
+  __append:
+    - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
+    - xform/^ng(;.*)/eng$1/
+    - xform/ńg|ňg|ǹg/eng/
+    - xform/ń|ň|ǹ/en/
+    - xform/^([aoe].*)(;.*)$/Ⓞ$1$2/
+    - xform/^(\w+?)ei(;.*)$/$1Ⓠ$2/
+    - xform/^(\w+?)ian(;.*)$/$1Ⓦ$2/
+    - xform/^(\w+?)er(;.*)$/$1Ⓡ$2/
+    - xform/^(\w+?)iu(;.*)$/$1Ⓡ$2/
+    - xform/^(\w+?)[iu]ang(;.*)$/$1Ⓣ$2/
+    - xform/^(\w+?)ing(;.*)$/$1Ⓨ$2/
+    - xform/^(\w+?)uo(;.*)$/$1Ⓞ$2/
+    - xform/^(\w+?)uan(;.*)$/$1Ⓟ$2/
+    - xform/^(\w+?)i?ong(;.*)$/$1Ⓢ$2/
+    - xform/^(\w+?)[iu]a(;.*)$/$1Ⓓ$2/
+    - xform/^(\w+?)en(;.*)$/$1Ⓕ$2/
+    - xform/^(\w+?)eng(;.*)$/$1Ⓖ$2/
+    - xform/^(\w+?)ang(;.*)$/$1Ⓗ$2/
+    - xform/^(\w+?)an(;.*)$/$1Ⓙ$2/
+    - xform/^(\w+?)iao(;.*)$/$1Ⓩ$2/
+    - xform/^(\w+?)ao(;.*)$/$1Ⓚ$2/
+    - xform/^(\w+?)in(;.*)$/$1Ⓒ$2/
+    - xform/^(\w+?)uai(;.*)$/$1Ⓒ$2/
+    - xform/^(\w+?)ai(;.*)$/$1Ⓛ$2/
+    - xform/^(\w+?)ie(;.*)$/$1Ⓧ$2/
+    - xform/^(\w+?)ou(;.*)$/$1Ⓑ$2/
+    - xform/^(\w+?)un(;.*)$/$1Ⓝ$2/
+    - xform/^(\w+?)[uv]e(;.*)$/$1Ⓜ$2/
+    - xform/^(\w+?)ui(;.*)$/$1Ⓜ$2/
+    - xform/^zh/Ⓐ/
+    - xform/^ch/Ⓔ/
+    - xform/^sh/Ⓥ/
+    - xlit/ⓆⓌⒺⓇⓉⓎⓄⓅⒶⓈⒹⒻⒼⒽⒿⓀⓁⓏⓍⒸⓋⒷⓃⓂ/qwertyopasdfghjklzxcvbnm/
+
+国标双拼:
+  __append:
+    - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
+    - xform/^ng(;.*)/eng$1/
+    - xform/ńg|ňg|ǹg/eng/
+    - xform/ń|ň|ǹ/en/
+    - derive/^([jqxy])u(;.*)$/$1v$2/
+    - derive/^([aoe])([ioun])(;.*)$/$1$1$2$3/
+    - xform/^([aoe])(ng)?(;.*)$/$1$1$2$3/
+    - xform/^(\w+?)[iu]a(;.*)$/$1Ⓠ$2/
+    - xform/^(\w+?)[vu]an(;.*)$/$1Ⓦ$2/
+    - xform/^(\w+?)en(;.*)$/$1Ⓡ$2/
+    - xform/^(\w+?)ie(;.*)$/$1Ⓣ$2/
+    - xform/^(\w+?)(iu|uai)(;.*)$/$1Ⓨ$3/
+    - xform/^(\w+?)uo(;.*)$/$1Ⓞ$2/
+    - xform/^(\w+?)ou(;.*)$/$1Ⓟ$2/
+    - xform/^(\w+?)i?ong(;.*)$/$1Ⓢ$2/
+    - xform/^(\w+?)ian(;.*)$/$1Ⓓ$2/
+    - xform/^(\w+?)an(;.*)$/$1Ⓕ$2/
+    - xform/^(\w+?)(iang|uang)(;.*)$/$1Ⓝ$3/
+    - xform/^(\w+?)iao(;.*)$/$1Ⓜ$2/
+    - xform/^(\w+?)ang(;.*)$/$1Ⓖ$2/
+    - xform/^(\w+?)eng(;.*)$/$1Ⓗ$2/
+    - xform/^(\w+?)ing(;.*)$/$1Ⓙ$2/
+    - xform/^(\w+?)ai(;.*)$/$1Ⓚ$2/
+    - xform/^(\w+?)(in|er)(;.*)$/$1Ⓛ$3/
+    - xform/^(\w+?)[vu]n(;.*)$/$1Ⓩ$2/
+    - xform/^(\w+?)[vu]e(;.*)$/$1Ⓧ$2/
+    - xform/^(\w+?)ao(;.*)$/$1Ⓒ$2/
+    - xform/^(\w+?)(v|ui)(;.*)$/$1Ⓥ$3/
+    - xform/^(\w+?)ei(;.*)$/$1Ⓑ$2/
+    - xform/^zh/Ⓥ/
+    - xform/^ch/Ⓘ/
+    - xform/^sh/Ⓤ/
+    - xlit/ⓆⓌⓇⓉⓎⓊⒾⓄⓅⓈⒹⒻⒼⒽⒿⓀⓁⓏⓍⒸⓋⒷⓃⓂ/qwrtyuiopsdfghjklzxcvbnm/
+###############################################以下是用来配置不同的辅助码方案###############################################
+fuzhu_kong: 
+  __append: 
+    - "xform/;.*$//"
+    - xform/◯/;/  #对于微软双拼、搜狗双拼，前面将分号保护了起来，现在放出来让其发挥作用
+fuzhu_moqi:    ##############################位于词库第一个分号后
+  __append:
+    - xform|^(.*?);(.*?);.*$|$1;$2|         #匹配当前方案，转换为 双拼；辅助码（当前方案）的形式
+    - derive|^(.+);.*$|$1| # 纯双拼的情况
+    - derive|^(.+);(\w)(\w).*$|$1$2| # 双拼+一位辅助码的情况
+    - derive|^(.+);(\w)(\w).*$|$1[$2| # 双拼+[一位辅助码的情况
+    - abbrev|^(.+);(\w)(\w).*$|$1$2$3| # 双拼+2位辅助码的情况
+    - derive|^(.+);(\w)(\w).*$|$1$2$3/| # 双拼+2位辅助码+/
+    - derive|^(.+);(\w)(\w).*$|$1$2$3o| # 双拼\+2位辅助码\+o，主要用来应对小企鹅这类输入法没法使用符号的场景，但同时有些辅助码会出现异常，如：ui uio>uiuio，手机小企鹅使用时开启
+    - xform/◯/;/  #对于微软双拼、搜狗双拼，前面将分号保护了起来，现在放出来让其发挥作用
+    - erase/^(.+);(.+)$/    # 删除原始编码加速检索
+fuzhu_flypy:   ####################################位于词库第二个分号后
+  __append:
+    - xform|^(.*?);.*?;(.*?);.*$|$1;$2|  #匹配当前方案，转换为 双拼；辅助码（当前方案）的形式
+    - derive|^(.+);.*$|$1| # 纯双拼的情况
+    - derive|^(.+);(\w)(\w).*$|$1$2| # 双拼+一位辅助码的情况
+    - derive|^(.+);(\w)(\w).*$|$1[$2| # 双拼+[一位辅助码的情况
+    - abbrev|^(.+);(\w)(\w).*$|$1$2$3| # 双拼+2位辅助码的情况
+    - derive|^(.+);(\w)(\w).*$|$1$2$3/| # 双拼+2位辅助码+/
+    - derive|^(.+);(\w)(\w).*$|$1$2$3o| # 双拼\+2位辅助码\+o，主要用来应对小企鹅这类输入法没法使用符号的场景，但同时有些辅助码会出现异常，如：ui uio>uiuio，手机小企鹅使用时开启
+      #分号后面第二组辅助码
+    - derive/^(.+);.*?,(\w\w).*$/$1$2/
+    - derive/^(.+);.*?,(\w)(\w).*$/$1[$2/
+    - abbrev/^(.+);.*?,(\w)(\w).*$/$1$2$3/
+    - derive|^(.+);.*?,(\w)(\w).*$|$1$2$3/|
+    - derive/^(.+);.*?,(\w)(\w).*$/$1$2$3o/
+    - xform/◯/;/  #对于微软双拼、搜狗双拼，前面将分号保护了起来，现在放出来让其发挥作用
+    - erase/^(.+);(.+)$/    # 删除原始编码加速检索
+fuzhu_zrm:  ########################################位于词库第三个分号后
+  __append:
+    - xform|^(.*?);.*?;.*?;(.*?);.*$|$1;$2|  #匹配当前方案，转换为 双拼；辅助码（当前方案）的形式
+#以下是双拼运算
+    - derive/^(.+);.*$/$1/ # 纯双拼的情况
+#分号后面第一组辅助码
+#分号后面第一组辅助码
+    - derive/^(.+);(\w)(\w).*$/$1$2/ # 双拼+一位辅助码的情况
+    - derive/^(.+);(\w)(\w).*$/$1[$2/ # 双拼+[一位辅助码的情况
+    - abbrev/^(.+);(\w)(\w).*$/$1$2$3/ # 双拼+2位辅助码的情况
+    - derive|^(.+);(\w)(\w).*$|$1$2$3/| # 双拼+2位辅助码+/
+    - derive|^(.+);(\w)(\w).*$|$1$2$3o| # 双拼\+2位辅助码\+o，主要用来应对小企鹅这类输入法没法使用符号的场景，但同时有些辅助码会出现异常，如：ui uio>uiuio，手机小企鹅使用时开启
+#分号后面第二组辅助码
+    - derive/^(.+);.*?,(\w)(\w).*$/$1$2/
+    - derive/^(.+);.*?,(\w)(\w).*$/$1[$2/
+    - abbrev/^(.+);.*?,(\w)(\w).*$/$1$2$3/
+    - derive|^(.+);.*?,(\w)(\w).*$|$1$2$3/|
+    - derive/^(.+);.*?,(\w)(\w).*$/$1$2$3o/
+#分号后面第三组辅助码
+    - derive/^(.+);.*?,.*?,(\w)(\w).*$/$1$2/
+    - derive/^(.+);.*?,.*?,(\w)(\w).*$/$1[$2/
+    - abbrev/^(.+);.*?,.*?,(\w)(\w).*$/$1$2$3/
+    - derive|^(.+);.*?,.*?,(\w)(\w).*$|$1$2$3/|
+    - derive/^(.+);.*?,.*?,(\w)(\w).*$/$1$2$3o/
+#分号后面第四组辅助码
+    - derive/^(.+);.*?,.*?,.*?,(\w)(\w).*$/$1$2/ 
+    - derive/^(.+);.*?,.*?,.*?,(\w)(\w).*$/$1[$2/
+    - abbrev/^(.+);.*?,.*?,.*?,(\w)(\w).*$/$1$2$3/
+    - derive|^(.+);.*?,.*?,.*?,(\w)(\w).*$|$1$2$3/|
+    - derive/^(.+);.*?,.*?,.*?,(\w)(\w).*$/$1$2$3o/
+#特殊优化：部分音节字极少，几乎不参与构词，则提升对应四码字的优先级，仅对自然码双拼有效，其他双拼方案需作对应修改）
+    - derive/^(.+);(bd|dw|df|dw|yl|rw|fs|iw)$/$1$2/
+    - derive/^(.+);.*?,(bd|dw|df|dw|yl|rw|fs|iw)$/$1$2/
+    - derive/^(.+);.*?,.*?,(bd|dw|df|dw|yl|rw|fs|iw)$/$1$2/
+    - derive/^(.+);.*?,.*?,.*?,(bd|dw|df|dw|yl|rw|fs|iw)$/$1$2/
+    - xform/◯/;/  #对于微软双拼、搜狗双拼，前面将分号保护了起来，现在放出来让其发挥作用
+    - erase/^(.+);(.+)$/    # 删除原始编码加速检索
+fuzhu_jdh:    ########################################位于词库第四个分号后
+  __append:  
+    - xform|^(.*?);.*?;.*?;.*?;(.*?);.*$|$1;$2|
+    - derive|^(.+);.*$|$1| # 纯双拼的情况
+    - derive|^(.+);(\w)(\w).*$|$1$2| # 双拼+一位辅助码的情况
+    - derive|^(.+);(\w)(\w).*$|$1[$2| # 双拼+[一位辅助码的情况
+    - abbrev|^(.+);(\w)(\w).*$|$1$2$3| # 双拼+2位辅助码的情况
+    - derive|^(.+);(\w)(\w).*$|$1$2$3/| # 双拼+2位辅助码+/
+    - derive|^(.+);(\w)(\w).*$|$1$2$3o| # 双拼\+2位辅助码\+o，主要用来应对小企鹅这类输入法没法使用符号的场景，但同时有些辅助码会出现异常，如：ui uio>uiuio
+    - xform/◯/;/  #对于微软双拼、搜狗双拼，前面将分号保护了起来，现在放出来让其发挥作用
+    - erase/^(.+);(.+)$/    # 删除原始编码加速检索
+
+fuzhu_cj:   ########################################位于词库第五个分号后
+  __append:
+    - xform|^(.*?);.*?;.*?;.*?;.*?;(.*?);.*$|$1;$2|
+    - derive|^(.+);.*$|$1| # 纯双拼的情况
+    - derive|^(.+);(\w)(\w).*$|$1$2| # 双拼+一位辅助码的情况
+    - derive|^(.+);(\w)(\w).*$|$1[$2| # 双拼+[一位辅助码的情况
+    - abbrev|^(.+);(\w)(\w).*$|$1$2$3| # 双拼+2位辅助码的情况
+    - derive|^(.+);(\w)(\w).*$|$1$2$3/| # 双拼+2位辅助码+/
+    - derive|^(.+);(\w)(\w).*$|$1$2$3o| # 双拼\+2位辅助码\+o，主要用来应对小企鹅这类输入法没法使用符号的场景，但同时有些辅助码会出现异常，如：ui uio>uiuio
+    - xform/◯/;/  #对于微软双拼、搜狗双拼，前面将分号保护了起来，现在放出来让其发挥作用
+    - erase/^(.+);(.+)$/    # 删除原始编码加速检索
+
+
+fuzhu_tiger:    ########################################位于词库第六个分号后
+  __append:
+    - xform|^(.*?);.*?;.*?;.*?;.*?;.*?;(.*?);.*$|$1;$2|
+    - derive|^(.+);.*$|$1| # 纯双拼的情况
+    - derive|^(.+);(\w)(\w).*$|$1$2| # 双拼+一位辅助码的情况
+    - derive|^(.+);(\w)(\w).*$|$1[$2| # 双拼+[一位辅助码的情况
+    - abbrev|^(.+);(\w)(\w).*$|$1$2$3| # 双拼+2位辅助码的情况
+    - derive|^(.+);(\w)(\w).*$|$1$2$3/| # 双拼+2位辅助码+/
+    - derive|^(.+);(\w)(\w).*$|$1$2$3o| # 双拼\+2位辅助码\+o，主要用来应对小企鹅这类输入法没法使用符号的场景，但同时有些辅助码会出现异常，如：ui uio>uiuio
+#分号后面第二组辅助码
+    - derive/^(.+);.*?,(\w)(\w).*$/$1$2/
+    - derive/^(.+);.*?,(\w)(\w).*$/$1[$2/
+    - abbrev/^(.+);.*?,(\w)(\w).*$/$1$2$3/
+    - derive|^(.+);.*?,(\w)(\w).*$|$1$2$3/|
+    - derive/^(.+);.*?,(\w)(\w).*$/$1$2$3o/
+    - xform/◯/;/  #对于微软双拼、搜狗双拼，前面将分号保护了起来，现在放出来让其发挥作用
+    - erase/^(.+);(.+)$/    # 删除原始编码加速检索
+
+fuzhu_wubi:     ########################################位于词库第七个分号后
+  __append:
+    - xform|^(.*?);.*?;.*?;.*?;.*?;.*?;.*?;(.*?);.*$|$1;$2|
+    - derive|^(.+);.*$|$1| # 纯双拼的情况
+    - derive|^(.+);(\w)(\w).*$|$1$2| # 双拼+一位辅助码的情况
+    - derive|^(.+);(\w)(\w).*$|$1[$2| # 双拼+[一位辅助码的情况
+    - abbrev|^(.+);(\w)(\w).*$|$1$2$3| # 双拼+2位辅助码的情况
+    - derive|^(.+);(\w)(\w).*$|$1$2$3/| # 双拼+2位辅助码+/
+    - derive|^(.+);(\w)(\w).*$|$1$2$3o| # 双拼\+2位辅助码\+o，主要用来应对小企鹅这类输入法没法使用符号的场景，但同时有些辅助码会出现异常，如：ui uio>uiuio
+    - xform/◯/;/  #对于微软双拼、搜狗双拼，前面将分号保护了起来，现在放出来让其发挥作用
+    - erase/^(.+);(.+)$/    # 删除原始编码加速检索
+
+fuzhu_hanxin:     ########################################位于词库第八个分号后
+  __append:
+    - xform|^(.*?);.*?;.*?;.*?;.*?;.*?;.*?;.*?;(.*?);.*$|$1;$2|
+    - derive|^(.+);.*$|$1| # 纯双拼的情况
+    - derive|^(.+);(\w)(\w).*$|$1$2| # 双拼+一位辅助码的情况
+    - derive|^(.+);(\w)(\w).*$|$1[$2| # 双拼+[一位辅助码的情况
+    - abbrev|^(.+);(\w)(\w).*$|$1$2$3| # 双拼+2位辅助码的情况
+    - derive|^(.+);(\w)(\w).*$|$1$2$3/| # 双拼+2位辅助码+/
+    - derive|^(.+);(\w)(\w).*$|$1$2$3o| # 双拼\+2位辅助码\+o，主要用来应对小企鹅这类输入法没法使用符号的场景，但同时有些辅助码会出现异常，如：ui uio>uiuio
+    - xform/◯/;/  #对于微软双拼、搜狗双拼，前面将分号保护了起来，现在放出来让其发挥作用
+    - erase/^(.+);(.+)$/    # 删除原始编码加速检索
+
+
+mohuyin:
+  __append:
+    # 模糊音 可选择性开启
+    - derive/^z([a-z])/v$1/
+    - derive/^c([a-z])/i$1/
+    - derive/^s([a-z])/u$1/
+    - derive/^v([a-z])/z$1/
+    - derive/^i([a-z])/c$1/
+    - derive/^u([a-z])/s$1/
+
+user_dict_set:
+  dictionary: wanxiang
+  initial_quality: 0
+  enable_completion: false
+  enable_sentence: false
+  spelling_hints: 100
+  comment_format:
+  enable_user_dict: true
+  user_dict: zc
+
+
+  # 自定义词典加词(ac引导)
+add_user_dict:
+  tag: add_user_dict
+  dictionary: wanxiang
+  initial_quality: -1
+  user_dict: zc
+  enable_charset_filter: false # 是否开启字符集过滤
+  enable_completion: true # 提前显示尚未输入完整码的字〔仅 table_translator 有效〕
+  enable_encoder: true # 是否开启自动造词〔仅 table_translator 有效〕
+  enable_sentence: true #  是否开启自动造句
+  enable_user_dict: true
+  encode_commit_history: false # 是否对已上屛词自动成词〔仅 table_translator 有效〕
+  preedit_format:   
+  comment_format:
+  prefix: "ac"
+  tips: "〔自造词〕"
+
+
+
+#语法模型
+octagram:
+  __patch:
+    grammar:
+      language: wanxiang-lts-zh-hans
+      collocation_max_length: 8         #命中的最长词组
+      collocation_min_length: 2         #命中的最短词组，搭配词频健全的词库时候应当最小值设为3避开2字高频词
+      collocation_penalty: -10          #默认-12 对常见搭配词组施加的惩罚值。较高的负值会降低这些搭配被选中的概率，防止过于频繁地出现某些固定搭配。
+      non_collocation_penalty: -12      #默认-12 对非搭配词组施加的惩罚值。较高的负值会降低非搭配词组被选中的概率，避免不合逻辑或不常见的词组组合。
+      weak_collocation_penalty: -24     #默认-24 对弱搭配词组施加的惩罚值。保持默认值通常是为了有效过滤掉不太常见但仍然合理的词组组合。
+      rear_penalty: -30                 #默认-18 对词组中后续词语的位置施加的惩罚值。较高的负值会降低某些词语在句子后部出现的概率，防止句子结构不自然。
+    translator/contextual_suggestions: false
+    translator/max_homophones: 5
+    translator/max_homographs: 5
+
+#并击处理器
+set_chord_composer:
+  __patch:
+    chord_composer:
+      finish_chord_on_first_key_release: true #有一键被释放时立刻触发合成
+      alphabet: qazwsxedcrfvtgbyhnujmik,ol.p;/ `
+      algebra:
+      # 符号和数字映射为大写字母，分离其转义干扰
+        - xlit|;,./|ACXZ|
+      # 左手编码包装
+        - xform/([qwertasdfgzxcvb]+)/<$1>/
+      # 右手编码包装
+        - xform/([yuiophjklAnmCXZ]+)/<$1>/
+      # 主处理区（尽量按照顺序排列）
+        - xform=(<q>|<p>)=q=
+        - xform=(<w>|<o>)=w=
+        - xform=(<e>|<i>)=e=
+        - xform=(<r>|<u>)=r=
+        - xform=(<t>|<y>)=t=
+        - xform=(<ef>|<ji>)=y=
+        - xform=(<er>|<ui>)=u=
+        - xform=(<we>|<io>)=i=
+        - xform=(<wr>|<uo>)=o=
+        - xform=(<qr>|<up>)=p=
+        - xform=(<a>|<A>)=a=
+        - xform=(<s>|<l>)=s=
+        - xform=(<d>|<k>)=d=
+        - xform=(<f>|<j>)=f=
+        - xform=(<g>|<h>)=g=
+        - xform=(<se>|<il>)=h=
+        - xform=(<wf>|<jo>)=h=
+        - xform=(<df>|<jk>)=j=
+        - xform=(<sd>|<kl>)=k=
+        - xform=(<sf>|<jl>)=l=
+        - xform=(<z>|<Z>)=z=
+        - xform=(<x>|<X>)=x=
+        - xform=(<c>|<C>)=c=
+        - xform=(<v>|<m>)=v=
+        - xform=(<b>|<n>)=b=
+        - xform=(<af>|<jA>)=n=
+        - xform=(<cv>|<mC>)=m=
+        - xform=(<dg>)=,=
+        - xform=(<ag>)=.=
+        - xform=(<hk>)=!=
+        - xform=(<hA>)=?=
+        - xform=(<xc>|<CX>)=,=
+        - xform=(<xv>|<mX>)=.=
+        - xform=(<zx>|<XZ>)=!=
+        - xform=(<zv>|<mZ>)=?=
+        - xform=(<ad>|<kA>)=;=
+        - xform=(<as>|<lA>)=/=
+        - xform=(<vb>|<nm>)=/=
+        - xform=(<rt>|<yu>)=“=
+        - xform=(<et>|<yi>)=”=
+        - xform=(<qa>|<pA>)=~”=
+        - xform=(<aw>|<oA>)=^”=
+        - xform=(<ed>|<ik>)=!”=
+        - xform=(<rf>|<uj>)=?”=
+        - xform=(<ar>|<uA>)=:“=
+        - xform=(<sr>|<ul>)=.”=
+        - xform=(<qw>|<op>)=,“=
+        - xform=(<zf>|<jZ>)=+=
+        - xform=(<xf>|<jX>)=-=
+        - xform=(<cf>|<jC>)=%=
+        - xform=(<dr>|<uk>)=*=
+        - xform=(<qe>|<ip>)=@=
+        - xform=(<tg>)=:=
+        - xform=(<yh>)=#=
+        - xform=(<fg>)=~=
+        - xform=(<hj>)=^=
+      #  - xform=(<qt>|<yp>)==
+      #  - xform=(<rt>|<yu>)==
+      #  - xform=(<fg>|<hj>)==
+      #  - xform=(<tg>|<yh>)==   
+      #  - xform=(<qw>|<op>)==
+  ###################################
+        # 屏蔽未定义的指法
+        - xform/<1>/ /
+        - xform/<"1>/"/
+        - xform/^.*<.+>.*$//
+        # 符号转义的后处理
+        - xform=，="""",=
+        - xform=。="""".=
+        - xform=！=""""!=
+        - xform=？=""""?=

@@ -1,0 +1,4 @@
+patch:
+  # 只修改下面配置中的输入方案名称，名称与wanxiang.custom.yaml保持一致
+  speller/algebra:
+    __include: wanxiang_radical.schema:/小鹤双拼     #可选的选项有（自然码, 小鹤双拼, 微软双拼, 搜狗双拼, 智能ABC, 紫光双拼）
