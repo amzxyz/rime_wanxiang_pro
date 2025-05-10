@@ -356,8 +356,8 @@ key_binder:
     #- { when: has_menu, accept: semicolon, send: 2 }
 #使用Control+e进入翻译模式
     - { when: has_menu, accept: "Control+e", toggle: chinese_english }
-#使用快捷键Control+z分别开启和关闭辅助码拆分显示
-    - { when: has_menu, accept: "Control+z", toggle: chaifen_switch }
+#使用快捷键Control+c拆分显示
+    - { when: has_menu, accept: "Control+c", toggle: chaifen_switch }
 #使用快捷键Control+a开启和关闭辅助码显示
     - { when: has_menu, accept: "Control+a", toggle: fuzhu_switch }
 #通过快捷键Control+s使得输入码显示音调
