@@ -13,7 +13,7 @@ schema_list:
 
 # 菜单
 menu:
-  page_size: 7  # 候选词个数
+  page_size: 6  # 候选词个数，不得超过6个，7890代表声调
   alternative_select_labels: [ ⒈, ⒉, ⒊, ⒋, ⒌, ⒍, ⒎, ⒏, ⒐, ⒑, ⒒, ⒓, ⒔, ⒕, ⒖, ⒗, ⒘, ⒙, ⒚, ⒛ ]  # 修改候选项标签
   # alternative_select_keys: ASDFGHJKL  # 如编码字符占用数字键，则需另设选字键
 
