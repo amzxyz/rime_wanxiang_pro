@@ -2,12 +2,12 @@ patch:
   speller/algebra:
     __patch:
     - wanxiang.schema:/小鹤双拼            # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
-    - wanxiang.schema:/fuzhu_moqi          # 可选辅助码有：fuzhu_kong，fuzhu_hanxin, fuzhu_moqi, fuzhu_flypy, fuzhu_zrm, fuzhu_tiger, fuzhu_wubi    选择一个填入
+    - wanxiang.schema:/直接辅助            #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
   # 中英混合词汇，要与你的双拼类型一样
-  cn_en/user_dict: en_dicts/flypy          # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
+  cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
   #通过下面的设置可以让你自己的文件引入而与仓库custom_phrase.txt不同，以后可以大胆覆盖更新
-  custom_phrase/user_dict: custom_phrase   # 如果在这里填了 custom222 则需要在配置的根目录手动创建 custom222.txt 文件
-  #下面是候选数量
+  custom_phrase/user_dict: custom_phrase    # 改成什么就需要手动创建 xxxxxx.txt 文件在用户目录
+    #下面是候选数量，未来7890分别代表1234声，请候选长度不要大于6避免冲突
   menu/page_size: 6
   #下面用来改变你的windows小狼毫右下角软件图标
   #schema/+:
