@@ -5,7 +5,7 @@ local function tone_fallback(input, env)
     local ctx = env.engine.context
     -- 获取当前输入的内容
     local input_text = ctx.input
-    if string.match(input_text, "^V") or string.match(input_text, "^R") or string.match(input_text, "^N") or string.match(input_text, "^/") then
+    if string.match(input_text, "^V") or string.match(input_text, "^R") or string.match(input_text, "^N") or string.match(input_text, "^U") or string.match(input_text, "^/") then
         return 2
     end
     -- 检查最后两个字符是否为数字
