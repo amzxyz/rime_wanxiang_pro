@@ -155,7 +155,7 @@ function S.func(key, env)
     if not segment then
         return 2
     end
-    if string.match(input_text, "^V") or string.match(input_text, "^R") or string.match(input_text, "^N") then
+    if string.match(input_text, "^V") or string.match(input_text, "^R") or string.match(input_text, "^N") or string.match(input_text, "^/") then
         return 2
     end
     local db = wrapLevelDb("lua/tips", false)
@@ -183,7 +183,10 @@ function S.func(key, env)
         tipsph = segment.prompt
     end
     -- 检查是否触发提示上屏
-    if (context:is_composing() or context:has_menu()) and S.tips_key and is_super_tips and (tipspc or tipsph) then
+    if (context:is_composing() or context:has_menu())
+        and S.tips_key
+        and is_super_tips
+        and ((tipspc and tipspc ~= "") or (tipsph and tipsph ~= "")) then
         local trigger = key:repr() == S.tips_key
         local text = selected_cand and selected_cand.text or input_text
         if trigger then
