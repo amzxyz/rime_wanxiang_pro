@@ -589,11 +589,11 @@ speller:
     - xform/^(ā|á|ǎ|à)/Q$1/
     - xform/^(ō|ó|ǒ|ò)/R$1/
     - xform/^(ē|é|ě|è)/B$1/
-    - xform/^([eacj])u(;.*)/$1ü$2/
-    - xform/^([eacj])ū(;.*)/$1ǖ$2/
-    - xform/^([eacj])ú(;.*)/$1ǘ$2/
-    - xform/^([eacj])ǔ(;.*)/$1ǚ$2/
-    - xform/^([eacj])ù(;.*)/$1ǜ$2/
+    - xform/^([jqxy])u(;.*)/$1ü$2/
+    - xform/^([jqxy])ū(;.*)/$1ǖ$2/
+    - xform/^([jqxy])ú(;.*)/$1ǘ$2/
+    - xform/^([jqxy])ǔ(;.*)/$1ǚ$2/
+    - xform/^([jqxy])ù(;.*)/$1ǜ$2/
     - xform/^a(;.*)$/Qā$1/
     - xform/^o(;.*)$/Rō$1/
     - xform/^e(;.*)$/Bē$1/
