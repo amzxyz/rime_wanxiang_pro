@@ -4,9 +4,11 @@
 #兼容词库，对于多字词汇两种读音的场景，手动维护到本表以及一些其他的杂项
 ---
 name: compatible
-version: "2025-05-12 23:15"
+version: "2025-05-13 07:09"
 sort: by_weight
 ...
+好高	hào;nz;nz;nz;ya;vd;bh;vb;nz gāo;wk;wk;wk;io;yr;gg;ym;wk
+好强	hào;nz;nz;nz;ya;vd;bh;vb;nz qiáng;gi;gi;gs;rf;ni;bc;xk;gi
 攒个	cuán;fb;fr;fz;jm;qo,xo;uo;rt;fr gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra	391
 攒个	zǎn;fb;fr;fz;jm;qo,xo;uo;rt;fr gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra	391
 背着	bēi;bo;lo;ob;ll;lb;av;ux;bo zhe;yo;yo;yo;fs;tu;gq;ud;em
