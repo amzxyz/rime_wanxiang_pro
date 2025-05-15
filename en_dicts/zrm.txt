@@ -1183,6 +1183,7 @@ hold住	holdvu
 苏L	suL
 苏M	suM
 苏N	suN
+苏U	suU
 皖A	wjA
 皖B	wjB
 皖C	wjC
@@ -1547,6 +1548,7 @@ hold住	holdvu
 苏L	sul
 苏M	sum
 苏N	sun
+苏U	suu
 皖A	wja
 皖B	wjb
 皖C	wjc

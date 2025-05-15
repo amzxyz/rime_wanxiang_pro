@@ -1183,6 +1183,8 @@ hold住	holdzhu
 苏L	suL
 苏M	suM
 苏N	suN
+苏U	suU
+苏U	suu
 皖A	wanA
 皖B	wanB
 皖C	wanC
