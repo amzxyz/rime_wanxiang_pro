@@ -4,7 +4,7 @@
 #兼容词库，对于多字词汇两种读音的场景，手动维护到本表以及一些其他的杂项
 ---
 name: compatible
-version: "2025-05-14 20:52"
+version: "2025-05-15 12:34"
 sort: by_weight
 ...
 好高	hào;nz;nz;nz;ya;vd;bh;vb;nz gāo;wk;wk;wk;io;yr;gg;ym;wk
