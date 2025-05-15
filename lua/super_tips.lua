@@ -90,9 +90,9 @@ local function is_mobile_device()
     if dist == "trime" or dist == "hamster" or dist == "Squirrel" then
         return true
     end
-    -- 补充判断：路径中出现 mobile/Android/手机特征
+    -- 补充判断：路径中出现 mobile/Android/手机特征，/data/storage/el2/随机字符串/group是鸿蒙的路径
     local lower_path = user_data_dir:lower()
-    if lower_path:find("/android/") or lower_path:find("/mobile/") or lower_path:find("/sdcard/") then
+    if lower_path:find("/android/") or lower_path:find("/mobile/") or lower_path:find("/sdcard/") or lower_path:find("/data/storage/") then
         return true
     end
     return false
