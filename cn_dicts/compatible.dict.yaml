@@ -7,11 +7,12 @@ name: compatible
 version: "LTS"
 sort: by_weight
 ...
-好高	hào;nz;nz;nz;ya;vd;bh;vb;nz gāo;wk;wk;wk;io;yr;gg;ym;wk
-好强	hào;nz;nz;nz;ya;vd;bh;vb;nz qiáng;gi;gi;gs;rf;ni;bc;xk;gi
+公差	gōng;bs;bs;sb,bs;fp;ci;hk;wc;bv chā;yg;yg;yg;fp;tm;gu;ud;eg	480
+好高	hào;nz;nz;nz;ya;vd;bh;vb;nz gāo;wk;wk;wk;io;yr;gg;ym;wk	491
+好强	hào;nz;nz;nz;ya;vd;bh;vb;nz qiáng;gi;gi;gs;rf;ni;bc;xk;gi	485
 攒个	cuán;fb;fr;fz;jm;qo,xo;uo;rt;fr gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra	391
 攒个	zǎn;fb;fr;fz;jm;qo,xo;uo;rt;fr gè;rl;rl;ra,pa;ep;ol,xl;jg;wh;ra	391
-背着	bēi;bo;lo;ob;ll;lb;av;ux;bo zhe;yo;yo;yo;fs;tu;gq;ud;em
+背着	bēi;bo;lo;ob;ll;lb;av;ux;bo zhe;yo;yo;yo;fs;tu;gq;ud;em	545
 外传	wài;xb;xb;xb;fh;ny;ly;qh;xb chuán;rv;rv;rv;xh;oi;ji;wf;rv	460
 长点儿	cháng;pn;pn;pd;uh;po;pc;ta;pn diǎn;vh;lh;hv;pn;yf,xf;yc;hk;ve ér;pv;pv;pg;kk;lu;pe;qt;pv	293
 长点儿	zhǎng;pn;pn;pd;uh;po;pc;ta;pn diǎn;vh;lh;hv;pn;yf,xf;yc;hk;ve ér;pv;pv;pg;kk;lu;pe;qt;pv	293
