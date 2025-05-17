@@ -100,7 +100,7 @@ if __name__ == "__main__":
 
     # 你可能有一批 start_index、end_index 对照表，这里仅示意
     index_mapping = [
-        (1, 2, "moqi_cndicts"),
+        (1, 2, "moqi_dicts"),
         (2, 3, "flypy_dicts"),
         (3, 4, "zrm_dicts"),
         (4, 5, "jdh_dicts"),
