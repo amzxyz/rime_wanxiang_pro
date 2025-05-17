@@ -41,13 +41,13 @@ function M.init(env)
     local config = env.engine.schema.config
     local dist = rime_api.get_distribution_code_name() or ""
     local user_lua_dir = rime_api.get_user_data_dir() .. "/lua"
-    -- 检查 dist 是否是 "hamster" 或 "Weasel"，如果是则不执行 ensure_dir_exist
     if dist ~= "hamster" and dist ~= "Weasel" then
         ensure_dir_exist(user_lua_dir)
     end
+
     local db = wrapLevelDb('lua/tips', true)
-    local user_path = rime_api.get_user_data_dir() .. "/lua/data/tips_show.txt"
-    local shared_path = rime_api.get_shared_data_dir() .. "/lua/data/tips_show.txt"
+    local user_path = rime_api.get_user_data_dir() .. "/lua/tips/tips_show.txt"
+    local shared_path = rime_api.get_shared_data_dir() .. "/lua/tips/tips_show.txt"
     local path = nil
 
     local f = io.open(user_path, "r")
@@ -65,6 +65,7 @@ function M.init(env)
         db:close()
         return
     end
+
     local file = io.open(path, "r")
     if not file then 
         db:close()
@@ -79,8 +80,24 @@ function M.init(env)
         end
     end
     file:close()
+
+    -- 加载用户覆盖文件
+    local user_path = rime_api.get_user_data_dir() .. "/lua/tips/tips_user.txt"
+    local user_file = io.open(user_path, "r")
+    if user_file then
+        for line in user_file:lines() do
+            if not line:match("^#") then
+                local value, key = line:match("([^\t]+)\t([^\t]+)")
+                if value and key then
+                    db:update(key, value)  -- 高优先级覆盖
+                end
+            end
+        end
+        user_file:close()
+    end
+
     collectgarbage()
-    db:close()  -- 初始化完毕后关闭
+    db:close()
 end
 -- 判断是否为手机设备，通过路径来判断（可以根据实际路径修改判断方式）
 local function is_mobile_device()
