@@ -32,7 +32,7 @@ local function ensure_dir_exist(dir)
 
     if sep == "/" then
         local cmd = 'mkdir -p "'..dir..'" 2>/dev/null'
-	local success = os.execute(cmd)
+    local success = os.execute(cmd)
     end
 end
 
@@ -43,6 +43,7 @@ function M.init(env)
     local user_lua_dir = rime_api.get_user_data_dir() .. "/lua"
     if dist ~= "hamster" and dist ~= "Weasel" then
         ensure_dir_exist(user_lua_dir)
+        ensure_dir_exist(user_lua_dir .. "/tips")
     end
 
     local db = wrapLevelDb('lua/tips', true)
@@ -82,10 +83,10 @@ function M.init(env)
     file:close()
 
     -- 加载用户覆盖文件
-    local user_path = rime_api.get_user_data_dir() .. "/lua/tips/tips_user.txt"
-    local user_file = io.open(user_path, "r")
-    if user_file then
-        for line in user_file:lines() do
+    local user_override_path = rime_api.get_user_data_dir() .. "/lua/tips/tips_user.txt"
+    local override_file = io.open(user_override_path, "r")
+    if override_file then
+        for line in override_file:lines() do
             if not line:match("^#") then
                 local value, key = line:match("([^\t]+)\t([^\t]+)")
                 if value and key then
@@ -93,7 +94,7 @@ function M.init(env)
                 end
             end
         end
-        user_file:close()
+        override_file:close()
     end
 
     collectgarbage()

@@ -95,7 +95,10 @@ function CR.init(env)
 end
 function CR.run(cand, env)
     -- 使用候选词的 comment 作为 code，在缓存中查找对应的修正
-    local correction = corrections_cache[cand.comment]
+    local correction = nil
+    if corrections_cache then
+        correction = corrections_cache[cand.comment]
+    end
     if correction and cand.text == correction.text then
         -- 用新的注释替换默认注释
         local final_comment = CR.style:gsub("{comment}", correction.comment)
