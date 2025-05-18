@@ -32,7 +32,7 @@ local function ensure_dir_exist(dir)
 
     if sep == "/" then
         local cmd = 'mkdir -p "'..dir..'" 2>/dev/null'
-    local success = os.execute(cmd)
+        local success = os.execute(cmd)
     end
 end
 
