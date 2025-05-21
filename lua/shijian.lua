@@ -2234,7 +2234,7 @@ local function translator(input, seg, env)
         local days_in_year = IsLeap(year) == "闰年" and 366 or 365  -- 判断是否为闰年
         local year_progress = (day_of_year / days_in_year) * 100  -- 今年进度
         -- 获取星期数据
-        local week_day_str = chinese_weekday2(week_of_year)  -- 获取中文星期（例如 "星期三"）
+        local week_day_str = chinese_weekday2(os.date("%w"))  -- 获取中文星期（例如 "星期三"）
         -- 获取农历数据
         local lunar_info_str = Date2LunarDate(os.date("%Y%m%d"))  -- 获取农历的天干地支和生肖等
     
