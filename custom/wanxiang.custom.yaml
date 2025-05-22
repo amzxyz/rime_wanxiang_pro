@@ -6,7 +6,9 @@ patch:
   # 中英混合词汇，要与你的双拼类型一样
   cn_en/user_dict: en_dicts/flypy           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
   #通过下面的设置可以让你自己的文件引入而与仓库custom_phrase.txt不同，以后可以大胆覆盖更新
-  custom_phrase/user_dict: custom_phrase    # 改成什么就需要手动创建 xxxxxx.txt 文件在用户目录
+  custom_phrase/user_dict: custom_phrasexx    # 改成什么就需要手动创建 xxxxxx.txt 文件在用户目录，这个文件主要用于置顶，编码为自定义编码的词汇
+  translator/packs/+:
+    - userxx                                  #导入根目录下名称为userxx.dict.yaml的自定义固定词典，编码要与固定词库一致（或者不写编码），形如姓名、专有名词公司名称等等
     #下面是候选数量，未来7890分别代表1234声，请候选长度不要大于6避免冲突
   menu/page_size: 6
   #下面用来改变你的windows小狼毫右下角软件图标
