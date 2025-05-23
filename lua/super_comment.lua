@@ -251,7 +251,7 @@ function ZH.func(input, env)
             if final_comment ~= initial_comment then
                 -- 有其他模块修改过注释，保留
             elseif input_str:match("//") and index == 1 then  --匹配pin造词状态
-            elseif input_str:match("^/") or input_str:match("^R") or input_str:match("^N") or input_str:match("^V") or input_str:match("^U") then
+            elseif input_str:match("^[VRNU/]") then
                 -- 输入包含 //，首选项保留注释
             else
                 -- 其他情况清空

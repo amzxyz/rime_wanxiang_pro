@@ -173,7 +173,7 @@ function S.func(key, env)
     if not segment then
         return 2
     end
-    if string.match(input_text, "^V") or string.match(input_text, "^R") or string.match(input_text, "^N") or string.match(input_text, "^U") or string.match(input_text, "^/") then
+    if string.match(input_text, "^[VRNU/]") then
         return 2
     end
     local db = wrapLevelDb("lua/tips", false)
