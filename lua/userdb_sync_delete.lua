@@ -136,7 +136,7 @@ function send_user_notification(deleted_count, env)
         os.execute('msg * "' .. ansi_message .. '"')
     elseif env.os_type == "linux" then
         local utf8_message = generate_utf8_message(deleted_count)
-        os.execute('notify-send "' .. utf8_message .. '"')
+        os.execute('notify-send "' .. utf8_message .. '" "--app-name=万象输入法"')
     elseif env.os_type == "macos" then
         local utf8_message = generate_utf8_message(deleted_count)
         os.execute('osascript -e \'display notification "' .. utf8_message .. '" with title "万象输入法"\'')
