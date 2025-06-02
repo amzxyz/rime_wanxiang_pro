@@ -2091,6 +2091,116 @@ local function get_upcoming_holidays()
   return upcoming_holidays
 end
 
+-- 获取生日提醒信息的函数，可接受自定义生日设置
+function get_birthday_reminders(custom_settings)
+  -- 使用传入的自定义设置或默认全局设置
+  local settings = custom_settings or BIRTHDAY_SETTINGS
+  
+  -- 获取当前日期
+  local current_date = os.date("%Y%m%d")
+  local current_year = os.date("%Y")
+  local birthday_list = {}
+  
+  -- 计算公历生日倒计时
+  for _, birthday in ipairs(settings.solar or {}) do
+      local month, day, name, note = birthday[1], birthday[2], birthday[3], birthday[4]
+      -- 构建今年的生日日期
+      local this_year_birthday = string.format("%s%02d%02d", current_year, month, day)
+      -- 计算天数差
+      local days_left = diffDate(current_date, this_year_birthday)
+      
+      -- 如果生日已过，计算明年的生日
+      if days_left < 0 then
+          local next_year = tonumber(current_year) + 1
+          this_year_birthday = string.format("%s%02d%02d", next_year, month, day)
+          days_left = diffDate(current_date, this_year_birthday)
+      end
+      
+      -- 格式化日期显示
+      local formatted_date = string.format("%02d月%02d日", month, day)
+      -- 构建生日信息
+      local birthday_info
+      if note and note ~= "" then
+          birthday_info = string.format("%s(%s): %s < %d 天", 
+              name, note, formatted_date, days_left)
+      else
+          birthday_info = string.format("%s: %s < %d 天", 
+              name, formatted_date, days_left)
+      end
+      
+      -- 添加到生日列表
+      table.insert(birthday_list, {birthday_info, name .. "公历生日", days_left})
+  end
+  
+  -- 计算农历生日倒计时
+  for _, birthday in ipairs(settings.lunar or {}) do
+    local month, day, name, note = birthday[1], birthday[2], birthday[3], birthday[4]
+    
+    -- 在函数内重新定义农历月份名和日期名
+    local cMonName = {"正月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "冬月", "腊月"}
+    local cDayName = {"初一", "初二", "初三", "初四", "初五", "初六", "初七", "初八", "初九", "初十",
+                      "十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十",
+                      "廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八", "廿九", "三十"}
+    
+    -- 格式化农历月日
+    local lunar_md = string.format("%02d%02d", month, day)
+  
+    -- 先计算今年的农历生日对应的公历日期
+    local lunar_date_str = current_year .. lunar_md
+    local solar_date = LunarDate2Date(lunar_date_str, 0)
+    
+    -- 提取公历日期中的月份和日期
+    local solar_month, solar_day = solar_date:match("(%d+)月(%d+)日")
+    solar_month = tonumber(solar_month)
+    solar_day = tonumber(solar_day)
+    
+    -- 构建今年农历生日对应的公历日期字符串
+    local this_year_birthday = string.format("%s%02d%02d", current_year, solar_month, solar_day)
+    -- 计算今年农历生日倒计时天数
+    local days_left = diffDate(current_date, this_year_birthday)
+    
+    -- 如果今年农历生日已过，计算明年的农历生日
+    if days_left < 0 then
+      local next_year = tonumber(current_year) + 1
+      lunar_date_str = next_year .. lunar_md
+      solar_date = LunarDate2Date(lunar_date_str, 0)
+      solar_month, solar_day = solar_date:match("(%d+)月(%d+)日")
+      solar_month = tonumber(solar_month)
+      solar_day = tonumber(solar_day)
+      days_left = nl_shengri2(current_year, lunar_md, "00")
+    end
+    
+    -- 格式化农历日期
+    local formatted_lunar = cMonName[month] .. cDayName[day]
+    local formatted_solar = string.format("%d月%d日", tonumber(solar_month), tonumber(solar_day))
+    
+    -- 构建农历生日信息
+    local birthday_info
+    if note and note ~= "" then
+        birthday_info = string.format("%s(%s): %s(%s) < %d 天", 
+            name, note, formatted_lunar, formatted_solar, days_left)
+    else
+        birthday_info = string.format("%s: %s(%s) < %d 天", 
+            name, formatted_lunar, formatted_solar, days_left)
+    end
+    
+    -- 添加到生日列表
+    table.insert(birthday_list, {birthday_info, name .. "农历生日", days_left})
+  end
+  
+  -- 按天数排序
+  table.sort(birthday_list, function(a, b)
+      return a[3] < b[3]
+  end)
+  
+  -- 移除days_left数据，保持与原始数据结构兼容
+  for i, v in ipairs(birthday_list) do
+      birthday_list[i] = {v[1], v[2]}
+  end
+  
+  return birthday_list
+end
+
 --下面这个用于统一生成候选的逻辑
 local function generate_candidates(input, seg, candidates)
   for _, item in ipairs(candidates) do
@@ -2218,6 +2328,27 @@ local function translator(input, seg, env)
         end
         -- 使用 generate_candidates 函数生成候选项
         generate_candidates("holiday_summary", seg, candidates)
+    
+    -- **生日提醒**
+    elseif (input == "/sr" or input == "osr") then  
+        local birthday_settings = {
+          -- 公历生日 {月, 日, 姓名, 备注(可选)}
+          solar = {
+              {1, 11, "小明", ""},
+              {1, 11, "大明", "11"},
+            -- 添加更多公历生日...
+          },
+          -- 农历生日 {月, 日, 姓名, 备注}
+          lunar = {
+              {1, 11, "小明", "22"},
+              {1, 11, "大明", ""},
+              -- 添加更多农历生日...
+          }
+        }
+        local candidates = get_birthday_reminders(birthday_settings)
+        -- 生成候选项
+        generate_candidates("birthday_reminders", seg, candidates)
+    
       -- 日历信息整合处理 `/day`
     elseif (input == "/day" or input == "oday") then
         -- 获取当前时间
