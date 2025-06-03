@@ -2337,37 +2337,63 @@ local function translator(input, seg, env)
             solar = {},
             lunar = {}
         }
-    
-        -- 读取公历生日
-        local solar_list = config:get_list("birthday_reminder/solar")
-        if solar_list then
-            for i = 0, solar_list.size - 1 do
-                local item = solar_list:get_at(i):get_list()
-                if item.size >= 3 then
-                    local month = item:get_value_at(0):get_int()
-                    local day = item:get_value_at(1):get_int()
-                    local name = item:get_value_at(2):get_string()
-                    local note = item.size > 3 and item:get_value_at(3):get_string() or ""
-                    table.insert(birthday_settings.solar, {month, day, name, note})
+
+        -- 读取公历生日（键值对格式）
+        local solar_map = config:get_map("birthday_reminder/solar_birthdays")
+        if solar_map then
+            -- 使用 keys() 方法获取所有键
+            local keys = solar_map:keys()
+            for _, key in ipairs(keys) do
+                -- 使用 get_value(key) 方法获取值
+                local value = solar_map:get_value(key):get_string()
+                
+                -- 解析值：日期和备注（格式："日期,备注" 或 "日期"）
+                local parts = {}
+                for part in string.gmatch(value, "[^,]+") do
+                    table.insert(parts, part)
                 end
+                
+                local date_str = parts[1] or ""
+                local note = parts[2] or ""
+                
+                -- 解析日期字符串
+                date_str = string.format("%04d", tonumber(date_str) or 0)
+                local month = tonumber(date_str:sub(1, 2))
+                local day = tonumber(date_str:sub(3, 4))
+                
+                -- 添加到生日设置
+                table.insert(birthday_settings.solar, {month, day, key, note})
             end
         end
-    
-        -- 读取农历生日
-        local lunar_list = config:get_list("birthday_reminder/lunar")
-        if lunar_list then
-            for i = 0, lunar_list.size - 1 do
-                local item = lunar_list:get_at(i):get_list()
-                if item.size >= 3 then
-                    local month = item:get_value_at(0):get_int()
-                    local day = item:get_value_at(1):get_int()
-                    local name = item:get_value_at(2):get_string()
-                    local note = item.size > 3 and item:get_value_at(3):get_string() or ""
-                    table.insert(birthday_settings.lunar, {month, day, name, note})
+
+        -- 读取农历生日（键值对格式）
+        local lunar_map = config:get_map("birthday_reminder/lunar_birthdays")
+        if lunar_map then
+            -- 使用 keys() 方法获取所有键
+            local keys = lunar_map:keys()
+            for _, key in ipairs(keys) do
+                -- 使用 get_value(key) 方法获取值
+                local value = lunar_map:get_value(key):get_string()
+                
+                -- 解析值：日期和备注（格式："日期,备注" 或 "日期"）
+                local parts = {}
+                for part in string.gmatch(value, "[^,]+") do
+                    table.insert(parts, part)
                 end
+                
+                local date_str = parts[1] or ""
+                local note = parts[2] or ""
+                
+                -- 解析日期字符串
+                date_str = string.format("%04d", tonumber(date_str) or 0)
+                local month = tonumber(date_str:sub(1, 2))
+                local day = tonumber(date_str:sub(3, 4))
+                
+                -- 添加到生日设置
+                table.insert(birthday_settings.lunar, {month, day, key, note})
             end
         end
-    
+
         local candidates = get_birthday_reminders(birthday_settings)
         -- 生成候选项
         generate_candidates("birthday_reminders", seg, candidates)
