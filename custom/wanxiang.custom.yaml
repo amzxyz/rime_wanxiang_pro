@@ -59,3 +59,11 @@ patch:
   recognizer/patterns/quick_symbol: "^;.*$"
   #下面这个用来设置开启调频的时候哪些内容不调频
   translator/disable_user_dict_for_patterns: "^[a-z]{1,6}"
+  # 生日信息，使用/sr或者osr触发shijian.lua中的生日提醒模块
+  birthday_reminder:
+    solar: # 公历生日
+      - [1, 11, "小明", "同事"] # 月, 日, 姓名, 备注(可选)
+      - [2, 22, "大明", ""]
+    lunar: # 农历生日
+      - [2, 4, "小明", "同事"] # 月, 日, 姓名, 备注(可选)
+      - [3, 6, "大明", ""]
