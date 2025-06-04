@@ -11,18 +11,18 @@ local function text_formatting(input, env)
         ["\\d"] = "-",   -- 短横线（自定义）
         -- 添加更多需要的转义序列...
     }
-    
+
     -- 构建匹配所有转义序列的模式
-    local pattern = "\\[ntrsd\\\\]"  -- 匹配 \n, \t, \r, \s, \d, \\
+    local pattern = "\\[ntrsd\\\\]" -- 匹配 \n, \t, \r, \s, \d, \\
 
     for cand in input:iter() do
         -- 检查候选文本是否包含任何转义序列
         if cand.text:find(pattern) then
             -- 替换所有转义序列
             local new_text = cand.text:gsub(pattern, function(escape)
-                return escape_map[escape] or escape  -- 如果未定义，保留原样
+                return escape_map[escape] or escape -- 如果未定义，保留原样
             end)
-            
+
             -- 创建新候选
             local new_cand = Candidate(
                 cand.type,
@@ -32,7 +32,7 @@ local function text_formatting(input, env)
                 cand.comment
             )
             new_cand.preedit = cand.preedit
-            
+
             -- 输出处理后的候选
             yield(new_cand)
         else

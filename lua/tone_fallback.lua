@@ -20,6 +20,6 @@ local function tone_fallback(_, env)
         ctx.input = new_str
         return 1 -- kAccepted
     end
-    return 2 -- kNoop
+    return 2     -- kNoop
 end
 return tone_fallback

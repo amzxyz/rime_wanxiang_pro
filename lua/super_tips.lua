@@ -4,19 +4,19 @@
 --https://github.com/amzxyz/rime_wanxiang_pro
 --https://github.com/amzxyz/rime_wanxiang
 --     - lua_processor@*super_tips*S              手机电脑有着不同的逻辑,除了编码匹配之外,电脑支持光标高亮匹配检索,手机只支持首选候选匹配
---     - lua_filter@*super_tips*M                  
+--     - lua_filter@*super_tips*M
 --     key_binder/tips_key: "slash"  #上屏按键配置
 local is_mobile_device = require("wanxiang")
-local _db_pool = _db_pool or {}  -- 数据库池
+local _db_pool = _db_pool or {} -- 数据库池
 -- 获取或创建 LevelDb 实例，避免重复打开
 local function wrapLevelDb(dbname, mode)
     _db_pool[dbname] = _db_pool[dbname] or LevelDb(dbname)
     local db = _db_pool[dbname]
     if db and not db:loaded() then
         if mode then
-            db:open()  -- 读写模式
+            db:open()           -- 读写模式
         else
-            db:open_read_only()  -- 只读模式
+            db:open_read_only() -- 只读模式
         end
     end
     return db
@@ -27,13 +27,13 @@ local S = {}
 
 local function ensure_dir_exist(dir)
     -- 获取系统路径分隔符
-    local sep = package.config:sub(1,1)
+    local sep = package.config:sub(1, 1)
 
-    dir = dir:gsub([["]], [[\"]])  -- 处理双引号
+    dir = dir:gsub([["]], [[\"]]) -- 处理双引号
 
     if sep == "/" then
-        local cmd = 'mkdir -p "'..dir..'" 2>/dev/null'
-    local success = os.execute(cmd)
+        local cmd = 'mkdir -p "' .. dir .. '" 2>/dev/null'
+        local success = os.execute(cmd)
     end
 end
 
@@ -53,9 +53,9 @@ function M.init(env)
     local path = nil
 
     local f = io.open(user_path, "r")
-    if f then 
+    if f then
         f:close()
-        path = user_path 
+        path = user_path
     else
         f = io.open(shared_path, "r")
         if f then
@@ -69,9 +69,9 @@ function M.init(env)
     end
 
     local file = io.open(path, "r")
-    if not file then 
+    if not file then
         db:close()
-        return 
+        return
     end
     for line in file:lines() do
         if not line:match("^#") then
@@ -91,7 +91,7 @@ function M.init(env)
             if not line:match("^#") then
                 local value, key = line:match("([^\t]+)\t([^\t]+)")
                 if value and key then
-                    db:update(key, value)  -- 高优先级覆盖
+                    db:update(key, value) -- 高优先级覆盖
                 end
             end
         end
@@ -153,6 +153,7 @@ function S.init(env)
     S.tips_key = config:get_string("key_binder/tips_key")
     local db = wrapLevelDb("lua/tips", false)
 end
+
 function S.func(key, env)
     local context = env.engine.context
     local segment = context.composition:back()
@@ -195,7 +196,8 @@ function S.func(key, env)
         local trigger = key:repr() == S.tips_key
         local text = selected_cand and selected_cand.text or input_text
         if trigger then
-            local formatted = (tipspc and (tipspc:match(".+：(.*)") or tipspc:match(".+:(.*)") or tips)) or (tipsph and (tipsph:match("〔.+：(.*)〕") or tipsph:match("〔.+:(.*)〕"))) or ""
+            local formatted = (tipspc and (tipspc:match(".+：(.*)") or tipspc:match(".+:(.*)") or tips)) or
+            (tipsph and (tipsph:match("〔.+：(.*)〕") or tipsph:match("〔.+:(.*)〕"))) or ""
             env.engine:commit_text(formatted)
             context:clear()
             return 1
@@ -203,4 +205,5 @@ function S.func(key, env)
     end
     return 2
 end
+
 return { M = M, S = S }

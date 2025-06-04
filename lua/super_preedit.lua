@@ -1,10 +1,10 @@
 local function modify_preedit_filter(input, env)
     -- 获取配置中的分隔符
     local config = env.engine.schema.config
-    local delimiter = config:get_string('speller/delimiter') or " '"  -- 默认是两个空格
+    local delimiter = config:get_string('speller/delimiter') or " '" -- 默认是两个空格
 
     -- 初始化开关状态和分隔符
-    env.settings = {tone_display = env.engine.context:get_option("tone_display")} or false
+    env.settings = { tone_display = env.engine.context:get_option("tone_display") } or false
     local auto_delimiter = delimiter:sub(1, 1)
     local manual_delimiter = delimiter:sub(2, 2)
 
@@ -15,8 +15,8 @@ local function modify_preedit_filter(input, env)
     -- **加入 `tag` 方式检测是否处于反查模式**
     local seg = context.composition:back()
     env.is_radical_mode = seg and (
-        seg:has_tag("radical_lookup") 
-        or seg:has_tag("reverse_stroke") 
+        seg:has_tag("radical_lookup")
+        or seg:has_tag("reverse_stroke")
         or seg:has_tag("add_user_dict")
     ) or false
 

@@ -2,9 +2,9 @@
 function init(env)
     if not env.initialized then
         env.initialized = true
-        env.yaml_installation = detect_yaml_installation()  -- 解析 installation.yaml 文件，获取配置信息
-        env.os_type = detect_os_type(env)  -- 全局变量，存储系统类型
-        env.total_deleted = 0  -- 记录删除的总条目数
+        env.yaml_installation = detect_yaml_installation() -- 解析 installation.yaml 文件，获取配置信息
+        env.os_type = detect_os_type(env)                  -- 全局变量，存储系统类型
+        env.total_deleted = 0                              -- 记录删除的总条目数
     end
 end
 
@@ -14,10 +14,10 @@ function detect_yaml_installation()
         return s:match("^%s*(.-)%s*$") or ""
     end
 
-    local yaml = {}
+    local yaml          = {}
     local user_data_dir = rime_api.get_user_data_dir()
-    local yaml_path = user_data_dir .. "/installation.yaml"
-    local file, err  = io.open(yaml_path, "r")
+    local yaml_path     = user_data_dir .. "/installation.yaml"
+    local file, err     = io.open(yaml_path, "r")
     if not file then
         return yaml, "无法打开 installation.yaml 文件"
     end
@@ -30,7 +30,7 @@ function detect_yaml_installation()
                 local raw_value = trim(value_part)
                 if key ~= "" and raw_value ~= "" then
                     local value = trim(raw_value)
-                    if #value >= 2 and value:sub(1,1) == '"' and value:sub(-1) == '"' then
+                    if #value >= 2 and value:sub(1, 1) == '"' and value:sub(-1) == '"' then
                         value = trim(value:sub(2, -2))
                     end
                     yaml[key] = value
@@ -45,10 +45,10 @@ end
 
 -- 手动维护的操作系统检测模式表
 local os_detection_patterns = {
-    windows = { "weasel", "Weasel" },    -- Windows 的标识符列表
-    linux = { "fcitx%-rime" },           -- Linux 的标识符
-    macos = { "squirrel", "Squirrel" },  -- macOS 的标识符
-    android = { "trime" }                -- android 的标识符
+    windows = { "weasel", "Weasel" },   -- Windows 的标识符列表
+    linux = { "fcitx%-rime" },          -- Linux 的标识符
+    macos = { "squirrel", "Squirrel" }, -- macOS 的标识符
+    android = { "trime" }               -- android 的标识符
 }
 
 -- 检查系统类型
@@ -85,8 +85,8 @@ end
 -- 检测并处理路径分隔符转换
 function convert_path_separator(path, os_type)
     if os_type == "windows" then
-        path = path:gsub("\\\\", "\\")  -- 将双反斜杠替换为单反斜杠
-        path = path:gsub("/", "\\")     -- 将斜杠替换为反斜杠
+        path = path:gsub("\\\\", "\\") -- 将双反斜杠替换为单反斜杠
+        path = path:gsub("/", "\\")    -- 将斜杠替换为反斜杠
     end
     return path
 end
@@ -117,16 +117,16 @@ function UserDictCleaner_process(key_event, env)
 
     -- 检查是否输入 /del
     if input == "/del" and env.initialized then
-        env.total_deleted = 0  -- 重置计数器
+        env.total_deleted = 0 -- 重置计数器
 
         pcall(trigger_sync_cleanup, env)
         send_user_notification(env.total_deleted, env) -- 失败情况下会发送0
 
         -- 清空输入内容，防止输入保留
         context:clear()
-        return 1  -- 返回 1 表示已处理该事件
+        return 1 -- 返回 1 表示已处理该事件
     end
-    return 2  -- 返回 2 继续处理其它输入
+    return 2     -- 返回 2 继续处理其它输入
 end
 
 -- 发送通知反馈函数，使用动态生成的消息
@@ -145,15 +145,23 @@ function send_user_notification(deleted_count, env)
         os.execute('notify "' .. utf8_message .. '"')
     end
 end
+
 -- 定义固定部分的ANSI编码
 local base_message = "\xD3\xC3\xBB\xA7\xB4\xCA\xB5\xE4\xB9\xB2\xC7\xE5\xC0\xED\x20" -- "用户词典共清理 "（注意结尾有一个空格）
-local end_message = "\x20\xD0\xD0\xCE\xDE\xD0\xA7\xB4\xCA\xCC\xF5" -- " 行无效词条"（前面带一个空格）
+local end_message = "\x20\xD0\xD0\xCE\xDE\xD0\xA7\xB4\xCA\xCC\xF5"                  -- " 行无效词条"（前面带一个空格）
 
 -- 预定义数字0-9的ANSI编码表示
 local digit_to_ansi = {
-    ["0"] = "\x30", ["1"] = "\x31", ["2"] = "\x32", ["3"] = "\x33",
-    ["4"] = "\x34", ["5"] = "\x35", ["6"] = "\x36", ["7"] = "\x37",
-    ["8"] = "\x38", ["9"] = "\x39"
+    ["0"] = "\x30",
+    ["1"] = "\x31",
+    ["2"] = "\x32",
+    ["3"] = "\x33",
+    ["4"] = "\x34",
+    ["5"] = "\x35",
+    ["6"] = "\x36",
+    ["7"] = "\x37",
+    ["8"] = "\x38",
+    ["9"] = "\x39"
 }
 
 -- 生成ANSI编码的删除条目数量部分
@@ -180,7 +188,8 @@ end
 
 -- 收集 path 目录下的目录，不含文件
 function list_dirs(path, os_type)
-    local command = os_type == "windows" and ('dir "'..path..'" /AD /B 2>nul') or ('ls -p "'..path..'" | grep / 2>/dev/null')
+    local command = os_type == "windows" and ('dir "' .. path .. '" /AD /B 2>nul') or
+    ('ls -p "' .. path .. '" | grep / 2>/dev/null')
     local handle = io.popen(command)
     if not handle then
         return nil, "无法遍历路径: " .. path
@@ -201,7 +210,8 @@ end
 
 -- 收集 path 目录下的文件，不含目录
 function list_files(path, os_type)
-    local command = os_type == "windows" and ('dir "'..path..'" /A-D /B 2>nul') or ('ls -p "'..path..'" | grep -v / 2>/dev/null')
+    local command = os_type == "windows" and ('dir "' .. path .. '" /A-D /B 2>nul') or
+    ('ls -p "' .. path .. '" | grep -v / 2>/dev/null')
     local handle = io.popen(command)
     if not handle then
         return nil, "无法遍历路径: " .. path

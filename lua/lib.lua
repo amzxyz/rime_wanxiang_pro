@@ -777,7 +777,7 @@ end
 function rime.current(context)
     local segment = context.composition:toSegmentation():back()
     if not segment then
-      return nil
+        return nil
     end
     return context.input:sub(segment.start + 1, segment._end)
 end
@@ -787,7 +787,5 @@ end
 function rime.input(context)
     return context.input
 end
-  
+
 return rime
-
-

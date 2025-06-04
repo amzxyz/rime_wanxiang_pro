@@ -9,10 +9,10 @@ function write_word_to_file(env, record_type)
     if not filename then
         return false
     end
-    local serialize_str = ""  --返回数据部分
+    local serialize_str = "" --返回数据部分
     -- 遍历表中的每个元素并格式化
     for phrase, entry in pairs(env.seq_words) do
-        serialize_str = serialize_str .. string.format('    ["%s"] = {%d},\n', phrase, entry[1])  -- entry[1]为偏移量
+        serialize_str = serialize_str .. string.format('    ["%s"] = {%d},\n', phrase, entry[1]) -- entry[1]为偏移量
     end
     -- 构造完整的 record 内容
     local record = "local seq_words = {\n" .. serialize_str .. "}\nreturn seq_words"
@@ -21,12 +21,14 @@ function write_word_to_file(env, record_type)
     fd:setvbuf("line")
     -- 写入完整内容
     fd:write(record)
-    fd:close()  -- 关闭文件
+    fd:close() -- 关闭文件
 end
+
 local P = {}
 function P.init(env)
-    env.seq_words = require("seq_words")  -- 加载文件中的 seq_words
+    env.seq_words = require("seq_words") -- 加载文件中的 seq_words
 end
+
 -- P 阶段按键处理
 function P.func(key_event, env)
     local context = env.engine.context
@@ -41,9 +43,9 @@ function P.func(key_event, env)
     local selected_candidate = context:get_selected_candidate()
     local phrase = selected_candidate.text
     local preedit = selected_candidate.preedit
-    local current_position = env.seq_words[phrase] and env.seq_words[phrase][1]  -- 获取对应的偏移量
+    local current_position = env.seq_words[phrase] and env.seq_words[phrase][1] -- 获取对应的偏移量
     -- 判断按下的键
-    if key_event.keycode == 0x6A then  -- ctrl + j (向左移动 1 个)
+    if key_event.keycode == 0x6A then                                           -- ctrl + j (向左移动 1 个)
         if current_position == nil then
             env.seq_words[phrase] = { -1 }
         else
@@ -51,10 +53,10 @@ function P.func(key_event, env)
             if new_position == 0 then
                 env.seq_words[phrase] = nil
             else
-                env.seq_words[phrase][1] = new_position  -- 更新偏移量
+                env.seq_words[phrase][1] = new_position -- 更新偏移量
             end
         end
-    elseif key_event.keycode == 0x6B then  -- ctrl + k (向右移动 1 个)
+    elseif key_event.keycode == 0x6B then -- ctrl + k (向右移动 1 个)
         if current_position == nil then
             env.seq_words[phrase] = { 1 }
         else
@@ -62,20 +64,19 @@ function P.func(key_event, env)
             if new_position == 0 then
                 env.seq_words[phrase] = nil
             else
-                env.seq_words[phrase][1] = new_position  -- 更新偏移量
+                env.seq_words[phrase][1] = new_position -- 更新偏移量
             end
         end
-    elseif key_event.keycode == 0x30 then  -- ctrl + 0 (删除位移信息)
+    elseif key_event.keycode == 0x30 then -- ctrl + 0 (删除位移信息)
         env.seq_words[phrase] = nil
     else
         return 2
     end
     -- 实时更新 Lua 表序列化并保存
-    write_word_to_file(env, "seq")  -- 使用统一的写入函数
+    write_word_to_file(env, "seq") -- 使用统一的写入函数
     context:refresh_non_confirmed_composition()
     return 1
 end
-
 
 local F = {}
 local MAX_CANDIDATES = 300
@@ -86,13 +87,13 @@ end
 
 function F.func(input, env)
     local seen = {}
-    local displaced = {}   -- 有偏移项
-    local fallback = {}    -- 无偏移项
-    local result = {}      -- 最终结果
-    local occupied = {}    -- 位置是否已被占用
-    local original_positions = {}  -- 记录每个候选的原始 index
+    local displaced = {}          -- 有偏移项
+    local fallback = {}           -- 无偏移项
+    local result = {}             -- 最终结果
+    local occupied = {}           -- 位置是否已被占用
+    local original_positions = {} -- 记录每个候选的原始 index
 
-    local index = 1  -- 原始顺序编号
+    local index = 1               -- 原始顺序编号
     for cand in input:iter() do
         if index > MAX_CANDIDATES then break end
         local text = cand.text
@@ -103,9 +104,9 @@ function F.func(input, env)
             local displacement = env.seq_words[text] and env.seq_words[text][1]
             if displacement then
                 local pos = index + displacement
-                pos = math.max(pos, 1)  -- 限制左移最小为 1
+                pos = math.max(pos, 1)              -- 限制左移最小为 1
                 pos = math.min(pos, MAX_CANDIDATES) -- 限制右移最大不超边界
-                table.insert(displaced, {candidate = cand, target_pos = pos})
+                table.insert(displaced, { candidate = cand, target_pos = pos })
             else
                 table.insert(fallback, cand)
             end
@@ -158,4 +159,5 @@ function F.func(input, env)
         yield(cand)
     end
 end
+
 return { F = F, P = P }

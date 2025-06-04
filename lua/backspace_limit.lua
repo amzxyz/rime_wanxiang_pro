@@ -12,9 +12,10 @@ local mobile_detector = require("wanxiang")
 -- env.bs_sequence:  当前是否处于连续 Backspace 序列中
 
 function M.init(env)
-    env.prev_input_len = -1  -- 初始化为无效值
+    env.prev_input_len = -1 -- 初始化为无效值
     env.bs_sequence = false
 end
+
 function M.func(key, env)
     local ctx = env.engine.context
     local kc = key.keycode
@@ -24,19 +25,19 @@ function M.func(key, env)
         env.prev_input_len = -1
         return PASS
     end
-    
+
     -- 获取当前输入长度
     local current_len = #ctx.input
-    
+
     -- 处于连续 Backspace 序列中
     if env.bs_sequence then
         -- 移动设备由于运行逻辑的问题不能实现友好的逻辑
         if mobile_detector.is_mobile_device() then
-            return PASS  -- 直接放行
-        -- PC设备保持原有逻辑：长度1变0时拦截
+            return PASS -- 直接放行
+            -- PC设备保持原有逻辑：长度1变0时拦截
         else
             if env.prev_input_len == 1 and current_len == 0 then
-                return ACCEPT  -- 拦截：PC设备上从1变为0的情况
+                return ACCEPT -- 拦截：PC设备上从1变为0的情况
             end
         end
         -- 更新状态
@@ -49,4 +50,5 @@ function M.func(key, env)
     -- 首次按键总是允许
     return PASS
 end
+
 return M
