@@ -588,28 +588,14 @@ speller:
 
 汉心龙:    #原作者项目地址： https://hanxinma.gitlab.io/longma/
   __append:
-    - xform/^ēr/BA/
-    - xform/^ér/BJ/
-    - xform/^ěr/BP/
-    - xform/^èr/BO/
-    - xform/^er/BA/
-    - xform/^(ā|á|ǎ|à)([ioun])/Q$1$2/
-    - xform/^(ō|ó|ǒ|ò)([ioun])/R$1$2/
-    - xform/^(ē|é|ě|è)([ioun])/B$1$2/
-    - xform/^(ā|á|ǎ|à)(ng)/Q$1$2/
-    - xform/^(ō|ó|ǒ|ò)(ng)/R$1$2/
-    - xform/^(ē|é|ě|è)(ng)/B$1$2/
-    - xform/^(ā|á|ǎ|à)/Q$1/
-    - xform/^(ō|ó|ǒ|ò)/R$1/
-    - xform/^(ē|é|ě|è)/B$1/
+    - xform/^(a|ā|á|ǎ|à)/Q$1/
+    - xform/^(o|ō|ó|ǒ|ò)/R$1/
+    - xform/^(e|ē|é|ě|è)/B$1/
     - xform/^([jqxy])u(;.*)/$1ü$2/
     - xform/^([jqxy])ū(;.*)/$1ǖ$2/
     - xform/^([jqxy])ú(;.*)/$1ǘ$2/
     - xform/^([jqxy])ǔ(;.*)/$1ǚ$2/
     - xform/^([jqxy])ù(;.*)/$1ǜ$2/
-    - xform/^a(;.*)$/Qā$1/
-    - xform/^o(;.*)$/Rō$1/
-    - xform/^e(;.*)$/Bē$1/
     - xform/^ǹg/Bèng/
     - xform/^ňg/Běng/
     - xform/^ńg/Béng/
@@ -646,13 +632,13 @@ speller:
     - xform/^h/M/
     - xform/^(.)(ēn|en|iǎn|ǒng|iáng|uá|ó|án|ǐng)(;.*)$/$1Q$3/
     - xform/^(.)(ào|èn|èng|iě|iàng)(;.*)$/$1W$3/
-    - xform/^(.)(ǖ|iù|ā|a|uì|uǎng)(;.*)$/$1E$3/
+    - xform/^(.)(ü|ǖ|iù|ā|a|uì|uǎng)(;.*)$/$1E$3/
     - xform/^(.)(ìn|è|à|ě|ǎi|áo)(;.*)$/$1R$3/
     - xform/^(.)(ō|o|ìòng|ǎo|óu)(;.*)$/$1T$3/
-    - xform/^(.)(én|ià|ang|āng|iú|ǐn|üē|uē|üe)(;.*)$/$1Y$3/
+    - xform/^(.)(én|ià|ang|āng|iú|ǐn|üē|uē|üe|ue)(;.*)$/$1Y$3/
     - xform/^(.)(àng|iàn|ao|āo)(;.*)$/$1U$3/
     - xform/^(.)(ù|uán|ué|üé)(;.*)$/$1I$3/
-    - xform/^(.)(éng|iā|ia|ān|an|èr|uè|üè|iū|uài|iáo)(;.*)$/$1O$3/
+    - xform/^(.)(éng|iā|ia|ān|an|èr|uè|üè|iu|iū|uài|iáo)(;.*)$/$1O$3/
     - xform/^(.)(uǒ|iè|iào|ěr|ǎng)(;.*)$/$1P$3/
     - xform/^(.)(āi|ai|óng|ìng|uāng|uang|á|ēr|er|iǎ)(;.*)$/$1A$3/
     - xform/^(.)(uō|uo|ǚ|uó|àn|ín|ūn|un|iōng|iong)(;.*)$/$1S$3/
@@ -664,10 +650,10 @@ speller:
     - xform/^(.)(ē|e|íng|òu|ié)(;.*)$/$1K$3/
     - xform/^(.)(ì|uī|ui)(;.*)$/$1L$3/
     - xform/^(.)(uā|ua|òng|uǐ|áng|iǔ|iǎo)(;.*)$/$1Z$3/
-    - xform/^(.)(uò|ōu|iān|ian|ēi|ei|ùn)(;.*)$/$1X$3/
+    - xform/^(.)(uò|ōu|ou|iān|ian|ēi|ei|ùn)(;.*)$/$1X$3/
     - xform/^(.)(ǔ|uàn)(;.*)$/$1C$3/
     - xform/^(.)(ǎ|uái|ōng|ong|īn|in|ióng|iǒng)(;.*)$/$1V$3/
-    - xform/^(.)(ài|ián|üě|ǔe|uí|uǎn|uàng|ǘ)(;.*)$/$1B$3/
+    - xform/^(.)(ài|ián|üě|uě|uí|uǎn|uàng|ǘ)(;.*)$/$1B$3/
     - xform/^(.)(í|iǎng|ǎn)(;.*)$/$1N$3/
     - xform/^(.)(ú|iāng|iang|ěng|ǔn)(;.*)$/$1M$3/
     - xlit/QWERTYUIOPASDFGHMJCKLZXVBN/qwertyuiopasdfghmjcklzxvbn/
