@@ -21,13 +21,13 @@ local function autocap_filter(input, env)
             yield(cand)
         end
         return
-    ---- 输入码全大写
-    -- elseif code == code:upper() then
-    --     codeAllUCase = true
-    -- 输入码前 2 - n 位大写
+        ---- 输入码全大写
+        -- elseif code == code:upper() then
+        --     codeAllUCase = true
+        -- 输入码前 2 - n 位大写
     elseif code:find("^%u%u+.*") then
         codeAllUCase = true
-    -- 输入码首位大写
+        -- 输入码首位大写
     elseif code:find("^%u.*") then
         codeUCase = true
     end
@@ -45,11 +45,11 @@ local function autocap_filter(input, env)
                 pureCode:lower() ~= pureText:lower()) -- 例如 PS - Photoshop
         then
             yield(cand)
-        -- 输入码前 2~10 位大写，候选词转换为全大写
+            -- 输入码前 2~10 位大写，候选词转换为全大写
         elseif codeAllUCase then
             text = text:upper()
             yield(Candidate(cand.type, 0, codeLen, text, cand.comment))
-        -- 输入码首位大写，候选词转换为首位大写
+            -- 输入码首位大写，候选词转换为首位大写
         elseif codeUCase then
             text = text:gsub("^%a", string.upper)
             yield(Candidate(cand.type, 0, codeLen, text, cand.comment))

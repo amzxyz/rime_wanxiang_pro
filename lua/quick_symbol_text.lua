@@ -8,8 +8,8 @@
 -- recognizer/patterns/quick_text: "^;.*$"
 -- 你可以在方案文件中如下去针对性的替换符号的设定，或者a-z0-1全部替换
 -- quick_symbol_text:
--- q: "wwwwwwwww"
--- w: "？"
+--   q: "wwwwwwwww"
+--   w: "？"
 -- 读取 RIME 配置文件中的符号映射表
 local function load_mapping_from_config(config)
     local symbol_map = {}

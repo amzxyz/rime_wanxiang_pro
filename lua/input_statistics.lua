@@ -7,10 +7,10 @@ local software_version = rime_api.get_distribution_version()
 
 -- 初始化统计表（若未加载）
 input_stats = input_stats or {
-    daily = {count = 0, length = 0, fastest = 0, ts = 0},
-    weekly = {count = 0, length = 0, fastest = 0, ts = 0},
-    monthly = {count = 0, length = 0, fastest = 0, ts = 0},
-    yearly = {count = 0, length = 0, fastest = 0, ts = 0},
+    daily = { count = 0, length = 0, fastest = 0, ts = 0 },
+    weekly = { count = 0, length = 0, fastest = 0, ts = 0 },
+    monthly = { count = 0, length = 0, fastest = 0, ts = 0 },
+    yearly = { count = 0, length = 0, fastest = 0, ts = 0 },
     lengths = {},
     daily_max = 0,
     recent = {}
@@ -18,17 +18,17 @@ input_stats = input_stats or {
 
 -- 时间戳工具函数
 local function start_of_day(t)
-    return os.time{year=t.year, month=t.month, day=t.day, hour=0}
+    return os.time { year = t.year, month = t.month, day = t.day, hour = 0 }
 end
 local function start_of_week(t)
     local d = t.wday == 1 and 6 or (t.wday - 2)
-    return os.time{year=t.year, month=t.month, day=t.day - d, hour=0}
+    return os.time { year = t.year, month = t.month, day = t.day - d, hour = 0 }
 end
 local function start_of_month(t)
-    return os.time{year=t.year, month=t.month, day=1, hour=0}
+    return os.time { year = t.year, month = t.month, day = 1, hour = 0 }
 end
 local function start_of_year(t)
-    return os.time{year=t.year, month=1, day=1, hour=0}
+    return os.time { year = t.year, month = 1, day = 1, hour = 0 }
 end
 
 -- 判断是否是统计命令
@@ -47,18 +47,18 @@ local function update_stats(input_length)
     local year_ts = start_of_year(now)
 
     if input_stats.daily.ts ~= day_ts then
-        input_stats.daily = {count = 0, length = 0, fastest = 0, ts = day_ts}
+        input_stats.daily = { count = 0, length = 0, fastest = 0, ts = day_ts }
         input_stats.daily_max = 0
         input_stats.recent = {}
     end
     if input_stats.weekly.ts ~= week_ts then
-        input_stats.weekly = {count = 0, length = 0, fastest = 0, ts = week_ts}
+        input_stats.weekly = { count = 0, length = 0, fastest = 0, ts = week_ts }
     end
     if input_stats.monthly.ts ~= month_ts then
-        input_stats.monthly = {count = 0, length = 0, fastest = 0, ts = month_ts}
+        input_stats.monthly = { count = 0, length = 0, fastest = 0, ts = month_ts }
     end
     if input_stats.yearly.ts ~= year_ts then
-        input_stats.yearly = {count = 0, length = 0, fastest = 0, ts = year_ts}
+        input_stats.yearly = { count = 0, length = 0, fastest = 0, ts = year_ts }
     end
 
     -- 更新记录
@@ -79,7 +79,7 @@ local function update_stats(input_length)
 
     -- 最近一分钟统计
     local ts = os.time()
-    table.insert(input_stats.recent, {ts = ts, len = input_length})
+    table.insert(input_stats.recent, { ts = ts, len = input_length })
     local threshold = ts - 60
     local total = 0
     local new_recent = {}
@@ -98,7 +98,7 @@ end
 
 -- 表序列化工具（请自行根据实际添加到环境中）
 table.serialize = function(tbl)
-    local lines = {"{"}
+    local lines = { "{" }
     for k, v in pairs(tbl) do
         local key = (type(k) == "string") and ("[\"" .. k .. "\"]") or ("[" .. k .. "]")
         local val
@@ -163,7 +163,7 @@ local function format_yearly_summary()
     if s.count == 0 then return "※ 本年没有任何记录。" end
     local length_counts = {}
     for length, count in pairs(input_stats.lengths) do
-        table.insert(length_counts, {length = length, count = count})
+        table.insert(length_counts, { length = length, count = count })
     end
     table.sort(length_counts, function(a, b) return a.count > b.count end)
     local fav = length_counts[1] and length_counts[1].length or 0
@@ -186,13 +186,14 @@ local function translator(input, seg, env)
     elseif input == "/ntj" then
         summary = format_yearly_summary()
     elseif input == "/tj" then
-        summary = format_daily_summary() .. "\n\n" .. format_weekly_summary() .. "\n\n" .. format_monthly_summary() .. "\n\n" .. format_yearly_summary()
+        summary = format_daily_summary() ..
+            "\n\n" .. format_weekly_summary() .. "\n\n" .. format_monthly_summary() .. "\n\n" .. format_yearly_summary()
     elseif input == "/tjql" then
         input_stats = {
-            daily = {count = 0, length = 0, fastest = 0, ts = 0},
-            weekly = {count = 0, length = 0, fastest = 0, ts = 0},
-            monthly = {count = 0, length = 0, fastest = 0, ts = 0},
-            yearly = {count = 0, length = 0, fastest = 0, ts = 0},
+            daily = { count = 0, length = 0, fastest = 0, ts = 0 },
+            weekly = { count = 0, length = 0, fastest = 0, ts = 0 },
+            monthly = { count = 0, length = 0, fastest = 0, ts = 0 },
+            yearly = { count = 0, length = 0, fastest = 0, ts = 0 },
             lengths = {},
             daily_max = 0,
             recent = {}
@@ -219,10 +220,10 @@ local function load_stats_from_lua_file()
     else
         -- 保底初始化，防止错误
         input_stats = {
-            daily = {count = 0, length = 0, fastest = 0, ts = 0},
-            weekly = {count = 0, length = 0, fastest = 0, ts = 0},
-            monthly = {count = 0, length = 0, fastest = 0, ts = 0},
-            yearly = {count = 0, length = 0, fastest = 0, ts = 0},
+            daily = { count = 0, length = 0, fastest = 0, ts = 0 },
+            weekly = { count = 0, length = 0, fastest = 0, ts = 0 },
+            monthly = { count = 0, length = 0, fastest = 0, ts = 0 },
+            yearly = { count = 0, length = 0, fastest = 0, ts = 0 },
             lengths = {},
             daily_max = 0,
             recent = {}
@@ -247,8 +248,8 @@ local function init(env)
         if commit_text:match("^[※◉]") then return end
 
         -- 排除我们自己生成的统计候选（comment 是 "input_stats_summary"）
-      --  local cand = ctx:get_selected_candidate()
-       -- if cand and cand.comment == "input_stats_summary" then return end
+        --  local cand = ctx:get_selected_candidate()
+        -- if cand and cand.comment == "input_stats_summary" then return end
 
         -- 保存最近一次 commit 内容
         env.last_commit_text = commit_text

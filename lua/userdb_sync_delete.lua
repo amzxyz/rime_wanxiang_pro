@@ -1,5 +1,3 @@
-local rime = require('lib')
-
 -- 检查系统类型
 -- 各类 rime 前端详见：https://rime.im/download/
 -- 输入法           code_name   OS
@@ -11,11 +9,12 @@ local rime = require('lib')
 -- fcitx5-macos     fcitx-rime  macOS
 -- Fcitx5           fcitx-rime  Linux
 -- fcitx5-android   fcitx-rime  Android
+---@return 'windows' | 'unknown' | 'ios' | 'macos' | 'android' | 'linux'
 local function detect_os_type()
     -- 先判断 Windows，因为只有 Windows 的路径分隔符为 \
     if package.config:sub(1, 1) == '\\' then return 'windows' end
 
-    local dist_name = rime.api.get_distribution_code_name()
+    local dist_name = rime_api.get_distribution_code_name()
     if not dist_name then return "unknown" end
 
     if dist_name == 'Hamster' then return 'ios' end
@@ -24,7 +23,7 @@ local function detect_os_type()
     if dist_name == 'ibus-rime' then return 'linux' end
 
     if dist_name == 'fcitx-rime' then
-        local user_data_dir = rime.api.get_user_data_dir()
+        local user_data_dir = rime_api.get_user_data_dir()
         if user_data_dir:match("^/org%.fcitx%.fcitx5%.android/$") then
             return "android"
         end
@@ -54,6 +53,8 @@ local function detect_os_type()
     return 'unknown'
 end
 
+local os_type = detect_os_type()
+
 local function trim(s)
     return s:match("^%s*(.-)%s*$") or ""
 end
@@ -65,7 +66,7 @@ end
 -- 解析 installation.yaml 文件
 local function detect_yaml_installation()
     local yaml = {}
-    local user_data_dir = rime.api.get_user_data_dir()
+    local user_data_dir = rime_api.get_user_data_dir()
     local yaml_path = user_data_dir .. "/installation.yaml"
     local file, _ = io.open(yaml_path, "r")
     if not file then
@@ -98,13 +99,12 @@ local function init(env)
     if not env.initialized then
         env.initialized = true
         env.yaml_installation = detect_yaml_installation() -- 解析 installation.yaml 文件，获取配置信息
-        env.os_type = detect_os_type()                     -- 全局变量，存储系统类型
         env.total_deleted = 0                              -- 记录删除的总条目数
     end
 end
 
 -- 检测并处理路径分隔符转换
-local function convert_path_separator(path, os_type)
+local function convert_path_separator(path)
     if os_type == "windows" then
         path = path:gsub("\\\\", "\\") -- 将双反斜杠替换为单反斜杠
         path = path:gsub("/", "\\")    -- 将斜杠替换为反斜杠
@@ -116,7 +116,7 @@ end
 local function get_sync_path_from_yaml(env)
     local sync_dir = env.yaml_installation["sync_dir"]
     if not sync_dir then
-        local user_data_dir = rime.api.get_user_data_dir()
+        local user_data_dir = rime_api.get_user_data_dir()
         sync_dir = user_data_dir .. "/sync"
     end
 
@@ -125,7 +125,7 @@ local function get_sync_path_from_yaml(env)
         sync_dir = sync_dir .. "/" .. installation_id
     end
 
-    sync_dir = convert_path_separator(sync_dir, env.os_type)
+    sync_dir = convert_path_separator(sync_dir)
 
     return sync_dir, nil
 end
@@ -170,30 +170,30 @@ local function generate_utf8_message(deleted_count)
 end
 
 -- 发送通知反馈函数，使用动态生成的消息
-local function send_user_notification(deleted_count, env)
-    if env.os_type == "windows" then
+local function send_user_notification(deleted_count)
+    if os_type == "windows" then
         local ansi_message = generate_ansi_message(deleted_count)
         os.execute('msg * "' .. ansi_message .. '"')
-    elseif env.os_type == "linux" then
+    elseif os_type == "linux" then
         local utf8_message = generate_utf8_message(deleted_count)
         os.execute('notify-send "' .. utf8_message .. '" "--app-name=万象输入法"')
-    elseif env.os_type == "macos" then
+    elseif os_type == "macos" then
         local utf8_message = generate_utf8_message(deleted_count)
         os.execute('osascript -e \'display notification "' .. utf8_message .. '" with title "万象输入法"\'')
-    elseif env.os_type == "android" then
+    elseif os_type == "android" then
         local utf8_message = generate_utf8_message(deleted_count)
         os.execute('notify "' .. utf8_message .. '"')
     end
 end
 
 -- 删除 installation.yaml 同级目录下的 .userdb 文件夹
-local function process_userdb_folders(env)
-    local user_data_dir = rime.api.get_user_data_dir()
+local function process_userdb_folders()
+    local user_data_dir = rime_api.get_user_data_dir()
 
     -- 遍历文件夹，删除以 .userdb 结尾的文件夹下的所有数据库文件
     local command = string.format('find "%s"/*.userdb/ -maxdepth 1 -mindepth 1 -type f 2>/dev/null',
         user_data_dir)
-    local os_is_windows = env.os_type == "windows"
+    local os_is_windows = os_type == "windows"
     if os_is_windows then
         command = string.format(
             'for /f "tokens=*" %%G in (\'dir "%s"\\*.userdb /AD /B\') do dir "%s\\%%G" /A-D /B /S 2>nul',
@@ -203,19 +203,16 @@ local function process_userdb_folders(env)
     local handle = io.popen(command)
     if not handle then return end
 
-    -- rime.warnf("[wanxiang/userdb_sync_delete/process_userdb_folders]\n\tcmd: %s", command)
-
     local output = handle:read("*a") -- 一次性读取全部内容以尽快释放句柄
     handle:close()
     if not output then return end
 
-    -- rime.warnf("[wanxiang/userdb_sync_delete/process_userdb_folders]\n\toutput: %s", output)
     -- 然后处理收集到的行
     for line in output:gmatch("[^\r\n]+") do
         if startsWith(line, user_data_dir) then
             local success, err = os.remove(line)
             if not success then
-                rime.warnf("清理 userdb 文件夹出错：%s。", err)
+                log.warning(string.format("清理 userdb 文件夹出错：%s。", err))
             end
         end
     end
@@ -263,7 +260,7 @@ local function process_userdb_files(env)
     local sync_path, _ = get_sync_path_from_yaml(env)
     if not sync_path then return end
 
-    local command = env.os_type == "windows"
+    local command = os_type == "windows"
         and (string.format("dir %s\\*.userdb.txt /A-D /B /S 2>nul", sync_path))
         or (string.format("find %s/ -maxdepth 1 -mindepth 1 -type f -name '*.userdb.txt' 2>/dev/null", sync_path))
 
@@ -274,7 +271,6 @@ local function process_userdb_files(env)
     handle:close()
     if not output then return end
 
-    -- rime.warnf("[wanxiang/userdb_sync_delete/process_userdb_files] output: %s", output)
     -- 然后处理收集到的行
     for line in output:gmatch("[^\r\n]+") do
         if startsWith(line, sync_path) then
@@ -286,7 +282,7 @@ end
 -- 触发清理操作
 local function trigger_sync_cleanup(env)
     process_userdb_files(env)
-    process_userdb_folders(env)
+    process_userdb_folders()
 end
 
 -- 捕获输入并执行相应的操作
@@ -301,7 +297,7 @@ local function UserDictCleaner_process(_, env)
 
         pcall(trigger_sync_cleanup, env)
         -- 失败情况下会发送 0
-        send_user_notification(env.total_deleted, env)
+        send_user_notification(env.total_deleted)
 
         return 1 -- 返回 1 表示已处理该事件
     end

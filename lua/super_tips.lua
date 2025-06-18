@@ -7,11 +7,10 @@
 --     - lua_filter@*super_tips*M
 --     key_binder/tips_key: "slash"  #上屏按键配置
 local wanxiang = require("wanxiang")
-local rime = require("lib")
 local _db_pool = {} -- 数据库池
 -- 获取或创建 LevelDb 实例，避免重复打开
 local function wrapLevelDb(dbname, mode)
-    _db_pool[dbname] = _db_pool[dbname] or rime.LevelDb(dbname)
+    _db_pool[dbname] = _db_pool[dbname] or LevelDb(dbname)
     local db = _db_pool[dbname]
 
     local function close()
@@ -114,8 +113,8 @@ end
 
 local function get_preset_file_path()
     local preset_path = "/lua/tips/tips_show.txt"
-    local preset_path_user = rime.api.get_user_data_dir() .. preset_path
-    local preset_path_shared = rime.api.get_shared_data_dir() .. preset_path
+    local preset_path_user = rime_api.get_user_data_dir() .. preset_path
+    local preset_path_shared = rime_api.get_shared_data_dir() .. preset_path
 
     if file_exists(preset_path_user) then
         return preset_path_user
@@ -129,7 +128,7 @@ local function init_tips_userdb()
     local hash_in_db = db:fetch(hash_key)
 
     local preset_file_path = get_preset_file_path()
-    local user_override_path = rime.api.get_user_data_dir() .. "/lua/tips/tips_user.txt"
+    local user_override_path = rime_api.get_user_data_dir() .. "/lua/tips/tips_user.txt"
     local file_hash = string.format("%s|%s",
         calculate_file_hash(preset_file_path),
         calculate_file_hash(user_override_path))
@@ -148,8 +147,8 @@ end
 
 -- 初始化词典（写模式，把 txt 加载进 db）
 function M.init(env)
-    local dist = rime.api.get_distribution_code_name() or ""
-    local user_lua_dir = rime.api.get_user_data_dir() .. "/lua"
+    local dist = rime_api.get_distribution_code_name() or ""
+    local user_lua_dir = rime_api.get_user_data_dir() .. "/lua"
     if dist ~= "hamster" and dist ~= "Weasel" then
         ensure_dir_exist(user_lua_dir)
         ensure_dir_exist(user_lua_dir .. "/tips")
@@ -157,7 +156,7 @@ function M.init(env)
 
     local start = os.clock()
     init_tips_userdb()
-    rime.infof("[wanxiag/super_tips]: init_tips_userdb 共耗时 %s 秒", os.clock() - start)
+    log.info(string.format("[wanxiang/super_tips]: init_tips_userdb 共耗时 %s 秒", os.clock() - start))
 end
 
 -- 滤镜：设置提示内容
@@ -198,13 +197,13 @@ function M.func(input, env)
         end
         -- 输出候选
         for _, cand in ipairs(candidates) do
-            rime.yield(cand)
+            yield(cand)
         end
         -- 输出候选
     else
         -- 如果不是手机设备，直接输出候选，不进行数据库操作
         for cand in input:iter() do
-            rime.yield(cand)
+            yield(cand)
         end
     end
 end

@@ -97,7 +97,7 @@ local function reverse_lookup(code_projection, db_table, wildcard, text, s, glob
                 if global_match then
                     if part:find(s) then return true end
                 else
-                    if part:find('^' .. s) then return true end   -- an error pointing at this line. do not know why. so I'll keep an eye.
+                    if part:find('^' .. s) then return true end -- an error pointing at this line. do not know why. so I'll keep an eye.
                 end
             end
         end
