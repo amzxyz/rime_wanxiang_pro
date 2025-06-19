@@ -21,12 +21,16 @@ local function wrapLevelDb(dbname, mode)
     end
 
     if db then
-        if mode then
-            close()
-            db:open()
-        elseif not db:loaded() then
-            -- 读写模式需要 lock 数据
-            db:open_read_only() -- 只读模式
+        if not db:loaded() then
+            if mode then
+                db:open()
+            else -- 只读模式
+                db:open_read_only()
+            end
+        elseif mode then
+            -- 仅在首次打开读写模式返回 db 实例
+            -- 其他情况返回 nil，避免多个实例同时写
+            return nil, close
         end
     end
 
@@ -101,12 +105,11 @@ local function file_exists(name)
     end
 end
 
+-- 清空整个 db
 local function empty_tips_db(db)
     local da = db:query("")
-    local count_before = 0
     for key, _ in da:iter() do
         db:erase(key)
-        count_before = count_before + 1
     end
     da = nil
 end
@@ -124,6 +127,8 @@ end
 
 local function init_tips_userdb()
     local db, close_db = wrapLevelDb('lua/tips', true)
+    if not db then return end
+
     local hash_key = "__TIPS_FILE_HASH"
     local hash_in_db = db:fetch(hash_key)
 
@@ -170,6 +175,8 @@ function M.func(input, env)
     } or true
     local is_super_tips = env.settings.super_tips
     local db = wrapLevelDb("lua/tips", false)
+    if not db then return end
+
     -- 手机设备：读取数据库并输出候选
     if wanxiang.is_mobile_device() then
         local input_text = env.engine.context.input or ""
@@ -226,6 +233,8 @@ function S.func(key, env)
         return 2
     end
     local db = wrapLevelDb("lua/tips", false)
+    if not db then return end
+
     env.settings = {
         super_tips = context:get_option("super_tips")
     }

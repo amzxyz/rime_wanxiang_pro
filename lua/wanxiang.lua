@@ -55,4 +55,44 @@ function wanxiang.is_mobile_device()
     return false
 end
 
+--- 检测是否为万象专业版
+---@param env Env
+---@return boolean
+function wanxiang.is_pro_scheme(env)
+    -- local schema_name = env.engine.schema.schema_name
+    -- return schema_name:gsub("PRO$", "") ~= schema_name
+    return env.engine.schema.schema_name == "wanxiang_pro"
+end
+
+-- 以 `tag` 方式检测是否处于反查模式
+function wanxiang.is_in_radical_mode(env)
+    local seg = env.engine.context.composition:back()
+    return seg and (
+        seg:has_tag("radical_lookup")
+        or seg:has_tag("reverse_stroke")
+        or seg:has_tag("add_user_dict")
+    ) or false
+end
+
+-- 按照优先顺序加载文件：用户目录 > 系统目录
+---@param path string 相对路径
+---@retur file*, function
+function wanxiang.load_file_with_fallback(path, mode)
+    local _path = path:gsub("^/+", "") -- 去掉开头的斜杠
+    local user_path = rime_api.get_user_data_dir() .. '/' .. _path
+    local shared_path = rime_api.get_shared_data_dir() .. '/' .. _path
+
+    mode = mode or "r" -- 默认读取模式
+    local file, err = io.open(user_path, mode)
+    if not file then
+        file, err = io.open(shared_path, mode)
+    end
+
+    local function close()
+        if file then file:close() end
+    end
+
+    return file, close, err
+end
+
 return wanxiang
