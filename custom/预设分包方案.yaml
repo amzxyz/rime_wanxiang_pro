@@ -1,0 +1,77 @@
+#使用之前请详细遍历每一行，都注释了功能点，看清楚是不是你要的，需不需要修改参数，哪些该留，哪些该删除，够语重心长了吧😄
+patch:
+  speller/algebra:
+    __patch:
+      - wanxiang.schema:/自然码            # 可选输入方案名称：全拼, 自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
+
+  # 中英混合词汇，要与你的双拼类型一样
+  cn_en/user_dict: en_dicts/zrm           # 可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou
+  #通过下面的设置可以让你自己的文件引入而与仓库custom_phrase.txt不同，以后可以大胆覆盖更新
+  custom_phrase/user_dict: custom_phrasexx    # 改成什么就需要手动创建 xxxxxx.txt 文件在用户目录，这个文件主要用于置顶，编码为自定义编码的词汇
+  translator/packs/+:
+    - userxx                                  #导入根目录下名称为userxx.dict.yaml的自定义固定词典，编码要与固定词库一致（或者不写编码），形如姓名、专有名词公司名称等等
+  #下面是候选数量
+  menu/page_size: 6  #不要超过6，7890用于代表声调1234，6个管够你用了，如果你非要10个，不要问我😜。
+  #生日信息：/sr或者osr，在这里定义全局替换构建你的生日查询数据库
+  birthday_reminder:  #日期格式：必须是4位数字，格式为MMDD（月份和日期），例如：1月27日 → 0127 ，#备注格式：在日期后添加逗号，然后添加任意文本作为备注，例如："0501,我的好朋友"，也可以无备注
+    solar_birthdays:  # 公历生日, 姓名: "日期,备注" or 姓名: "日期"
+      小明: "0501,准备礼物"
+      大明: "0405"
+    lunar_birthdays:  # 农历生日, 姓名: "日期,备注" or 姓名: "日期"
+      小明: "0114"
+      小红: "0815,农历中秋"
+  #下面用来改变你的windows小狼毫右下角软件图标
+  #schema/+:
+  #  icon: "icons/zhong.ico"
+  #  ascii_icon: "icons/ying.ico"
+  #下面这个可以改变tips上屏的按键
+  key_binder/tips_key: "period"   #修改时候去default找按键名称，默认是句号
+  #下面这个是修改快符的映射，按自己需求来
+  quick_symbol_text:
+    q: "‰"
+    w: "？"
+    e: "（"
+    r: "）"
+    t: "~"
+    y: "·"
+    u: "『"
+    i: "』"
+    o: "〖"
+    p: "〗"
+    a: "！"
+    s: "……"
+    d: "、"
+    f: "“"
+    g: "”"
+    h: "‘"
+    j: "’"
+    k: "【"
+    l: "】"
+    z: "。”"
+    x: "？”"
+    c: "！”"
+    v: "——"
+    b: "%"
+    n: "《"
+    m: "》"
+    "1": "①"
+    "2": "②"
+    "3": "③"
+    "4": "④"
+    "5": "⑤"
+    "6": "⑥"
+    "7": "⑦"
+    "8": "⑧"
+    "9": "⑨"
+    "0": "⓪"
+  #下面这两个是快符的引导符号，前者用来引导符号、双击重复上屏符号，后者双击重复上屏汉字
+  recognizer/patterns/quick_symbol: "^;.*$"
+  #下面这个用来设置开启调频的时候哪些内容不调频
+  translator/disable_user_dict_for_patterns: "^[a-z]{1,6}"
+  translator/enable_user_dict: true  # 是否开启自动调频用户词，如果你希望使用下面``造词功能，请保持false，因为两个跨翻译器会造成词汇不能正常记录
+
+#以下恢复``造词功能，也就是平时不记录，引导才记录，按需造词，如果你想恢复这个功能，请取消注释----
+  #recognizer/patterns/add_user_dict: "^``[A-Za-z/`']*$"      #自造词引导方式
+  #user_dict_set/enable_user_dict: true     
+  #add_user_dict/enable_user_dict: true
+#按需造词全功能段落结束---------------------------------------------------------------

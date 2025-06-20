@@ -78,7 +78,7 @@ jobs:
             python custom/提取lookup子集.py $type
 
             # 复制 schema
-            cp custom/预设.yaml wanxiang_pro.schema.yaml
+            cp custom/预设分包方案.yaml wanxiang_pro.schema.yaml
 
             # 打包
             zip -r "dist/rime-wanxiang-${type}-fuzhu.zip" \
