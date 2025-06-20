@@ -85,8 +85,12 @@ jobs:
 
             # 获取根目录额外要打包的文件（排除特定命名）
             EXTRA_ROOT_FILES=$(find . -maxdepth 1 -type f \( -iname "*.yaml" -o -iname "*.txt" -o -iname "*.ini" -o -iname "*.md" -o -iname "*.png" -o -iname "*.jpg" \) \
-              ! -iname "wanxiang_pro*" ! -iname "wanxiang_lookup*" ! -iname "wanxiang_charset*" ! -iname "wanxiang.schema.yaml" )
-
+            ! -iname "wanxiang_pro.schema.yaml" \
+            ! -iname "wanxiang_lookup*" \
+            ! -iname "wanxiang_charset*" \
+            ! -iname "wanxiang_pro*" \
+            ! -iname "default.yaml" \
+            ! -iname "wanxiang.schema.yaml" )
             # 打包
             zip -r "dist/rime-wanxiang-${type}-fuzhu.zip" \
               custom/wanxiang_pro.custom.yaml \
