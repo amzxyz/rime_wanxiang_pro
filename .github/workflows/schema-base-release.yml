@@ -97,11 +97,11 @@ jobs:
 
         # 4. 创建 GitHub Release 并上传打包文件
       - name: Create Release and Upload
-          uses: softprops/action-gh-release@v2
-          with:
-            files: dist/rime-wanxiang.zip
-            body: ${{ env.RELEASE_BODY }}
-            draft: false
-            prerelease: false
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/rime-wanxiang.zip
+          body: ${{ env.RELEASE_BODY }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
