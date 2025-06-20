@@ -122,6 +122,7 @@ jobs:
           done
     
       - name: Generate changelog from commits
+        shell: bash
         run: |
           echo "### ${RELEASE_HEADER}" > release_notes.md
           echo "---" >> release_notes.md
@@ -132,7 +133,7 @@ jobs:
           echo "" >> release_notes.md
           echo "#### 2. 双拼辅助码增强版输入方案" >> release_notes.md
           echo "✨**适用类型：** 支持各种双拼+辅助码的自由组合" >> release_notes.md
-          echo "✨**下载地址：**
+      
           declare -A display_names=(
             [zrm]="汉字自然码"
             [moqi]="墨奇"
@@ -142,10 +143,12 @@ jobs:
             [wubi]="五笔前2"
             [tiger]="虎码首末"
           )
+      
           for type in zrm moqi flypy jdh hanxin wubi tiger; do
             name="${display_names[$type]}"
             echo "- **${name}辅助版本：** [rime-wanxiang-${type}-fuzhu.zip](https://github.com/${{ github.repository }}/releases/download/${TAG_VERSION}/rime-wanxiang-${type}-fuzhu.zip)" >> release_notes.md
           done
+      
           echo "" >> release_notes.md
           echo "#### 3. 语法模型" >> release_notes.md
           echo "✨**适用类型：** 所有版本皆可用" >> release_notes.md
@@ -156,6 +159,7 @@ jobs:
           echo "" >> release_notes.md
           echo "---" >> release_notes.md
           echo "📖 使用说明与配置教程请查看仓库中的 README.md" >> release_notes.md
+        
 
       - name: Create Release and Upload
         uses: softprops/action-gh-release@v2
