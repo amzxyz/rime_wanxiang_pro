@@ -167,7 +167,6 @@ jobs:
           name: ${{ env.RELEASE_TITLE }}         #发布页标题
           tag_name: ${{ github.ref_name }}
           files: |
-            dist/rime-wanxiang-base.zip
             dist/rime-wanxiang-*.zip
           body_path: release_notes.md
           draft: false
