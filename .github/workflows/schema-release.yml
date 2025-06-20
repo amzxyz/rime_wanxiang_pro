@@ -42,7 +42,7 @@ jobs:
           ROOT_FILES=$(find . -maxdepth 1 -type f \( -iname "*.yaml" -o -iname "*.txt" -o -iname "*.ini" -o -iname "*.md" -o -iname "*.png" -o -iname "*.jpg" \) \
           ! -iname "wanxiang_pro*" ! -iname "wanxiang_lookup*" ! -iname "wanxiang_charset*" ! -iname "default.yaml")
 
-          zip -r dist/rime-wanxiang.zip \
+          zip -r dist/rime-wanxiang-base.zip \
             custom/wanxiang.custom.yaml \
             custom/wanxiang_en.custom.yaml \
             custom/wanxiang_radical.custom.yaml \
@@ -128,7 +128,7 @@ jobs:
           echo "" >> release_notes.md
           echo "#### 1. 标准版输入方案" >> release_notes.md
           echo "✨**适用类型：** 支持全拼、各种双拼" >> release_notes.md
-          echo "✨**下载地址：** [rime-wanxiang.zip](https://github.com/${{ github.repository }}/releases/download/${TAG_VERSION}/rime-wanxiang.zip)" >> release_notes.md
+          echo "✨**下载地址：** [rime-wanxiang-base.zip](https://github.com/${{ github.repository }}/releases/download/${TAG_VERSION}/rime-wanxiang-base.zip)" >> release_notes.md
           echo "" >> release_notes.md
           echo "#### 2. 双拼辅助码增强版输入方案" >> release_notes.md
           echo "✨**适用类型：** 支持各种双拼+辅助码的自由组合" >> release_notes.md
@@ -152,7 +152,7 @@ jobs:
           name: ${{ env.RELEASE_TITLE }}         #发布页标题
           tag_name: ${{ github.ref_name }}
           files: |
-            dist/rime-wanxiang.zip
+            dist/rime-wanxiang-base.zip
             dist/rime-wanxiang-*.zip
           body_path: release_notes.md
           draft: false
