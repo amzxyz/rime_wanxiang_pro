@@ -40,7 +40,8 @@ jobs:
           # 替换 default.yaml
           sed -i '/^[[:space:]]*- schema: wanxiang_pro$/d' default.yaml
           ROOT_FILES=$(find . -maxdepth 1 -type f \( -iname "*.yaml" -o -iname "*.txt" -o -iname "*.ini" -o -iname "*.md" -o -iname "*.png" -o -iname "*.jpg" \) \
-            ! -iname "wanxiang_pro*" ! -iname "wanxiang_lookup*" ! -iname "wanxiang_charset* ! -default.yaml")
+          ! -iname "wanxiang_pro*" ! -iname "wanxiang_lookup*" ! -iname "wanxiang_charset*" ! -iname "default.yaml")
+
           zip -r dist/rime-wanxiang.zip \
             custom/wanxiang.custom.yaml \
             custom/wanxiang_en.custom.yaml \
