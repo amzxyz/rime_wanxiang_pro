@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
+# 文件名：lookup分包.py
 import sys
 
-# 类型到索引映射（从 0 开始）
 type_index_map = {
     "zrm": 0,
     "moqi": 1,
@@ -10,31 +10,35 @@ type_index_map = {
     "jdh": 4,
 }
 
-# 预设数据（用于 wubi, tiger 类型）
 preset_lines = [
-    "太\t空",
+    "大\t小",
 ]
 
 if len(sys.argv) != 2:
-    print("用法: python 提取lookup子集.py <类型>")
+    print("用法: python lookup分包.py <类型>")
     sys.exit(1)
 
 fuzhu_type = sys.argv[1]
 input_path = "wanxiang_lookup.dict.yaml"
 output_lines = []
 
-# 特殊情况处理：wubi / tiger
-if fuzhu_type in ("wubi", "tiger"):
+try:
     with open(input_path, "r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            if "\t" in line:
-                key, _ = line.split("\t", 1)
-                output_lines.append(f"{key}\t")
-            else:
-                output_lines.append(f"{line}\t")
+        lines = f.readlines()
+except FileNotFoundError:
+    print(f"找不到文件: {input_path}")
+    sys.exit(1)
+
+if fuzhu_type in ("wubi", "tiger"):
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        if "\t" in line:
+            key, _ = line.split("\t", 1)
+            output_lines.append(f"{key}\t")
+        else:
+            output_lines.append(f"{line}\t")
     output_lines.extend(preset_lines)
 else:
     idx = type_index_map.get(fuzhu_type)
@@ -42,20 +46,18 @@ else:
         print(f"未知类型: {fuzhu_type}")
         sys.exit(1)
 
-    with open(input_path, "r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            if "\t" in line:
-                key, raw = line.split("\t", 1)
-                parts = raw.split("◉")
-                part = parts[idx] if idx < len(parts) else ""
-                output_lines.append(f"{key}\t{part}")
-            else:
-                # 没有 tab 的行也写 key\t
-                output_lines.append(f"{line}")
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        if "\t" in line:
+            key, raw = line.split("\t", 1)
+            parts = raw.split("◉")
+            part = parts[idx].strip() if idx < len(parts) else ""
+            output_lines.append(f"{key}\t{part}")
+        else:
+            output_lines.append(f"{line}\t")
 
-# 写入回原文件
+# 写回
 with open(input_path, "w", encoding="utf-8") as f:
     f.write("\n".join(output_lines) + "\n")
