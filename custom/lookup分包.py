@@ -36,7 +36,7 @@ if fuzhu_type in ("wubi", "tiger"):
         if not line:
             continue
         if "\t" in line:
-            key, _ = line.split("\t", 1)
+            key = line.split("\t", 1)[0]
             output_lines.append(f"{key}\t")
         else:
             output_lines.append(f"{line}\t")
@@ -51,15 +51,17 @@ else:
         line = line.strip()
         if not line:
             continue
+
         if "\t" in line:
-            key, raw = line.split("\t", 1)
-            parts = raw.split("◉")
-            part = parts[idx].strip() if idx < len(parts) else ""
-            output_lines.append(f"{key}\t{part}")
+            key, value = line.split("\t", 1)
+            parts = value.split("◉")
+            selected = parts[idx].strip() if idx < len(parts) else ""
+            output_lines.append(f"{key}\t{selected}")
         else:
+            # 若整行无 tab，视为 key-only（极少数情况）
             output_lines.append(f"{line}\t")
 
 with open(output_path, "w", encoding="utf-8") as f:
     f.write("\n".join(output_lines) + "\n")
 
-print(f"✓ 输出已保存至：{output_path}")
+print(f"✓ 类型 {fuzhu_type} 已写入: {output_path}")
