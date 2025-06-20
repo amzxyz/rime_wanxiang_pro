@@ -114,23 +114,26 @@ jobs:
             rm -f wanxiang_pro.schema.yaml
 
           done
-
+      - name: Extract tag version
+        id: extract_tag
+        run: |
+          TAG_VERSION=${GITHUB_REF#refs/tags/}
+          echo "TAG_VERSION=$TAG_VERSION" >> $GITHUB_ENV
+          echo "RELEASE_TITLE=${TAG_VERSION} Rime万象拼音输入方案，全新词库，全新语法模型" >> $GITHUB_ENV
+    
       - name: Generate changelog from commits
         run: |
-          TITLE="📦 万象输入法发布 - $TAG_VERSION"
-          echo "RELEASE_TITLE=$TITLE" >> $GITHUB_ENV
-      
-          echo "### $TITLE" > release_notes.md
+          echo "### ${RELEASE_HEADER}" > release_notes.md
           echo "---" >> release_notes.md
           echo "" >> release_notes.md
           echo "#### 1. 标准版输入方案" >> release_notes.md
           echo "✨**适用类型：** 支持全拼、各种双拼" >> release_notes.md
-          echo "✨**下载地址：** [rime-wanxiang.zip](https://github.com/${{ github.repository }}/releases/download/${{ env.TAG_VERSION }}/rime-wanxiang.zip)" >> release_notes.md
+          echo "✨**下载地址：** [rime-wanxiang.zip](https://github.com/${{ github.repository }}/releases/download/${TAG_VERSION}/rime-wanxiang.zip)" >> release_notes.md
           echo "" >> release_notes.md
           echo "#### 2. 双拼辅助码增强版输入方案" >> release_notes.md
           echo "✨**适用类型：** 支持各种双拼+辅助码的自由组合" >> release_notes.md
           for type in zrm moqi flypy jdh hanxin wubi tiger; do
-            echo "- **${type^^} 辅助版本：** [rime-wanxiang-${type}-fuzhu.zip](https://github.com/${{ github.repository }}/releases/download/${{ env.TAG_VERSION }}/rime-wanxiang-${type}-fuzhu.zip)" >> release_notes.md
+            echo "- **${type^^} 辅助版本：** [rime-wanxiang-${type}-fuzhu.zip](https://github.com/${{ github.repository }}/releases/download/${TAG_VERSION}/rime-wanxiang-${type}-fuzhu.zip)" >> release_notes.md
           done
           echo "" >> release_notes.md
           echo "#### 3. 语法模型" >> release_notes.md
@@ -138,17 +141,15 @@ jobs:
           echo "✨**下载地址：** [wanxiang-lts-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram)" >> release_notes.md
           echo "" >> release_notes.md
           echo "#### 📝 更新日志" >> release_notes.md
-          echo "" >> release_notes.md
           git log --pretty=format:"- %s (%an)" $(git describe --tags --abbrev=0 HEAD^)..HEAD >> release_notes.md
           echo "" >> release_notes.md
           echo "---" >> release_notes.md
           echo "📖 使用说明与配置教程请查看仓库中的 README.md" >> release_notes.md
-      
 
       - name: Create Release and Upload
         uses: softprops/action-gh-release@v2
         with:
-          name: ${{ env.RELEASE_TITLE }}
+          name: ${{ env.RELEASE_TITLE }}         #发布页标题
           tag_name: ${{ github.ref_name }}
           files: |
             dist/rime-wanxiang.zip
