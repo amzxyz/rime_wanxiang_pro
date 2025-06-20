@@ -34,9 +34,9 @@ jobs:
         run: |
           mkdir -p dist
           # 替换 default.yaml
-          sed -i '/^- schema: wanxiang_pro$/d' default.yaml
+          sed -i '/^[[:space:]]*- schema: wanxiang_pro$/d' default.yaml
           ROOT_FILES=$(find . -maxdepth 1 -type f \( -iname "*.yaml" -o -iname "*.txt" -o -iname "*.ini" -o -iname "*.md" -o -iname "*.png" -o -iname "*.jpg" \) \
-            ! -iname "wanxiang_pro*" ! -iname "wanxiang_lookup*" ! -iname "wanxiang_charset*")
+            ! -iname "wanxiang_pro*" ! -iname "wanxiang_lookup*" ! -iname "wanxiang_charset* ! -default.yaml")
           zip -r dist/rime-wanxiang.zip \
             custom/wanxiang.custom.yaml \
             custom/wanxiang_en.custom.yaml \
@@ -49,6 +49,7 @@ jobs:
             lua \
             opencc \
             zh_dicts \
+            default.yaml \
             $ROOT_FILES
 
       - name: Process Rime PRO dicts using Python script
@@ -75,7 +76,7 @@ jobs:
             cp -r "$dict_dir/"* zh_dicts_pro/  # 将 dict 文件直接复制进 zh_dicts_pro，而非嵌套目录
 
             # 替换 default.yaml
-            sed -i '/^- schema: wanxiang$/d' default.yaml
+            sed -i '/^[[:space:]]*- schema: wanxiang$/d' default.yaml
 
             # 精简 lookup 文件
             python custom/lookup分包.py $type
