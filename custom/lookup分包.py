@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 
+# 类型到索引映射（从 0 开始）
 type_index_map = {
     "zrm": 0,
     "moqi": 1,
@@ -20,7 +21,7 @@ head_lines = []
 body_lines = []
 collecting_head = True
 
-# 拆分文件头与正文
+# 拆分头部和正文
 with open(input_path, "r", encoding="utf-8") as f:
     for line in f:
         line = line.rstrip()
@@ -33,12 +34,9 @@ with open(input_path, "r", encoding="utf-8") as f:
 
 output_lines = []
 
+# 特殊处理：wubi / tiger → 直接清空正文，只输出一行
 if fuzhu_type in ("wubi", "tiger"):
-    for line in body_lines:
-        if not line or "\t" in line:
-            continue
-        output_lines.append(line)
-    output_lines.append("你\t哈哈")
+    output_lines = ["你\t哈哈"]
 else:
     idx = type_index_map.get(fuzhu_type)
     if idx is None:
@@ -56,7 +54,7 @@ else:
         else:
             output_lines.append(line)
 
-# 写回文件
+# 写入回原文件
 with open(input_path, "w", encoding="utf-8") as f:
     f.write("\n".join(head_lines) + "\n\n")
     f.write("\n".join(output_lines) + "\n")
