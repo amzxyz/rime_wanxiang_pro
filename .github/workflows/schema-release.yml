@@ -47,7 +47,7 @@ jobs:
           sed -i '/^[[:space:]]*- schema: wanxiang_pro$/d' default.yaml
 
           ROOT_FILES=$(find . -maxdepth 1 -type f \( -iname "*.yaml" -o -iname "*.txt" -o -iname "*.ini" -o -iname "*.md" -o -iname "*.png" -o -iname "*.jpg" \) \
-          ! -iname "wanxiang_pro*" ! -iname "wanxiang_lookup*" ! -iname "wanxiang_charset*" ! -iname "default.yaml")
+          ! -iname "wanxiang_pro*" ! -iname "wanxiang_lookup*" ! -iname "wanxiang_charset*" ! -iname "default.yaml" ! -iname "default.backup.yaml")
 
           zip -r dist/rime-wanxiang-base.zip \
             custom/wanxiang.custom.yaml \
@@ -167,7 +167,7 @@ jobs:
           echo "" >> release_notes.md
           echo "2. **使用增强版的用户：**" >> release_notes.md
           echo "   - PRO 每一个 zip 是**完整独立配置包**，其差异仅在于词库是否带有特定辅助码。" >> release_notes.md
-          echo "   - `flypy` 仅表示“词库中包含小鹤辅助码”，并**不代表这是小鹤双拼方案**。" >> release_notes.md
+          echo "   - flypy 仅表示“词库中包含小鹤辅助码”，并**不代表这是小鹤双拼方案**。" >> release_notes.md
           echo "   - 万象输入法可任意组合任意双拼与任意辅助码，请根据需要选择对应包。" >> release_notes.md
           echo "   - 想要**携带全部辅助码**？直接克隆仓库即可。" >> release_notes.md
           echo "   - 若已有目标辅助码类型，只需下载对应 zip，解压后根据 README 中提示修改表头（例如双拼方案）即可使用。" >> release_notes.md

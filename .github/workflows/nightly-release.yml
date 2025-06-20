@@ -70,8 +70,8 @@ jobs:
           mkdir -p dist
           echo "Packing original zh_dicts..."
           if [ -d "zh_dicts" ]; then
-            zip -r dist/9-zh-dicts.zip zh_dicts
-            echo "Packing completed: dist/9-zh-dicts.zip"
+            zip -r dist/9-base-zh-dicts.zip zh_dicts
+            echo "Packing completed: dist/9-base-zh-dicts.zip"
           else
             echo "Error: zh_dicts_pro folder does not exist."
             exit 1
@@ -157,9 +157,9 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: dict-nightly
-          name: "实时词库更新"
+          name: "实时提交的词库更新"
           body: |
-            - **zh-dicts.zip**：最新的标准版原始中文词库文件
+            - **base-zh-dicts.zip**：最新的标准版原始中文词库文件
             - **pro-all-zh-dicts.zip**：最新的全辅助码原始中文词库文件
             - **pro-moqi-fuzhu-dicts.zip**：携带了墨奇辅助码的词库文件
             - **pro-flypy-fuzhu-dicts.zip**：携带了小鹤辅助码的词库文件
@@ -170,7 +170,7 @@ jobs:
             - **pro-hanxin-fuzhu-dicts.zip**：携带了汉心辅助码的词库文件
             - **[wanxiang-lts-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram)**：与词库同步更新的语法模型
           files: |
-            dist/9-zh-dicts.zip
+            dist/9-base-zh-dicts.zip
             dist/8-pro-all-zh-dicts.zip
             dist/1-pro-moqi-fuzhu-dicts.zip
             dist/2-pro-flypy-fuzhu-dicts.zip
