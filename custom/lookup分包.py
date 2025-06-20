@@ -25,19 +25,20 @@ fuzhu_type = sys.argv[1]
 input_path = "wanxiang_lookup.dict.yaml"
 output_lines = []
 
-# 特殊情况处理：wubi / tiger
+# 特殊情况：wubi / tiger
 if fuzhu_type in ("wubi", "tiger"):
     with open(input_path, "r", encoding="utf-8") as f:
         for line in f:
-            line = line.strip()
-            if not line:
+            line = line.rstrip("\n")
+            if not line.strip():
                 continue
             if "\t" in line:
                 key, _ = line.split("\t", 1)
                 output_lines.append(f"{key}\t")
             else:
-                output_lines.append(f"{line}\t")
+                output_lines.append(line)  # 不添加制表符
     output_lines.extend(preset_lines)
+
 else:
     idx = type_index_map.get(fuzhu_type)
     if idx is None:
@@ -46,8 +47,8 @@ else:
 
     with open(input_path, "r", encoding="utf-8") as f:
         for line in f:
-            line = line.strip()
-            if not line:
+            line = line.rstrip("\n")
+            if not line.strip():
                 continue
             if "\t" in line:
                 key, raw = line.split("\t", 1)
@@ -55,9 +56,8 @@ else:
                 part = parts[idx] if idx < len(parts) else ""
                 output_lines.append(f"{key}\t{part}")
             else:
-                # 没有 tab 的行也写 key\t
-                output_lines.append(f"{line}\t")
+                output_lines.append(line)  # 保持原样
 
-# 写入回原文件
+# 写入结果
 with open(input_path, "w", encoding="utf-8") as f:
     f.write("\n".join(output_lines) + "\n")

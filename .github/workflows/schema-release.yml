@@ -107,6 +107,7 @@ jobs:
               wanxiang_pro.dict.yaml \
               default.yaml \
               wanxiang_lookup.dict.yaml \
+              wanxiang_lookup.schema.yaml \
               $EXTRA_ROOT_FILES
 
             rm -rf zh_dicts_pro
