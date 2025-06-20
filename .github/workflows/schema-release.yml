@@ -26,10 +26,6 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Extract tag version
-        id: extract_tag
-        run: echo "TAG_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-
       - name: Pack standard version into rime-wanxiang.zip
         run: |
           mkdir -p dist
