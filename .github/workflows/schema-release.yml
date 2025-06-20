@@ -75,7 +75,7 @@ jobs:
             sed -i '/^- schema: wanxiang$/d' default.yaml
 
             # 精简 lookup 文件
-            python custom/提取lookup子集.py $type
+            python custom/lookup分包.py $type
 
             # 复制 schema
             cp custom/预设分包方案.yaml wanxiang_pro.schema.yaml
