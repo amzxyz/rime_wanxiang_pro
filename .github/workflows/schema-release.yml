@@ -26,6 +26,14 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Extract tag version
+        id: extract_tag
+        run: |
+          TAG_VERSION=${GITHUB_REF#refs/tags/}
+          echo "TAG_VERSION=$TAG_VERSION" >> $GITHUB_ENV
+          echo "RELEASE_TITLE=${TAG_VERSION} Rime万象拼音输入方案，全新词库，全新语法模型" >> $GITHUB_ENV
+
+
       - name: Pack standard version into rime-wanxiang.zip
         run: |
           mkdir -p dist
@@ -111,12 +119,6 @@ jobs:
             rm -f wanxiang_pro.schema.yaml
 
           done
-      - name: Extract tag version
-        id: extract_tag
-        run: |
-          TAG_VERSION=${GITHUB_REF#refs/tags/}
-          echo "TAG_VERSION=$TAG_VERSION" >> $GITHUB_ENV
-          echo "RELEASE_TITLE=${TAG_VERSION} Rime万象拼音输入方案，全新词库，全新语法模型" >> $GITHUB_ENV
     
       - name: Generate changelog from commits
         run: |
