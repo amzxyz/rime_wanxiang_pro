@@ -9,12 +9,6 @@ type_index_map = {
     "jdh": 4,
 }
 
-preset_lines = [
-    "太原\t晋A",
-    "大同\t晋B",
-    "阳泉\t晋C",
-]
-
 if len(sys.argv) != 2:
     print("用法: python 提取lookup子集.py <类型>")
     sys.exit(1)
@@ -26,7 +20,7 @@ head_lines = []
 body_lines = []
 collecting_head = True
 
-# 读取并拆分文件内容
+# 拆分文件头与正文
 with open(input_path, "r", encoding="utf-8") as f:
     for line in f:
         line = line.rstrip()
@@ -40,12 +34,11 @@ with open(input_path, "r", encoding="utf-8") as f:
 output_lines = []
 
 if fuzhu_type in ("wubi", "tiger"):
-    # 仅保留单列数据
     for line in body_lines:
         if not line or "\t" in line:
             continue
         output_lines.append(line)
-    output_lines.extend(preset_lines)
+    output_lines.append("你\t哈哈")
 else:
     idx = type_index_map.get(fuzhu_type)
     if idx is None:
@@ -63,7 +56,7 @@ else:
         else:
             output_lines.append(line)
 
-# 写入回原文件（保留头部 + 新正文）
+# 写回文件
 with open(input_path, "w", encoding="utf-8") as f:
     f.write("\n".join(head_lines) + "\n\n")
     f.write("\n".join(output_lines) + "\n")
