@@ -28,11 +28,10 @@ jobs:
       - name: Pack release contents into rime-wanxiang.zip
         run: |
           mkdir -p dist
-          # 构建包含根目录文件（排除特定前缀）的列表
-          INCLUDE_FILES=$(find . -maxdepth 1 -type f \(
-            -name "*.yaml" -o -name "*.txt" -o -name "*.ini" -o -name "*.md" -o -name "*.png" -o -name "*.jpg" \
-          \) ! -name "wanxiang_pro*" ! -name "wanxiang_lookup*" ! -name "wanxiang_charset*")
-
+          # 查找所有符合条件的根目录文件
+          ROOT_FILES=$(find . -maxdepth 1 -type f \( -iname "*.yaml" -o -iname "*.txt" -o -iname "*.ini" -o -iname "*.md" -o -iname "*.png" -o -iname "*.jpg" \) \
+            ! -iname "wanxiang_pro*" ! -iname "wanxiang_lookup*" ! -iname "wanxiang_charset*")
+      
           # 打包所有内容
           zip -r dist/rime-wanxiang.zip \
             custom/wanxiang.custom.yaml \
@@ -43,7 +42,8 @@ jobs:
             lua \
             opencc \
             zh_dicts \
-            $INCLUDE_FILES
+            $ROOT_FILES
+    
 
       # 3.5 提取当前 tag 版本号
       - name: Extract tag version
