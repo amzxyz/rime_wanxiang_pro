@@ -1,0 +1,57 @@
+name: Release Standard Version
+
+on:
+  push:
+    tags:
+      - 'v*'   # 触发：以 v 开头的标签，如 v1.0.0
+
+concurrency:
+  group: release-standard
+  cancel-in-progress: true
+
+jobs:
+  release:
+    runs-on: ubuntu-22.04
+
+    steps:
+      # 1. 检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. 设置打包环境（Node 仅为 GH Release 工具需要）
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      # 3. 打包所需内容
+      - name: Pack release contents into rime-wanxiang.zip
+        run: |
+          mkdir -p dist
+          # 先构建一个临时文件列表
+          INCLUDE_FILES=$(find . -maxdepth 1 -type f \( \
+            -name "*.yaml" -o -name "*.txt" -o -name "*.ini" -o -name "*.md" -o -name "*.png" -o -name "*.jpg" \
+          \) ! -name "wanxiang_pro*" ! -name "wanxiang_lookup*" ! -name "wanxiang_charset*")
+
+          # 打包所有内容
+          zip -r dist/rime-wanxiang.zip \
+            custom/wanxiang.custom.yaml \
+            custom/wanxiang_en.custom.yaml \
+            custom/wanxiang_radical.custom.yaml \
+            en_dicts \
+            jm_dicts \
+            lua \
+            opencc \
+            zh_dicts \
+            $INCLUDE_FILES
+
+
+      # 4. 创建 GitHub Release 并上传打包文件
+      - name: Create Release and Upload
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/rime-wanxiang.zip
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
