@@ -92,6 +92,7 @@ jobs:
             cp -r "$dict_dir/"* zh_dicts_pro/
 
             python custom/lookup分包.py $type
+            cp wanxiang_lookup_${type}.dict.yaml wanxiang_lookup.dict.yaml
             cp custom/预设分包方案.yaml wanxiang_pro.schema.yaml
 
             EXTRA_ROOT_FILES=$(find . -maxdepth 1 -type f \( -iname "*.yaml" -o -iname "*.txt" -o -iname "*.ini" -o -iname "*.md" -o -iname "*.png" -o -iname "*.jpg" \) \

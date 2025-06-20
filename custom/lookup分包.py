@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# 文件名：lookup分包.py
 import sys
+import os
 
 type_index_map = {
     "zrm": 0,
@@ -20,14 +20,15 @@ if len(sys.argv) != 2:
 
 fuzhu_type = sys.argv[1]
 input_path = "wanxiang_lookup.dict.yaml"
+output_path = f"wanxiang_lookup_{fuzhu_type}.dict.yaml"
 output_lines = []
 
-try:
-    with open(input_path, "r", encoding="utf-8") as f:
-        lines = f.readlines()
-except FileNotFoundError:
-    print(f"找不到文件: {input_path}")
+if not os.path.exists(input_path):
+    print(f"未找到文件: {input_path}")
     sys.exit(1)
+
+with open(input_path, "r", encoding="utf-8") as f:
+    lines = f.readlines()
 
 if fuzhu_type in ("wubi", "tiger"):
     for line in lines:
@@ -58,6 +59,7 @@ else:
         else:
             output_lines.append(f"{line}\t")
 
-# 写回
-with open(input_path, "w", encoding="utf-8") as f:
+with open(output_path, "w", encoding="utf-8") as f:
     f.write("\n".join(output_lines) + "\n")
+
+print(f"✓ 输出已保存至：{output_path}")
