@@ -122,7 +122,16 @@ jobs:
           echo "#### 2. 双拼辅助码增强版输入方案" >> release_notes.md
           echo "✨**适用类型：** 支持各种双拼+辅助码的自由组合" >> release_notes.md
           for type in zrm moqi flypy jdh hanxin wubi tiger; do
-            echo "- **${type^^} 辅助版本：** [rime-wanxiang-${type}-fuzhu.zip](https://github.com/${{ github.repository }}/releases/download/${{ env.TAG_VERSION }}/rime-wanxiang-${type}-fuzhu.zip)" >> release_notes.md
+            case "$type" in
+            zrm) TYPE="自然码" ;;
+            moqi) TYPE="墨奇" ;;
+            flypy) TYPE="小鹤" ;;
+            jdh) TYPE="简单鹤" ;;
+            hanxin) TYPE="汉心" ;;
+            wubi) TYPE="五笔前2" ;;
+            tiger) TYPE="虎码首末" ;;
+            esac
+            echo "- **${TYPE} 辅助版本：** [rime-wanxiang-${type}-fuzhu.zip](https://github.com/${{ github.repository }}/releases/download/${{ env.TAG_VERSION }}/rime-wanxiang-${type}-fuzhu.zip)" >> release_notes.md
           done
           echo "" >> release_notes.md
           echo "#### 3. 语法模型" >> release_notes.md
