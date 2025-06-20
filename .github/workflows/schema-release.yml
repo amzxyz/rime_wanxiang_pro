@@ -99,6 +99,7 @@ jobs:
               ! -iname "wanxiang_charset*" \
               ! -iname "wanxiang_pro*" \
               ! -iname "default.yaml" \
+              ! -iname "default.backup.yaml" \
               ! -iname "wanxiang.schema.yaml" )
 
             zip -r "dist/rime-wanxiang-${type}-fuzhu.zip" \
@@ -138,7 +139,7 @@ jobs:
           echo "✨**适用类型：** 支持各种双拼+辅助码的自由组合" >> release_notes.md
       
           declare -A display_names=(
-            [zrm]="汉字自然码"
+            [zrm]="自然码"
             [moqi]="墨奇"
             [flypy]="小鹤"
             [jdh]="简单鹤"
