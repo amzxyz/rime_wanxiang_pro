@@ -10,10 +10,6 @@ type_index_map = {
     "jdh": 4,
 }
 
-preset_lines = [
-    "大\t小",
-]
-
 if len(sys.argv) != 2:
     print("用法: python lookup分包.py <类型>")
     sys.exit(1)
@@ -35,12 +31,8 @@ if fuzhu_type in ("wubi", "tiger"):
         line = line.strip()
         if not line:
             continue
-        if "\t" in line:
-            key = line.split("\t", 1)[0]
-            output_lines.append(f"{key}\t")
-        else:
-            output_lines.append(f"{line}\t")
-    output_lines.extend(preset_lines)
+        key = line.split("\t", 1)[0]
+        output_lines.append(f"{key}\t")
 else:
     idx = type_index_map.get(fuzhu_type)
     if idx is None:
@@ -49,17 +41,12 @@ else:
 
     for line in lines:
         line = line.strip()
-        if not line:
+        if not line or "\t" not in line:
             continue
-
-        if "\t" in line:
-            key, value = line.split("\t", 1)
-            parts = value.split("◉")
-            selected = parts[idx].strip() if idx < len(parts) else ""
-            output_lines.append(f"{key}\t{selected}")
-        else:
-            # 若整行无 tab，视为 key-only（极少数情况）
-            output_lines.append(f"{line}\t")
+        key, raw = line.split("\t", 1)
+        parts = raw.split("◉")
+        part = parts[idx].strip() if idx < len(parts) else ""
+        output_lines.append(f"{key}\t{part}")
 
 with open(output_path, "w", encoding="utf-8") as f:
     f.write("\n".join(output_lines) + "\n")
