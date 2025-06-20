@@ -34,11 +34,18 @@ jobs:
           echo "RELEASE_TITLE=${TAG_VERSION} Rime万象拼音输入方案，全新词库，全新语法模型" >> $GITHUB_ENV
 
 
-      - name: Pack standard version into rime-wanxiang.zip
+      - name: Prepare and backup default.yaml
         run: |
           mkdir -p dist
-          # 替换 default.yaml
+          cp default.yaml default.backup.yaml
+
+      - name: Pack standard version into rime-wanxiang.zip
+        run: |
+          # 先还原 default.yaml
+          cp default.backup.yaml default.yaml
+          # 删除 wanxiang_pro 行
           sed -i '/^[[:space:]]*- schema: wanxiang_pro$/d' default.yaml
+
           ROOT_FILES=$(find . -maxdepth 1 -type f \( -iname "*.yaml" -o -iname "*.txt" -o -iname "*.ini" -o -iname "*.md" -o -iname "*.png" -o -iname "*.jpg" \) \
           ! -iname "wanxiang_pro*" ! -iname "wanxiang_lookup*" ! -iname "wanxiang_charset*" ! -iname "default.yaml")
 
@@ -64,7 +71,6 @@ jobs:
 
       - name: Generate fuzhu scheme zip packages
         run: |
-          mkdir -p dist
           declare -A types=(
             [zrm]=pro-zrm-fuzhu-dicts
             [moqi]=pro-moqi-fuzhu-dicts
@@ -77,26 +83,24 @@ jobs:
 
           for type in "${!types[@]}"; do
             dict_dir="${types[$type]}"
-            mkdir -p zh_dicts_pro
-            cp -r "$dict_dir/"* zh_dicts_pro/  # 将 dict 文件直接复制进 zh_dicts_pro，而非嵌套目录
 
-            # 替换 default.yaml
+            # 恢复 default.yaml，并删除 wanxiang 行
+            cp default.backup.yaml default.yaml
             sed -i '/^[[:space:]]*- schema: wanxiang$/d' default.yaml
 
-            # 精简 lookup 文件
-            python custom/lookup分包.py $type
+            mkdir -p zh_dicts_pro
+            cp -r "$dict_dir/"* zh_dicts_pro/
 
-            # 复制 schema
+            python custom/lookup分包.py $type
             cp custom/预设分包方案.yaml wanxiang_pro.schema.yaml
 
-            # 获取根目录额外要打包的文件（排除特定命名）
             EXTRA_ROOT_FILES=$(find . -maxdepth 1 -type f \( -iname "*.yaml" -o -iname "*.txt" -o -iname "*.ini" -o -iname "*.md" -o -iname "*.png" -o -iname "*.jpg" \) \
-            ! -iname "wanxiang_lookup*" \
-            ! -iname "wanxiang_charset*" \
-            ! -iname "wanxiang_pro*" \
-            ! -iname "default.yaml" \
-            ! -iname "wanxiang.schema.yaml" )
-            # 打包
+              ! -iname "wanxiang_lookup*" \
+              ! -iname "wanxiang_charset*" \
+              ! -iname "wanxiang_pro*" \
+              ! -iname "default.yaml" \
+              ! -iname "wanxiang.schema.yaml" )
+
             zip -r "dist/rime-wanxiang-${type}-fuzhu.zip" \
               custom/wanxiang_pro.custom.yaml \
               custom/wanxiang_en.custom.yaml \
@@ -118,9 +122,8 @@ jobs:
 
             rm -rf zh_dicts_pro
             rm -f wanxiang_pro.schema.yaml
-
           done
-    
+
       - name: Generate changelog from commits
         shell: bash
         run: |
@@ -158,7 +161,22 @@ jobs:
           git log --pretty=format:"- %s (%an)" $(git describe --tags --abbrev=0 HEAD^)..HEAD >> release_notes.md
           echo "" >> release_notes.md
           echo "---" >> release_notes.md
-          echo "📖 使用说明与配置教程请查看仓库中的 README.md" >> release_notes.md
+          echo "#### 📘 使用说明" >> release_notes.md
+          echo "" >> release_notes.md
+          echo "1. **不使用辅助码的用户** 请直接下载标准版，按仓库中的 [README.md](https://github.com/${{ github.repository }}/blob/main/README.md) 配置使用。" >> release_notes.md
+          echo "" >> release_notes.md
+          echo "2. **使用增强版的用户：**" >> release_notes.md
+          echo "   - PRO 每一个 zip 是**完整独立配置包**，其差异仅在于词库是否带有特定辅助码。" >> release_notes.md
+          echo "   - `flypy` 仅表示“词库中包含小鹤辅助码”，并**不代表这是小鹤双拼方案**。" >> release_notes.md
+          echo "   - 万象输入法可任意组合任意双拼与任意辅助码，请根据需要选择对应包。" >> release_notes.md
+          echo "   - 想要**携带全部辅助码**？直接克隆仓库即可。" >> release_notes.md
+          echo "   - 若已有目标辅助码类型，只需下载对应 zip，解压后根据 README 中提示修改表头（例如双拼方案）即可使用。" >> release_notes.md
+          echo "" >> release_notes.md
+          echo "3. **语法模型需单独下载**，并放入输入法用户目录根目录（与方案文件放一起），**无需配置**。" >> release_notes.md
+          echo "" >> release_notes.md
+          echo "4. 💾 飞机盘下载地址（最快更新）：[点击访问](https://share.feijipan.com/s/xiGvXdKz)" >> release_notes.md
+          echo "5. 🛠 推荐使用更新脚本优雅管理版本：[rime-wanxiang-weasel-update-tools](https://github.com/expoli/rime-wanxiang-weasel-update-tools)" >> release_notes.md
+
         
 
       - name: Create Release and Upload
@@ -173,4 +191,3 @@ jobs:
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
