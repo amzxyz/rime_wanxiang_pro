@@ -85,7 +85,6 @@ jobs:
 
             # 获取根目录额外要打包的文件（排除特定命名）
             EXTRA_ROOT_FILES=$(find . -maxdepth 1 -type f \( -iname "*.yaml" -o -iname "*.txt" -o -iname "*.ini" -o -iname "*.md" -o -iname "*.png" -o -iname "*.jpg" \) \
-            ! -iname "wanxiang_pro.schema.yaml" \
             ! -iname "wanxiang_lookup*" \
             ! -iname "wanxiang_charset*" \
             ! -iname "wanxiang_pro*" \
@@ -105,6 +104,7 @@ jobs:
               opencc \
               zh_dicts_pro \
               wanxiang_pro.schema.yaml \
+              wanxiang_pro.dict.yaml \
               default.yaml \
               wanxiang_lookup.dict.yaml \
               $EXTRA_ROOT_FILES
