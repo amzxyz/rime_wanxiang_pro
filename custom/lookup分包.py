@@ -29,12 +29,14 @@ output_lines = []
 if fuzhu_type in ("wubi", "tiger"):
     with open(input_path, "r", encoding="utf-8") as f:
         for line in f:
-            line = line.rstrip("\n")
+            line = line.strip()
+            if not line:
+                continue
             if "\t" in line:
                 key, _ = line.split("\t", 1)
                 output_lines.append(f"{key}\t")
             else:
-                output_lines.append(line)
+                output_lines.append(f"{line}\t")
     output_lines.extend(preset_lines)
 else:
     idx = type_index_map.get(fuzhu_type)
@@ -44,14 +46,17 @@ else:
 
     with open(input_path, "r", encoding="utf-8") as f:
         for line in f:
-            line = line.rstrip("\n")
+            line = line.strip()
+            if not line:
+                continue
             if "\t" in line:
                 key, raw = line.split("\t", 1)
                 parts = raw.split("◉")
                 part = parts[idx] if idx < len(parts) else ""
                 output_lines.append(f"{key}\t{part}")
             else:
-                output_lines.append(line)
+                # 没有 tab 的行也写 key\t
+                output_lines.append(f"{line}\t")
 
 # 写入回原文件
 with open(input_path, "w", encoding="utf-8") as f:
