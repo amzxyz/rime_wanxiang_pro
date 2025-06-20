@@ -116,7 +116,10 @@ jobs:
 
       - name: Generate changelog from commits
         run: |
-          echo "### 📦 下载导航" > release_notes.md
+          TITLE="📦 万象输入法发布 - $TAG_VERSION"
+          echo "RELEASE_TITLE=$TITLE" >> $GITHUB_ENV
+      
+          echo "### $TITLE" > release_notes.md
           echo "---" >> release_notes.md
           echo "" >> release_notes.md
           echo "#### 1. 标准版输入方案" >> release_notes.md
@@ -139,10 +142,13 @@ jobs:
           echo "" >> release_notes.md
           echo "---" >> release_notes.md
           echo "📖 使用说明与配置教程请查看仓库中的 README.md" >> release_notes.md
+      
 
       - name: Create Release and Upload
         uses: softprops/action-gh-release@v2
         with:
+          name: ${{ env.RELEASE_TITLE }}
+          tag_name: ${{ github.ref_name }}
           files: |
             dist/rime-wanxiang.zip
             dist/rime-wanxiang-*.zip
@@ -151,3 +157,4 @@ jobs:
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
