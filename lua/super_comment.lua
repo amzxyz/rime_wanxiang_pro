@@ -32,29 +32,42 @@ local patterns = {
 -- #########################
 local CF = {}
 function CF.init(env)
-        -- 初始化拆分词典（reverse.bin 形式）
     if env.chaifen_dict == nil then
         env.chaifen_dict = ReverseLookup("wanxiang_lookup")
     end
 end
 function CF.fini(env)
-    if env.chaifen_dict ~= nil then
-        env.chaifen_dict = nil
-        collectgarbage()
-    end
+    env.chaifen_dict = nil
+    collectgarbage()
 end
--- 拆分功能：返回拆分注释
 function CF.get_comment(cand, env, initial_comment)
     local dict = env.chaifen_dict
-    if not dict then return nil end
+    if not dict then return "" end
 
-    local append = dict:lookup(cand.text)
-    if append ~= "" then
-        if initial_comment and initial_comment ~= "" then
-            return append
-        end
+    local raw = dict:lookup(cand.text)
+    if raw == "" then return "" end
+    -- 若无 ◉ 分隔符，直接返回整体
+    if not string.find(raw, "◉") then
+        return raw
     end
-    return nil
+    -- 拆分段落
+    local segments = {}
+    for seg in string.gmatch(raw .. "◉", "(.-)◉") do
+        table.insert(segments, seg)
+    end
+    -- 辅助码类型映射到段索引
+    local index_map = {
+        zrm = 1,
+        moqi = 2,
+        flypy = 3,
+        hanxin = 4,
+        jdh = 5
+    }
+    local fuzhu_type = env.settings.fuzhu_type or ""
+    local idx = index_map[fuzhu_type]
+    if not idx then return "" end
+    -- 若该段超出范围或为空，返回空字符串
+    return segments[idx] or ""
 end
 -- #########################
 -- # 错音错字提示模块 (Corrector)

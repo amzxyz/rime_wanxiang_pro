@@ -1,0 +1,140 @@
+name: Release Standard Version
+
+on:
+  push:
+    tags:
+      - 'v*'   # 触发：以 v 开头的标签，如 v1.0.0
+
+concurrency:
+  group: release-standard
+  cancel-in-progress: true
+
+jobs:
+  release:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Extract tag version
+        id: extract_tag
+        run: echo "TAG_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: Pack standard version into rime-wanxiang.zip
+        run: |
+          mkdir -p dist
+          # 替换 default.yaml
+          sed -i '/^- schema: wanxiang_pro$/d' default.yaml
+          ROOT_FILES=$(find . -maxdepth 1 -type f \( -iname "*.yaml" -o -iname "*.txt" -o -iname "*.ini" -o -iname "*.md" -o -iname "*.png" -o -iname "*.jpg" \) \
+            ! -iname "wanxiang_pro*" ! -iname "wanxiang_lookup*" ! -iname "wanxiang_charset*")
+          zip -r dist/rime-wanxiang.zip \
+            custom/wanxiang.custom.yaml \
+            custom/wanxiang_en.custom.yaml \
+            custom/wanxiang_radical.custom.yaml \
+            en_dicts \
+            jm_dicts \
+            lua \
+            opencc \
+            zh_dicts \
+            $ROOT_FILES
+
+      - name: Process Rime PRO dicts using Python script
+        run: |
+          pip install --upgrade pip
+          python custom/万象分包.py
+
+      - name: Generate fuzhu scheme zip packages
+        run: |
+          mkdir -p dist
+          declare -A types=(
+            [zrm]=pro-zrm-fuzhu-dicts
+            [moqi]=pro-moqi-fuzhu-dicts
+            [flypy]=pro-flypy-fuzhu-dicts
+            [jdh]=pro-jdh-fuzhu-dicts
+            [hanxin]=pro-hanxin-fuzhu-dicts
+            [wubi]=pro-wubi-fuzhu-dicts
+            [tiger]=pro-tiger-fuzhu-dicts
+          )
+
+          for type in "${!types[@]}"; do
+            dict_dir="${types[$type]}"
+            cp -r "$dict_dir" zh_dicts_pro
+
+            # 替换 default.yaml
+            sed -i '/^- schema: wanxiang$/d' default.yaml
+
+            # 精简 lookup 文件
+            python custom/提取lookup子集.py $type
+
+            # 复制 schema
+            cp custom/预设.yaml wanxiang_pro.schema.yaml
+
+            # 打包
+            zip -r "dist/rime-wanxiang-${type}-fuzhu.zip" \
+              custom/wanxiang_pro.custom.yaml \
+              custom/wanxiang_en.custom.yaml \
+              custom/wanxiang_radical.custom.yaml \
+              custom/*.md \
+              custom/*.jpg \
+              custom/*.png \
+              en_dicts \
+              jm_dicts \
+              lua \
+              opencc \
+              zh_dicts_pro \
+              wanxiang_pro.schema.yaml \
+              default.yaml \
+              wanxiang_lookup.dict.yaml
+
+            rm -rf zh_dicts_pro
+            rm -f wanxiang_pro.schema.yaml
+          done
+
+      - name: Generate changelog from commits
+        run: |
+          echo "### 📦 下载导航" > release_notes.md
+          echo "---" >> release_notes.md
+          echo "" >> release_notes.md
+          echo "#### 1. 标准版输入方案" >> release_notes.md
+          echo "✨**适用类型：** 支持全拼、各种双拼" >> release_notes.md
+          echo "✨**下载地址：** [rime-wanxiang.zip](https://github.com/${{ github.repository }}/releases/download/${{ env.TAG_VERSION }}/rime-wanxiang.zip)" >> release_notes.md
+          echo "" >> release_notes.md
+          echo "#### 2. 双拼辅助码增强版输入方案" >> release_notes.md
+          echo "✨**适用类型：** 支持各种双拼+辅助码的自由组合" >> release_notes.md
+          for type in zrm moqi flypy jdh hanxin wubi tiger; do
+            echo "- **${type^^} 辅助版本：** [rime-wanxiang-${type}-fuzhu.zip](https://github.com/${{ github.repository }}/releases/download/${{ env.TAG_VERSION }}/rime-wanxiang-${type}-fuzhu.zip)" >> release_notes.md
+          done
+          echo "" >> release_notes.md
+          echo "#### 3. 语法模型" >> release_notes.md
+          echo "✨**适用类型：** 所有版本皆可用" >> release_notes.md
+          echo "✨**下载地址：** [wanxiang-lts-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram)" >> release_notes.md
+          echo "" >> release_notes.md
+          echo "#### 📝 更新日志" >> release_notes.md
+          echo "" >> release_notes.md
+          git log --pretty=format:"- %s (%an)" $(git describe --tags --abbrev=0 HEAD^)..HEAD >> release_notes.md
+          echo "" >> release_notes.md
+          echo "---" >> release_notes.md
+          echo "📖 使用说明与配置教程请查看仓库中的 README.md" >> release_notes.md
+
+      - name: Create Release and Upload
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/rime-wanxiang.zip
+            dist/rime-wanxiang-*.zip
+          body_path: release_notes.md
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
