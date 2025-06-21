@@ -66,33 +66,56 @@ local function sync_tips_db_from_file(db, path)
     file:close()
 end
 
--- 获取文件内容哈希值，使用 FNV-1a 哈希算法
+-- 获取文件内容哈希值，使用 FNV-1a 哈希算法（增强兼容性，避免位运算依赖）
 local function calculate_file_hash(filepath)
     local file = io.open(filepath, "rb")
     if not file then return nil end
 
     -- FNV-1a 哈希参数（32位）
-    local FNV_OFFSET_BASIS = 0x811C9DC5
-    local FNV_PRIME = 0x01000193
+    local FNV_OFFSET_BASIS = 2166136261
+    local FNV_PRIME = 16777619
 
     local hash = FNV_OFFSET_BASIS
 
-    -- 分块读取文件（提高大文件处理效率）
-    while true do
-        local chunk = file:read(4096) -- 4KB 块大小
-        if not chunk then break end
+    -- 位运算兼容处理
+    local function xor(a, b)
+        local res, p = 0, 1
+        while a > 0 or b > 0 do
+            local ab = (a % 2 + b % 2) % 2
+            res = res + ab * p
+            a = math.floor(a / 2)
+            b = math.floor(b / 2)
+            p = p * 2
+        end
+        return res
+    end
 
-        -- 处理每个字节
+    local function band(a, b)
+        local res, p = 0, 1
+        while a > 0 and b > 0 do
+            if (a % 2 == 1) and (b % 2 == 1) then
+                res = res + p
+            end
+            a = math.floor(a / 2)
+            b = math.floor(b / 2)
+            p = p * 2
+        end
+        return res
+    end
+
+    while true do
+        local chunk = file:read(4096)
+        if not chunk then break end
         for i = 1, #chunk do
             local byte = string.byte(chunk, i)
-            hash = hash ~ byte       -- XOR 操作
-            hash = hash * FNV_PRIME  -- 乘法操作
-            hash = hash & 0xFFFFFFFF -- 确保32位
+            hash = xor(hash, byte)
+            hash = (hash * FNV_PRIME) % 4294967296 -- 保证32位
+            hash = band(hash, 0xFFFFFFFF)
         end
     end
 
     file:close()
-    return string.format("%08x", hash) -- 返回16进制字符串
+    return string.format("%08x", hash)
 end
 
 local function file_exists(name)
