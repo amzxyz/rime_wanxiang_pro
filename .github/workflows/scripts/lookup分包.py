@@ -25,7 +25,7 @@ if fuzhu_type not in type_index_map:
 
 # --- 保证始终从仓库根目录读写 ---
 # 假设脚本位于 custom/lookup分包.py
-base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../"))
 input_path = os.path.join(base_dir, "wanxiang_lookup.dict.yaml")
 output_path = os.path.join(base_dir, f"wanxiang_lookup_{fuzhu_type}.dict.yaml")
 
