@@ -2,7 +2,8 @@ name: Release Schema
 on:
   push:
     tags:
-      - 'v*'   # 触发：以 v 开头的标签，如 v1.0.0
+      - "v*" # 触发：以 v 开头的标签，如 v1.0.0
+  workflow_dispatch: # 手动触发工作流
 
 concurrency:
   group: release-standard
@@ -19,12 +20,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Extract tag version
         id: extract_tag
@@ -33,118 +34,8 @@ jobs:
           echo "TAG_VERSION=$TAG_VERSION" >> $GITHUB_ENV
           echo "RELEASE_TITLE=${TAG_VERSION} Rime万象拼音输入方案，全新词库，全新语法模型" >> $GITHUB_ENV
 
-
-      - name: Prepare and backup default.yaml
-        run: |
-          mkdir -p dist
-          cp default.yaml default.backup.yaml
-
-      - name: Pack standard version into rime-wanxiang.zip
-        run: |
-          # 先还原 default.yaml
-          cp default.backup.yaml default.yaml
-          # 删除 wanxiang_pro 行
-          sed -i '/^[[:space:]]*- schema: wanxiang_pro$/d' default.yaml
-
-          ROOT_FILES=$(find . -maxdepth 1 -type f \( -iname "*.yaml" -o -iname "*.txt" -o -iname "*.ini" -o -iname "*.md" -o -iname "*.png" -o -iname "*.jpg" -o -iname "*.db" \) \
-          ! -iname "wanxiang_pro*" ! -iname "wanxiang_lookup*" ! -iname "wanxiang_charset*" ! -iname "default.yaml" ! -iname "default.backup.yaml")
-
-          zip -r dist/rime-wanxiang-base.zip \
-            custom/wanxiang.custom.yaml \
-            custom/wanxiang_en.custom.yaml \
-            custom/wanxiang_radical.custom.yaml \
-            custom/*.md \
-            custom/*.jpg \
-            custom/*.png \
-            en_dicts \
-            jm_dicts \
-            lua \
-            opencc \
-            zh_dicts \
-            default.yaml \
-            $ROOT_FILES
-
-      - name: Process Rime PRO dicts using Python script
-        run: |
-          pip install --upgrade pip
-          python custom/万象分包.py
-
-      - name: Generate fuzhu scheme zip packages
-        run: |
-          declare -A types=(
-            [zrm]=pro-zrm-fuzhu-dicts
-            [moqi]=pro-moqi-fuzhu-dicts
-            [flypy]=pro-flypy-fuzhu-dicts
-            [jdh]=pro-jdh-fuzhu-dicts
-            [hanxin]=pro-hanxin-fuzhu-dicts
-            [wubi]=pro-wubi-fuzhu-dicts
-            [tiger]=pro-tiger-fuzhu-dicts
-          )
-
-          for type in "${!types[@]}"; do
-            dict_dir="${types[$type]}"
-            work_dir="tmp_${type}"
-
-            echo "🧹 清理并创建工作目录: $work_dir"
-            rm -rf "$work_dir"
-            mkdir -p "$work_dir/zh_dicts_pro"
-
-            echo "📦 复制分包词库: $dict_dir → $work_dir/zh_dicts_pro/"
-            cp -r "$dict_dir/"* "$work_dir/zh_dicts_pro/"
-
-            echo "📍生成 lookup 分包文件（按类型 $type）"
-            python custom/lookup分包.py "$type"
-
-            echo "📥 复制该类型的 lookup 分包文件 → wanxiang_lookup.dict.yaml"
-            cp "wanxiang_lookup_${type}.dict.yaml" "$work_dir/wanxiang_lookup.dict.yaml"
-
-            echo "📄 复制 default.yaml 并修改"
-            cp default.backup.yaml "$work_dir/default.yaml"
-            sed -i '/^[[:space:]]*- schema: wanxiang$/d' "$work_dir/default.yaml"
-
-            echo "🧩 复制 custom 配置"
-            mkdir -p "$work_dir/custom"
-            cp custom/wanxiang_pro.custom.yaml "$work_dir/custom/"
-            cp custom/wanxiang_en.custom.yaml "$work_dir/custom/"
-            cp custom/wanxiang_radical.custom.yaml "$work_dir/custom/"
-            cp custom/*.md "$work_dir/custom/" 2>/dev/null || true
-            cp custom/*.png "$work_dir/custom/" 2>/dev/null || true
-            cp custom/*.jpg "$work_dir/custom/" 2>/dev/null || true
-
-            echo "📄 复制 schema 主文件"
-            cp wanxiang_pro.dict.yaml "$work_dir/wanxiang_pro.dict.yaml"
-            cp custom/预设分包方案.yaml "$work_dir/wanxiang_pro.schema.yaml"
-            cp wanxiang_lookup.schema.yaml "$work_dir/wanxiang_lookup.schema.yaml"
-
-            echo "📁 拷贝模块子目录"
-            cp -r en_dicts "$work_dir/"
-            cp -r jm_dicts "$work_dir/"
-            cp -r lua "$work_dir/"
-            cp -r opencc "$work_dir/"
-
-            echo "🗃 合并根目录的通用文件"
-            find . -maxdepth 1 -type f \( \
-              -iname "*.yaml" -o -iname "*.txt" -o -iname "*.md" -o -iname "*.png" -o -iname "*.jpg" -o -iname "*.db" -o -iname "*.ini" -o -iname "*.db" \
-              \) \
-              ! -iname "wanxiang_pro*" \
-              ! -iname "wanxiang_lookup*" \
-            #  ! -iname "wanxiang_charset*" \
-              ! -iname "wanxiang.dict.yaml" \
-              ! -iname "wanxiang.schema.yaml" \
-              ! -iname "default.yaml" \
-              ! -iname "default.backup.yaml" \
-              -exec cp {} "$work_dir/" \;
-
-            echo "📦 打包为扁平结构 zip"
-            (cd "$work_dir" && zip -r "../dist/rime-wanxiang-${type}-fuzhu.zip" .)
-
-            echo "🧹 清理中间文件"
-            rm -rf "$work_dir"
-            rm -f wanxiang_lookup_${type}.dict.yaml
-
-            echo "✅ 完成打包: rime-wanxiang-${type}-fuzhu.zip"
-          done
-  
+      - name: Release build
+        run: bash .github/workflows/scripts/release-build.sh
 
       - name: Generate changelog from commits
         shell: bash
@@ -158,7 +49,7 @@ jobs:
           echo "" >> release_notes.md
           echo "#### 2. 双拼辅助码增强版输入方案" >> release_notes.md
           echo "✨**适用类型：** 支持各种双拼+辅助码的自由组合" >> release_notes.md
-      
+
           declare -A display_names=(
             [zrm]="自然码"
             [moqi]="墨奇"
@@ -168,12 +59,12 @@ jobs:
             [wubi]="五笔前2"
             [tiger]="虎码首末"
           )
-      
+
           for type in zrm moqi flypy jdh hanxin wubi tiger; do
             name="${display_names[$type]}"
             echo "- **${name}辅助版本：** [rime-wanxiang-${type}-fuzhu.zip](https://github.com/${{ github.repository }}/releases/download/${TAG_VERSION}/rime-wanxiang-${type}-fuzhu.zip)" >> release_notes.md
           done
-      
+
           echo "" >> release_notes.md
           echo "#### 3. 语法模型" >> release_notes.md
           echo "✨**适用类型：** 所有版本皆可用" >> release_notes.md
@@ -199,17 +90,15 @@ jobs:
           echo "4. 💾 飞机盘下载地址（最快更新）：[点击访问](https://share.feijipan.com/s/xiGvXdKz)" >> release_notes.md
           echo "5. 🛠 推荐使用更新脚本优雅管理版本：[rime-wanxiang-weasel-update-tools](https://github.com/expoli/rime-wanxiang-weasel-update-tools)" >> release_notes.md
 
-        
-
       - name: Create Release and Upload
         uses: softprops/action-gh-release@v2
         with:
-          name: ${{ env.RELEASE_TITLE }}         #发布页标题
+          name: ${{ env.RELEASE_TITLE }} #发布页标题
           tag_name: ${{ github.ref_name }}
           files: |
             dist/rime-wanxiang-*.zip
           body_path: release_notes.md
-          draft: false
+          draft: ${{ github.event_name == 'workflow_dispatch' }}
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
