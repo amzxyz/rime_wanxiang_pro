@@ -7,9 +7,17 @@ DIST_DIR="$ROOT_DIR/dist"
 CUSTOM_DIR="$ROOT_DIR/custom"
 
 # 成成 PRO 分包文件
+echo "▶️ PRO 分包开始"
 python3 "$CUSTOM_DIR/万象分包.py"
-echo "✅ PRO 完成: 生成完毕"
+echo "✅ PRO 分包完毕"
 echo
+
+remove_schema() {
+    SCHEMA=$1
+    OUT_DIR=$2
+
+    sed -i -E "/^\s+-\s+schema:\s+${SCHEMA}\s*$/d" "$OUT_DIR/default.yaml"
+}
 
 package_schema_base() {
     OUT_DIR=$1
@@ -34,7 +42,7 @@ package_schema_base() {
     done
 
     # 3. 修改 default.yaml，删除 schema_list: 中的 - schema: wanxiang_pro
-    sed -i '/- schema: wanxiang_pro/d' "$OUT_DIR/default.yaml"
+    remove_schema wanxiang_pro "$OUT_DIR"
 }
 
 package_schema_pro() {
@@ -72,7 +80,7 @@ package_schema_pro() {
     done
 
     # 5. 修改 default.yaml，删除 schema_list: 中的 - schema: wanxiang
-    sed -i '/- schema: wanxiang$/d' "$OUT_DIR/default.yaml"
+    remove_schema wanxiang "$OUT_DIR"
 }
 
 package_schema() {
