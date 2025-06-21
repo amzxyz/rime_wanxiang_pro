@@ -151,7 +151,7 @@ local function init_tips_userdb()
 end
 
 -- 初始化词典（写模式，把 txt 加载进 db）
-function M.init(env)
+function M.init()
     local dist = rime_api.get_distribution_code_name() or ""
     local user_lua_dir = rime_api.get_user_data_dir() .. "/lua"
     if dist ~= "hamster" and dist ~= "Weasel" then
@@ -220,6 +220,11 @@ function S.init(env)
     local config = env.engine.schema.config
     S.tips_key = config:get_string("key_binder/tips_key")
     local db = wrapLevelDb("lua/tips", false)
+end
+
+function S.fini()
+    local _, close_db = wrapLevelDb("lua/tips", false)
+    close_db()
 end
 
 function S.func(key, env)
