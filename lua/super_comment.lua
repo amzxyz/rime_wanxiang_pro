@@ -32,16 +32,25 @@ local patterns = {
 -- #########################
 local CF = {}
 function CF.init(env)
-    if env.chaifen_dict == nil then
-        env.chaifen_dict = ReverseLookup("wanxiang_lookup")
+    if wanxiang.is_pro_scheme(env) then -- pro 版直接初始化
+        CF.get_dict(env)
     end
 end
+
 function CF.fini(env)
     env.chaifen_dict = nil
     collectgarbage()
 end
-function CF.get_comment(cand, env, initial_comment)
-    local dict = env.chaifen_dict
+
+function CF.get_dict(env)
+    if env.chaifen_dict == nil then
+        env.chaifen_dict = ReverseLookup("wanxiang_lookup")
+    end
+    return env.chaifen_dict
+end
+
+function CF.get_comment(cand, env)
+    local dict = CF.get_dict(env)
     if not dict then return "" end
 
     local raw = dict:lookup(cand.text)
@@ -69,6 +78,7 @@ function CF.get_comment(cand, env, initial_comment)
     -- 若该段超出范围或为空，返回空字符串
     return segments[idx] or ""
 end
+
 -- #########################
 -- # 错音错字提示模块 (Corrector)
 -- #########################
@@ -102,6 +112,7 @@ function CR.init(env)
     end
     close_file()
 end
+
 function CR.get_comment(cand)
     -- 使用候选词的 comment 作为 code，在缓存中查找对应的修正
     local correction = nil
@@ -115,6 +126,7 @@ function CR.get_comment(cand)
     end
     return nil
 end
+
 -- ################################
 -- 部件组字返回的注释（radical_pinyin）
 -- ################################
@@ -128,7 +140,7 @@ local function get_az_comment(_, env, initial_comment)
     for segment in initial_comment:gmatch("[^%s]+") do
         table.insert(segments, segment)
     end
-    local semicolon_count = select(2, segments[1]:gsub(";", ""))  -- 使用第一个段判断
+    local semicolon_count = select(2, segments[1]:gsub(";", "")) -- 使用第一个段判断
     local pinyins = {}
     local fuzhu = nil
     for _, segment in ipairs(segments) do
@@ -234,7 +246,7 @@ local function get_pro_fz_cl_comment(env, cand, index, initial_comment)
     end
     -- 拆分辅助码
     if is_chaifen_enabled then
-        local cf_comment = CF.get_comment(cand, env, initial_comment)
+        local cf_comment = CF.get_comment(cand, env)
         if cf_comment then
             final_comment = cf_comment
         end
@@ -255,16 +267,16 @@ function ZH.init(env)
         corrector_enabled = config:get_bool("super_comment/corrector") or true,                -- 错音错词提醒功能
         corrector_type = config:get_string("super_comment/corrector_type") or "{comment}",     -- 提示类型
         candidate_length = tonumber(config:get_string("super_comment/candidate_length")) or 1, -- 候选词长度
-        fuzhu_type = config:get_string("super_comment/fuzhu_type") or "" -- 辅助码类型
+        fuzhu_type = config:get_string("super_comment/fuzhu_type") or ""                       -- 辅助码类型
     }
     CR.init(env)
-    CF.init(env)
 end
 
 function ZH.fini(env)
     -- 清理
     CF.fini(env)
 end
+
 function ZH.func(input, env)
     -- 声明反查模式的 tag 状态
     local is_radical_mode = wanxiang.is_in_radical_mode(env)
@@ -307,4 +319,5 @@ function ZH.func(input, env)
         ::continue::
     end
 end
+
 return ZH
