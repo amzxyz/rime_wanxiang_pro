@@ -4,6 +4,7 @@ set -e
 
 ROOT_DIR="$(cd "$(dirname "$0")/../../../" && pwd)"
 DIST_DIR="$ROOT_DIR/dist"
+CUSTOM_DIR="$ROOT_DIR/custom"
 
 # 成成 PRO 分包文件
 echo "▶️ PRO 分包开始"
@@ -24,8 +25,8 @@ package_schema_base() {
 
     # 1. 拷贝 custom/ 下除 wanxiang_pro.custom* 外的所有 yaml、md、jpg、ng 文件
     mkdir -p "$OUT_DIR"/custom
-    find "$ROOT_DIR/custom" -type f \( -name "*.yaml" -o -name "*.md" -o -name "*.jpg" -o -name "*.png" \) \
-        ! -name "wanxiang_pro.custom*" -exec cp {} "$OUT_DIR"/custom \;
+    find "$CUSTOM_DIR" -type f \( -name "*.yaml" -o -name "*.md" -o -name "*.jpg" -o -name "*.png" \) \
+        ! \( -name "wanxiang_pro.custom*" -o -name "预设分包方案.yaml" \) -exec cp {} "$OUT_DIR"/custom \;
 
     # 2. 拷贝根目录下除指定内容外的文件/文件夹
     for item in "$ROOT_DIR"/*; do
@@ -33,9 +34,12 @@ package_schema_base() {
         if [[ "$name" =~ ^\. ]]; then continue; fi
         if [[ "$name" == "pro-"*-fuzhu-dicts ]]; then continue; fi
         if [[ "$name" == "wanxiang_pro.dict.yaml" || "$name" == "wanxiang_pro.schema.yaml" ]]; then continue; fi
+        if [[ "$name" == "wanxiang_lookup.dict.yaml" || "$name" == "wanxiang_lookup.schema.yaml" ]]; then continue; fi
+        if [[ "$name" == "wanxiang_charset.dict.yaml" || "$name" == "wanxiang_charset.schema.yaml" ]]; then continue; fi
         if [[ "$name" == "custom_phrase_flypy.txt" ]]; then continue; fi
         if [[ "$name" == "zh_dicts_pro" ]]; then continue; fi
         if [[ "$name" == "custom" || "$name" == "dist" ]]; then continue; fi
+        if [[ "$name" == "LICENSE" ]]; then continue; fi
         cp -r "$item" "$OUT_DIR/"
     done
 
@@ -60,10 +64,15 @@ package_schema_pro() {
         mv "$ROOT_DIR/wanxiang_lookup_$SCHEMA_NAME.dict.yaml" "$OUT_DIR/wanxiang_lookup.dict.yaml"
     fi
 
+    # 3. 复制 schema 主文件
+    if [[ -f "$CUSTOM_DIR/预设分包方案.yaml" ]]; then
+        cp "$CUSTOM_DIR/预设分包方案.yaml" "$OUT_DIR/wanxiang_pro.schema.yaml"
+    fi
+
     # 3. 拷贝 custom/ 下除 wanxiang.custom.yaml 外的所有 yaml、md、jpg、ng 文件
     mkdir -p "$OUT_DIR"/custom
     find "$ROOT_DIR/custom" -type f \( -name "*.yaml" -o -name "*.md" -o -name "*.jpg" -o -name "*.png" \) \
-        ! -name "wanxiang.custom.yaml" -exec cp {} "$OUT_DIR"/custom \;
+        ! \( -name "wanxiang.custom*" -o -name "预设分包方案.yaml" \) -exec cp {} "$OUT_DIR"/custom \;
 
     # 4. 拷贝根目录下除指定内容外的文件/文件夹
     for item in "$ROOT_DIR"/*; do
@@ -74,6 +83,7 @@ package_schema_pro() {
         if [[ "$name" == "zh_dicts" ]]; then continue; fi
         if [[ -e "$OUT_DIR/$name" ]]; then continue; fi
         if [[ "$name" == "custom" || "$name" == "dist" ]]; then continue; fi
+        if [[ "$name" == "LICENSE" ]]; then continue; fi
         cp -r "$item" "$OUT_DIR/"
     done
 
