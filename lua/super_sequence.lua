@@ -3,9 +3,11 @@
 --这个版本是db数据库支持的版本,可能会支持更多的排序记录,作为一个备用版本留存
 --ctrl+j左移 ctrl+k左移  ctrl+0移除排序信息,固定词典其实没必要删除,直接降权到后面
 --排序算法可能还不完美,有能力的朋友欢迎帮忙变更算法
+local data_file = "lua/seq_words.lua"
+
 -- 序列化并写入文件的函数
-function write_word_to_file(env, record_type)
-    local filename = rime_api.get_user_data_dir() .. "/lua/seq_words.lua"
+local function write_word_to_file(env, record_type)
+    local filename = rime_api.get_user_data_dir() .. "/" .. data_file
     if not filename then
         return false
     end
@@ -24,12 +26,47 @@ function write_word_to_file(env, record_type)
     fd:close() -- 关闭文件
 end
 
+-- 解析文件内容的函数
+local function load_seq_words_from_file(env)
+    local filename = rime_api.get_user_data_dir() .. "/" .. data_file
+    local file = io.open(filename, "r")
+    if not file then
+        write_word_to_file(env)
+        return {}
+    end
+
+    local content = file:read("*all")
+    file:close()
+
+    if not content or content == "" then
+        return {}
+    end
+
+    -- 执行 Lua 代码来获取数据
+    local func, err = load(content)
+    if not func then
+        log.error(string.format("[super_sequence] 数据文件加载失败，错误信息：%s" .. err))
+        return {}
+    end
+
+    local success, result = pcall(func)
+    if not success or type(result) ~= "table" then
+        log.error("[super_sequence] 数据文件解析失败")
+        return {}
+    end
+
+    return result
+end
+
 local P = {}
 function P.init(env)
-    env.seq_words = require("seq_words") -- 加载文件中的 seq_words
+    env.seq_words = {}
+    env.seq_words = load_seq_words_from_file(env) -- 直接解析文件中的 seq_words
 end
 
 -- P 阶段按键处理
+---@param key_event KeyEvent
+---@param env Env
 function P.func(key_event, env)
     local context = env.engine.context
     local input_text = context.input
@@ -82,9 +119,11 @@ local F = {}
 local MAX_CANDIDATES = 300
 
 function F.init(env)
-    env.seq_words = require("seq_words") or {}
+    env.seq_words = load_seq_words_from_file() or {}
 end
 
+---@param input Translation
+---@param env Env
 function F.func(input, env)
     local seen = {}
     local displaced = {}          -- 有偏移项
