@@ -27,7 +27,7 @@ local function wrapLevelDb(dbname, mode)
             db:open_read_only()
         end
     elseif db and db:loaded() and mode then
-        log.warning(string.format("[super_tips] reopen in write mode"))
+        log.warning(string.format("[super_tips] DB 已在写模式下打开，同时写存在风险"))
     end
 
     return db, close
