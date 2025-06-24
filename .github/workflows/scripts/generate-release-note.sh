@@ -22,7 +22,26 @@ else
   PREVIOUS_VERSION=$(git tag --list "v*" --sort=-committerdate | grep -v beta | head -1)
 fi
 
-CHANGES=$(git log --pretty="- %s" "$PREVIOUS_VERSION"..."$VERSION")
+CHANGES=$(
+  git log --pretty="%s|[#%h]($REPO_URL/commit/%H)" "$PREVIOUS_VERSION"..."$VERSION" |
+  awk -F'|' '
+    {
+      msg=$1
+      link=$2
+      if (msg in map) {
+        map[msg]=map[msg]", "link
+      } else {
+        order[++n]=msg
+        map[msg]=link
+      }
+    }
+    END {
+      for (i=1; i<=n; i++) {
+        print "- " order[i] " (" map[order[i]] ")"
+      }
+    }
+  '
+)
 
 echo "生成 Release Note，当前版本：${VERSION}，上一版本：${PREVIOUS_VERSION}"
 echo "$CHANGES"
