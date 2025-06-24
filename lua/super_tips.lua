@@ -27,7 +27,8 @@ local function wrapLevelDb(dbname, mode)
             db:open_read_only()
         end
     elseif db and db:loaded() and mode then
-        log.warning(string.format("[super_tips] DB 已在写模式下打开，同时写存在风险"))
+        -- 全局只需要初始化时写入一次，再次初始化时直接禁止写入
+        return nil, close
     end
 
     return db, close
