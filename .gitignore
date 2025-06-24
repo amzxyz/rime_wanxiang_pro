@@ -4,3 +4,4 @@ lua/seq_words.lua
 # 本地测试打包时的临时文件
 dist
 pro-*-fuzhu-dicts
+release_notes.md
