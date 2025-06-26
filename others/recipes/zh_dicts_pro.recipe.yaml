@@ -1,0 +1,9 @@
+# encoding: utf-8
+---
+recipe:
+  Rx: others/recipes/zh_dicts_pro
+  args:
+  description: >-
+    中文词库（pro版）安装、更新
+install_files: >-
+  zh_dicts_pro/*.*

@@ -1,0 +1,9 @@
+# encoding: utf-8
+---
+recipe:
+  Rx: others/recipes/jm_dicts
+  args:
+  description: >-
+    简码词库安装、更新
+install_files: >-
+  jm_dicts/*.*

@@ -1,0 +1,9 @@
+# encoding: utf-8
+---
+recipe:
+  Rx: others/recipes/stroke
+  args:
+  description: >-
+    笔画反查词库安装、更新
+install_files: >-
+  wanxiang_stroke.dict.yaml

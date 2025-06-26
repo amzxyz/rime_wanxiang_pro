@@ -1,0 +1,9 @@
+# encoding: utf-8
+---
+recipe:
+  Rx: others/recipes/lookup
+  args:
+  description: >-
+    万象注释滤镜安装、更新
+install_files: >-
+  lookup/*.*

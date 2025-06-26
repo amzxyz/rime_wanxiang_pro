@@ -1,0 +1,9 @@
+# encoding: utf-8
+---
+recipe:
+  Rx: others/recipes/radical
+  args:
+  description: >-
+    拆字词库安装、更新
+install_files: >-
+  wanxiang_radical.dict.yaml
