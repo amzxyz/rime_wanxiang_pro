@@ -1,10 +1,10 @@
 # encoding: utf-8
 ---
 recipe:
-  Rx: others/recipes/opencc
+  Rx: others/recipes/lua
   args:
   description: >-
-    opencc(Emoji)安装、更新
+    lua安装、更新
 install_files: >-
   lua/*.*
   lua/tips/*.*
