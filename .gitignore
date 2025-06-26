@@ -5,3 +5,6 @@ lua/seq_words.lua
 dist
 pro-*-fuzhu-dicts
 release_notes.md
+# 忽略编译生成的文件和用户数据库
+build
+*.userdb
