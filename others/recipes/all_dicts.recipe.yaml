@@ -1,0 +1,16 @@
+# encoding: utf-8
+---
+recipe:
+  Rx: others/recipes/all_dicts
+  args:
+  description: >-
+    所有词库安装、更新
+install_files: >-
+  zh_dicts/*.*
+  zh_dicts_pro/*.*
+  jm_dicts/*.*
+  lookup/*.*
+  wanxiang_charset.dict.yaml
+  wanxiang_radical.dict.yaml
+  wanxiang_stroke.dict.yaml
+  en_dicts/*.*
