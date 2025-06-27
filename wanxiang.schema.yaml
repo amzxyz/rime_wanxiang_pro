@@ -38,6 +38,7 @@ switches:
     abbrev: [¥, $]
     states: [ 中标, 英标 ]
   - name: full_shape                    #全角、半角字符输出
+     abbrev: [半, 全]
     states: [ 半角, 全角 ]
   - name: emoji                         #候选出现emoji滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，因此默认为reset: 0，归属opencc emoji滤镜
     abbrev: [🙃, 😄]
