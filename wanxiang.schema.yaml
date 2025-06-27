@@ -32,27 +32,36 @@ schema:
 # abbrev: 默认的缩写取 states 的第一个字符，abbrev 可自定义一个字符
 switches:
   - name: ascii_mode                    # 中英输入状态
+    abbrev: [中,英]
     states: [ 中文, 英文 ]
   - name: ascii_punct                   # 中英标点，可以在中文输入状态输入英文符号
+    abbrev: [¥,$]
     states: [ 中标, 英标 ]
   - name: full_shape                    #全角、半角字符输出
     states: [ 半角, 全角 ]
   - name: emoji                         #候选出现emoji滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，因此默认为reset: 0，归属opencc emoji滤镜
+    abbrev: [🙃,😄]
     states: [ emoji关, emoji开 ]
   - name: chinese_english               #候选进入翻译模式滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，归属opencc 翻译滤镜
+    abbrev: [译,翻]
     states: [ 翻译关, 翻译开 ]
   - name: tone_display                  #开启后在输入编码的位置实时转换为带声调全拼，不开启则采用系统配置，影响的是preedit_format,归属：super_preedit.lua
+    abbrev: [调,声]
     states: [ 声调关, 声调开 ]
   - name: tone_hint                    #开启后在候选的注释里面实时显示全拼声调，不开启则采用系统配置，影响的是comment_format，归属：super_comment.lua
+    abbrev: [音,读]
     states: [ 读音关, 读音开 ]
   - name: super_tips                    #开启后在输入编码后面的提示区显示实时的提示数据，受tips数据库影响，表情、翻译、车牌、符号等对应关系数据，并可实现句号上屏，不开启则默认，影响的是segment.prompt参数，归属：super_tips.lua
+    abbrev: [off,tips]
     states: [ tips关, tips开 ]
     reset: 1
   - options: [ s2s, s2t, s2hk, s2tw ]   # 简繁转换开关组，可以在一个空选项和多个实际“- simplifier@s2hk”引入的项目之前切换，这是一个开关组，你可以将其中任意一个s2s等设置为toggle快捷键，多次按下将轮询
     states: [ 简体, 通繁, 港繁, 臺繁 ]
   - name: prediction                    #开启后输入上屏后继续弹出预测数据候选展示例如输入：你在 ，预测候选： 哪里 干嘛 吗 做等等，predictor配置区可设置详细参数，归属：predict内置插件
+    abbrev: [测,预]
     states: [ 预测关, 预测开 ]
   - name: search_single_char            #多体现在编码重合但候选有单字或者多字的情况辅码查词时是否单字优先，全拼常见，类似于特定编码情况下、反查状态下的调序能力。归属：search.lua
+    abbrev: [词,单]
     states: [正常, 单字]
 
 
