@@ -1,214 +1,282 @@
---万象拼音方案新成员，手动自由排序
---一个基于快捷键计数偏移量来手动调整排序的工具
---这个版本是db数据库支持的版本,可能会支持更多的排序记录,作为一个备用版本留存
---ctrl+j左移 ctrl+k左移  ctrl+0移除排序信息,固定词典其实没必要删除,直接降权到后面
---排序算法可能还不完美,有能力的朋友欢迎帮忙变更算法
-local data_file = "lua/seq_words.lua"
-local seq_words = nil
+-- 万象拼音方案新成员：手动自由排序
+-- 数据存放于 userdb 中，此排序仅影响但前输入码
+-- ctrl+j 前移
+-- ctrl+k 后移
+-- ctrl+0 重置
 
--- 序列化并写入文件的函数
-local function write_word_to_file()
-    if not seq_words then return end
+---@type string | nil 当前选中的词
+local cur_selected_text = nil
+---@type integer | nil 当前高亮索引
+local cur_highlight_idx = nil
+---@type -1 | 1 | 0 | nil 当前调整的偏移量，0 为未调整，nil 为重置
+local cur_offset = 0
 
-    local filename = rime_api.get_user_data_dir() .. "/" .. data_file
-    if not filename then
-        return false
+local _user_db = nil
+-- 获取或创建 LevelDb 实例，避免重复打开
+---@param mode? boolean 默认为只读，true 为写模式
+local function getUserDB(mode)
+    _user_db = _user_db or LevelDb('lua/sequence')
+
+    local function close()
+        if _user_db:loaded() then
+            collectgarbage()
+            _user_db:close()
+        end
     end
-    local serialize_str = "" --返回数据部分
-    -- 遍历表中的每个元素并格式化
-    for phrase, entry in pairs(seq_words) do
-        serialize_str = serialize_str .. string.format('    ["%s"] = {%d},\n', phrase, entry[1]) -- entry[1]为偏移量
+
+    if _user_db and not _user_db:loaded() then
+        _user_db:open()
     end
-    -- 构造完整的 record 内容
-    local record = "local seq_words = {\n" .. serialize_str .. "}\nreturn seq_words"
-    -- 打开文件进行写入
-    local fd = assert(io.open(filename, "w"))
-    fd:setvbuf("line")
-    -- 写入完整内容
-    fd:write(record)
-    fd:close() -- 关闭文件
+
+    return _user_db, close
 end
 
--- 解析文件内容的函数
-local function load_seq_words_from_file()
-    if seq_words then return end
+---@param value string LevelDB 中序列化的值
+---@return table<{to_position: integer, updated_at: integer}>
+local function parsePhraseValue(value)
+    local result = {}
 
-    seq_words = {}
-    local filename = rime_api.get_user_data_dir() .. "/" .. data_file
-    local file = io.open(filename, "r")
-    if not file then
-        write_word_to_file()
-        return
+    local match = value:gmatch("[-.%d]+")
+    result.to_position = tonumber(match());
+    result.updated_at = tonumber(match());
+
+    return result
+end
+
+---@param input string
+---@param phrase string
+---@param to_position integer | nil
+local function saveUserSegment(input, phrase, to_position)
+    local db = getUserDB(true)
+    local key = string.format("%s|%s", input, phrase)
+
+    if (to_position == nil) then
+        return db:erase(key)
     end
 
-    local content = file:read("*all")
-    file:close()
+    -- 由于 lua os.time() 的精度只到秒，排序可能会引起问题
+    local timestamp = os.time()
+    local ms = 0
+    if rime_api.get_time_ms then
+        ms = rime_api.get_time_ms()
+    end
+    local value = string.format("%s\t%s.%s", to_position, timestamp, ms)
+    log.warning(value)
+    return db:update(key, value)
+end
 
-    if not content or content == "" then
-        return
+---@param input string 当前输入码
+---@return table<string, { to_position: integer, updated_at: integer, from_position?: integer, candidate?: Candidate}> | nil
+local function getUserSegment(input)
+    local db = getUserDB()
+
+    local accessor = db:query(input .. "|")
+    if accessor == nil then return nil end
+
+    local table = nil
+    for key, value in accessor:iter() do
+        if table == nil then table = {} end
+        local phrase = string.gsub(key, "^.*|", "")
+        table[phrase] = parsePhraseValue(value)
+        log.warning(string.format("getUserSegment: %s: %s", phrase, value))
     end
 
-    -- 执行 Lua 代码来获取数据
-    local func, err = load(content)
-    if not func then
-        log.error(string.format("[super_sequence] 数据文件加载失败，错误信息：%s", err))
-        return
-    end
+    ---@diagnostic disable-next-line: cast-local-type
+    accessor = nil
 
-    local success, result = pcall(func)
-    if not success or type(result) ~= "table" then
-        log.error("[super_sequence] 数据文件解析失败")
-        return
-    end
-
-    seq_words = result
+    return table
 end
 
 local P = {}
-function P.init()
-    load_seq_words_from_file()
+function P.init() end
+
+function P.fini()
+    local _, db_close = getUserDB()
+    db_close()
 end
+
+local PROCESS_RESULTS = {
+    kRejected = 0, -- 表示处理器明确拒绝了这个按键，停止处理链但不返回 true
+    kAccepted = 1, -- 表示处理器成功处理了这个按键，停止处理链并返回 true
+    kNoop = 2,     -- 表示处理器没有处理这个按键，继续传递给下一个处理器
+}
 
 -- P 阶段按键处理
 ---@param key_event KeyEvent
 ---@param env Env
+---@return ProcessResult
 function P.func(key_event, env)
-    local context = env.engine.context
-    local input_text = context.input
-    local segment = context.composition:back()
-    if not segment then
-        return 2
-    end
+    -- 每次按键都需要重置参数
+    cur_selected_text, cur_highlight_idx, cur_offset = nil, nil, 0
+
     if not key_event:ctrl() or key_event:release() then
-        return 2
+        return PROCESS_RESULTS.kNoop
     end
-    local selected_candidate = context:get_selected_candidate()
-    local phrase = selected_candidate.text
-    local preedit = selected_candidate.preedit
-    local current_position = seq_words[phrase] and seq_words[phrase][1] -- 获取对应的偏移量
-    -- 判断按下的键
-    if key_event.keycode == 0x6A then                                   -- ctrl + j (向左移动 1 个)
-        if current_position == nil then
-            seq_words[phrase] = { -1 }
-        else
-            local new_position = current_position - 1
-            if new_position == 0 then
-                seq_words[phrase] = nil
-            else
-                seq_words[phrase][1] = new_position -- 更新偏移量
-            end
-        end
-    elseif key_event.keycode == 0x6B then -- ctrl + k (向右移动 1 个)
-        if current_position == nil then
-            seq_words[phrase] = { 1 }
-        else
-            local new_position = current_position + 1
-            if new_position == 0 then
-                seq_words[phrase] = nil
-            else
-                seq_words[phrase][1] = new_position -- 更新偏移量
-            end
-        end
-    elseif key_event.keycode == 0x30 then -- ctrl + 0 (删除位移信息)
-        seq_words[phrase] = nil
+
+    log.warning(string.format("----------- keycode: %s -------------", key_event.keycode))
+
+    -- 0xFF51 ←
+    -- 0xFF52 ↑
+    -- 0xFF53 →
+    -- 0xFF54 ↓
+    -- 判断按下的键，更新偏移量
+    local is_pin = key_event.keycode == 0xFF52
+    if key_event.keycode == 0xFF51 then     -- 前移
+        cur_offset = -1
+    elseif key_event.keycode == 0xFF53 then -- 后移
+        cur_offset = 1
+    elseif is_pin then -- 置顶
+        cur_offset = nil
+    elseif key_event.keycode == 0xFF54 then -- 重置
+        cur_offset = nil
     else
-        return 2
+        return PROCESS_RESULTS.kNoop
     end
-    -- 实时更新 Lua 表序列化并保存
-    write_word_to_file(env, "seq") -- 使用统一的写入函数
+
+    if cur_offset == 0 then -- 未有移动操作，不用操作
+        return PROCESS_RESULTS.kAccepted
+    end
+
+    local context = env.engine.context
+    local selected_cand = context:get_selected_candidate()
+    if cur_offset == nil then
+        if selected_cand ~= nil and selected_cand.text ~= nil then
+            saveUserSegment(context.input, selected_cand.text, is_pin and 1 or nil)
+        end
+    else
+        cur_selected_text = selected_cand.text
+    end
+
     context:refresh_non_confirmed_composition()
-    return 1
+
+    if context.highlight and cur_highlight_idx and cur_highlight_idx > 0 then
+        context:highlight(cur_highlight_idx)
+    end
+
+    return PROCESS_RESULTS.kAccepted
 end
 
 local F = {}
-local MAX_CANDIDATES = 300
+function F.init() end
 
-function F.init()
-    load_seq_words_from_file()
+function F.fini()
+    local _, db_close = getUserDB()
+    db_close()
 end
 
 ---@param input Translation
 ---@param env Env
 function F.func(input, env)
-    if seq_words == nil then
-        for _, cand in ipairs(sorted) do
-            yield(cand)
-        end
+    local start = os.clock()
+
+    local context = env.engine.context
+    local user_segment = getUserSegment(context.input)
+    local need_reorder = user_segment ~= nil or (cur_selected_text ~= nil and cur_offset ~= 0 and cur_offset ~= nil)
+
+    if not need_reorder then -- 如果没有自定义排序，不用去重，直接 yield 并返回
+        for cand in input:iter() do yield(cand) end
         return
     end
 
-    local seen = {}
-    local displaced = {}          -- 有偏移项
-    local fallback = {}           -- 无偏移项
-    local result = {}             -- 最终结果
-    local occupied = {}           -- 位置是否已被占用
-    local original_positions = {} -- 记录每个候选的原始 index
+    ---@type table<Candidate>
+    local reordered_candidates = {}
+    local dedupe_position = 1
+    local text_counts = {} -- 用于去重
+    local cur_selected_from_position = nil
+    local cur_selected_cand = nil
 
-    local index = 1 -- 原始顺序编号
     for cand in input:iter() do
-        if index > MAX_CANDIDATES then break end
         local text = cand.text
-        if not seen[text] then
-            seen[text] = true
-            original_positions[text] = index
+        text_counts[text] = (text_counts[text] or 0) + 1
 
-            local displacement = seq_words[text] and seq_words[text][1]
-            if displacement then
-                local pos = index + displacement
-                pos = math.max(pos, 1)              -- 限制左移最小为 1
-                pos = math.min(pos, MAX_CANDIDATES) -- 限制右移最大不超边界
-                table.insert(displaced, { candidate = cand, target_pos = pos })
-            else
-                table.insert(fallback, cand)
+        if text_counts[text] == 1 then -- 都需要去重
+            -- 依次插入得到去重后的列表
+            table.insert(reordered_candidates, cand)
+
+            if cur_selected_text == text then
+                cur_selected_cand = cand
+                cur_selected_from_position = dedupe_position
             end
 
-            index = index + 1
+            if user_segment ~= nil and user_segment[text] ~= nil then
+                user_segment[text].candidate = cand
+                user_segment[text].from_position = dedupe_position
+            end
+
+            dedupe_position = dedupe_position + 1
         end
     end
 
-    local candidate_count = index - 1
-    local max_pos = 0
+    log.warning(string.format("----------- %s -------------", cur_selected_text))
 
-    -- 插入有偏移量的候选
-    for _, item in ipairs(displaced) do
-        local pos = math.min(item.target_pos, candidate_count)
-        while occupied[pos] do
-            pos = pos + 1
-            if pos > candidate_count then
+    -- 获取当前输入码的自定义排序项数组，并按操作时间从前到后手动排序
+    local user_ordered_records = {}
+    if user_segment ~= nil then
+        for _, info in pairs(user_segment) do
+            table.insert(user_ordered_records, info)
+        end
+        table.sort(user_ordered_records, function(a, b) return a.updated_at < b.updated_at end)
+
+        -- 恢复至上次调整状态
+        for _, record in ipairs(user_ordered_records) do
+            log.warning(string.format("restore order [%s]: %s -> %s", record.candidate.text, record.from_position,
+            record.to_position))
+            if record.from_position ~= record.to_position then
+                local from_position, to_position = record.from_position, record.to_position
+                table.remove(reordered_candidates, from_position)
+                table.insert(reordered_candidates, to_position, record.candidate)
+                -- 修正由于移位导致的 from_position 变动
+                for idx, r in ipairs(user_ordered_records) do
+                    local is_move_top = to_position < from_position
+                    local min_position = is_move_top and to_position or from_position
+                    local max_position = is_move_top and from_position or to_position
+                    if min_position <= r.from_position and r.from_position <= max_position then
+                        user_ordered_records[idx].from_position = r.from_position + (is_move_top and 1 or -1)
+                    end
+                end
+            end
+        end
+    end
+    log.warning(string.format("reordered_candidates size after: %s ", #reordered_candidates))
+
+    -- 应用当前调整
+    log.warning(string.format("selected_index: %s, offset: %s", context.composition:back().selected_index, cur_offset))
+    if cur_selected_text ~= nil and cur_offset ~= 0 and cur_offset ~= nil then
+        ---@type integer | nil
+        local from_position = nil
+        for position, cand in ipairs(reordered_candidates) do
+            if cand.text == cur_selected_text then
+                from_position = position
                 break
             end
         end
-        if pos <= candidate_count then
-            result[pos] = item.candidate
-            occupied[pos] = true
-            if pos > max_pos then max_pos = pos end
-        else
-            table.insert(fallback, item.candidate)
+
+        if from_position ~= nil then
+            local to_position = from_position + cur_offset
+            log.warning(string.format("[%s] from %s to %s, raw: %s", cur_selected_text, from_position, to_position,
+                cur_selected_from_position))
+
+            if from_position ~= to_position then
+                if to_position < 1 then
+                    to_position = 1
+                elseif to_position > #reordered_candidates then
+                    to_position = #reordered_candidates
+                end
+
+                table.remove(reordered_candidates, from_position)
+                table.insert(reordered_candidates, to_position, cur_selected_cand)
+                saveUserSegment(context.input, cur_selected_text, to_position)
+                cur_highlight_idx = to_position - 1
+            end
         end
     end
 
-    -- 填充剩余候选
-    local insert_pos = 1
-    for _, cand in ipairs(fallback) do
-        while occupied[insert_pos] do
-            insert_pos = insert_pos + 1
-        end
-        result[insert_pos] = cand
-        occupied[insert_pos] = true
-        if insert_pos > max_pos then max_pos = insert_pos end
-    end
+    log.warning(string.format("[wanxiang/super_sequence]: 本次排序共耗时 %.6f 秒", os.clock() - start))
 
-    -- 输出排序结果
-    local sorted = {}
-    for i = 1, max_pos do
-        if result[i] then
-            table.insert(sorted, result[i])
-        end
-    end
-
-    for _, cand in ipairs(sorted) do
+    -- 输出最终结果
+    for _, cand in ipairs(reordered_candidates) do
         yield(cand)
     end
 end
 
-return { F = F, P = P }
+return { P = P, F = F }

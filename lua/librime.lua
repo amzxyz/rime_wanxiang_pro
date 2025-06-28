@@ -15,6 +15,7 @@
 ---@field get_distribution_code_name fun(): string
 ---@field get_distribution_version fun(): string
 ---@field get_user_id fun(): string
+---@field get_time_ms fun(): number
 ---@field regex_match fun(input: string, pattern: string): boolean
 ---@field regex_search fun(input: string, pattern: string): string[] | nil
 ---@field regex_replace fun(input: string, pattern: string, fmt: string): string
@@ -125,6 +126,7 @@ function Set(values) end
 ---@field delete_input fun(self: self, len: integer): boolean
 ---@field clear fun(self: self)
 ---@field select fun(self: self, index: integer): boolean
+---@field highlight fun(self: self, index: integer): boolean
 ---@field confirm_current_selection fun(self: self): boolean
 ---@field delete_current_selection fun(self: self): boolean
 ---@field confirm_previous_selection fun(self: self): boolean
