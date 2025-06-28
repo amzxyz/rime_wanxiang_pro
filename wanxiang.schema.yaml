@@ -75,6 +75,7 @@ engine:
     - lua_processor@*key_binder                 #绑定按键扩展能力，支持正则扩展将按键生效情景更加细化
     - speller                                   #拼写处理器，接受字符按键，编辑输入
     - punctuator                                #符号处理器，将单个字符按键直接映射为标点符号或文字
+  #  - lua_processor@*input_habit_logger #输入习惯记录器 - 提供诸如退格，上屏非首选项等不止于此的详细json格式的日志
     - selector                                  #选字处理器，处理数字选字键〔可以换成别的哦〕、上、下候选定位、换页
     - navigator                                 #处理输入栏内的光标移动
     - express_editor                            #编辑器，处理空格、回车上屏、回退键
