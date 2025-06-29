@@ -125,6 +125,7 @@ function Set(values) end
 ---@field delete_input fun(self: self, len: integer): boolean
 ---@field clear fun(self: self)
 ---@field select fun(self: self, index: integer): boolean
+---@field highlight fun(self: self, index: integer): boolean
 ---@field confirm_current_selection fun(self: self): boolean
 ---@field delete_current_selection fun(self: self): boolean
 ---@field confirm_previous_selection fun(self: self): boolean

@@ -3,212 +3,218 @@
 --这个版本是db数据库支持的版本,可能会支持更多的排序记录,作为一个备用版本留存
 --ctrl+j左移 ctrl+k左移  ctrl+0移除排序信息,固定词典其实没必要删除,直接降权到后面
 --排序算法可能还不完美,有能力的朋友欢迎帮忙变更算法
-local data_file = "lua/seq_words.lua"
-local seq_words = nil
+local cur_selected_text = nil
 
--- 序列化并写入文件的函数
-local function write_word_to_file()
-    if not seq_words then return end
+local _user_db = nil
+-- 获取或创建 LevelDb 实例，避免重复打开
+---@param mode? boolean 默认为只读，true 为写模式
+local function getUserDB(mode)
+    _user_db = _user_db or LevelDb('lua/sequence')
 
-    local filename = rime_api.get_user_data_dir() .. "/" .. data_file
-    if not filename then
-        return false
+    local function close()
+        if _user_db:loaded() then
+            collectgarbage()
+            _user_db:close()
+        end
     end
-    local serialize_str = "" --返回数据部分
-    -- 遍历表中的每个元素并格式化
-    for phrase, entry in pairs(seq_words) do
-        serialize_str = serialize_str .. string.format('    ["%s"] = {%d},\n', phrase, entry[1]) -- entry[1]为偏移量
+
+    if mode == true and _user_db and _user_db:loaded() and _user_db.read_only then
+        close()
     end
-    -- 构造完整的 record 内容
-    local record = "local seq_words = {\n" .. serialize_str .. "}\nreturn seq_words"
-    -- 打开文件进行写入
-    local fd = assert(io.open(filename, "w"))
-    fd:setvbuf("line")
-    -- 写入完整内容
-    fd:write(record)
-    fd:close() -- 关闭文件
+
+    if _user_db and not _user_db:loaded() then
+        if mode == true then
+            _user_db:open()
+        else
+            _user_db:open_read_only()
+        end
+    end
+
+    return _user_db, close
 end
 
--- 解析文件内容的函数
-local function load_seq_words_from_file()
-    if seq_words then return end
+---@param value string LevelDB 中序列化的值
+---@return table<{index: number, updated_at: number}>
+local function parsePhraseValue(value)
+    local result = {}
 
-    seq_words = {}
-    local filename = rime_api.get_user_data_dir() .. "/" .. data_file
-    local file = io.open(filename, "r")
-    if not file then
-        write_word_to_file()
-        return
+    local match = value:gmatch("%d+")
+    result.index = tonumber(match());
+    result.updated_at = tonumber(match());
+
+    return result
+end
+
+---@param input string 当前输入码
+---@param phrase string 候选词
+---@return table<{index: number, updated_at: number}> | nil
+local function getUserPhrase(input, phrase)
+    local db = getUserDB()
+
+    local key = string.format("%s|%s", input, phrase)
+    local value = db:fetch(key)
+
+    return value ~= nil and parsePhraseValue(value) or nil
+end
+
+---@param input string 当前输入码
+---@return table<string, {index: number, updated_at: number, candidate: Candidate}> | nil
+local function getUserSegment(input)
+    local db = getUserDB()
+
+    local accessor = db:query(input)
+    if accessor == nil then return nil end
+
+    local table = nil
+    for key, value in accessor:iter() do
+        if table == nil then table = {} end
+        local phrase = string.gsub(key, "^.*|", "")
+        table[phrase] = parsePhraseValue(value)
     end
 
-    local content = file:read("*all")
-    file:close()
+    ---@diagnostic disable-next-line: cast-local-type
+    accessor = nil
 
-    if not content or content == "" then
-        return
-    end
+    return table
+end
 
-    -- 执行 Lua 代码来获取数据
-    local func, err = load(content)
-    if not func then
-        log.error(string.format("[super_sequence] 数据文件加载失败，错误信息：%s", err))
-        return
-    end
+---@param input string
+---@param phrase string
+---@param index number | nil
+local function saveUserSegment(input, phrase, index)
+    local db = getUserDB(true)
 
-    local success, result = pcall(func)
-    if not success or type(result) ~= "table" then
-        log.error("[super_sequence] 数据文件解析失败")
-        return
-    end
+    local key = string.format("%s|%s", input, phrase)
+    local value = string.format("%s\t%s", index, os.time())
 
-    seq_words = result
+    local result = index == nil and db:erase(key) or db:update(key, value)
+    return result
 end
 
 local P = {}
-function P.init()
-    load_seq_words_from_file()
+function P.init() end
+
+function P.fini()
+    local _, db_close = getUserDB()
+    db_close()
 end
+
+local PROCESS_RESULTS = {
+    kRejected = 0,
+    kAccepted = 1,
+    kNoop = 2,
+}
 
 -- P 阶段按键处理
 ---@param key_event KeyEvent
 ---@param env Env
+---@return ProcessResult
 function P.func(key_event, env)
+    if not key_event:ctrl() or key_event:release() then
+        return PROCESS_RESULTS.kNoop
+    end
+
     local context = env.engine.context
-    local input_text = context.input
     local segment = context.composition:back()
     if not segment then
-        return 2
+        return PROCESS_RESULTS.kNoop
     end
-    if not key_event:ctrl() or key_event:release() then
-        return 2
-    end
-    local selected_candidate = context:get_selected_candidate()
-    local phrase = selected_candidate.text
-    local preedit = selected_candidate.preedit
-    local current_position = seq_words[phrase] and seq_words[phrase][1] -- 获取对应的偏移量
-    -- 判断按下的键
-    if key_event.keycode == 0x6A then                                   -- ctrl + j (向左移动 1 个)
-        if current_position == nil then
-            seq_words[phrase] = { -1 }
-        else
-            local new_position = current_position - 1
-            if new_position == 0 then
-                seq_words[phrase] = nil
-            else
-                seq_words[phrase][1] = new_position -- 更新偏移量
-            end
+
+    local input = context.input
+    local selected_cand = context:get_selected_candidate()
+    cur_selected_text = selected_cand.text
+    local user_segment = getUserPhrase(input, cur_selected_text) or { index = nil }
+
+    local from_index = user_segment.index or segment.selected_index
+    local new_index
+    -- 判断按下的键，更新偏移量
+    if key_event.keycode == 0x6A then -- ctrl + j (向左移动 1 个)
+        new_index = from_index - 1
+        if new_index < 0 then
+            new_index = 0
         end
     elseif key_event.keycode == 0x6B then -- ctrl + k (向右移动 1 个)
-        if current_position == nil then
-            seq_words[phrase] = { 1 }
-        else
-            local new_position = current_position + 1
-            if new_position == 0 then
-                seq_words[phrase] = nil
-            else
-                seq_words[phrase][1] = new_position -- 更新偏移量
-            end
+        new_index = from_index + 1
+
+        -- 加载候选
+        segment.menu:prepare(new_index + 1)
+        local candidate_count = segment.menu:candidate_count()
+        if new_index > candidate_count - 1 then
+            new_index = candidate_count - 1
         end
     elseif key_event.keycode == 0x30 then -- ctrl + 0 (删除位移信息)
-        seq_words[phrase] = nil
-    else
-        return 2
+        new_index = nil
     end
-    -- 实时更新 Lua 表序列化并保存
-    write_word_to_file(env, "seq") -- 使用统一的写入函数
+
+    -- 索引位置未变化
+    if new_index == segment.selected_index then
+        return PROCESS_RESULTS.kNoop
+    end
+
+    saveUserSegment(input, cur_selected_text, new_index)
+
     context:refresh_non_confirmed_composition()
-    return 1
+    if new_index and context.highlight then
+        context:highlight(new_index)
+    end
+
+    return PROCESS_RESULTS.kAccepted
 end
 
 local F = {}
-local MAX_CANDIDATES = 300
+function F.init() end
 
-function F.init()
-    load_seq_words_from_file()
+function F.fini()
+    local _, db_close = getUserDB()
+    db_close()
 end
 
 ---@param input Translation
 ---@param env Env
 function F.func(input, env)
-    if seq_words == nil then
-        for _, cand in ipairs(sorted) do
+    local context = env.engine.context
+    local user_segment = getUserSegment(context.input)
+
+    if user_segment == nil then
+        for cand in input:iter() do
             yield(cand)
         end
         return
     end
 
-    local seen = {}
-    local displaced = {}          -- 有偏移项
-    local fallback = {}           -- 无偏移项
-    local result = {}             -- 最终结果
-    local occupied = {}           -- 位置是否已被占用
-    local original_positions = {} -- 记录每个候选的原始 index
-
-    local index = 1 -- 原始顺序编号
+    local dedup = {} -- 用于去重
+    local new_candidates = {}
     for cand in input:iter() do
-        if index > MAX_CANDIDATES then break end
         local text = cand.text
-        if not seen[text] then
-            seen[text] = true
-            original_positions[text] = index
 
-            local displacement = seq_words[text] and seq_words[text][1]
-            if displacement then
-                local pos = index + displacement
-                pos = math.max(pos, 1)              -- 限制左移最小为 1
-                pos = math.min(pos, MAX_CANDIDATES) -- 限制右移最大不超边界
-                table.insert(displaced, { candidate = cand, target_pos = pos })
-            else
-                table.insert(fallback, cand)
-            end
+        dedup[text] = (dedup[text] or 0) + 1
+        if dedup[text] == 1 then goto continue end
 
-            index = index + 1
-        end
-    end
-
-    local candidate_count = index - 1
-    local max_pos = 0
-
-    -- 插入有偏移量的候选
-    for _, item in ipairs(displaced) do
-        local pos = math.min(item.target_pos, candidate_count)
-        while occupied[pos] do
-            pos = pos + 1
-            if pos > candidate_count then
-                break
-            end
-        end
-        if pos <= candidate_count then
-            result[pos] = item.candidate
-            occupied[pos] = true
-            if pos > max_pos then max_pos = pos end
+        if user_segment[text] ~= nil then
+            user_segment[text].candidate = cand
         else
-            table.insert(fallback, item.candidate)
+            table.insert(new_candidates, cand)
+        end
+
+        ::continue::
+    end
+
+    local user_cand_list = {}
+    for _, info in pairs(user_segment) do
+        if info.candidate ~= nil then
+            table.insert(user_cand_list, info)
         end
     end
 
-    -- 填充剩余候选
-    local insert_pos = 1
-    for _, cand in ipairs(fallback) do
-        while occupied[insert_pos] do
-            insert_pos = insert_pos + 1
-        end
-        result[insert_pos] = cand
-        occupied[insert_pos] = true
-        if insert_pos > max_pos then max_pos = insert_pos end
+    table.sort(user_cand_list, function(a, b) return a.updated_at < b.updated_at end)
+
+    for _, info in ipairs(user_cand_list) do
+        table.insert(new_candidates, info.index + 1, info.candidate)
     end
 
-    -- 输出排序结果
-    local sorted = {}
-    for i = 1, max_pos do
-        if result[i] then
-            table.insert(sorted, result[i])
-        end
-    end
-
-    for _, cand in ipairs(sorted) do
+    for _, cand in ipairs(new_candidates) do
         yield(cand)
     end
 end
 
-return { F = F, P = P }
+return { P = P, F = F }
