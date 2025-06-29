@@ -2,6 +2,7 @@
 #@/db_name	cn_en.txt
 #@/db_type	tabledb
 #@/tick	0
+ENSO循环	ensoxunhuan
 方块A	fangkuaia
 方块J	fangkuaij
 方块Q	fangkuaiq

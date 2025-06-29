@@ -2,6 +2,7 @@
 # coding: utf-8
 #@/db_name	cn_en_sogou.txt
 #@/db_type	tabledb
+ENSO循环	ensoxphr
 方块A	fhkya
 方块J	fhkyj
 方块Q	fhkyq

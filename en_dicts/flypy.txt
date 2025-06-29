@@ -2,6 +2,7 @@
 # coding: utf-8
 #@/db_name	cn_en_flypy.txt
 #@/db_type	tabledb
+ENSO循环	ensoxyhr
 方块A	fhkka
 方块J	fhkkj
 方块Q	fhkkq

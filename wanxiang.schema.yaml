@@ -38,7 +38,7 @@ switches:
   - name: full_shape                    #全角、半角字符输出
     states: [ 半角, 全角 ]
   - name: emoji                         #候选出现emoji滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，因此默认为reset: 0，归属opencc emoji滤镜
-    states: [🙃, 😄]
+    states: [表情关, 表情开]
   - name: chinese_english               #候选进入翻译模式滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，归属opencc 翻译滤镜
     states: [ 翻译关, 翻译开 ]
   - name: tone_display                  #开启后在输入编码的位置实时转换为带声调全拼，不开启则采用系统配置，影响的是preedit_format,归属：super_preedit.lua
@@ -46,7 +46,7 @@ switches:
   - name: tone_hint                    #开启后在候选的注释里面实时显示全拼声调，不开启则采用系统配置，影响的是comment_format，归属：super_comment.lua
     states: [ 读音关, 读音开 ]
   - name: super_tips                    #开启后在输入编码后面的提示区显示实时的提示数据，受tips数据库影响，表情、翻译、车牌、符号等对应关系数据，并可实现句号上屏，不开启则默认，影响的是segment.prompt参数，归属：super_tips.lua
-    states: [ tips关, tips开 ]
+    states: [ 提示关, 提示开 ]
     reset: 1
   - options: [ s2s, s2t, s2hk, s2tw ]   # 简繁转换开关组，可以在一个空选项和多个实际“- simplifier@s2hk”引入的项目之前切换，这是一个开关组，你可以将其中任意一个s2s等设置为toggle快捷键，多次按下将轮询
     states: [ 简体, 通繁, 港繁, 臺繁 ]
