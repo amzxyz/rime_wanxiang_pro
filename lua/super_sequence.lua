@@ -9,7 +9,7 @@
 local cur_selected_text = nil
 ---@type integer | nil 当前高亮索引
 local cur_highlight_idx = nil
----@type -1 | 1 | 0 | nil 当前调整的偏移量，0 为未调整，nil 为重置
+---@type -1 | 1 | 0 | nil 当前调整的偏移量，0 为未调整，nil 为重置/置顶
 local cur_offset = 0
 
 local _user_db = nil
@@ -108,11 +108,18 @@ local start = os.clock()
 ---@return ProcessResult
 function P.func(key_event, env)
     start = os.clock()
-
     -- 每次按键都需要重置参数
     cur_selected_text, cur_highlight_idx, cur_offset = nil, nil, 0
 
-    if not key_event:ctrl() or key_event:release() then
+    local context = env.engine.context
+    local selected_cand = context:get_selected_candidate()
+
+    if not context:has_menu()
+        or selected_cand == nil
+        or selected_cand.text == nil
+        or not key_event:ctrl()
+        or key_event:release()
+    then
         return PROCESS_RESULTS.kNoop
     end
 
@@ -131,16 +138,12 @@ function P.func(key_event, env)
     end
 
     if cur_offset == 0 then -- 未有移动操作，不用操作
-        return PROCESS_RESULTS.kAccepted
+        return PROCESS_RESULTS.kNoop
     end
 
-    local context = env.engine.context
-    local selected_cand = context:get_selected_candidate()
-    if cur_offset == nil then
-        if selected_cand ~= nil and selected_cand.text ~= nil then
-            saveUserSegment(context.input, selected_cand.text, is_pin and 1 or nil)
-        end
-    else
+    if cur_offset == nil then -- 如果是重置/置顶，直接设置位置
+        saveUserSegment(context.input, selected_cand.text, is_pin and 1 or nil)
+    else                      -- 否则进入 filter 调整位移
         cur_selected_text = selected_cand.text
     end
 
@@ -177,7 +180,6 @@ function F.func(input, env)
     local reordered_candidates = {}
     local dedupe_position = 1
     local text_counts = {} -- 用于去重
-    local cur_selected_from_position = nil
     local cur_selected_cand = nil
 
     for cand in input:iter() do
@@ -190,7 +192,6 @@ function F.func(input, env)
 
             if cur_selected_text == text then
                 cur_selected_cand = cand
-                cur_selected_from_position = dedupe_position
             end
 
             if user_segment ~= nil and user_segment[text] ~= nil then
