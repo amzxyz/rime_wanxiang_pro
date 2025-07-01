@@ -7,35 +7,40 @@
 --     - lua_filter@*super_tips*M
 --     key_binder/tips_key: "slash"  #上屏按键配置
 local wanxiang = require("wanxiang")
-local _db_pool = {} -- 数据库池
--- 获取或创建 LevelDb 实例，避免重复打开
-local function wrapLevelDb(dbname, mode)
-    _db_pool[dbname] = _db_pool[dbname] or LevelDb(dbname)
-    local db = _db_pool[dbname]
 
-    local function close()
-        if db:loaded() then
-            collectgarbage()
-            db:close()
-        end
+---@type UserDb | nil
+
+local db = nil -- 数据库池
+local function close_db()
+    if db and db:loaded() then
+        collectgarbage()
+        return db:close()
+    end
+    return true
+end
+
+-- 获取或创建 LevelDb 实例，避免重复打开
+---@param mode? boolean
+---@return UserDb
+local function getDB(mode)
+    if db == nil then db = LevelDb("lua/tips") end
+
+    mode = mode or false
+
+    if mode == true and db and db:loaded() and db.read_only then
+        close_db()
     end
 
     if db and not db:loaded() then
         if mode then
             db:open()
-        else -- 只读模式
+        else
             db:open_read_only()
         end
-    elseif db and db:loaded() and mode then
-        -- 全局只需要初始化时写入一次，再次初始化时直接禁止写入
-        return nil, close
     end
 
-    return db, close
+    return db
 end
-
-local M = {}
-local S = {}
 
 local function ensure_dir_exist(dir)
     -- 获取系统路径分隔符
@@ -170,8 +175,7 @@ local function get_preset_file_path()
 end
 
 local function init_tips_userdb()
-    local db, close_db = wrapLevelDb('lua/tips', true)
-    if not db then return end
+    local db = getDB()
 
     local hash_key = "__TIPS_FILE_HASH"
     local hash_in_db = db:fetch(hash_key)
@@ -183,19 +187,22 @@ local function init_tips_userdb()
         calculate_file_hash(user_override_path))
 
     if hash_in_db == file_hash then
-        close_db()
         return
     end
 
+    -- userdb 需要更新
+    db = getDB(true) -- 以读写模式打开数据库
     empty_tips_db(db)
     db:update(hash_key, file_hash)
     sync_tips_db_from_file(db, preset_file_path)
     sync_tips_db_from_file(db, user_override_path)
-    close_db()
+    close_db() -- 主动关闭数据库，后续只需要只读方式打开
 end
 
--- 初始化词典（写模式，把 txt 加载进 db）
-function M.init()
+local P = {}
+
+-- Processor：按键触发上屏 (S)
+function P.init(env)
     local dist = rime_api.get_distribution_code_name() or ""
     local user_lua_dir = rime_api.get_user_data_dir() .. "/lua"
     if dist ~= "hamster" and dist ~= "Weasel" then
@@ -205,11 +212,72 @@ function M.init()
 
     local start = os.clock()
     init_tips_userdb()
-    log.info(string.format("[wanxiang/super_tips]: init_tips_userdb 共耗时 %s 秒", os.clock() - start))
+    log.info(string.format("[super_tips]: init_tips_userdb 共耗时 %s 秒", os.clock() - start))
+
+    -- 提前初始化 DB
+    P.tips_key = env.engine.schema.config:get_string("key_binder/tips_key")
+end
+
+local start = nil
+function P.func(key, env)
+    start = os.clock()
+    local context = env.engine.context
+    local segment = context.composition:back()
+    local input_text = context.input or ""
+    if not segment then
+        return 2
+    end
+    if string.match(input_text, "^[VRNU/]") then
+        return 2
+    end
+
+    local db = getDB()
+
+    local is_super_tips = context:get_option("super_tips") or true
+    local tipspc
+    local tipsph
+    -- 电脑设备：直接处理按键事件并使用数据库
+    if not wanxiang.is_mobile_device() then
+        local input_text = context.input or ""
+        local stick_phrase = db:fetch(input_text)
+        local selected_cand = context:get_selected_candidate()
+        local selected_cand_match = selected_cand and db:fetch(selected_cand.text) or nil
+        tipspc = stick_phrase or selected_cand_match
+        env.last_tips = env.last_tips or ""
+        if is_super_tips and tipspc and tipspc ~= "" then
+            env.last_tips = tipspc
+            segment.prompt = "〔" .. tipspc .. "〕"
+        else
+            if segment.prompt == "〔" .. env.last_tips .. "〕" then
+                segment.prompt = ""
+            end
+        end
+    else
+        tipsph = segment.prompt
+    end
+    -- 检查是否触发提示上屏
+    if (context:is_composing() or context:has_menu()) and P.tips_key and is_super_tips and
+        ((tipspc and tipspc ~= "") or (tipsph and tipsph ~= "")) then
+        local trigger = key:repr() == P.tips_key
+        if trigger then
+            local formatted = (tipspc and (tipspc:match(".+：(.*)") or tipspc:match(".+:(.*)"))) or
+                (tipsph and (tipsph:match("〔.+：(.*)〕") or tipsph:match("〔.+:(.*)〕"))) or ""
+            env.engine:commit_text(formatted)
+            context:clear()
+            return 1
+        end
+    end
+    return 2
+end
+
+local F = {}
+-- filter 阶段关闭数据库
+function F.fini()
+    close_db()
 end
 
 -- 滤镜：设置提示内容
-function M.func(input, env)
+function F.func(input, env)
     local segment = env.engine.context.composition:back()
     if not segment then
         return 2
@@ -218,8 +286,8 @@ function M.func(input, env)
         super_tips = env.engine.context:get_option("super_tips")
     } or true
     local is_super_tips = env.settings.super_tips
-    local db = wrapLevelDb("lua/tips", false)
-    if not db then return end
+
+    local db = getDB()
 
     -- 手机设备：读取数据库并输出候选
     if wanxiang.is_mobile_device() then
@@ -246,12 +314,14 @@ function M.func(input, env)
                 segment.prompt = ""
             end
         end
+        log.warning(string.format("[super_tips] 耗时 %.2fms", (os.clock() - start) * 1000))
         -- 输出候选
         for _, cand in ipairs(candidates) do
             yield(cand)
         end
         -- 输出候选
     else
+        log.warning(string.format("[super_tips] 耗时 %.2fms", (os.clock() - start) * 1000))
         -- 如果不是手机设备，直接输出候选，不进行数据库操作
         for cand in input:iter() do
             yield(cand)
@@ -259,66 +329,7 @@ function M.func(input, env)
     end
 end
 
--- Processor：按键触发上屏 (S)
-function S.init(env)
-    local config = env.engine.schema.config
-    S.tips_key = config:get_string("key_binder/tips_key")
-end
-
-function S.func(key, env)
-    local context = env.engine.context
-    local segment = context.composition:back()
-    local input_text = context.input or ""
-    if not segment then
-        return 2
-    end
-    if string.match(input_text, "^[VRNU/]") then
-        return 2
-    end
-    local db = wrapLevelDb("lua/tips", false)
-    if not db then return end
-
-    env.settings = {
-        super_tips = context:get_option("super_tips")
-    }
-    local is_super_tips = env.settings.super_tips
-    local tipspc
-    local tipsph
-    -- 电脑设备：直接处理按键事件并使用数据库
-    if not wanxiang.is_mobile_device() then
-        local input_text = context.input or ""
-        local stick_phrase = db:fetch(input_text)
-        local selected_cand = context:get_selected_candidate()
-        local selected_cand_match = selected_cand and db:fetch(selected_cand.text) or nil
-        tipspc = stick_phrase or selected_cand_match
-        env.last_tips = env.last_tips or ""
-        if is_super_tips and tipspc and tipspc ~= "" then
-            env.last_tips = tipspc
-            segment.prompt = "〔" .. tipspc .. "〕"
-        else
-            if segment.prompt == "〔" .. env.last_tips .. "〕" then
-                segment.prompt = ""
-            end
-        end
-    else
-        tipsph = segment.prompt
-    end
-    -- 检查是否触发提示上屏
-    if (context:is_composing() or context:has_menu()) and S.tips_key and is_super_tips and
-        ((tipspc and tipspc ~= "") or (tipsph and tipsph ~= "")) then
-        local trigger = key:repr() == S.tips_key
-        if trigger then
-            local formatted = (tipspc and (tipspc:match(".+：(.*)") or tipspc:match(".+:(.*)") or tips)) or
-                (tipsph and (tipsph:match("〔.+：(.*)〕") or tipsph:match("〔.+:(.*)〕"))) or ""
-            env.engine:commit_text(formatted)
-            context:clear()
-            return 1
-        end
-    end
-    return 2
-end
-
 return {
-    M = M,
-    S = S
+    S = P,
+    M = F,
 }
