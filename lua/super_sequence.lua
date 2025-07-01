@@ -62,7 +62,6 @@ local function saveUserSegment(input, phrase, to_position)
         ms = rime_api.get_time_ms()
     end
     local value = string.format("%s\t%s.%s", to_position, timestamp, ms)
-    log.warning(value)
     return db:update(key, value)
 end
 
@@ -79,7 +78,6 @@ local function getUserSegment(input)
         if table == nil then table = {} end
         local phrase = string.gsub(key, "^.*|", "")
         table[phrase] = parsePhraseValue(value)
-        log.warning(string.format("getUserSegment: %s: %s", phrase, value))
     end
 
     ---@diagnostic disable-next-line: cast-local-type
@@ -102,11 +100,15 @@ local PROCESS_RESULTS = {
     kNoop = 2,     -- 表示处理器没有处理这个按键，继续传递给下一个处理器
 }
 
+local start = os.clock()
+
 -- P 阶段按键处理
 ---@param key_event KeyEvent
 ---@param env Env
 ---@return ProcessResult
 function P.func(key_event, env)
+    start = os.clock()
+
     -- 每次按键都需要重置参数
     cur_selected_text, cur_highlight_idx, cur_offset = nil, nil, 0
 
@@ -114,12 +116,6 @@ function P.func(key_event, env)
         return PROCESS_RESULTS.kNoop
     end
 
-    log.warning(string.format("----------- keycode: %s -------------", key_event.keycode))
-
-    -- 0xFF51 ←
-    -- 0xFF52 ↑
-    -- 0xFF53 →
-    -- 0xFF54 ↓
     -- 判断按下的键，更新偏移量
     local is_pin = key_event.keycode == 0x70
     if key_event.keycode == 0x6A then     -- 前移
@@ -128,7 +124,7 @@ function P.func(key_event, env)
         cur_offset = 1
     elseif key_event.keycode == 0x6C then -- 重置
         cur_offset = nil
-    elseif is_pin then -- 置顶
+    elseif is_pin then                    -- 置顶
         cur_offset = nil
     else
         return PROCESS_RESULTS.kNoop
@@ -168,8 +164,6 @@ end
 ---@param input Translation
 ---@param env Env
 function F.func(input, env)
-    local start = os.clock()
-
     local context = env.engine.context
     local user_segment = getUserSegment(context.input)
     local need_reorder = user_segment ~= nil or (cur_selected_text ~= nil and cur_offset ~= 0 and cur_offset ~= nil)
@@ -208,8 +202,6 @@ function F.func(input, env)
         end
     end
 
-    log.warning(string.format("----------- %s -------------", cur_selected_text))
-
     -- 获取当前输入码的自定义排序项数组，并按操作时间从前到后手动排序
     local user_ordered_records = {}
     if user_segment ~= nil then
@@ -220,8 +212,6 @@ function F.func(input, env)
 
         -- 恢复至上次调整状态
         for _, record in ipairs(user_ordered_records) do
-            log.warning(string.format("restore order [%s]: %s -> %s", record.candidate.text, record.from_position,
-            record.to_position))
             if record.from_position ~= record.to_position then
                 local from_position, to_position = record.from_position, record.to_position
                 table.remove(reordered_candidates, from_position)
@@ -238,10 +228,8 @@ function F.func(input, env)
             end
         end
     end
-    log.warning(string.format("reordered_candidates size after: %s ", #reordered_candidates))
 
     -- 应用当前调整
-    log.warning(string.format("selected_index: %s, offset: %s", context.composition:back().selected_index, cur_offset))
     if cur_selected_text ~= nil and cur_offset ~= 0 and cur_offset ~= nil then
         ---@type integer | nil
         local from_position = nil
@@ -254,8 +242,6 @@ function F.func(input, env)
 
         if from_position ~= nil then
             local to_position = from_position + cur_offset
-            log.warning(string.format("[%s] from %s to %s, raw: %s", cur_selected_text, from_position, to_position,
-                cur_selected_from_position))
 
             if from_position ~= to_position then
                 if to_position < 1 then
@@ -272,7 +258,12 @@ function F.func(input, env)
         end
     end
 
-    log.warning(string.format("[wanxiang/super_sequence]: 本次排序共耗时 %.6f 秒", os.clock() - start))
+    log.warning(string.format(
+        "[wanxiang/super_sequence] %s：耗时 %.2fms，共调整：%s/%s",
+        context.input,
+        (os.clock() - start) * 1000,
+        #user_ordered_records,
+        #reordered_candidates))
 
     -- 输出最终结果
     for _, cand in ipairs(reordered_candidates) do
