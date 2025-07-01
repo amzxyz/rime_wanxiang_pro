@@ -89,11 +89,6 @@ end
 local P = {}
 function P.init() end
 
-function P.fini()
-    local _, db_close = getUserDB()
-    db_close()
-end
-
 local PROCESS_RESULTS = {
     kRejected = 0, -- 表示处理器明确拒绝了这个按键，停止处理链但不返回 true
     kAccepted = 1, -- 表示处理器成功处理了这个按键，停止处理链并返回 true
