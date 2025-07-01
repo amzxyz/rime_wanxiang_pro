@@ -1,8 +1,9 @@
 -- 万象拼音方案新成员：手动自由排序
--- 数据存放于 userdb 中，此排序仅影响但前输入码
+-- 数据存放于 userdb 中，处于性能考量，此排序仅影响当前输入码
 -- ctrl+j 前移
 -- ctrl+k 后移
--- ctrl+0 重置
+-- ctrl+l 重置
+-- ctrl+p 置顶
 
 ---@type string | nil 当前选中的词
 local cur_selected_text = nil
@@ -120,14 +121,14 @@ function P.func(key_event, env)
     -- 0xFF53 →
     -- 0xFF54 ↓
     -- 判断按下的键，更新偏移量
-    local is_pin = key_event.keycode == 0xFF52
-    if key_event.keycode == 0xFF51 then     -- 前移
+    local is_pin = key_event.keycode == 0x70
+    if key_event.keycode == 0x6A then     -- 前移
         cur_offset = -1
-    elseif key_event.keycode == 0xFF53 then -- 后移
+    elseif key_event.keycode == 0x6B then -- 后移
         cur_offset = 1
-    elseif is_pin then -- 置顶
+    elseif key_event.keycode == 0x6C then -- 重置
         cur_offset = nil
-    elseif key_event.keycode == 0xFF54 then -- 重置
+    elseif is_pin then -- 置顶
         cur_offset = nil
     else
         return PROCESS_RESULTS.kNoop
