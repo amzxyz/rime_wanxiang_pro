@@ -11,13 +11,17 @@ local function get_fallback_input(input_text)
     return input_text:gsub("%d+", function(match) return match:sub(-1) end)
 end
 
+local function should_ignore_context(ctx)
+    return wanxiang.is_function_mode_active(ctx) or ctx.input == ""
+end
+
 local P = {}
 function P.init(env)
     env.tone_fallback_update_connection =
         env.engine.context.update_notifier:connect(function(ctx)
             local input_text = ctx.input
-            -- 排除特殊模式（V/R/N/U//开头）
-            if wanxiang.is_function_mode_active(ctx) then return end
+
+            if should_ignore_context(ctx) then return end
 
             local new_input = get_fallback_input(input_text)
             if new_input ~= input_text then
@@ -37,7 +41,7 @@ function P.func(_, env)
     local ctx = env.engine.context
     local input_text = ctx.input
 
-    if wanxiang.is_function_mode_active(ctx) then
+    if should_ignore_context(ctx) then
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
