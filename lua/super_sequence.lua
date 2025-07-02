@@ -95,14 +95,11 @@ local PROCESS_RESULTS = {
     kNoop = 2,     -- 表示处理器没有处理这个按键，继续传递给下一个处理器
 }
 
-local start = os.clock()
-
 -- P 阶段按键处理
 ---@param key_event KeyEvent
 ---@param env Env
 ---@return ProcessResult
 function P.func(key_event, env)
-    start = os.clock()
     -- 每次按键都需要重置参数
     cur_selected_text, cur_highlight_idx, cur_offset = nil, nil, 0
 
@@ -253,13 +250,6 @@ function F.func(input, env)
             end
         end
     end
-
-    log.warning(string.format(
-        "[wanxiang/super_sequence] %s：耗时 %.2fms，共调整：%s/%s",
-        context.input,
-        (os.clock() - start) * 1000,
-        #user_ordered_records,
-        #reordered_candidates))
 
     -- 输出最终结果
     for _, cand in ipairs(reordered_candidates) do
