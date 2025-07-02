@@ -1,6 +1,9 @@
 -- 欢迎使用万象拼音方案
 -- @amzxyz
 -- https://github.com/amzxyz/rime_wanxiang
+
+local wanxiang = require("wanxiang")
+
 -- 检查系统类型
 -- 各类 rime 前端详见：https://rime.im/download/
 -- 输入法           code_name   OS
@@ -302,9 +305,9 @@ local function UserDictCleaner_process(_, env)
         -- 失败情况下会发送 0
         send_user_notification(env.total_deleted)
 
-        return 1 -- 返回 1 表示已处理该事件
+        return wanxiang.RIME_PROCESS_RESULTS.kAccepted -- 返回 1 表示已处理该事件
     end
-    return 2     -- 返回 2 继续处理其它输入
+    return wanxiang.RIME_PROCESS_RESULTS.kNoop     -- 返回 2 继续处理其它输入
 end
 
 -- 返回初始化和处理函数

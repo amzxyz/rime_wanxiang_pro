@@ -4,6 +4,7 @@
 -- ctrl+k 后移
 -- ctrl+l 重置
 -- ctrl+p 置顶
+local wanxiang = require("wanxiang")
 
 ---@type string | nil 当前选中的词
 local cur_selected_text = nil
@@ -89,12 +90,6 @@ end
 local P = {}
 function P.init() end
 
-local PROCESS_RESULTS = {
-    kRejected = 0, -- 表示处理器明确拒绝了这个按键，停止处理链但不返回 true
-    kAccepted = 1, -- 表示处理器成功处理了这个按键，停止处理链并返回 true
-    kNoop = 2,     -- 表示处理器没有处理这个按键，继续传递给下一个处理器
-}
-
 -- P 阶段按键处理
 ---@param key_event KeyEvent
 ---@param env Env
@@ -112,7 +107,7 @@ function P.func(key_event, env)
         or not key_event:ctrl()
         or key_event:release()
     then
-        return PROCESS_RESULTS.kNoop
+        return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
     -- 判断按下的键，更新偏移量
@@ -126,11 +121,11 @@ function P.func(key_event, env)
     elseif is_pin then                    -- 置顶
         cur_offset = nil
     else
-        return PROCESS_RESULTS.kNoop
+        return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
     if cur_offset == 0 then -- 未有移动操作，不用操作
-        return PROCESS_RESULTS.kNoop
+        return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
     if cur_offset == nil then -- 如果是重置/置顶，直接设置位置
@@ -145,7 +140,7 @@ function P.func(key_event, env)
         context:highlight(cur_highlight_idx)
     end
 
-    return PROCESS_RESULTS.kAccepted
+    return wanxiang.RIME_PROCESS_RESULTS.kAccepted
 end
 
 local F = {}

@@ -10,6 +10,9 @@
 --   q: "wwwwwwwww"
 --   w: "？"
 -- 读取 RIME 配置文件中的符号映射表
+
+local wanxiang = require("wanxiang")
+
 local function load_mapping_from_config(config)
     local symbol_map = {}
     local keys = "qwertyuiopasdfghjklzxcvbnm1234567890"
@@ -128,9 +131,9 @@ local function processor(key_event, env)
     local input = env.engine.context.input
     if string.match(input, env.double_symbol_pattern_text) 
         or string.match(input, env.single_symbol_pattern) then
-        return RIME_PROCESS_RESULTS.kAccepted
+        return wanxiang.RIME_PROCESS_RESULTS.kAccepted
     end
 
-    return RIME_PROCESS_RESULTS.kNoop -- 继续后续处理
+    return wanxiang.RIME_PROCESS_RESULTS.kNoop -- 继续后续处理
 end
 return { init = init, fini = fini, func = processor }

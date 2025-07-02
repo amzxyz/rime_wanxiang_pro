@@ -1,15 +1,15 @@
 ---@diagnostic disable: undefined-global
 
+-- 万象的一些共用工具函数
+local wanxiang = {}
+
 -- 全局内容
 ---@alias PROCESS_RESULT ProcessResult
-RIME_PROCESS_RESULTS = {
+wanxiang.RIME_PROCESS_RESULTS = {
     kRejected = 0, -- 表示处理器明确拒绝了这个按键，停止处理链但不返回 true
     kAccepted = 1, -- 表示处理器成功处理了这个按键，停止处理链并返回 true
     kNoop = 2,     -- 表示处理器没有处理这个按键，继续传递给下一个处理器
 }
-
--- 万象的一些共用工具函数
-local wanxiang = {}
 
 -- 整个生命周期内不变，缓存判断结果
 local is_mobile_device = nil

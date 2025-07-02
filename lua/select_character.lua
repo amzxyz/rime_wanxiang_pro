@@ -1,5 +1,6 @@
 -- 以词定字
 
+local wanxiang = require("wanxiang")
 
 local select = {}
 
@@ -26,15 +27,15 @@ function select.func(key, env)
             if (key:repr() == select.first_key) then
                 engine:commit_text(text:sub(1, utf8.offset(text, 2) - 1))
                 context:clear()
-                return 1
+                return wanxiang.RIME_PROCESS_RESULTS.kAccepted
             elseif (key:repr() == select.last_key) then
                 engine:commit_text(text:sub(utf8.offset(text, -1)))
                 context:clear()
-                return 1
+                return wanxiang.RIME_PROCESS_RESULTS.kAccepted
             end
         end
     end
-    return 2
+    return wanxiang.RIME_PROCESS_RESULTS.kNoop
 end
 
 return select

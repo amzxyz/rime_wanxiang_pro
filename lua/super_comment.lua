@@ -15,7 +15,9 @@
 --  corrector: true                  # 启用错音错词提醒，例如输入 geiyu 给予 获得 jǐ yǔ 提示
 --  corrector_type: "{comment}"      # 新增一个提示类型，比如"【{comment}】"
 --  fuzhu_type: moqi, flypy, zrm, jdh, tiger, wubi, hanxin tone fuzhu(分包使用时代表整体分号后面)
+
 local wanxiang = require('wanxiang')
+
 local patterns = {
     fuzhu = "[^;];(.+)$",
     tone = "([^;]*);",

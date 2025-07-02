@@ -4,7 +4,7 @@
 -- https://github.com/amzxyz/rime_wanxiang
 --     - lua_processor@*super_tips
 --     key_binder/tips_key: "slash" # 上屏按键配置
-require("wanxiang")
+local wanxiang = require("wanxiang")
 
 ---@type UserDb | nil
 local db = nil -- 数据库池
@@ -269,7 +269,7 @@ function P.func(key, env)
         or not segment
         or input_text:match("^[VRNU/]")
     then
-        return RIME_PROCESS_RESULTS.kNoop
+        return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
     -- rime 内核在移动候选时并不会触发 update_notifier，这里做一个临时修复
@@ -288,10 +288,10 @@ function P.func(key, env)
     then
         env.engine:commit_text(tip_text)
         context:clear()
-        return RIME_PROCESS_RESULTS.kAccepted
+        return wanxiang.RIME_PROCESS_RESULTS.kAccepted
     end
 
-    return RIME_PROCESS_RESULTS.kNoop
+    return wanxiang.RIME_PROCESS_RESULTS.kNoop
 end
 
 return P
