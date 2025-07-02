@@ -1,20 +1,21 @@
 ---@diagnostic disable: undefined-global
 
 -- 全局内容
+---@alias PROCESS_RESULT ProcessResult
 RIME_PROCESS_RESULTS = {
-    kRejected = 0,
-    kAccepted = 1,
-    kNoop = 2,
+    kRejected = 0, -- 表示处理器明确拒绝了这个按键，停止处理链但不返回 true
+    kAccepted = 1, -- 表示处理器成功处理了这个按键，停止处理链并返回 true
+    kNoop = 2,     -- 表示处理器没有处理这个按键，继续传递给下一个处理器
 }
 
 -- 万象的一些共用工具函数
 local wanxiang = {}
 
--- 缓存判断结果
+-- 整个生命周期内不变，缓存判断结果
 local is_mobile_device = nil
--- 提供跨平台设备检测功能
--- @author amzxyz
--- 判断是否为手机设备（返回布尔值）
+-- 判断是否为手机设备
+---@author amzxyz
+---@return boolean
 function wanxiang.is_mobile_device()
     local function _is_mobile_device()
         local dist = rime_api.get_distribution_code_name() or ""
