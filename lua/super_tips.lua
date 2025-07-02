@@ -2,8 +2,8 @@
 -- 采用leveldb数据库,支持大数据遍历,支持多种类型混合,多种拼音编码混合,维护简单
 -- 支持候选匹配和编码匹配两种
 -- https://github.com/amzxyz/rime_wanxiang
---     - lua_processor@*super_tips*P # 手机电脑有着不同的逻辑,除了编码匹配之外,电脑支持光标高亮匹配检索,手机只支持首选候选匹配
---     key_binder/tips_key: "slash"  # 上屏按键配置
+--     - lua_processor@*super_tips  # 手机电脑有着不同的逻辑,除了编码匹配之外,电脑支持光标高亮匹配检索,手机只支持首选候选匹配
+--     key_binder/tips_key: "slash" # 上屏按键配置
 require("wanxiang")
 
 ---@type UserDb | nil
@@ -289,4 +289,4 @@ function P.func(key, env)
     return RIME_PROCESS_RESULTS.kNoop
 end
 
-return { P = P }
+return P
