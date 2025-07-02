@@ -134,7 +134,7 @@ local function calculate_file_hash(filepath)
     if not r then
         file:seek("set", 0)
         hash = hash_compt()
-        log.warning("[super_tips]：不支持位运算符，使用兼容 hash 计算方式")
+        log.warning("[super_tips] 不支持位运算符，使用兼容 hash 计算方式")
     end
 
     file:close()
@@ -200,13 +200,12 @@ local function update_tips_prompt(context, env)
     local segment = context.composition:back()
     if segment == nil then return end
 
-    ---@type string | nil 存放 db 中查到的 tips 值
-    local tips_text
-
     local db = getUserDB()
-    ---@type string | nil
-    tips_text = context.input and db:fetch(context.input)
-    -- 如何 context.input 没有匹配的 tips，则使用候选词查找
+
+    ---@type string | nil 存放 db 中查到的 tips 值
+    local tips_text = context.input and db:fetch(context.input)
+
+    -- 如果 context.input 没有匹配的 tips，则使用候选词查找
     if tips_text == nil or tips_text == "" then
         local candidate = context:get_selected_candidate()
         tips_text = candidate and db:fetch(candidate.text)
@@ -241,7 +240,7 @@ function P.init(env)
 
     -- 注册 tips 查找监听器
     local context = env.engine.context
-    env.update_connection = context.update_notifier:connect(
+    env.tips_update_connection = context.update_notifier:connect(
         function(context)
             update_tips_prompt(context, env)
         end
@@ -251,8 +250,8 @@ end
 function P.fini(env)
     close_db()
     -- 清理连接
-    if env.update_connection then
-        env.update_connection:disconnect()
+    if env.tips_update_connection then
+        env.tips_update_connection:disconnect()
     end
 end
 
@@ -271,6 +270,12 @@ function P.func(key, env)
         or input_text:match("^[VRNU/]")
     then
         return RIME_PROCESS_RESULTS.kNoop
+    end
+
+    -- rime 内核在移动候选时并不会触发 update_notifier，这里做一个临时修复
+    -- 如果是 paging，则主动调用 update_tips_prompt
+    if segment:has_tag("paging") then
+        update_tips_prompt(context, env)
     end
 
     -- 检查是否触发提示上屏
