@@ -83,12 +83,20 @@ local function init(env)
     env.last_commit_text = "欢迎使用万象拼音！"
 
     -- 连接提交通知器
-    env.engine.context.commit_notifier:connect(function(ctx)
-        local commit_text = ctx:get_commit_text()
-        if commit_text ~= "" then
-            env.last_commit_text = commit_text -- 更新最后提交内容到env
+    env.quick_symbol_text_commit_notifier = env.engine.context.commit_notifier:connect(
+        function(ctx)
+            local commit_text = ctx:get_commit_text()
+            if commit_text ~= "" then
+                env.last_commit_text = commit_text -- 更新最后提交内容到env
+            end
         end
-    end)
+    )
+end
+
+local function fini(env)
+    if env.quick_symbol_text_commit_notifier then
+        env.quick_symbol_text_commit_notifier:disconnect()
+    end
 end
 
 -- 处理符号和文本的重复上屏逻辑
@@ -116,4 +124,4 @@ local function processor(key_event, env)
     end
     return 2 -- 继续后续处理
 end
-return { init = init, func = processor }
+return { init = init, fini = fini, func = processor }
