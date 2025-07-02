@@ -6,7 +6,7 @@
 --     - lua_processor@*super_tips*S              手机电脑有着不同的逻辑,除了编码匹配之外,电脑支持光标高亮匹配检索,手机只支持首选候选匹配
 --     - lua_filter@*super_tips*M
 --     key_binder/tips_key: "slash"  #上屏按键配置
-local wanxiang = require("wanxiang")
+require("wanxiang")
 
 ---@type UserDb | nil
 local db = nil -- 数据库池
@@ -136,7 +136,7 @@ local function calculate_file_hash(filepath)
     if not r then
         file:seek("set", 0)
         hash = hash_compt()
-        log.info("[super_tips]：不支持位运算符，使用兼容 hash")
+        log.warning("[super_tips]：不支持位运算符，使用兼容 hash 计算方式")
     end
 
     file:close()
@@ -198,15 +198,38 @@ local function init_tips_userdb()
     close_db() -- 主动关闭数据库，后续只需要只读方式打开
 end
 
-local P = {}
-function P.fini()
-    close_db()
+local function update_tips_prompt(context, env)
+    local segment = context.composition:back()
+    if segment == nil then return end
+
+    ---@type string | nil 存放 db 中查到的 tips 值
+    local tips_text
+
+    local db = getUserDB()
+    ---@type string | nil
+    tips_text = context.input and db:fetch(context.input)
+    -- 如何 context.input 没有匹配的 tips，则使用候选词查找
+    if tips_text == nil or tips_text == "" then
+        local candidate = context:get_selected_candidate()
+        tips_text = candidate and db:fetch(candidate.text)
+    end
+
+    if tips_text ~= nil and tips_text ~= ""
+    then -- 有 tips 则直接设置 prompt
+        env.last_tip_prompt = "〔" .. tips_text .. "〕"
+        segment.prompt = env.last_tip_prompt
+    else -- 没有则重置
+        if env.last_tip_prompt == segment.prompt then
+            env.last_tip_prompt = nil
+            segment.prompt = ""
+        end
+    end
 end
+
+local P = {}
 
 -- Processor：按键触发上屏 (S)
 function P.init(env)
-    local start = os.clock()
-
     local dist = rime_api.get_distribution_code_name() or ""
     local user_lua_dir = rime_api.get_user_data_dir() .. "/lua"
     if dist ~= "hamster" and dist ~= "Weasel" then
@@ -218,25 +241,27 @@ function P.init(env)
 
     P.tips_key = env.engine.schema.config:get_string("key_binder/tips_key")
 
-    log.warning(string.format("[super_tips]: 初始化耗时 %.4fms", (os.clock() - start) * 1000))
+    -- 注册 tips 查找监听器
+    local context = env.engine.context
+    env.update_connection = context.update_notifier:connect(
+        function(context)
+            update_tips_prompt(context, env)
+        end
+    )
 end
 
-local function reset_prompt(env)
-    local segment = env.engine.context.composition:back()
-    if segment == nil then return end
-
-    if env.last_tip_prompt == segment.prompt then
-        segment.prompt = ""
+function P.fini(env)
+    close_db()
+    -- 清理连接
+    if env.update_connection then
+        env.update_connection:disconnect()
     end
 end
 
-local _start = nil
 ---@param key KeyEvent
 ---@param env Env
 ---@return ProcessResult
 function P.func(key, env)
-    _start = os.clock()
-
     local is_tips_enabled = env.engine.context:get_option("super_tips")
 
     local context = env.engine.context
@@ -247,13 +272,12 @@ function P.func(key, env)
         or not segment
         or input_text:match("^[VRNU/]")
     then
-        reset_prompt(env)
         return RIME_PROCESS_RESULTS.kNoop
     end
 
     -- 检查是否触发提示上屏
     ---@type string 从 prompt 中获取的当前 tip 文本
-    local tip_text = segment.prompt and segment.prompt:match(".+[：:](.*)") or ""
+    local tip_text = segment.prompt and segment.prompt:match(".+[：:](.*)〕?") or ""
     if (context:is_composing() or context:has_menu())
         and P.tips_key
         and key:repr() == P.tips_key
@@ -263,26 +287,6 @@ function P.func(key, env)
         context:clear()
         return RIME_PROCESS_RESULTS.kAccepted
     end
-
-    -- 设置 tips prompt
-    ---@type string | nil
-    local tips_text
-    local db = getUserDB()
-    ---@type string | nil
-    tips_text = context.input and db:fetch(context.input)
-    if tips_text == nil or tips_text == "" then
-        local first_cand = context:get_selected_candidate() or segment:get_candidate_at(0)
-        tips_text = first_cand and db:fetch(first_cand.text)
-    end
-
-    if tips_text ~= nil and tips_text ~= "" then -- tips prompt 有值则设置 prompt
-        segment.prompt = "〔" .. tips_text .. "〕"
-        env.last_tip_prompt = segment.prompt
-    else -- 重置 prompt
-        reset_prompt(env)
-    end
-
-    log.warning(string.format("[super_tips] 耗时 %.4fms", (os.clock() - _start) * 1000))
 
     return RIME_PROCESS_RESULTS.kNoop
 end
