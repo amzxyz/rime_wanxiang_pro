@@ -6,26 +6,46 @@
 
 local wanxiang = require("wanxiang")
 
+---@return string
+local function get_fallback_input(input_text)
+    return input_text:gsub("%d+", function(match) return match:sub(-1) end)
+end
+
+local P = {}
+function P.init(env)
+    env.tone_fallback_update_connection =
+        env.engine.context.update_notifier:connect(function(ctx)
+            local input_text = ctx.input
+            -- 排除特殊模式（V/R/N/U//开头）
+            if wanxiang.is_function_mode_active(ctx) then return end
+
+            local new_input = get_fallback_input(input_text)
+            if new_input ~= input_text then
+                ctx.input = new_input
+            end
+        end)
+end
+
+function P.fini(env)
+    if env.tone_fallback_update_connection then
+        env.tone_fallback_update_connection:disconnect()
+    end
+end
+
 ---@return ProcessResult
-local function tone_fallback(_, env)
+function P.func(_, env)
     local ctx = env.engine.context
     local input_text = ctx.input
-    -- 排除特殊模式（V/R/N/U//开头）
-    if input_text:match("^[VRNU/]") then
+
+    if wanxiang.is_function_mode_active(ctx) then
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
-    -- 查找所有连续数字段（≥2位）
-    local modified = false
-    local new_str = input_text:gsub("(%d)(%d+)", function(first, rest)
-        modified = true
-        -- 保留最后一位数字
-        return rest:sub(-1)
-    end)
-    -- 若发生替换则更新输入
-    if modified then
-        ctx.input = new_str
-        return wanxiang.RIME_PROCESS_RESULTS.kAccepted
-    end
-    return wanxiang.RIME_PROCESS_RESULTS.kNoop
+
+    local new_fallback = get_fallback_input(input_text)
+
+    return new_fallback ~= input_text
+        and wanxiang.RIME_PROCESS_RESULTS.kAccepted
+        or wanxiang.RIME_PROCESS_RESULTS.kNoop
 end
-return tone_fallback
+
+return P

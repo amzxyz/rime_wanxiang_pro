@@ -105,4 +105,11 @@ function wanxiang.load_file_with_fallback(path, mode)
     return file, close, err
 end
 
+---判断是否在命令模式
+---@param context Context | nil
+---@return boolean
+function wanxiang.is_function_mode_active(context)
+    return string.match(context and context.input or "", "^[VRNU/]")
+end
+
 return wanxiang
