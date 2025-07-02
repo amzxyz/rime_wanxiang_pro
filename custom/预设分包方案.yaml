@@ -74,7 +74,7 @@ engine:
     - lua_processor@*tone_fallback         #声调辅助回退，当你输入声调数字错误时，继续输入正确的而不用回退删除
     - lua_processor@*super_sequence*P      #手动排序，高亮候选 ctrl+j左移动 ctrl+k 右移动 ctrl+l 移除位移  ctrl+p 置顶
     - lua_processor@*quick_symbol_text     #快符引导以及重复上屏，配合quick_symbol_text顶层配置清单定义扩展按键
-    - lua_processor@*super_tips*S          #超级提示模块：表情、简码、翻译、化学式、等等靠你想象
+    - lua_processor@*super_tips*P          #超级提示模块：表情、简码、翻译、化学式、等等靠你想象
     - lua_processor@*limit_repeated        #用于限制最大候选长度以及最大重复输入声母编码长度，避免性能异常
     - lua_processor@*backspace_limit       #防止连续 Backspace 在编码为空时删除已上屏内容
     - lua_processor@*userdb_sync_delete    #危险操作：通过输入 /del 触发,用于清理自定义同步目录下txt用户词典里被标记c<0的词条，操作步骤：必须先同步、再执行/del、再去部署刷新状态、再去同步回收词典，完成动作。
@@ -126,7 +126,6 @@ engine:
     - simplifier@s2hk                               #简繁切换港繁
     - simplifier@chinese_english                    #中英翻译滤镜
     - lua_filter@*search@wanxiang_radical           #部件拆字辅码放在简繁转换之后
-    - lua_filter@*super_tips*M                      #超级提示模块：表情、简码、翻译、化学式、等等靠你想象
     - lua_filter@*super_comment                     #超级注释模块，支持错词提示、辅助码显示，部件组字读音注释，支持个性化配置和关闭相应的功能，详情搜索super_comment进行详细配置
     - lua_filter@*text_formatting                   #给自定义用户词扩展一个换行:\n, 制表符：\t, 回车符：\r, 空格：\s
     - uniquifier                                    #去重
