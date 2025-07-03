@@ -282,7 +282,7 @@ function P.func(key, env)
 
     -- 检查是否触发提示上屏
     ---@type string 从 prompt 中获取的当前 tip 文本
-    local tip_text = segment.prompt and segment.prompt:match(".+[：:](.*)〕?") or ""
+    local tip_text = segment.prompt and segment.prompt:gsub("：", ":"):match(":%s*([^%s]*)%s*〕") or ""
     if (context:is_composing() or context:has_menu())
         and P.tips_key
         and key:repr() == P.tips_key
