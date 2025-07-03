@@ -242,7 +242,10 @@ function P.init(env)
     local context = env.engine.context
     env.tips_update_connection = context.update_notifier:connect(
         function(context)
-            update_tips_prompt(context, env)
+            local is_tips_enabled = context:get_option("super_tips")
+            if is_tips_enabled == true then
+                update_tips_prompt(context, env)
+            end
         end
     )
 end
@@ -263,11 +266,10 @@ function P.func(key, env)
 
     local context = env.engine.context
     local segment = context.composition:back()
-    local input_text = context.input or ""
 
     if not is_tips_enabled
         or not segment
-        or input_text:match("^[VRNU/]")
+        or wanxiang.is_function_mode_active(context)
     then
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
