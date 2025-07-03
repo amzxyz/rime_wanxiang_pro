@@ -84,6 +84,26 @@ function wanxiang.is_in_radical_mode(env)
     ) or false
 end
 
+-- 判断是否在命令模式
+function wanxiang.is_function_mode_active(env)
+    local seg = env.engine.context.composition:back()
+    return seg and (
+        seg:has_tag("number")
+        or seg:has_tag("unicode")
+        or seg:has_tag("punct")
+        or seg:has_tag("calculator")
+        or seg:has_tag("gregorian_to_lunar")
+    ) or false
+end
+
+---判断是否在命令模式
+---@param context Context | nil
+---@return boolean
+-- 原始is_function_mode_active实现作为备用
+function wanxiang.is_function_mode_active_old(context)
+    return string.match(context and context.input or "", "^[VRNU/]")
+end
+
 -- 按照优先顺序加载文件：用户目录 > 系统目录
 ---@param path string 相对路径
 ---@retur file*, function
@@ -103,13 +123,6 @@ function wanxiang.load_file_with_fallback(path, mode)
     end
 
     return file, close, err
-end
-
----判断是否在命令模式
----@param context Context | nil
----@return boolean
-function wanxiang.is_function_mode_active(context)
-    return string.match(context and context.input or "", "^[VRNU/]")
 end
 
 return wanxiang

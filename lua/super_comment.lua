@@ -264,7 +264,7 @@ function ZH.func(input, env)
     local is_radical_mode = wanxiang.is_in_radical_mode(env)
     local index = 0
     local input_str = env.engine.context.input
-    local should_skip_candidate_comment = input_str and input_str:match("^[VRNU/]")
+    local should_skip_candidate_comment = wanxiang.is_function_mode_active(env)
     local is_comment_hint = env.engine.context:get_option("fuzhu_hint")
     local is_tone_comment = env.engine.context:get_option("tone_hint")
     local is_chaifen_enabled = env.engine.context:get_option("chaifen_switch")
