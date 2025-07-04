@@ -92,12 +92,7 @@ end
 ---@param context Context
 ---@return string
 local function get_valid_input(context)
-    local segmentation = context.composition:toSegmentation()
-    local start = segmentation:get_confirmed_position() + 1
-
-    if start > context.caret_pos then return "" end
-
-    return context.input:sub(start, context.caret_pos)
+    return context.input:sub(1, context.caret_pos)
 end
 
 local P = {}
