@@ -286,7 +286,7 @@ function P.func(key, env)
         segment.prompt:match("：%s*(.*)%s*〕") -- 优先匹配常规的全角冒号
         or segment.prompt:match(":%s*(.*)%s*〕") -- 没有匹配则回落到半角冒号
         or "")
-    log.warning(tip_text)
+
     if (context:is_composing() or context:has_menu())
         and P.tips_key
         and key:repr() == P.tips_key
