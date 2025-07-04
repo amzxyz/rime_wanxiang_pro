@@ -69,6 +69,8 @@ end
 ---@param input string 当前输入码
 ---@return table<string, { to_position: integer, updated_at: integer, from_position?: integer, candidate?: Candidate}> | nil
 local function getUserSegment(input)
+    if input == "" then return nil end
+
     local db = getUserDB()
 
     local accessor = db:query(input .. "|")
@@ -85,6 +87,12 @@ local function getUserSegment(input)
     accessor = nil
 
     return table
+end
+
+---@param context Context
+---@return string
+local function get_valid_input(context)
+    return context.input:sub(1, context.caret_pos)
 end
 
 local P = {}
@@ -129,8 +137,9 @@ function P.func(key_event, env)
     end
 
     if cur_offset == nil then -- 如果是重置/置顶，直接设置位置
-        saveUserSegment(context.input, selected_cand.text, is_pin and 1 or nil)
-    else                      -- 否则进入 filter 调整位移
+        local valid_input = get_valid_input(context)
+        saveUserSegment(valid_input, selected_cand.text, is_pin and 1 or nil)
+    else -- 否则进入 filter 调整位移
         cur_selected_text = selected_cand.text
     end
 
@@ -155,10 +164,17 @@ end
 ---@param env Env
 function F.func(input, env)
     local context = env.engine.context
-    local user_segment = getUserSegment(context.input)
-    local need_reorder = user_segment ~= nil or (cur_selected_text ~= nil and cur_offset ~= 0 and cur_offset ~= nil)
+    local valid_input = get_valid_input(context)
+    local user_segment = getUserSegment(valid_input)
 
-    if not need_reorder then -- 如果没有自定义排序，不用去重，直接 yield 并返回
+    local cur_has_new_reorder = cur_selected_text ~= nil
+        and cur_offset ~= 0
+        and cur_offset ~= nil
+        and valid_input ~= ""
+
+    if not cur_has_new_reorder
+        and user_segment == nil
+    then -- 如果没有自定义排序，不用去重，直接 yield 并返回
         for cand in input:iter() do yield(cand) end
         return
     end
@@ -194,7 +210,9 @@ function F.func(input, env)
     local user_ordered_records = {}
     if user_segment ~= nil then
         for _, info in pairs(user_segment) do
-            table.insert(user_ordered_records, info)
+            if info.candidate then
+                table.insert(user_ordered_records, info)
+            end
         end
         table.sort(user_ordered_records, function(a, b) return a.updated_at < b.updated_at end)
 
@@ -218,7 +236,7 @@ function F.func(input, env)
     end
 
     -- 应用当前调整
-    if cur_selected_text ~= nil and cur_offset ~= 0 and cur_offset ~= nil then
+    if cur_has_new_reorder then
         ---@type integer | nil
         local from_position = nil
         for position, cand in ipairs(reordered_candidates) do
@@ -240,7 +258,9 @@ function F.func(input, env)
 
                 table.remove(reordered_candidates, from_position)
                 table.insert(reordered_candidates, to_position, cur_selected_cand)
-                saveUserSegment(context.input, cur_selected_text, to_position)
+
+                ---@diagnostic disable-next-line: param-type-mismatch
+                saveUserSegment(valid_input, cur_selected_text, to_position)
                 cur_highlight_idx = to_position - 1
             end
         end
