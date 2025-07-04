@@ -210,7 +210,9 @@ function F.func(input, env)
     local user_ordered_records = {}
     if user_segment ~= nil then
         for _, info in pairs(user_segment) do
-            table.insert(user_ordered_records, info)
+            if info.candidate then
+                table.insert(user_ordered_records, info)
+            end
         end
         table.sort(user_ordered_records, function(a, b) return a.updated_at < b.updated_at end)
 
