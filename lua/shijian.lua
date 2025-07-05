@@ -2244,6 +2244,7 @@ local function generate_candidates(input, seg, candidates)
         yield(candidate)
     end
 end
+
 -- 判断指定年月日是否合法
 local function DateExists(year, month, day)
     local days
@@ -2262,13 +2263,20 @@ local function set_prompt_if_invalid(context, msg)
         segment.prompt = msg
     end
 end
+
+---@param input string
+---@param seg Segment
+---@param env Env
 local function translator(input, seg, env)
     local engine = env.engine
     local context = engine.context
     local config  = engine.schema.config
+    local segment = env.engine.context.composition:back()   
+
     if input:sub(1, 1) == "N" then
         local n = input:sub(2)
         local yr = os.date("%Y")
+        segment.tags = segment.tags + Set({ "Ndate" })
 
         -- N0101–N1231（仅月日）
         if #n == 4 and n:match("^%d%d%d%d$") then
@@ -2350,12 +2358,14 @@ local function translator(input, seg, env)
         return
     end
 
-    -- 日期候选
-    if command == "rq" then
-        local today     = os.date("*t")               -- 当前时间表
-        local ymd       = os.date("%Y%m%d")           -- 年月日
-        local ymdh      = os.date("%Y%m%d%H")         -- 年月日时
-        local num_year  = string.format("〔%03d/%d〕", today.yday, IsLeap(today.year))  -- 年内第几天/总天数
+    segment.tags = segment.tags + Set({ "shijian" })
+
+    -- **日期候选项**
+    if (command == "rq") then
+        local today = os.date("*t")       -- 当前时间表
+        local ymd = os.date("%Y%m%d")     -- 年月日
+        local ymdh = os.date("%Y%m%d%H")  -- 年月日时
+        local num_year = string.format("〔%03d/%d〕", today.yday, IsLeap(today.year))  -- 年内第几天/总天数
         local m = today.month
         local d = today.day
 
@@ -2712,5 +2722,7 @@ local function translator(input, seg, env)
         generate_candidates("day_summary", seg, candidates)
         return
     end
+    -- 取消tag 
+    segment.tags = segment.tags - Set({ "shijian" })
 end
 return translator
