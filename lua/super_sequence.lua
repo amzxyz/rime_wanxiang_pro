@@ -6,8 +6,8 @@
 -- ctrl+p 置顶
 local wanxiang = require("wanxiang")
 
----@type string | nil 当前选中的词
-local cur_adjustment = nil
+---@type string | nil 当前选中的键，命令模式为 0 开始的位置索引，正常模式为候选词
+local cur_adjustment_phrase = nil
 
 ---@type integer | nil 当前高亮索引
 local cur_highlight_idx = nil
@@ -54,28 +54,6 @@ local function parse_adjustment_value(value)
     return result
 end
 
----@param code string
----@param phrase string
----@param to_position integer | nil
----@param timestamp? number
-local function save_adjustment(code, phrase, to_position, timestamp)
-    local db = get_user_db()
-    local key = string.format("%s|%s", code, phrase)
-
-    if to_position == nil or to_position <= 0 then
-        return db:erase(key)
-    end
-
-    -- 由于 lua os.time() 的精度只到秒，排序可能会引起问题
-    if not timestamp then
-        timestamp = rime_api.get_time_ms
-            and os.time() + tonumber(string.format("0.%s", rime_api.get_time_ms()))
-            or os.time()
-    end
-    local value = string.format("%s\t%s", to_position, timestamp)
-    return db:update(key, value)
-end
-
 ---@param code string 当前输入码
 ---@return table<string, { to_position: integer, updated_at: integer, from_position?: integer, candidate?: Candidate}> | nil
 local function get_adjustment(code)
@@ -89,14 +67,61 @@ local function get_adjustment(code)
     local table = nil
     for key, value in accessor:iter() do
         if table == nil then table = {} end
-        local phrase = string.gsub(key, "^.*|", "")
-        table[phrase] = parse_adjustment_value(value)
+        local adjustment_key = string.match(key, "^.*|(%S+)$")
+        table[adjustment_key] = parse_adjustment_value(value)
     end
 
     ---@diagnostic disable-next-line: cast-local-type
     accessor = nil
 
     return table
+end
+
+---@param code string 匹配的输入码
+---@param adjust_key string | number 匹配键，为候选索引（命令模式），或候选词（普通模式）
+---@param to_position integer | nil 目标位置，`nil` 为从数据库中移除该纪录
+---@param timestamp? number 操作时间戳，默认去当前时间戳
+local function save_adjustment(code, adjust_key, to_position, timestamp)
+    local db = get_user_db()
+    local key = string.format("%s|%s", code, adjust_key)
+
+    if to_position == nil or to_position <= 0 then
+        if type(adjust_key) == "number" then
+            -- 遍历目标位置，去最后一个再此位置的项重置
+            local user_adjustment = get_adjustment(code)
+
+            if user_adjustment == nil then return false end
+
+            ---@type table{key: string, updated_at: number} | nil
+            local erase_item = {}
+            for db_key, db_value in pairs(user_adjustment) do
+                if adjust_key + 1 == db_value.to_position
+                    and (erase_item.updated_at == nil
+                        or erase_item.updated_at < db_value.updated_at)
+                then
+                    erase_item.key = db_key
+                    erase_item.updated_at = db_value.updated_at
+                end
+            end
+
+            if erase_item.key ~= nil then
+                return db:erase(string.format("%s|%s", code, erase_item.key))
+            end
+
+            return false
+        else
+            return db:erase(key)
+        end
+    end
+
+    -- 由于 lua os.time() 的精度只到秒，排序可能会引起问题
+    if not timestamp then
+        timestamp = rime_api.get_time_ms
+            and os.time() + tonumber(string.format("0.%s", rime_api.get_time_ms()))
+            or os.time()
+    end
+    local value = string.format("%s\t%s", to_position, timestamp)
+    return db:update(key, value)
 end
 
 ---@param context Context
@@ -190,10 +215,14 @@ local function process_adjustment(context)
     local selected_cand = context:get_selected_candidate()
 
     if cur_adjust_offset == nil then -- 如果是重置/置顶，直接设置位置
+        -- 非索引匹配的情况下，我们可以直接重置，提高效率
         local code = extract_adjustment_code(context)
-        save_adjustment(code, selected_cand.text, in_pin_mode and 1 or nil)
+        local adjustment_key = wanxiang.is_function_mode_active(context)
+            and context.composition:back().selected_index
+            or selected_cand.text
+        save_adjustment(code, adjustment_key, in_pin_mode and 1 or nil)
     else -- 否则进入 filter 调整位移
-        cur_adjustment = selected_cand.text
+        cur_adjustment_phrase = selected_cand.text
     end
 
     context:refresh_non_confirmed_composition()
@@ -203,7 +232,7 @@ local function process_adjustment(context)
     end
 
     ---重置全局状态
-    cur_adjustment = nil
+    cur_adjustment_phrase = nil
     cur_highlight_idx = nil
     cur_adjust_offset = 0
     in_pin_mode = false
@@ -222,6 +251,7 @@ end
 function P.func(key_event, env)
     local context = env.engine.context
     local selected_cand = context:get_selected_candidate()
+    local segment = context.composition:back()
 
     if not context:has_menu()
         or selected_cand == nil
@@ -229,6 +259,11 @@ function P.func(key_event, env)
         or not key_event:ctrl()
         or key_event:release()
     then
+        return wanxiang.RIME_PROCESS_RESULTS.kNoop
+    end
+
+    if wanxiang.is_function_mode_active(context) and not segment:has_tag("shijian") then
+        log.info(string.format("[sequence] 暂不支持当前输入的手动排序"))
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
@@ -268,13 +303,13 @@ end
 ---@param env Env
 function F.func(input, env)
     local context = env.engine.context
-    local valid_code = extract_adjustment_code(context)
-    local user_adjustment = get_adjustment(valid_code)
+    local adjust_code = extract_adjustment_code(context)
+    local user_adjustment = get_adjustment(adjust_code)
 
-    local has_unsaved_adjustment = cur_adjustment ~= nil
+    local has_unsaved_adjustment = cur_adjustment_phrase ~= nil
         and cur_adjust_offset ~= 0
         and cur_adjust_offset ~= nil
-        and valid_code ~= ""
+        and adjust_code ~= ""
 
     if not has_unsaved_adjustment  -- 如果当前没有排序调整
         and user_adjustment == nil -- 并且之前也没有自定义排序
@@ -289,21 +324,27 @@ function F.func(input, env)
     local phrase_count = {}   -- 用于去重
     local dedupe_position = 1 -- 记录去重会的当前索引位置
     local cur_candidate = nil
+    local cur_raw_index = nil
+
+    local is_function_mode_active = wanxiang.is_function_mode_active(context)
     for cand in input:iter() do
         local text = cand.text
+
         phrase_count[text] = (phrase_count[text] or 0) + 1
 
         if phrase_count[text] == 1 then -- 都需要去重
             -- 依次插入得到去重后的列表
             table.insert(candidates, cand)
 
-            if cur_adjustment == text then
+            if cur_adjustment_phrase == text then
                 cur_candidate = cand
+                cur_raw_index = dedupe_position - 1
             end
 
-            if user_adjustment ~= nil and user_adjustment[text] ~= nil then
-                user_adjustment[text].candidate = cand
-                user_adjustment[text].from_position = dedupe_position
+            local user_adjustment_key = is_function_mode_active and tostring(dedupe_position - 1) or text
+            if user_adjustment and user_adjustment[user_adjustment_key] ~= nil then
+                user_adjustment[user_adjustment_key].candidate = cand
+                user_adjustment[user_adjustment_key].from_position = dedupe_position
             end
 
             dedupe_position = dedupe_position + 1
@@ -344,7 +385,7 @@ function F.func(input, env)
         ---@type integer | nil
         local from_position = nil
         for position, cand in ipairs(candidates) do
-            if cand.text == cur_adjustment then
+            if cand.text == cur_adjustment_phrase then
                 from_position = position
                 break
             end
@@ -363,9 +404,13 @@ function F.func(input, env)
                 table.remove(candidates, from_position)
                 table.insert(candidates, to_position, cur_candidate)
 
-                ---@diagnostic disable-next-line: param-type-mismatch
-                save_adjustment(valid_code, cur_adjustment, to_position)
-                cur_highlight_idx = to_position - 1
+                local adjust_key = wanxiang.is_function_mode_active(context)
+                    and cur_raw_index
+                    or cur_adjustment_phrase
+                if adjust_key then
+                    save_adjustment(adjust_code, adjust_key, to_position)
+                    cur_highlight_idx = to_position - 1
+                end
             end
         end
     end
