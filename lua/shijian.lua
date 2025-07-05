@@ -2244,26 +2244,87 @@ local function generate_candidates(input, seg, candidates)
         yield(candidate)
     end
 end
+-- 判断指定年月日是否合法
+local function DateExists(year, month, day)
+    local days
+    if IsLeap(year) > 365 then
+        days = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }
+    else
+        days = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }
+    end
+    return month >= 1 and month <= 12 and day >= 1 and day <= days[month]
+end
 
+-- 设置 segment 提示
+local function set_prompt_if_invalid(context, msg)
+    local segment = context.composition:back()
+    if segment then
+        segment.prompt = msg
+    end
+end
 local function translator(input, seg, env)
     local engine = env.engine
     local context = engine.context
-    local config = engine.schema.config
+    local config  = engine.schema.config
+    if input:sub(1, 1) == "N" then
+        local n = input:sub(2)
+        local yr = os.date("%Y")
 
-    -- **N日期**
-    if string.sub(input, 1, 1) == "N" then
-        local n = string.sub(input, 2)
-        if not (string.match(n, "^(20)%d%d+$") == nil and string.match(n, "^(19)%d%d+$") == nil) then
-            local lunar = QueryLunarInfo(n)
-            if #lunar > 0 then
-                for i = 1, #lunar do
-                    local candidate = Candidate(input, seg.start, seg._end, lunar[i][1], lunar[i][2])
-                    candidate.quality = 1000000
-                    yield(candidate)
+        -- N0101–N1231（仅月日）
+        if #n == 4 and n:match("^%d%d%d%d$") then
+            local mm = tonumber(n:sub(1, 2))
+            local dd = tonumber(n:sub(3, 4))
+            if mm and dd and mm >= 1 and mm <= 12 and dd >= 1 and dd <= 31 then
+                if not DateExists(yr, mm, dd) then
+                    set_prompt_if_invalid(context, "〔日期不存在〕")
+                    return
                 end
+                local mm_str = string.format("%02d", mm)
+                local dd_str = string.format("%02d", dd)
+                local date_str = yr .. mm_str .. dd_str .. "01"
+                local lunar = QueryLunarInfo(date_str)
+                if #lunar > 0 then
+                    local comment = string.format("〔%s〕", yr)
+                    local candidates = {
+                        { string.format("%d月%d日", mm, dd), comment }, --第一个候选标记一下年份
+                        { string.format("%02d月%02d日", mm, dd), "" }
+                    }
+                    local lunar_full = lunar[2][1]
+                    local lunar_md = lunar_full:gsub(".*%)", "")
+                    if lunar_md == lunar_full then
+                        local lunar_md = lunar_full:gsub("^.-年", ""):gsub("^.-%)", "")
+                    end
+                    table.insert(candidates, { lunar_md, "" })
+
+                    local gz_full = lunar[3][1]
+                    local gz_md = gz_full:gsub("^.-年", "")
+                    table.insert(candidates, { gz_md, "" })
+
+                    generate_candidates(input, seg, candidates)
+                end
+                return
             end
         end
-        return
+
+        -- N2025 或 N20250101 等
+        if n:match("^(20)%d%d") or n:match("^(19)%d%d") then
+            if #n >= 8 then
+                local yyyy = tonumber(n:sub(1, 4))
+                local mm = tonumber(n:sub(5, 6))
+                local dd = tonumber(n:sub(7, 8))
+                if not DateExists(yyyy, mm, dd) then
+                    set_prompt_if_invalid(context, "〔日期不存在〕")
+                    return
+                end
+            end
+            local lunar = QueryLunarInfo(n)
+            local candidates = {}
+            for i = 1, #lunar do
+                table.insert(candidates, { lunar[i][1], lunar[i][2] })
+            end
+            generate_candidates(input, seg, candidates)
+            return
+        end
     end
 
     -- 以下为需要通过 shijian_keys 触发的功能
