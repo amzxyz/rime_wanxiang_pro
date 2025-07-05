@@ -269,7 +269,7 @@ function P.func(key, env)
 
     if not is_tips_enabled
         or not segment
-        or wanxiang.is_function_mode_active(env)
+        or wanxiang.is_function_mode_active(context)
     then
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end

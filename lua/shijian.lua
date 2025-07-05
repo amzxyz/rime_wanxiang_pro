@@ -2244,6 +2244,7 @@ local function generate_candidates(input, seg, candidates)
         yield(candidate)
     end
 end
+
 -- 判断指定年月日是否合法
 local function DateExists(year, month, day)
     local days
@@ -2262,13 +2263,20 @@ local function set_prompt_if_invalid(context, msg)
         segment.prompt = msg
     end
 end
+
+---@param input string
+---@param seg Segment
+---@param env Env
 local function translator(input, seg, env)
     local engine = env.engine
     local context = engine.context
     local config  = engine.schema.config
+    local segment = env.engine.context.composition:back()   
+
     if input:sub(1, 1) == "N" then
         local n = input:sub(2)
         local yr = os.date("%Y")
+        segment.tags = segment.tags + Set({ "Ndate" })
 
         -- N0101–N1231（仅月日）
         if #n == 4 and n:match("^%d%d%d%d$") then
@@ -2350,30 +2358,21 @@ local function translator(input, seg, env)
         return
     end
 
-    -- 日期候选
-    if command == "rq" then
-        local today     = os.date("*t")               -- 当前时间表
-        local ymd       = os.date("%Y%m%d")           -- 年月日
-        local ymdh      = os.date("%Y%m%d%H")         -- 年月日时
-        local num_year  = string.format("〔%03d/%d〕", today.yday, IsLeap(today.year))  -- 年内第几天/总天数
-        local m = today.month
-        local d = today.day
+    segment.tags = segment.tags + Set({ "shijian" })
 
+    -- **日期候选项**
+    if (command == "rq") then
+        local num_year = "〔" .. os.date("%j/") .. IsLeap(os.date("%Y")) .. "〕"
         local date_variants = {
-            -- 常规格式（带前导零）
-            { os.date("%Y年%m月%d日"), num_year },
-            { os.date("%Y.%m.%d"), "" },
+            { os.date("%Y年%m月%d日"), num_year }, --同一个日期首选看到差值即可
+            { os.date("%Y.%m.%d"), "" }, 
             { os.date("%Y-%m-%d"), "" },
             { os.date("%Y/%m/%d"), "" },
-            -- 不带前导零的格式
-            { string.format("%d年%d月%d日", today.year, m, d), "" },
-            { string.format("%d月%d日", m, d), "" },
-            -- 农历相关
-            { CnDate_translator(ymd), num_year },
-            { lunarJzl(ymdh), "" },
-            { Date2LunarDate(ymd) .. JQtest(ymd), "" },
-            { Date2LunarDate(ymd) .. GetLunarSichen(os.date("%H"), 1), "" }
-        }
+            { os.date("%m月%d日"), "" },
+            { string.gsub(os.date("%m/%d/%Y"), "([^%d])0+", "%1"), "" },
+            { CnDate_translator(os.date("%Y%m%d")), num_year }, { lunarJzl(os.date("%Y%m%d%H")), " " },
+            { Date2LunarDate(os.date("%Y%m%d")) .. JQtest(os.date("%Y%m%d")),        "" },
+            { Date2LunarDate(os.date("%Y%m%d")) .. GetLunarSichen(os.date("%H"), 1), "" } }
         generate_candidates("date", seg, date_variants)
         return
     end
@@ -2712,5 +2711,7 @@ local function translator(input, seg, env)
         generate_candidates("day_summary", seg, candidates)
         return
     end
+    -- 取消tag 
+    segment.tags = segment.tags - Set({ "shijian" })
 end
 return translator

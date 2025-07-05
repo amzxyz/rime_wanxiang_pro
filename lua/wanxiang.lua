@@ -84,24 +84,23 @@ function wanxiang.is_in_radical_mode(env)
     ) or false
 end
 
--- 判断是否在命令模式
-function wanxiang.is_function_mode_active(env)
-    local seg = env.engine.context.composition:back()
-    return seg and (
-        seg:has_tag("number")
-        or seg:has_tag("unicode")
-        or seg:has_tag("punct")
-        or seg:has_tag("calculator")
-        or seg:has_tag("gregorian_to_lunar")
-    ) or false
-end
-
 ---判断是否在命令模式
 ---@param context Context | nil
 ---@return boolean
--- 原始is_function_mode_active实现作为备用
-function wanxiang.is_function_mode_active_old(context)
-    return string.match(context and context.input or "", "^[VRNU/]")
+function wanxiang.is_function_mode_active(context)
+    if not context or not context.composition or context.composition:empty() then
+        return false
+    end
+    
+    local seg = context.composition:back()
+    if not seg then return false end
+    
+    return seg:has_tag("number") or     -- number_translator.lua 数字金额转换 R+数字
+           seg:has_tag("unicode") or    -- unicode.lua 输出 Unicode 字符 U+小写字母或数字
+           seg:has_tag("punct") or      -- 标点符号 全角半角提示
+           seg:has_tag("calculator") or -- super_calculator.lua V键计算器
+           seg:has_tag("shijian") or    -- shijian.lua /rq /sr 等与时间日期相关功能    
+           seg:has_tag("Ndate")         -- shijian.lua N日期功能
 end
 
 -- 按照优先顺序加载文件：用户目录 > 系统目录
