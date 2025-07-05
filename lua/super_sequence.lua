@@ -13,11 +13,11 @@ local cur_highlight_idx = nil
 ---@type -1 | 1 | 0 | nil 当前调整的偏移量，0 为未调整，nil 为重置/置顶
 local cur_offset = 0
 
+local db_file_name = "lua/sequence"
 local _user_db = nil
 -- 获取或创建 LevelDb 实例，避免重复打开
----@param mode? boolean 默认为只读，true 为写模式
-local function getUserDB(mode)
-    _user_db = _user_db or LevelDb('lua/sequence')
+local function getUserDB()
+    _user_db = _user_db or LevelDb(db_file_name)
 
     local function close()
         if _user_db:loaded() then
@@ -34,7 +34,7 @@ local function getUserDB(mode)
 end
 
 ---@param value string LevelDB 中序列化的值
----@return table<{to_position: integer, updated_at: integer}>
+---@return { to_position: integer, updated_at: integer }
 local function parsePhraseValue(value)
     local result = {}
 
@@ -48,8 +48,9 @@ end
 ---@param input string
 ---@param phrase string
 ---@param to_position integer | nil
-local function saveUserSegment(input, phrase, to_position)
-    local db = getUserDB(true)
+---@param timestamp? number
+local function saveUserSegment(input, phrase, to_position, timestamp)
+    local db = getUserDB()
     local key = string.format("%s|%s", input, phrase)
 
     if (to_position == nil) then
@@ -57,12 +58,12 @@ local function saveUserSegment(input, phrase, to_position)
     end
 
     -- 由于 lua os.time() 的精度只到秒，排序可能会引起问题
-    local timestamp = os.time()
-    local ms = 0
-    if rime_api.get_time_ms then
-        ms = rime_api.get_time_ms()
+    if not timestamp then
+        timestamp = rime_api.get_time_ms
+            and os.time() + tonumber(string.format("0.%s", rime_api.get_time_ms()))
+            or os.time()
     end
-    local value = string.format("%s\t%s.%s", to_position, timestamp, ms)
+    local value = string.format("%s\t%s", to_position, timestamp)
     return db:update(key, value)
 end
 
@@ -95,8 +96,90 @@ local function get_valid_input(context)
     return context.input:sub(1, context.caret_pos)
 end
 
+local sync_file_name = rime_api.get_user_data_dir() .. "/" .. db_file_name .. ".txt"
+
+local function file_exists(name)
+    local f = io.open(name, "r")
+    return f ~= nil and io.close(f)
+end
+
+local function export_to_file(db)
+    -- 文件已存在不进行覆盖
+    if file_exists(sync_file_name) then return end
+
+    local file = io.open(sync_file_name, "w")
+    if not file then return end;
+
+    ---@type nil | DbAccessor
+    local da = nil
+    da = db:query("")
+    if not da then return end
+
+    for key, value in da:iter() do
+        local line = string.format("%s\t%s", key, value)
+        file:write(line, "\n")
+    end
+    da = nil
+
+    log.info(string.format("[super_sequence] 已导出排序数据至文件 %s", sync_file_name))
+
+    file:close()
+end
+
+local function import_from_file(db)
+    local file = io.open(sync_file_name, "r")
+    if not file then return end;
+
+    local import_count = 0
+
+    local user_id = db:fetch("\001" .. "/user_id")
+    local from_user_id = nil
+    for line in file:lines() do
+        if line == "" then goto continue end
+        -- 先找 from_user_id
+        if from_user_id == nil then
+            from_user_id = string.match(line, "^" .. "\001" .. "/user_id\t(.+)")
+            goto continue
+        end
+        -- 如果 user_id 一致，则不进行同步
+        if from_user_id == user_id then break end
+        -- 忽略开头是 "\001/" 开头
+        if line:sub(1, 2) == "\001" .. "/" then goto continue end
+
+        -- 以下开始处理输入
+        local key, value = string.match(line, "^(.-)\t(.+)$")
+
+        if key and value then
+            local code, phrase = string.match(key, "^(.+)|(.+)$")
+            local info = parsePhraseValue(value)
+            local exist_value = db:fetch(key)
+            if exist_value then -- 跳过旧的数据
+                local exist_info = parsePhraseValue(exist_value)
+                if info.updated_at <= exist_info.updated_at then
+                    goto continue
+                end
+            end
+
+            import_count = import_count + 1
+            saveUserSegment(code, phrase, info.to_position, info.updated_at)
+        end
+
+        ::continue::
+    end
+
+    log.info(string.format("[super_sequence] 自动导入排序数据 %s 条", import_count))
+
+    file:close()
+    if import_count > 0 then
+        os.remove(sync_file_name)
+    end
+end
+
 local P = {}
-function P.init() end
+function P.init()
+    local db = getUserDB()
+    import_from_file(db)
+end
 
 -- P 阶段按键处理
 ---@param key_event KeyEvent
@@ -156,7 +239,8 @@ local F = {}
 function F.init() end
 
 function F.fini()
-    local _, db_close = getUserDB()
+    local db, db_close = getUserDB()
+    export_to_file(db)
     db_close()
 end
 
