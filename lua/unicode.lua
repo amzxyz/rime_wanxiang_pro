@@ -10,8 +10,7 @@ local function unicode(input, seg, env)
     if seg:has_tag("unicode") and env.unicode_keyword ~= '' and input:sub(1, 1) == env.unicode_keyword then
         local ucodestr = input:match(env.unicode_keyword .. "(%x+)")
         if ucodestr and #ucodestr > 1 then
-            local context = env.engine.context
-            local segment = context.composition:back()        
+            local segment = env.engine.context.composition:back()        
             -- 设置标签
             segment.tags = segment.tags + Set({ "unicode" })             
             local code = tonumber(ucodestr, 16)
