@@ -57,7 +57,7 @@ end
 ---@param code string 当前输入码
 ---@return table<string, { to_position: integer, updated_at: integer, from_position?: integer, candidate?: Candidate}> | nil
 local function get_adjustment(code)
-    if code == "" then return nil end
+    if code == "" or code == nil then return nil end
 
     local db = get_user_db()
 
@@ -82,6 +82,8 @@ end
 ---@param to_position integer | nil 目标位置，`nil` 为从数据库中移除该纪录
 ---@param timestamp? number 操作时间戳，默认去当前时间戳
 local function save_adjustment(code, adjust_key, to_position, timestamp)
+    if code == "" or code == nil then return end
+
     local db = get_user_db()
     local key = string.format("%s|%s", code, adjust_key)
 
@@ -124,9 +126,14 @@ local function save_adjustment(code, adjust_key, to_position, timestamp)
     return db:update(key, value)
 end
 
+---从 context 中获取当前排序匹配码
 ---@param context Context
 ---@return string
 local function extract_adjustment_code(context)
+    if wanxiang.is_function_mode_active(context) then
+        return context:get_property("sequence_adjustment_code") or ""
+    end
+
     return context.input:sub(1, context.caret_pos)
 end
 
@@ -262,8 +269,10 @@ function P.func(key_event, env)
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
-    if wanxiang.is_function_mode_active(context) and not segment:has_tag("shijian") then
-        log.info(string.format("[sequence] 暂不支持当前输入的手动排序"))
+    if wanxiang.is_function_mode_active(context)
+        and not context:get_property("sequence_adjustment_code")
+    then
+        log.warning(string.format("[sequence] 暂不支持当前指令的手动排序"))
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 

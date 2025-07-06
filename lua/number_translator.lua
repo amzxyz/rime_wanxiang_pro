@@ -155,6 +155,9 @@ local function number_translator(input, seg, env)
         env.engine.schema.config:get_string('recognizer/patterns/number'):sub(2, 2)
     local str, num, numberPart
     if env.number_keyword ~= '' and input:sub(1, 1) == env.number_keyword then
+        --- 设置手动排序的排序编码以支持 N 指令的手动排序
+        env.engine.context:set_property("sequence_adjustment_code", env.number_keyword)
+
         str = string.gsub(input, "^(%a+)", "")
         numberPart = number_translatorFunc(str)
         if str and #str > 0 and #numberPart > 0 then
