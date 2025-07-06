@@ -3101,6 +3101,7 @@ function T.func(input, seg, env)
 
     if startsWith(input, T.prefix) or (seg:has_tag("calculator")) then
         segment.prompt = "〔" .. T.tips .. "〕"
+        segment.tags = segment.tags + Set({ "calculator" })
         -- 提取算式
         local express = input:gsub(T.prefix, ""):gsub("^/vs", "")
         -- 算式长度 < 2 直接终止(没有计算意义)
