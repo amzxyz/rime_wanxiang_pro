@@ -310,7 +310,7 @@ local GXC_e = { 0.016708634, -0.000042037, -0.0000001267 }                      
 local GXC_p = { 102.93735 / RAD, 1.71946 / RAD, 0.00046 / RAD }                                                         -- 近点
 local GXC_l = { 280.4664567 / RAD, 36000.76982779 / RAD, 0.0003032028 / RAD, 1 / 49931000 / RAD, -1 / 153000000 / RAD } -- 太平黄经
 local GXC_k = 20.49552 /
-rad                                                                                                                     -- 光行差常数
+    rad                                                                                                                 -- 光行差常数
 function addGxc(t, zb)                                                                                                  -- 恒星周年光行差计算(黄道坐标中)
     local t1 = t / 36525
     local t2 = t1 * t1
@@ -2268,21 +2268,21 @@ end
 ---@param seg Segment
 ---@param env Env
 local function translator(input, seg, env)
-    local engine = env.engine
+    local engine  = env.engine
     local context = engine.context
     local config  = engine.schema.config
-    local segment = context.composition:back()   
+    local segment = context.composition:back()
 
     if input:sub(1, 1) == "N" then
-        --- 设置手动排序的排序编码，以启用手动排序支持
-        context:set_property("sequence_adjustment_code", "N")
-
         local n = input:sub(2)
         local yr = os.date("%Y")
         segment.tags = segment.tags + Set({ "Ndate" })
 
         -- N0101–N1231（仅月日）
         if #n == 4 and n:match("^%d%d%d%d$") then
+            --- 设置手动排序的排序编码，以启用手动排序支持
+            context:set_property("sequence_adjustment_code", "Nmmdd")
+
             local mm = tonumber(n:sub(1, 2))
             local dd = tonumber(n:sub(3, 4))
             if mm and dd and mm >= 1 and mm <= 12 and dd >= 1 and dd <= 31 then
@@ -2319,6 +2319,9 @@ local function translator(input, seg, env)
 
         -- N2025 或 N20250101 等
         if n:match("^(20)%d%d") or n:match("^(19)%d%d") then
+            --- 设置手动排序的排序编码，以启用手动排序支持
+            context:set_property("sequence_adjustment_code", "N")
+
             if #n >= 8 then
                 local yyyy = tonumber(n:sub(1, 4))
                 local mm = tonumber(n:sub(5, 6))
@@ -2368,10 +2371,10 @@ local function translator(input, seg, env)
         --- 设置手动排序的排序编码，以启用手动排序支持
         context:set_property("sequence_adjustment_code", "/rq")
 
-        local today = os.date("*t")       -- 当前时间表
-        local ymd = os.date("%Y%m%d")     -- 年月日
-        local ymdh = os.date("%Y%m%d%H")  -- 年月日时
-        local num_year = string.format("〔%03d/%d〕", today.yday, IsLeap(today.year))  -- 年内第几天/总天数
+        local today = os.date("*t") -- 当前时间表
+        local ymd = os.date("%Y%m%d") -- 年月日
+        local ymdh = os.date("%Y%m%d%H") -- 年月日时
+        local num_year = string.format("〔%03d/%d〕", today.yday, IsLeap(today.year)) -- 年内第几天/总天数
         local m = today.month
         local d = today.day
 
@@ -2400,7 +2403,7 @@ local function translator(input, seg, env)
         context:set_property("sequence_adjustment_code", "/sj")
 
         local time_discrpt = "〔" .. GetLunarSichen(os.date("%H"), 1) .. "〕"
-        local time_variants = { { os.date("%H:%M"), time_discrpt },  --同一个时间首选看到时辰即可
+        local time_variants = { { os.date("%H:%M"), time_discrpt }, --同一个时间首选看到时辰即可
             { format_Time() .. os.date("%I:%M"), "" },
             { os.date("%H:%M:%S"), "" },
             { string.gsub(os.date("%H点%M分%S秒"), "^0", ""), "" } }
@@ -2428,9 +2431,9 @@ local function translator(input, seg, env)
         local _, weekno = iso_week_number(now.year, now.month, now.day)
         local num_weekday = "〔第 " .. weekno .. " 周〕"
 
-        local week_variants = { 
+        local week_variants = {
             { chinese_weekday2(os.date("%w")), num_weekday },
-            { chinese_weekday(os.date("%w")), num_weekday } }
+            { chinese_weekday(os.date("%w")),  num_weekday } }
         generate_candidates("xq", seg, week_variants)
         return
     end
@@ -2755,7 +2758,7 @@ local function translator(input, seg, env)
         generate_candidates("day_summary", seg, candidates)
         return
     end
-    -- 取消tag 
+    -- 取消tag
     segment.tags = segment.tags - Set({ "shijian" })
 end
 return translator
