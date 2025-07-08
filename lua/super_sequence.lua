@@ -158,6 +158,13 @@ local function export_to_file(db)
 
     for key, value in da:iter() do
         local line = string.format("%s\t%s", key, value)
+        local from_user_id = string.match(line, "^" .. "\001" .. "/user_id\t(.+)")
+        if from_user_id ~= nil then
+            local fixed_user_id = wanxiang.get_user_id()
+            if fixed_user_id ~= from_user_id then
+                line = "\001" .. "/user_id\t" .. fixed_user_id
+            end
+        end
         file:write(line, "\n")
     end
     da = nil
@@ -173,7 +180,7 @@ local function import_from_file(db)
 
     local import_count = 0
 
-    local user_id = db:fetch("\001" .. "/user_id")
+    local user_id = wanxiang.get_user_id()
     local from_user_id = nil
     for line in file:lines() do
         if line == "" then goto continue end

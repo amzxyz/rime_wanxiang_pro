@@ -91,16 +91,16 @@ function wanxiang.is_function_mode_active(context)
     if not context or not context.composition or context.composition:empty() then
         return false
     end
-    
+
     local seg = context.composition:back()
     if not seg then return false end
-    
-    return seg:has_tag("number") or     -- number_translator.lua 数字金额转换 R+数字
-           seg:has_tag("unicode") or    -- unicode.lua 输出 Unicode 字符 U+小写字母或数字
-           seg:has_tag("punct") or      -- 标点符号 全角半角提示
-           seg:has_tag("calculator") or -- super_calculator.lua V键计算器
-           seg:has_tag("shijian") or    -- shijian.lua /rq /sr 等与时间日期相关功能    
-           seg:has_tag("Ndate")         -- shijian.lua N日期功能
+
+    return seg:has_tag("number") or  -- number_translator.lua 数字金额转换 R+数字
+        seg:has_tag("unicode") or    -- unicode.lua 输出 Unicode 字符 U+小写字母或数字
+        seg:has_tag("punct") or      -- 标点符号 全角半角提示
+        seg:has_tag("calculator") or -- super_calculator.lua V键计算器
+        seg:has_tag("shijian") or    -- shijian.lua /rq /sr 等与时间日期相关功能
+        seg:has_tag("Ndate")         -- shijian.lua N日期功能
 end
 
 -- 按照优先顺序加载文件：用户目录 > 系统目录
@@ -122,6 +122,33 @@ function wanxiang.load_file_with_fallback(path, mode)
     end
 
     return file, close, err
+end
+
+local USER_ID_DEFAULT = "unknown"
+---作为「小狼毫」和「仓」 `rime_api.get_user_id()` 的一个 workaround
+---详见：
+---1. https://github.com/rime/weasel/pull/1649
+---2. https://github.com/rime/librime/issues/1038
+---@return string
+function wanxiang.get_user_id()
+    local user_id = rime_api.get_user_id()
+    if user_id ~= USER_ID_DEFAULT then return user_id end
+
+    local user_data_dir = rime_api.get_user_data_dir()
+    local installation_path = user_data_dir .. "/installation.yaml"
+    local installation_file, _ = io.open(installation_path, "r")
+    if not installation_file then return user_id end
+
+    for line in installation_file:lines() do
+        local key, value = line:match('^([^#:]+):%s+"?([^"]%S+[^"])"?')
+        if key == "installation_id" then
+            user_id = value
+            break
+        end
+    end
+
+    installation_file:close()
+    return user_id
 end
 
 return wanxiang
