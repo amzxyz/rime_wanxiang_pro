@@ -14,59 +14,26 @@ declare -A display_names=(
 
 # 仓库和下载地址定义
 REPO_URL=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}
-TAG_VERSION=${GITHUB_REF#refs/tags/}
 DOWNLOAD_URL=${REPO_URL}/releases/download/${TAG_VERSION}
-VERSION="${TAG_VERSION}"
-
-# 获取上一个非 beta tag（不等于当前）
-PREVIOUS_VERSION=$(git tag --sort=-creatordate | grep -v beta | grep -v "^${VERSION}$" | head -n1)
-
-# 若找不到前一 tag，fallback 至初始提交
-if [[ -z "$PREVIOUS_VERSION" ]]; then
-  PREVIOUS_VERSION=$(git rev-list --max-parents=0 HEAD)
-fi
-
-echo "生成 Release Note，当前版本：${VERSION}，上一版本：${PREVIOUS_VERSION}"
 
 # 获取 changelog（标题相同的 commit 合并链接）
 CHANGES=$(
-  git log --pretty="%s|[#%h](${REPO_URL}/commit/%H)" "${PREVIOUS_VERSION}".."${VERSION}" |
-  awk -F'|' '
-    {
-      msg=$1
-      link=$2
-      if (msg in map) {
-        map[msg]=map[msg]", "link
-      } else {
-        order[++n]=msg
-        map[msg]=link
-      }
-    }
-    END {
-      for (i=1; i<=n; i++) {
-        print "- " order[i] " (" map[order[i]] ")"
-      }
-    }
-  '
+  gh release view --json body -t "{{.body}}" "${TAG_VERSION}" | sed '1d; /./,$!d'
 )
 
-
-echo "生成 Release Note，当前版本：${VERSION}，上一版本：${PREVIOUS_VERSION}"
-echo "$CHANGES"
-
 {
-  echo "### 📝 更新日志"
+  echo "## 📝 更新日志"
   echo ""
   echo "${CHANGES}"
   echo ""
-  echo "### 🚀 下载引导"
-  echo "#### 1. 标准版输入方案"
+  echo "## 🚀 下载引导"
+  echo "### 1. 标准版输入方案"
   echo ""
   echo "✨**适用类型：** 支持全拼、各种双拼"
   echo ""
   echo "✨**下载地址：** [rime-wanxiang-base.zip](${DOWNLOAD_URL}/rime-wanxiang-base.zip)"
   echo ""
-  echo "#### 2. 双拼辅助码增强版输入方案"
+  echo "### 2. 双拼辅助码增强版输入方案"
   echo ""
   echo "✨**适用类型：** 支持各种双拼+辅助码的自由组合"
 
@@ -76,13 +43,13 @@ echo "$CHANGES"
   done
 
   echo ""
-  echo "#### 3. 语法模型"
+  echo "### 3. 语法模型"
   echo ""
   echo "✨**适用类型：** 所有版本皆可用"
   echo ""
   echo "✨**下载地址：** [wanxiang-lts-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram)"
   echo ""
-  echo "### 📘 使用说明(QQ群：11033572 参与讨论)"
+  echo "## 📘 使用说明(QQ群：11033572 参与讨论)"
   echo ""
   echo "1. **不使用辅助码的用户：**"
   echo ""

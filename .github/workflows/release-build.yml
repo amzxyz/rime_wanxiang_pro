@@ -1,0 +1,36 @@
+name: Wanxiang Schema Builds
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      tag:
+        type: string
+
+jobs:
+  release-build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Release build
+        run: bash .github/workflows/scripts/release-build.sh
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: rime-wanxiang-dist-${{ github.ref_name }}
+          if-no-files-found: error
+          path: dist/rime-wanxiang-*.zip
