@@ -67,8 +67,11 @@ local function get_adjustment(code)
     local table = nil
     for key, value in accessor:iter() do
         if table == nil then table = {} end
-        local adjustment_key = string.match(key, "^.*|(%S+)$")
-        table[adjustment_key] = parse_adjustment_value(value)
+        local adjust_key = string.match(key, "^.*|(%S+)$")
+        local adjust_value = parse_adjustment_value(value)
+        if adjust_value.to_position > 0 then
+            table[adjust_key] = adjust_value
+        end
     end
 
     ---@diagnostic disable-next-line: cast-local-type
@@ -79,19 +82,27 @@ end
 
 ---@param code string 匹配的输入码
 ---@param adjust_key string | number 匹配键，为候选索引（命令模式），或候选词（普通模式）
----@param to_position integer | nil 目标位置，`nil` 为从数据库中移除该纪录
+---@param to_position integer `0` 为重置排序，>0 为目标位置
 ---@param timestamp? number 操作时间戳，默认去当前时间戳
 local function save_adjustment(code, adjust_key, to_position, timestamp)
     if code == "" or code == nil then return end
 
-    local db = get_user_db()
-    local key = string.format("%s|%s", code, adjust_key)
+    ---@param c string
+    ---@param ak string | number
+    local function get_db_key(c, ak)
+        if tostring(ak) == "" or c == "" then
+            return nil
+        end
+        return string.format("%s|%s", c, ak)
+    end
 
-    if to_position == nil or to_position <= 0 then
+    local key = get_db_key(code, adjust_key)
+
+    local db = get_user_db()
+    if to_position <= 0 then
         if type(adjust_key) == "number" then
             -- 遍历目标位置，去最后一个再此位置的项重置
             local user_adjustment = get_adjustment(code)
-
             if user_adjustment == nil then return false end
 
             ---@type table{key: string, updated_at: number} | nil
@@ -106,15 +117,19 @@ local function save_adjustment(code, adjust_key, to_position, timestamp)
                 end
             end
 
-            if erase_item.key ~= nil then
-                return db:erase(string.format("%s|%s", code, erase_item.key))
+            if erase_item.key == nil then
+                -- 如果没有找到对应的 key，则直接返回，正常应该不会出现这种情况
+                log.warning(string.format(
+                    "[sequence] 排序重置失败，未找到原有排序项。code: %s, adjust_key: %s, to_position: %s",
+                    code, adjust_key, to_position))
+                return false
             end
 
-            return false
-        else
-            return db:erase(key)
+            key = get_db_key(code, erase_item.key)
         end
     end
+
+    if key == nil then return false end
 
     -- 由于 lua os.time() 的精度只到秒，排序可能会引起问题
     if not timestamp then
@@ -234,7 +249,7 @@ local function process_adjustment(context)
         local adjustment_key = wanxiang.is_function_mode_active(context)
             and context.composition:back().selected_index
             or selected_cand.text
-        save_adjustment(code, adjustment_key, in_pin_mode and 1 or nil)
+        save_adjustment(code, adjustment_key, in_pin_mode and 1 or 0)
     else -- 否则进入 filter 调整位移
         cur_adjustment_phrase = selected_cand.text
     end
