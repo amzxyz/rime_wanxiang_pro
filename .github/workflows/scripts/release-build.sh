@@ -32,6 +32,7 @@ package_schema_base() {
     for item in "$ROOT_DIR"/*; do
         name="$(basename "$item")"
         if [[ "$name" =~ ^\. ]]; then continue; fi
+        if [[ "$name" == "release-please-config.json" ]]; then continue; fi
         if [[ "$name" == "pro-"*-fuzhu-dicts ]]; then continue; fi
         if [[ "$name" == "lookup" ]]; then continue; fi 
         if [[ "$name" == "wanxiang_pro.dict.yaml" || "$name" == "wanxiang_pro.schema.yaml" ]]; then continue; fi
@@ -83,6 +84,7 @@ package_schema_pro() {
     for item in "$ROOT_DIR"/*; do
         name="$(basename "$item")"
         if [[ "$name" =~ ^\. ]]; then continue; fi
+        if [[ "$name" == "release-please-config.json" ]]; then continue; fi
         if [[ "$name" == "pro-"*-fuzhu-dicts ]]; then continue; fi
         if [[ "$name" == "lookup" ]]; then continue; fi
         if [[ "$name" == "wanxiang.dict.yaml" || "$name" == "wanxiang.schema.yaml" ]]; then continue; fi
