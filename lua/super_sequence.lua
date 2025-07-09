@@ -6,21 +6,45 @@
 -- ctrl+p 置顶
 local wanxiang = require("wanxiang")
 
----@type string | nil 当前选中的键，命令模式为 0 开始的位置索引，正常模式为候选词
-local cur_adjustment_phrase = nil
+local Property = {
+    ADJUST_KEY = "sequence_adjustment_code",
+}
+---@param context Context
+function Property.get(context)
+    return context:get_property(Property.ADJUST_KEY)
+end
 
----@type integer | nil 当前高亮索引
-local cur_highlight_idx = nil
+---@param context Context
+function Property.reset(context)
+    local code = Property.get(context)
+    if code ~= nil and code ~= "" then
+        context:set_property(Property.ADJUST_KEY, "")
+    end
+end
 
----- `0`: 无调整，默认值
----- `-1`: 前移一位
----- `1`: 后移一位
----- `nil`: 重置/置顶
----@type -1 | 1 | 0 | nil
-local cur_adjust_offset = 0
+ADJUST_STATE_DEFAULT = {
+    ---@type string | nil 当前选中的键，命令模式为 0 开始的位置索引，正常模式为候选词
+    selected_phrase = nil,
+    ---@type integer 当前选中的键，命令模式为 0 开始的位置索引，正常模式为候选词
+    selected_index = 0,
+    ---- `0`: 无调整，默认值
+    ---- `-1`: 前移一位
+    ---- `1`: 后移一位
+    ---- `nil`: 重置/置顶
+    ---@type -1 | 1 | 0 | nil
+    adjust_offset = 0,
+    ---@type boolean 是否处于 pin 模式
+    in_pin_mode = false,
+    ---@type integer | nil 当前高亮索引
+    highlight_index = nil,
+}
+local AdjustState = ADJUST_STATE_DEFAULT
 
----@type boolean 是否处于 pin 模式
-local in_pin_mode = false
+function AdjustState.reset()
+    for key, value in pairs(ADJUST_STATE_DEFAULT) do
+        AdjustState[key] = value
+    end
+end
 
 local db_file_name = "lua/sequence"
 local _user_db = nil
@@ -143,10 +167,14 @@ end
 
 ---从 context 中获取当前排序匹配码
 ---@param context Context
----@return string
+---@return string | nil
 local function extract_adjustment_code(context)
     if wanxiang.is_function_mode_active(context) then
-        return context:get_property("sequence_adjustment_code") or ""
+        local code = Property.get(context)
+        if code and code ~= "" then
+            return code
+        end
+        return nil
     end
 
     return context.input:sub(1, context.caret_pos)
@@ -242,29 +270,29 @@ end
 ---@param context Context
 local function process_adjustment(context)
     local selected_cand = context:get_selected_candidate()
-
-    if cur_adjust_offset == nil then -- 如果是重置/置顶，直接设置位置
-        -- 非索引匹配的情况下，我们可以直接重置，提高效率
-        local code = extract_adjustment_code(context)
-        local adjustment_key = wanxiang.is_function_mode_active(context)
-            and context.composition:back().selected_index
-            or selected_cand.text
-        save_adjustment(code, adjustment_key, in_pin_mode and 1 or 0)
-    else -- 否则进入 filter 调整位移
-        cur_adjustment_phrase = selected_cand.text
-    end
+    AdjustState.selected_phrase = selected_cand.text
+    AdjustState.selected_index = context.composition:back().selected_index
 
     context:refresh_non_confirmed_composition()
 
-    if context.highlight and cur_highlight_idx and cur_highlight_idx > 0 then
-        context:highlight(cur_highlight_idx)
+    if context.highlight and AdjustState.highlight_index and AdjustState.highlight_index > 0 then
+        context:highlight(AdjustState.highlight_index)
     end
 
     ---重置全局状态
-    cur_adjustment_phrase = nil
-    cur_highlight_idx = nil
-    cur_adjust_offset = 0
-    in_pin_mode = false
+    AdjustState.reset()
+end
+
+---当前 context 是否允许自定义排序
+---@param context Context
+---@return boolean
+local function is_adjustment_allowed(context)
+    if wanxiang.is_function_mode_active(context) -- function mode 必须有设置 sequence_adjustment_code
+        and Property.get(context) == nil then
+        return false
+    end
+
+    return true
 end
 
 local P = {}
@@ -279,8 +307,9 @@ end
 ---@return ProcessResult
 function P.func(key_event, env)
     local context = env.engine.context
+    Property.reset(context)
+
     local selected_cand = context:get_selected_candidate()
-    local segment = context.composition:back()
 
     if not context:has_menu()
         or selected_cand == nil
@@ -291,28 +320,21 @@ function P.func(key_event, env)
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
-    if wanxiang.is_function_mode_active(context)
-        and not context:get_property("sequence_adjustment_code")
-    then
-        log.warning(string.format("[sequence] 暂不支持当前指令的手动排序"))
-        return wanxiang.RIME_PROCESS_RESULTS.kNoop
-    end
-
     -- 判断按下的键，更新偏移量
-    in_pin_mode = key_event.keycode == 0x70
+    AdjustState.in_pin_mode = key_event.keycode == 0x70
     if key_event.keycode == 0x6A then     -- 前移
-        cur_adjust_offset = -1
+        AdjustState.adjust_offset = -1
     elseif key_event.keycode == 0x6B then -- 后移
-        cur_adjust_offset = 1
+        AdjustState.adjust_offset = 1
     elseif key_event.keycode == 0x6C then -- 重置
-        cur_adjust_offset = nil
-    elseif in_pin_mode then               -- 置顶
-        cur_adjust_offset = nil
+        AdjustState.adjust_offset = nil
+    elseif AdjustState.in_pin_mode then   -- 置顶
+        AdjustState.adjust_offset = nil
     else
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
-    if cur_adjust_offset == 0 then -- 未有移动操作，不用操作
+    if AdjustState.adjust_offset == 0 then -- 未有移动操作，不用操作
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
@@ -333,20 +355,43 @@ end
 ---@param input Translation
 ---@param env Env
 function F.func(input, env)
-    local context = env.engine.context
-    local adjust_code = extract_adjustment_code(context)
-    local user_adjustment = get_adjustment(adjust_code)
+    local function original_list()
+        for cand in input:iter() do yield(cand) end
+    end
 
-    local has_unsaved_adjustment = cur_adjustment_phrase ~= nil
-        and cur_adjust_offset ~= 0
-        and cur_adjust_offset ~= nil
-        and adjust_code ~= ""
+    local context = env.engine.context
+
+    local adjustment_allowed = is_adjustment_allowed(context)
+    if not adjustment_allowed then
+        log.warning(string.format("[sequence] 暂不支持当前指令的手动排序"))
+        return original_list()
+    end
+
+    local adjust_code = extract_adjustment_code(context)
+    if adjust_code == nil then
+        return original_list()
+    end
+
+    if AdjustState.adjust_offset == nil then -- 如果是重置/置顶，直接设置位置
+        -- 非索引匹配的情况下，我们可以直接重置，提高效率
+        local adjustment_key = wanxiang.is_function_mode_active(context)
+            and AdjustState.selected_index
+            or AdjustState.selected_phrase
+        if adjustment_key ~= nil then
+            save_adjustment(adjust_code, adjustment_key, AdjustState.in_pin_mode and 1 or 0)
+        end
+    end
+
+    local has_unsaved_adjustment = AdjustState.selected_phrase ~= nil
+        and AdjustState.adjust_offset ~= 0
+        and AdjustState.adjust_offset ~= nil
+
+    local user_adjustment = get_adjustment(adjust_code)
 
     if not has_unsaved_adjustment  -- 如果当前没有排序调整
         and user_adjustment == nil -- 并且之前也没有自定义排序
     then                           -- 直接 yield 并返回
-        for cand in input:iter() do yield(cand) end
-        return
+        return original_list()
     end
 
     ---@type table<Candidate>
@@ -367,7 +412,7 @@ function F.func(input, env)
             -- 依次插入得到去重后的列表
             table.insert(candidates, cand)
 
-            if cur_adjustment_phrase == text then
+            if AdjustState.selected_phrase == text then
                 cur_candidate = cand
                 cur_raw_index = dedupe_position - 1
             end
@@ -416,14 +461,14 @@ function F.func(input, env)
         ---@type integer | nil
         local from_position = nil
         for position, cand in ipairs(candidates) do
-            if cand.text == cur_adjustment_phrase then
+            if cand.text == AdjustState.selected_phrase then
                 from_position = position
                 break
             end
         end
 
         if from_position ~= nil then
-            local to_position = from_position + cur_adjust_offset
+            local to_position = from_position + AdjustState.adjust_offset
 
             if from_position ~= to_position then
                 if to_position < 1 then
@@ -437,10 +482,10 @@ function F.func(input, env)
 
                 local adjust_key = wanxiang.is_function_mode_active(context)
                     and cur_raw_index
-                    or cur_adjustment_phrase
+                    or AdjustState.selected_phrase
                 if adjust_key then
                     save_adjustment(adjust_code, adjust_key, to_position)
-                    cur_highlight_idx = to_position - 1
+                    AdjustState.highlight_index = to_position - 1
                 end
             end
         end
