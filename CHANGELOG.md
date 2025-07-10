@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.7.1](https://github.com/amzxyz/rime_wanxiang/compare/v8.7.0...v8.7.1) (2025-07-10)
+
+
+### 🐛 Bug 修复
+
+* 预设分包方案修改 ([d7d9be7](https://github.com/amzxyz/rime_wanxiang/commit/d7d9be75a46d6f01f97583e995aca5de0dc0ff53))
+
 ## [8.7.0](https://github.com/amzxyz/rime_wanxiang/compare/v8.6.2...v8.7.0) (2025-07-10)
 
 
