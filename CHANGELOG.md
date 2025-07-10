@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.7.2](https://github.com/amzxyz/rime_wanxiang/compare/v8.7.1...v8.7.2) (2025-07-10)
+
+
+### 🐛 Bug 修复
+
+* 调整预设简码权重 ([bf9db33](https://github.com/amzxyz/rime_wanxiang/commit/bf9db33ebe75f2da4ae021c35b3a2fb6bd3ab104))
+
 ## [8.7.1](https://github.com/amzxyz/rime_wanxiang/compare/v8.7.0...v8.7.1) (2025-07-10)
 
 
