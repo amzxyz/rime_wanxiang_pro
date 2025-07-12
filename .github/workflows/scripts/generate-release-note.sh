@@ -27,6 +27,7 @@ CHANGES=$(
   echo "${CHANGES}"
   echo ""
   echo "## 🚀 下载引导"
+  echo ""
   echo "### 1. 标准版输入方案"
   echo ""
   echo "✨**适用类型：** 支持全拼、各种双拼"
@@ -66,4 +67,8 @@ CHANGES=$(
   echo "4. 💾 飞机盘下载地址（最快更新）：[点击访问](https://share.feijipan.com/s/xiGvXdKz)"
   echo ""
   echo "5. 🛠 推荐使用更新脚本优雅管理版本：[rime-wanxiang-weasel-update-tools](https://github.com/expoli/rime-wanxiang-weasel-update-tools)"
+  echo ""
+  echo "6. Arch Linux 用户推荐 [启用 Arch Linux CN 仓库](https://www.archlinuxcn.org/archlinux-cn-repo-and-mirror/) 或通过 [AUR](https://aur.archlinux.org/pkgbase/rime-wanxiang)，按需安装。"
+  echo "   - 基础版包名：\`rime-wanxiang-[拼写方案名]\`，如：自然码方案：\`rime-wanxiang-zrm\`"
+  echo "   - 双拼辅助码增强版包名：\`rime-wanxiang-pro-[拼写方案名]\`，如：自然码方案：\`rime-wanxiang-pro-zrm\`"
 } >release_notes.md
