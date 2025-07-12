@@ -1,5 +1,17 @@
 # Changelog
 
+## [8.7.4](https://github.com/amzxyz/rime_wanxiang/compare/v8.7.3...v8.7.4) (2025-07-12)
+
+
+### 📚 词库更新
+
+* 词库调整 ([1e01ec1](https://github.com/amzxyz/rime_wanxiang/commit/1e01ec100815f615d128aad98a315c4ae852bae5))
+
+
+### 📖 文档
+
+* 发行日志中加入 Arch Linux 安装小注 ([879baf4](https://github.com/amzxyz/rime_wanxiang/commit/879baf48aaea2432b927868f09062b0d05d2f49e))
+
 ## [8.7.3](https://github.com/amzxyz/rime_wanxiang/compare/v8.7.2...v8.7.3) (2025-07-11)
 
 
