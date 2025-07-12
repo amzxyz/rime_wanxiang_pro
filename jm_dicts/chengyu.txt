@@ -1,8 +1,3 @@
-# Rime table
-#@/db_name	jm_dicts/chengyu
-#@/db_type	tabledb
-#@/rime_version	1.12.0
-#@/tick	0
 傲岸不群	aabq	0
 皑皑白雪	aabx	0
 嗷嗷待哺	aadb	0

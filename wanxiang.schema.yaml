@@ -245,7 +245,7 @@ chengyu:
   db_class: stabledb
   enable_sentence: false
   enable_completion: false
-  initial_quality: 1.2
+  initial_quality: 1.3
 
 # 次翻译器，英文
 wanxiang_en:
