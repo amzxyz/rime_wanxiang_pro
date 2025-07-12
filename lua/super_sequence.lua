@@ -22,26 +22,24 @@ function Property.reset(context)
     end
 end
 
-ADJUST_STATE_DEFAULT = {
-    ---@type string | nil 当前选中的键，命令模式为 0 开始的位置索引，正常模式为候选词
+local AdjustState = {}
+AdjustState.__default = {
+    ---@type string | nil 当前选中的候选词，用户正常模式排序
     selected_phrase = nil,
-    ---@type integer 当前选中的键，命令模式为 0 开始的位置索引，正常模式为候选词
+    ---@type integer 当前选中的位置索引，用于命令模式排序
     selected_index = 0,
-    ---- `0`: 无调整，默认值
-    ---- `-1`: 前移一位
-    ---- `1`: 后移一位
-    ---- `nil`: 重置/置顶
-    ---@type -1 | 1 | 0 | nil
+    ---@type 0 | -1 | 1 | nil 手动排序的位移量。0 初始值，-1 前移，1 后移，nil 重置/置顶
     adjust_offset = 0,
     ---@type boolean 是否处于 pin 模式
     in_pin_mode = false,
-    ---@type integer | nil 当前高亮索引
+    ---@type integer | nil 当前高亮索引。nil 为初始值
     highlight_index = nil,
 }
-local AdjustState = ADJUST_STATE_DEFAULT
-
 function AdjustState.reset()
-    for key, value in pairs(ADJUST_STATE_DEFAULT) do
+    -- 如果是 nil，则已经是默认值了，不行要重置
+    if AdjustState.selected_phrase == nil then return end
+
+    for key, value in pairs(AdjustState.__default) do
         AdjustState[key] = value
     end
 end
@@ -278,9 +276,6 @@ local function process_adjustment(context)
     if context.highlight and AdjustState.highlight_index and AdjustState.highlight_index > 0 then
         context:highlight(AdjustState.highlight_index)
     end
-
-    ---重置全局状态
-    AdjustState.reset()
 end
 
 ---当前 context 是否允许自定义排序
@@ -307,7 +302,9 @@ end
 ---@return ProcessResult
 function P.func(key_event, env)
     local context = env.engine.context
+    ---重置状态
     Property.reset(context)
+    AdjustState.reset()
 
     local selected_cand = context:get_selected_candidate()
 
