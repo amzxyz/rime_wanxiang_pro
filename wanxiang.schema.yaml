@@ -244,7 +244,7 @@ chengyu:
   user_dict: jm_dicts/chengyu
   db_class: stabledb
   enable_sentence: false
-  enable_completion: false
+  enable_completion: true
   initial_quality: 1.3
 
 # 次翻译器，英文

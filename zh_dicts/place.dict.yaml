@@ -3814,6 +3814,7 @@ sort: by_weight
 大同市	dà tóng shì	450
 大同乡	dà tóng xiāng	387
 大洼区	dà wā qū	156
+大王镇	dà wáng zhèn	304
 大武口	dà wǔ kǒu	315
 大悟县	dà wù xiàn	226
 大武乡	dà wǔ xiāng	1
@@ -3844,7 +3845,6 @@ sort: by_weight
 大城镇	dài chéng zhèn	300
 大黄堡	dài huáng bǎo	175
 岱山县	dài shān xiàn	170
-大王镇	dài wáng zhèn	304
 岱岳区	dài yuè qū	174
 丹巴县	dān bā xiàn	188
 丹北镇	dān běi zhèn	100
@@ -14568,8 +14568,17 @@ sort: by_weight
 大湾沟村	dà wān gōu cūn	1
 大湾罗乡	dà wān luó xiāng	58
 大湾子村	dà wān zi cūn	57
+大王店镇	dà wáng diàn zhèn	225
+大王府村	dà wáng fǔ cūn	1
+大王古庄	dà wáng gǔ zhuāng	168
+大王集村	dà wáng jí cūn	1
+大王里村	dà wáng lǐ cūn	1
 大旺务村	dà wàng wù cūn	300
+大王寨乡	dà wáng zhài xiāng	1
+大王庄村	dà wáng zhuāng cūn	173
 大旺庄村	dà wàng zhuāng cūn	35
+大王庄乡	dà wáng zhuāng xiāng	116
+大王庄镇	dà wáng zhuāng zhèn	199
 大圩古镇	dà wéi gǔ zhèn	363
 大魏家村	dà wèi jiā cūn	1
 大围山镇	dà wéi shān zhèn	299
@@ -14819,15 +14828,6 @@ sort: by_weight
 埭头蔡村	dài tóu cài cūn	1
 代瓦尼乡	dài wǎ ní xiāng	1
 代王城镇	dài wáng chéng zhèn	142
-大王店镇	dài wáng diàn zhèn	225
-大王府村	dài wáng fǔ cūn	1
-大王古庄	dài wáng gǔ zhuāng	168
-大王集村	dài wáng jí cūn	1
-大王里村	dài wáng lǐ cūn	1
-大王寨乡	dài wáng zhài xiāng	1
-大王庄村	dài wáng zhuāng cūn	173
-大王庄乡	dài wáng zhuāng xiāng	116
-大王庄镇	dài wáng zhuāng zhèn	199
 岱武岔村	dài wǔ chà cūn	1
 岱峡河村	dài xiá hé cūn	1
 呆鹰岭镇	dāi yīng lǐng zhèn	156
