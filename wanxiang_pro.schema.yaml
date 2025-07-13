@@ -109,7 +109,6 @@ engine:
     - lua_translator@*super_calculator     #超级计算器，Lua内查看高级用法
     - lua_translator@*input_statistics     #一个输入统计的脚本，以日、周、月、年等维度的统计
     - table_translator@custom_phrase       #自定义短语 custom_phrase.txt，用于置顶自定义编码候选词
-    - table_translator@generic             #简码通用词汇表导入
     - table_translator@chengyu             #简码成语词汇表导入
     - table_translator@wanxiang_en         #挂接英文输入，参与中英混输
     - table_translator@cn_en               #中英混合词汇表导入
@@ -237,16 +236,6 @@ custom_phrase:
   enable_completion: false # 补全提示
   enable_sentence: false   # 禁止造句
   initial_quality: 99      # custom_phrase 的权重应该比 pinyin 和 wanxiang_en 大
-
-# 通用简码词库导入位于jm_dicts得generic.txt文件词库
-generic:
-  dictionary: ""
-  user_dict: jm_dicts/generic
-  db_class: stabledb
-  enable_sentence: false
-  enable_completion: false
-  initial_quality: 3.5
-
 
 # 简码词库导入位于jm_dicts得txt文件词库
 chengyu:
