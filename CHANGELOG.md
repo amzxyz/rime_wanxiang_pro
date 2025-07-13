@@ -1,5 +1,20 @@
 # Changelog
 
+## [8.7.6](https://github.com/amzxyz/rime_wanxiang/compare/v8.7.5...v8.7.6) (2025-07-13)
+
+
+### 📚 词库更新
+
+* 词库调整 ([adf742a](https://github.com/amzxyz/rime_wanxiang/commit/adf742aa0c81938c1159eeadfcb4b50f1429a5ce))
+* 词库调整 ([1799f73](https://github.com/amzxyz/rime_wanxiang/commit/1799f73f16f432093a4d566757ffea1cca650b94))
+* 词库调整 ([f100496](https://github.com/amzxyz/rime_wanxiang/commit/f1004960ddfab7422b8c11ec18116881ada98760))
+
+
+### 🐛 Bug 修复
+
+* **lua:** 手动排序后会产生大量无效排序记录的问题 ([69fa3d0](https://github.com/amzxyz/rime_wanxiang/commit/69fa3d0069b77ccb242dfc2f183c4eb9e4b0b261))
+* 字符集过滤增加符号tag豁免 ([b3d0264](https://github.com/amzxyz/rime_wanxiang/commit/b3d0264871e47113e161d3afd3c2fe1d125a7f36))
+
 ## [8.7.5](https://github.com/amzxyz/rime_wanxiang/compare/v8.7.4...v8.7.5) (2025-07-12)
 
 
