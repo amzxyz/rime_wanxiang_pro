@@ -1,5 +1,24 @@
 # Changelog
 
+## [8.8.0](https://github.com/amzxyz/rime_wanxiang/compare/v8.7.7...v8.8.0) (2025-07-14)
+
+
+### ✨ 新特性
+
+* 新增三伏天运算，随/day展示 ([ae1ea4e](https://github.com/amzxyz/rime_wanxiang/commit/ae1ea4e5b5d93204bb98d2b7bf24b4117b843b31))
+
+
+### 📚 词库更新
+
+* 精简词库 ([29981ec](https://github.com/amzxyz/rime_wanxiang/commit/29981ec946f3604738ff42d3bb4a389c044f2815))
+* 词库调整 ([c47b395](https://github.com/amzxyz/rime_wanxiang/commit/c47b39546eddfba8d21959113812033b4f4d9547))
+
+
+### 🐛 Bug 修复
+
+* **lua:** 手动排序使用偏移量排序 ([7b254d0](https://github.com/amzxyz/rime_wanxiang/commit/7b254d01eedbf6d1aae4199f42ca55111445b28a))
+* 删除预设简码 ([c611a5f](https://github.com/amzxyz/rime_wanxiang/commit/c611a5f917f8e472caef7801d3f41f1765e8f354))
+
 ## [8.7.7](https://github.com/amzxyz/rime_wanxiang/compare/v8.7.6...v8.7.7) (2025-07-13)
 
 
