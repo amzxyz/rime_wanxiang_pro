@@ -22,26 +22,51 @@ function Property.reset(context)
     end
 end
 
-local AdjustState = {}
-AdjustState.__default = {
+local CurrentState = {}
+---@enum AdjustStateMode
+CurrentState.ADJUST_MODE = {
+    None = -1,
+    Reset = 0,
+    Pin = 1,
+    Adjust = 2
+}
+CurrentState.default = {
     ---@type string | nil 当前选中的候选词，用户正常模式排序
     selected_phrase = nil,
     ---@type integer 当前选中的位置索引，用于命令模式排序
-    selected_index = 0,
-    ---@type 0 | -1 | 1 | nil 手动排序的位移量。0 初始值，-1 前移，1 后移，nil 重置/置顶
-    adjust_offset = 0,
-    ---@type boolean 是否处于 pin 模式
-    in_pin_mode = false,
+    offset = 0,
+    ---@type AdjustStateMode 当前调整模式
+    mode = CurrentState.ADJUST_MODE.None,
     ---@type integer | nil 当前高亮索引。nil 为初始值
     highlight_index = nil,
+    ---@type string | nil 当前的 adjust_code
+    adjust_code = nil,
+    ---@type string | integer | nil 当前的 adjust_key
+    adjust_key = nil,
 }
-function AdjustState.reset()
+function CurrentState.reset()
     -- 如果是 nil，则已经是默认值了，不行要重置
-    if AdjustState.selected_phrase == nil then return end
+    if CurrentState.selected_phrase == nil then return end
 
-    for key, value in pairs(AdjustState.__default) do
-        AdjustState[key] = value
+    for key, value in pairs(CurrentState.default) do
+        CurrentState[key] = value
     end
+end
+
+function CurrentState.is_pin_mode()
+    return CurrentState.mode == CurrentState.ADJUST_MODE.Pin
+end
+
+function CurrentState.is_reset_mode()
+    return CurrentState.mode == CurrentState.ADJUST_MODE.Reset
+end
+
+function CurrentState.is_adjust_mode()
+    return CurrentState.mode == CurrentState.ADJUST_MODE.Adjust
+end
+
+function CurrentState.has_adjustment()
+    return CurrentState.mode ~= CurrentState.ADJUST_MODE.None
 end
 
 local db_file_name = "lua/sequence"
@@ -65,20 +90,30 @@ local function get_user_db()
 end
 
 ---@param value string LevelDB 中序列化的值
----@return { to_position: integer, updated_at: integer }
+---@return { fixed_position: integer, offset: integer, updated_at: integer }
 local function parse_adjustment_value(value)
     local result = {}
 
-    local match = value:gmatch("[-.%d]+")
-    result.to_position = tonumber(match());
-    result.updated_at = tonumber(match());
+    local fixed_position, offset, updated_at = value:match("([-%d]+),?([-%d]*)\t([.%d]+)")
+    result.fixed_position = tonumber(fixed_position);
+    result.offset = offset and tonumber(offset) or 0;
+    result.updated_at = tonumber(updated_at);
 
     return result
 end
 
+---@param code string
+---@param adjust_key string | number
+local function get_adjust_db_key(code, adjust_key)
+    if tostring(adjust_key) == "" or code == "" then
+        return nil
+    end
+    return string.format("%s|%s", code, adjust_key)
+end
+
 ---@param code string 当前输入码
----@return table<string, { to_position: integer, updated_at: integer, from_position?: integer, candidate?: Candidate}> | nil
-local function get_adjustment(code)
+---@return table<string, { fixed_position: integer, offset: integer, updated_at: integer, raw_position?: integer }> | nil
+local function get_adjustments(code)
     if code == "" or code == nil then return nil end
 
     local db = get_user_db()
@@ -91,8 +126,10 @@ local function get_adjustment(code)
         if table == nil then table = {} end
         local adjust_key = string.match(key, "^.*|(%S+)$")
         local adjust_value = parse_adjustment_value(value)
-        if adjust_value.to_position > 0 then
+        -- 忽略为 0 的位置，0 位置代表重置
+        if adjust_value.fixed_position > 0 then
             table[adjust_key] = adjust_value
+            -- log.warning(string.format("[sequence] %s: %s", adjust_key, value))
         end
     end
 
@@ -102,64 +139,31 @@ local function get_adjustment(code)
     return table
 end
 
+local function get_timestamp()
+    return rime_api.get_time_ms
+        and os.time() + tonumber(string.format("0.%s", rime_api.get_time_ms()))
+        or os.time()
+end
+
 ---@param code string 匹配的输入码
 ---@param adjust_key string | number 匹配键，为候选索引（命令模式），或候选词（普通模式）
----@param to_position integer `0` 为重置排序，>0 为目标位置
+---@param fixed_position integer `0` 为重置排序，>0 为目标位置
+---@param offset? integer | nil
 ---@param timestamp? number 操作时间戳，默认去当前时间戳
-local function save_adjustment(code, adjust_key, to_position, timestamp)
+local function save_adjustment(code, adjust_key, fixed_position, offset, timestamp)
     if code == "" or code == nil then return end
 
-    ---@param c string
-    ---@param ak string | number
-    local function get_db_key(c, ak)
-        if tostring(ak) == "" or c == "" then
-            return nil
-        end
-        return string.format("%s|%s", c, ak)
-    end
-
-    local key = get_db_key(code, adjust_key)
-
+    local key = get_adjust_db_key(code, adjust_key)
     local db = get_user_db()
-    if to_position <= 0 then
-        if type(adjust_key) == "number" then
-            -- 遍历目标位置，去最后一个再此位置的项重置
-            local user_adjustment = get_adjustment(code)
-            if user_adjustment == nil then return false end
-
-            ---@type table{key: string, updated_at: number} | nil
-            local erase_item = {}
-            for db_key, db_value in pairs(user_adjustment) do
-                if adjust_key + 1 == db_value.to_position
-                    and (erase_item.updated_at == nil
-                        or erase_item.updated_at < db_value.updated_at)
-                then
-                    erase_item.key = db_key
-                    erase_item.updated_at = db_value.updated_at
-                end
-            end
-
-            if erase_item.key == nil then
-                -- 如果没有找到对应的 key，则直接返回，正常应该不会出现这种情况
-                log.warning(string.format(
-                    "[sequence] 排序重置失败，未找到原有排序项。code: %s, adjust_key: %s, to_position: %s",
-                    code, adjust_key, to_position))
-                return false
-            end
-
-            key = get_db_key(code, erase_item.key)
-        end
-    end
-
     if key == nil then return false end
 
     -- 由于 lua os.time() 的精度只到秒，排序可能会引起问题
     if not timestamp then
-        timestamp = rime_api.get_time_ms
-            and os.time() + tonumber(string.format("0.%s", rime_api.get_time_ms()))
-            or os.time()
+        timestamp = get_timestamp()
     end
-    local value = string.format("%s\t%s", to_position, timestamp)
+
+    local value = string.format("%s,%s\t%s", fixed_position, offset or 0, timestamp)
+    -- log.warning(string.format("[sequence/save_adjustment] %s: %s", key, value, fixed_position))
     return db:update(key, value)
 end
 
@@ -250,7 +254,7 @@ local function import_from_file(db)
             end
 
             import_count = import_count + 1
-            save_adjustment(code, phrase, info.to_position, info.updated_at)
+            save_adjustment(code, phrase, info.fixed_position, info.offset, info.updated_at)
         end
 
         ::continue::
@@ -268,13 +272,14 @@ end
 ---@param context Context
 local function process_adjustment(context)
     local selected_cand = context:get_selected_candidate()
-    AdjustState.selected_phrase = selected_cand.text
-    AdjustState.selected_index = context.composition:back().selected_index
+    CurrentState.selected_phrase = selected_cand.text
 
     context:refresh_non_confirmed_composition()
 
-    if context.highlight and AdjustState.highlight_index and AdjustState.highlight_index > 0 then
-        context:highlight(AdjustState.highlight_index)
+    if context.highlight
+        and CurrentState.highlight_index
+        and CurrentState.highlight_index > 0 then
+        context:highlight(CurrentState.highlight_index)
     end
 end
 
@@ -304,7 +309,7 @@ function P.func(key_event, env)
     local context = env.engine.context
     ---重置状态
     Property.reset(context)
-    AdjustState.reset()
+    CurrentState.reset()
 
     local selected_cand = context:get_selected_candidate()
 
@@ -318,20 +323,19 @@ function P.func(key_event, env)
     end
 
     -- 判断按下的键，更新偏移量
-    AdjustState.in_pin_mode = key_event.keycode == 0x70
-    if key_event.keycode == 0x6A then     -- 前移
-        AdjustState.adjust_offset = -1
+    if key_event.keycode == 0x6A then -- 前移
+        CurrentState.offset = -1
+        CurrentState.mode = CurrentState.ADJUST_MODE.Adjust
     elseif key_event.keycode == 0x6B then -- 后移
-        AdjustState.adjust_offset = 1
+        CurrentState.offset = 1
+        CurrentState.mode = CurrentState.ADJUST_MODE.Adjust
     elseif key_event.keycode == 0x6C then -- 重置
-        AdjustState.adjust_offset = nil
-    elseif AdjustState.in_pin_mode then   -- 置顶
-        AdjustState.adjust_offset = nil
+        CurrentState.offset = nil
+        CurrentState.mode = CurrentState.ADJUST_MODE.Reset
+    elseif key_event.keycode == 0x70 then -- 置顶
+        CurrentState.offset = nil
+        CurrentState.mode = CurrentState.ADJUST_MODE.Pin
     else
-        return wanxiang.RIME_PROCESS_RESULTS.kNoop
-    end
-
-    if AdjustState.adjust_offset == 0 then -- 未有移动操作，不用操作
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
@@ -347,6 +351,92 @@ function F.fini()
     local db, db_close = get_user_db()
     export_to_file(db)
     db_close()
+end
+
+---应用之前的调整
+---@param candidates table<Candidate>
+---@param prev_adjustments table
+local function apply_prev_adjustment(candidates, prev_adjustments)
+    -- 获取当前输入码的自定义排序项数组，并按操作时间从前到后手动排序
+    local user_adjustment_list = {}
+    for _, info in pairs(prev_adjustments) do
+        if info.raw_position then
+            info.from_position = info.raw_position -- from_position 用于动态排序
+            table.insert(user_adjustment_list, info)
+        end
+    end
+    table.sort(user_adjustment_list, function(a, b) return a.updated_at < b.updated_at end)
+
+    -- 恢复至上次调整状态
+    for _, record in ipairs(user_adjustment_list) do
+        local from_position = record.from_position
+
+        if from_position == nil or record.fixed_position <= 0 then
+            goto continue_restore
+        end
+
+        local to_position = record.offset == 0
+            and record.fixed_position
+            or record.raw_position + record.offset
+
+        if from_position == to_position then
+            goto continue_restore
+        end
+
+        local candidate = table.remove(candidates, from_position)
+        table.insert(candidates, to_position, candidate)
+        -- log.warning(string.format("[sequence] %s: %s -> %s", candidate.text, from_position, to_position))
+
+        -- 修正由于移位导致的 from_position 变动
+        for idx, r in ipairs(user_adjustment_list) do
+            local min_position = math.min(from_position, to_position)
+            local max_position = math.max(from_position, to_position)
+            if min_position <= r.from_position and r.from_position <= max_position then
+                local offset = to_position < from_position and 1 or -1
+                user_adjustment_list[idx].from_position = r.from_position + offset
+            end
+        end
+        ::continue_restore::
+    end
+end
+
+local function apply_curr_adjustment(candidates, curr_adjustment)
+    if curr_adjustment == nil then return end
+
+    ---@type integer | nil
+    local from_position = nil
+    for position, cand in ipairs(candidates) do
+        if cand.text == CurrentState.selected_phrase then
+            from_position = position
+            break
+        end
+    end
+
+    if from_position == nil then return end
+
+    local to_position = from_position
+    if CurrentState.is_adjust_mode() then
+        to_position = from_position + CurrentState.offset
+        curr_adjustment.offset = to_position - curr_adjustment.raw_position
+        curr_adjustment.fixed_position = to_position
+
+        local min_position, max_position = 1, #candidates
+        if from_position ~= to_position then
+            if to_position < min_position then
+                to_position = min_position
+            elseif to_position > max_position then
+                to_position = max_position
+            end
+
+            local candidate = table.remove(candidates, from_position)
+            table.insert(candidates, to_position, candidate)
+
+            save_adjustment(CurrentState.adjust_code, CurrentState.adjust_key,
+                curr_adjustment.fixed_position, curr_adjustment.offset, curr_adjustment.updated_at)
+        end
+    end
+
+    CurrentState.highlight_index = to_position - 1
 end
 
 ---@param input Translation
@@ -369,124 +459,75 @@ function F.func(input, env)
         return original_list()
     end
 
-    if AdjustState.adjust_offset == nil then -- 如果是重置/置顶，直接设置位置
-        -- 非索引匹配的情况下，我们可以直接重置，提高效率
-        local adjustment_key = wanxiang.is_function_mode_active(context)
-            and AdjustState.selected_index
-            or AdjustState.selected_phrase
-        if adjustment_key ~= nil then
-            save_adjustment(adjust_code, adjustment_key, AdjustState.in_pin_mode and 1 or 0)
-        end
+    local prev_adjustments = get_adjustments(adjust_code)
+
+    local curr_adjustment = nil
+    if CurrentState.has_adjustment() then
+        curr_adjustment = {
+            updated_at = get_timestamp(),
+        }
     end
 
-    local has_unsaved_adjustment = AdjustState.selected_phrase ~= nil
-        and AdjustState.adjust_offset ~= 0
-        and AdjustState.adjust_offset ~= nil
-
-    local user_adjustment = get_adjustment(adjust_code)
-
-    if not has_unsaved_adjustment  -- 如果当前没有排序调整
-        and user_adjustment == nil -- 并且之前也没有自定义排序
-    then                           -- 直接 yield 并返回
+    if curr_adjustment == nil       -- 如果当前没有排序调整
+        and prev_adjustments == nil -- 并且之前也没有自定义排序
+    then                            -- 直接 yield 并返回
         return original_list()
     end
 
+    --- 原始候选去重，并获取原始位置信息和 adjust_key & adjust_code
     ---@type table<Candidate>
-    local candidates = {}     -- 去重排序后的候选列表
-
-    local phrase_count = {}   -- 用于去重
-    local dedupe_position = 1 -- 记录去重会的当前索引位置
-    local cur_candidate = nil
-    local cur_raw_index = nil
-
+    local candidates = {}  -- 去重排序后的候选列表
+    local hash_phrase = {} -- 用于去重
     local is_function_mode_active = wanxiang.is_function_mode_active(context)
-    for cand in input:iter() do
-        local text = cand.text
+    for candidate in input:iter() do
+        local phrase = candidate.text
+        if not hash_phrase[phrase] then
+            hash_phrase[phrase] = true
 
-        phrase_count[text] = (phrase_count[text] or 0) + 1
-
-        if phrase_count[text] == 1 then -- 都需要去重
             -- 依次插入得到去重后的列表
-            table.insert(candidates, cand)
+            local position = #candidates + 1
+            candidates[position] = candidate
 
-            if AdjustState.selected_phrase == text then
-                cur_candidate = cand
-                cur_raw_index = dedupe_position - 1
+            local curr_key = is_function_mode_active
+                and position - 1 -- function mode 使用索引模式
+                or phrase
+            local curr_key_str = tostring(curr_key)
+
+            if curr_adjustment ~= nil and CurrentState.selected_phrase == phrase then
+                CurrentState.adjust_code = adjust_code
+                CurrentState.adjust_key = curr_key
+
+                curr_adjustment.raw_position = position
             end
 
-            local user_adjustment_key = is_function_mode_active and tostring(dedupe_position - 1) or text
-            if user_adjustment and user_adjustment[user_adjustment_key] ~= nil then
-                user_adjustment[user_adjustment_key].candidate = cand
-                user_adjustment[user_adjustment_key].from_position = dedupe_position
-            end
-
-            dedupe_position = dedupe_position + 1
-        end
-    end
-
-    -- 获取当前输入码的自定义排序项数组，并按操作时间从前到后手动排序
-    local user_adjustment_list = {}
-    if user_adjustment ~= nil then
-        for _, info in pairs(user_adjustment) do
-            if info.candidate then
-                table.insert(user_adjustment_list, info)
-            end
-        end
-        table.sort(user_adjustment_list, function(a, b) return a.updated_at < b.updated_at end)
-
-        -- 恢复至上次调整状态
-        for _, record in ipairs(user_adjustment_list) do
-            if record.from_position ~= record.to_position then
-                local from_position, to_position = record.from_position, record.to_position
-                table.remove(candidates, from_position)
-                table.insert(candidates, to_position, record.candidate)
-                -- 修正由于移位导致的 from_position 变动
-                for idx, r in ipairs(user_adjustment_list) do
-                    local is_move_top = to_position < from_position
-                    local min_position = is_move_top and to_position or from_position
-                    local max_position = is_move_top and from_position or to_position
-                    if min_position <= r.from_position and r.from_position <= max_position then
-                        user_adjustment_list[idx].from_position = r.from_position + (is_move_top and 1 or -1)
-                    end
-                end
+            if prev_adjustments and prev_adjustments[curr_key_str] ~= nil then
+                prev_adjustments[curr_key_str].raw_position = position -- raw_position 记录原始顺序
             end
         end
     end
 
-    -- 应用当前调整
-    if has_unsaved_adjustment then
-        ---@type integer | nil
-        local from_position = nil
-        for position, cand in ipairs(candidates) do
-            if cand.text == AdjustState.selected_phrase then
-                from_position = position
-                break
-            end
+    prev_adjustments = prev_adjustments or {}
+
+    -- 提前处理置顶/重置操作，以简化逻辑
+    if curr_adjustment ~= nil and not CurrentState.is_adjust_mode() then
+        curr_adjustment.offset = 0
+
+        local key = tostring(CurrentState.adjust_key)
+        if CurrentState.is_reset_mode() then -- reset mode 提前清空之前的旧数据
+            curr_adjustment.fixed_position = 0
+            prev_adjustments[key] = nil
+        elseif CurrentState.is_pin_mode() then
+            curr_adjustment.fixed_position = 1
+            prev_adjustments[key] = curr_adjustment
         end
 
-        if from_position ~= nil then
-            local to_position = from_position + AdjustState.adjust_offset
-
-            if from_position ~= to_position then
-                if to_position < 1 then
-                    to_position = 1
-                elseif to_position > #candidates then
-                    to_position = #candidates
-                end
-
-                table.remove(candidates, from_position)
-                table.insert(candidates, to_position, cur_candidate)
-
-                local adjust_key = wanxiang.is_function_mode_active(context)
-                    and cur_raw_index
-                    or AdjustState.selected_phrase
-                if adjust_key then
-                    save_adjustment(adjust_code, adjust_key, to_position)
-                    AdjustState.highlight_index = to_position - 1
-                end
-            end
-        end
+        save_adjustment(CurrentState.adjust_code, CurrentState.adjust_key,
+            curr_adjustment.fixed_position, curr_adjustment.offset, curr_adjustment.updated_at)
     end
+
+    apply_prev_adjustment(candidates, prev_adjustments)
+
+    apply_curr_adjustment(candidates, curr_adjustment)
 
     -- 输出最终结果
     for _, cand in ipairs(candidates) do
