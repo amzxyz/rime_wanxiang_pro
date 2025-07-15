@@ -46,7 +46,7 @@ CurrentState.default = {
 }
 function CurrentState.reset()
     -- 如果是 nil，则已经是默认值了，不行要重置
-    if CurrentState.selected_phrase == nil then return end
+    if not CurrentState.has_adjustment() then return end
 
     for key, value in pairs(CurrentState.default) do
         CurrentState[key] = value
@@ -89,55 +89,43 @@ local function get_user_db()
     return _user_db, close
 end
 
----@param value string LevelDB 中序列化的值
----@return { fixed_position: integer, offset: integer, updated_at: integer }
-local function parse_adjustment_value(value)
-    local result = {}
-
-    local fixed_position, offset, updated_at = value:match("([-%d]+),?([-%d]*)\t([.%d]+)")
-    result.fixed_position = tonumber(fixed_position);
-    result.offset = offset and tonumber(offset) or 0;
-    result.updated_at = tonumber(updated_at);
-
-    return result
-end
-
----@param code string
----@param adjust_key string | number
-local function get_adjust_db_key(code, adjust_key)
-    if tostring(adjust_key) == "" or code == "" then
-        return nil
-    end
-    return string.format("%s|%s", code, adjust_key)
-end
-
----@param code string 当前输入码
+local adjustments_cache = {
+    key = nil,
+    value = nil,
+}
+---@param input string 当前输入码
 ---@return table<string, { fixed_position: integer, offset: integer, updated_at: integer, raw_position?: integer }> | nil
-local function get_adjustments(code)
-    if code == "" or code == nil then return nil end
+local function get_adjustments(input)
+    if adjustments_cache.key == input then return adjustments_cache.value end
+
+    if input == "" or input == nil then return nil end
 
     local db = get_user_db()
-
-    local accessor = db:query(code .. "|")
-    if accessor == nil then return nil end
+    local value_str = db:fetch(input)
+    if value_str == nil then return nil end
 
     local adjustment = nil
-    for key, value in accessor:iter() do
+    for value in value_str:gmatch("[^\t]+") do
         if adjustment == nil then adjustment = {} end
 
-        local adjust_key = string.match(key, "^.*|(%S+)$")
-        local adjust_value = parse_adjustment_value(value)
+        local item, fixed_position, offset, updated_at = value:match("i=(%S+) p=(%S+) o=(%S+) t=(%S+)")
+        fixed_position = fixed_position and tonumber(fixed_position)
+        offset = offset and tonumber(offset)
+        updated_at = updated_at and tonumber(updated_at)
         -- 忽略为 0 的位置，0 位置代表重置
-        if adjust_value.fixed_position > 0 then
-            adjustment[adjust_key] = adjust_value
+        if fixed_position > 0 then
+            adjustment[item] = {
+                fixed_position = fixed_position,
+                offset = offset,
+                updated_at = updated_at,
+            }
             -- log.warning(string.format("[sequence] %s: %s", adjust_key, value))
         end
     end
 
-    ---@diagnostic disable-next-line: cast-local-type
-    accessor = nil
+    adjustments_cache.value = adjustment
 
-    return adjustment
+    return adjustments_cache.value
 end
 
 local function get_timestamp()
@@ -146,27 +134,35 @@ local function get_timestamp()
         or os.time()
 end
 
----@param code string 匹配的输入码
----@param adjust_key string | number 匹配键，为候选索引（命令模式），或候选词（普通模式）
+---@param input string 匹配的输入码
+---@param item string 调整项：命令模式为候选索引，其他为候选词
 ---@param fixed_position integer `0` 为重置排序，>0 为目标位置
 ---@param offset? integer | nil
----@param timestamp? number 操作时间戳，默认去当前时间戳
-local function save_adjustment(code, adjust_key, fixed_position, offset, timestamp)
-    if code == "" or code == nil then return end
+---@param updated_at? number 操作时间戳，默认去当前时间戳
+local function save_adjustment(input, item, fixed_position, offset, updated_at)
+    if input == "" or input == nil then return end
 
-    local key = get_adjust_db_key(code, adjust_key)
-    if key == nil then return false end
+    local adjustments = get_adjustments(input) or {}
 
-    local db = get_user_db()
+    adjustments[item] = {
+        fixed_position = fixed_position,
+        offset = offset or 0,
+        updated_at = updated_at or get_timestamp(), -- 由于 lua os.time() 的精度只到秒，排序可能会引起问题
+    }
 
-    -- 由于 lua os.time() 的精度只到秒，排序可能会引起问题
-    if not timestamp then
-        timestamp = get_timestamp()
+    local values = {}
+    for key, value in pairs(adjustments) do
+        local value_str = string.format("i=%s p=%s o=%s t=%s", key, value.fixed_position, value.offset, value.updated_at)
+        table.insert(values, value_str)
     end
 
-    local value = string.format("%s,%s\t%s", fixed_position, offset or 0, timestamp)
-    -- log.warning(string.format("[sequence/save_adjustment] %s: %s", key, value, fixed_position))
-    return db:update(key, value)
+    if adjustments_cache.key == input then
+        adjustments_cache.key = nil
+        adjustments_cache.value = nil
+    end
+
+    local db = get_user_db()
+    return db:update(input, table.concat(values, "\t"))
 end
 
 ---从 context 中获取当前排序匹配码
@@ -226,52 +222,52 @@ local function export_to_file(db)
 end
 
 local function import_from_file(db)
-    local file = io.open(sync_file_name, "r")
-    if not file then return end;
+    -- local file = io.open(sync_file_name, "r")
+    -- if not file then return end;
 
-    local import_count = 0
+    -- local import_count = 0
 
-    local user_id = wanxiang.get_user_id()
-    local from_user_id = nil
-    for line in file:lines() do
-        if line == "" then goto continue end
-        -- 先找 from_user_id
-        if from_user_id == nil then
-            from_user_id = string.match(line, "^" .. "\001" .. "/user_id\t(.+)")
-            goto continue
-        end
-        -- 如果 user_id 一致，则不进行同步
-        if from_user_id == user_id then break end
-        -- 忽略开头是 "\001/" 开头
-        if line:sub(1, 2) == "\001" .. "/" then goto continue end
+    -- local user_id = wanxiang.get_user_id()
+    -- local from_user_id = nil
+    -- for line in file:lines() do
+    --     if line == "" then goto continue end
+    --     -- 先找 from_user_id
+    --     if from_user_id == nil then
+    --         from_user_id = string.match(line, "^" .. "\001" .. "/user_id\t(.+)")
+    --         goto continue
+    --     end
+    --     -- 如果 user_id 一致，则不进行同步
+    --     if from_user_id == user_id then break end
+    --     -- 忽略开头是 "\001/" 开头
+    --     if line:sub(1, 2) == "\001" .. "/" then goto continue end
 
-        -- 以下开始处理输入
-        local key, value = string.match(line, "^(.-)\t(.+)$")
+    --     -- 以下开始处理输入
+    --     local key, value = string.match(line, "^(.-)\t(.+)$")
 
-        if key and value then
-            local code, phrase = string.match(key, "^(.+)|(.+)$")
-            local info = parse_adjustment_value(value)
-            local exist_value = db:fetch(key)
-            if exist_value then -- 跳过旧的数据
-                local exist_info = parse_adjustment_value(exist_value)
-                if info.updated_at <= exist_info.updated_at then
-                    goto continue
-                end
-            end
+    --     if key and value then
+    --         local code, phrase = string.match(key, "^(.+)|(.+)$")
+    --         local info = parse_adjustment_value(value)
+    --         local exist_value = db:fetch(key)
+    --         if exist_value then -- 跳过旧的数据
+    --             local exist_info = parse_adjustment_value(exist_value)
+    --             if info.updated_at <= exist_info.updated_at then
+    --                 goto continue
+    --             end
+    --         end
 
-            import_count = import_count + 1
-            save_adjustment(code, phrase, info.fixed_position, info.offset, info.updated_at)
-        end
+    --         import_count = import_count + 1
+    --         save_adjustment(code, phrase, info.fixed_position, info.offset, info.updated_at)
+    --     end
 
-        ::continue::
-    end
+    --     ::continue::
+    -- end
 
-    log.info(string.format("[super_sequence] 自动导入排序数据 %s 条", import_count))
+    -- log.info(string.format("[super_sequence] 自动导入排序数据 %s 条", import_count))
 
-    file:close()
-    if import_count > 0 then
-        os.remove(sync_file_name)
-    end
+    -- file:close()
+    -- if import_count > 0 then
+    --     os.remove(sync_file_name)
+    -- end
 end
 
 ---执行排序调整
@@ -501,9 +497,8 @@ function F.func(input, env)
             table.insert(candidates, candidate)
 
             local curr_key = is_function_mode_active
-                and position - 1 -- function mode 使用索引模式
+                and tostring(position - 1) -- function mode 使用索引模式
                 or phrase
-            local curr_key_str = tostring(curr_key)
 
             if curr_adjustment ~= nil and CurrentState.selected_phrase == phrase then
                 CurrentState.adjust_code = adjust_code
@@ -512,8 +507,8 @@ function F.func(input, env)
                 curr_adjustment.raw_position = position
             end
 
-            if prev_adjustments and prev_adjustments[curr_key_str] ~= nil then
-                prev_adjustments[curr_key_str].raw_position = position -- raw_position 记录原始顺序
+            if prev_adjustments and prev_adjustments[curr_key] ~= nil then
+                prev_adjustments[curr_key].raw_position = position -- raw_position 记录原始顺序
             end
         end
     end
