@@ -51,18 +51,23 @@ local function ensure_dir_exist(dir)
     end
 end
 
+---@return table<string>
 local function sync_tips_db_from_file(db, path)
+    local keys = {}
+
     local file = io.open(path, "r")
-    if not file then return end
+    if not file then return keys end
 
     for line in file:lines() do
         local value, key = line:match("([^\t]+)\t([^\t]+)")
         if value and key then
             db:update(key, value)
+            table.insert(keys, key)
         end
     end
 
     file:close()
+    return keys
 end
 
 -- 获取文件内容哈希值，使用 FNV-1a 哈希算法（增强兼容性，避免位运算依赖）
@@ -151,12 +156,33 @@ local function file_exists(name)
     end
 end
 
--- 清空整个 db
-local function empty_tips_db(db)
+---清理 db
+---@param db UserDb
+---@param user_keys? function | nil
+---@param erase_presets? boolean
+local function empty_tips_db(db, user_keys, erase_presets)
+    erase_presets = erase_presets or false
+
     local da = db:query("")
-    for key, _ in da:iter() do
-        db:erase(key)
+    if user_keys and not erase_presets then
+        for key in user_keys do
+            db:erase(key)
+        end
+    elseif user_keys and erase_presets then
+        local user_keys_d = {}
+        for key in user_keys do
+            user_keys_d[key] = true
+        end
+        for key, _ in da:iter() do
+            local is_preset = user_keys_d[key] == nil
+            if is_preset then db:erase(key) end
+        end
+    else
+        for key, _ in da:iter() do
+            db:erase(key)
+        end
     end
+    ---@diagnostic disable-next-line: cast-local-type
     da = nil
 end
 
@@ -172,27 +198,81 @@ local function get_preset_file_path()
 end
 
 local function init_tips_userdb()
-    local db = getUserDB()
-
-    local hash_key = "__TIPS_FILE_HASH"
-    local hash_in_db = db:fetch(hash_key)
-
     local preset_file_path = get_preset_file_path()
     local user_override_path = rime_api.get_user_data_dir() .. "/lua/tips/tips_user.txt"
-    local file_hash = string.format("%s|%s",
-        calculate_file_hash(preset_file_path),
-        calculate_file_hash(user_override_path))
 
-    if hash_in_db == file_hash then
+    local db = getUserDB()
+
+
+    local version_key = "wanxiang_version"
+    local version_in_db = db:fetch("\001" .. version_key)
+    local is_version_need_update = version_in_db ~= wanxiang.version
+
+    local is_preset_tips_need_update = false
+    local preset_hash_key = "\001" .. "hash_preset"
+    local preset_file_hash = nil
+    -- 如果版本号有变化，则判断 preset tips hash
+    if is_version_need_update then
+        local db_hash = db:fetch(preset_hash_key)
+        preset_file_hash = calculate_file_hash(preset_file_path)
+        is_preset_tips_need_update = preset_file_hash ~= db_hash
+    end
+
+    local user_hash_key = "\001" .. "hash_user"
+    local db_hash = db:fetch(user_hash_key)
+    local user_file_hash = calculate_file_hash(user_override_path)
+    local is_user_tips_need_update = user_file_hash ~= db_hash
+
+    if not is_version_need_update
+        and not is_user_tips_need_update
+        and not is_user_tips_need_update
+    then
         return
+    end
+
+    local user_keys_key = "\001" .. "user_keys"
+
+    ---@param userdb UserDb
+    ---@param keys table<string>
+    local function update_user_keys(userdb, keys)
+        userdb:update(user_keys_key, table.concat(keys, '\t'))
+    end
+
+    ---@param userdb UserDb
+    ---@return function | nil
+    local function get_user_keys(userdb)
+        local db_value = userdb:fetch(user_keys_key)
+        if db_value then
+            return db_value:gmatch("([^\t]+)")
+        end
+        return nil
     end
 
     -- userdb 需要更新
     db = getUserDB(true) -- 以读写模式打开数据库
-    empty_tips_db(db)
-    db:update(hash_key, file_hash)
-    sync_tips_db_from_file(db, preset_file_path)
-    sync_tips_db_from_file(db, user_override_path)
+
+    if is_version_need_update then
+        db:update(version_key, wanxiang.version)
+    end
+
+    local user_keys = nil
+    if is_preset_tips_need_update then
+        empty_tips_db(db)
+        sync_tips_db_from_file(db, preset_file_path)
+        user_keys = sync_tips_db_from_file(db, user_override_path)
+    elseif is_user_tips_need_update then
+        empty_tips_db(db, get_user_keys(db))
+        user_keys = sync_tips_db_from_file(db, user_override_path)
+    end
+    if user_keys then
+        update_user_keys(db, user_keys)
+    end
+    if preset_file_hash then
+        db:update(preset_hash_key, preset_file_hash)
+    end
+    if user_file_hash then
+        db:update(user_hash_key, user_file_hash)
+    end
     close_db() -- 主动关闭数据库，后续只需要只读方式打开
 end
 
