@@ -121,14 +121,15 @@ local function get_adjustments(code)
     local accessor = db:query(code .. "|")
     if accessor == nil then return nil end
 
-    local table = nil
+    local adjustment = nil
     for key, value in accessor:iter() do
-        if table == nil then table = {} end
+        if adjustment == nil then adjustment = {} end
+
         local adjust_key = string.match(key, "^.*|(%S+)$")
         local adjust_value = parse_adjustment_value(value)
         -- 忽略为 0 的位置，0 位置代表重置
         if adjust_value.fixed_position > 0 then
-            table[adjust_key] = adjust_value
+            adjustment[adjust_key] = adjust_value
             -- log.warning(string.format("[sequence] %s: %s", adjust_key, value))
         end
     end
@@ -136,7 +137,7 @@ local function get_adjustments(code)
     ---@diagnostic disable-next-line: cast-local-type
     accessor = nil
 
-    return table
+    return adjustment
 end
 
 local function get_timestamp()
@@ -154,8 +155,9 @@ local function save_adjustment(code, adjust_key, fixed_position, offset, timesta
     if code == "" or code == nil then return end
 
     local key = get_adjust_db_key(code, adjust_key)
-    local db = get_user_db()
     if key == nil then return false end
+
+    local db = get_user_db()
 
     -- 由于 lua os.time() 的精度只到秒，排序可能会引起问题
     if not timestamp then
@@ -186,7 +188,11 @@ local sync_file_name = rime_api.get_user_data_dir() .. "/" .. db_file_name .. ".
 
 local function file_exists(name)
     local f = io.open(name, "r")
-    return f ~= nil and io.close(f)
+    if f then
+        io.close(f)
+        return true
+    end
+    return false
 end
 
 local function export_to_file(db)
@@ -354,6 +360,10 @@ function F.fini()
 end
 
 ---应用之前的调整
+-- 注意：此函数按时间顺序重新应用调整。
+-- 在候选数量较多且单个输入代码需要进行多次调整的情况下，
+-- 在循环中使用 `table.remove` 可能会成为性能瓶颈，
+-- 因为它具有线性时间复杂度 (O(n))。
 ---@param candidates table<Candidate>
 ---@param prev_adjustments table
 local function apply_prev_adjustment(candidates, prev_adjustments)
@@ -368,7 +378,7 @@ local function apply_prev_adjustment(candidates, prev_adjustments)
     table.sort(user_adjustment_list, function(a, b) return a.updated_at < b.updated_at end)
 
     -- 恢复至上次调整状态
-    for _, record in ipairs(user_adjustment_list) do
+    for i, record in ipairs(user_adjustment_list) do
         local from_position = record.from_position
 
         if from_position == nil or record.fixed_position <= 0 then
@@ -387,13 +397,14 @@ local function apply_prev_adjustment(candidates, prev_adjustments)
         table.insert(candidates, to_position, candidate)
         -- log.warning(string.format("[sequence] %s: %s -> %s", candidate.text, from_position, to_position))
 
-        -- 修正由于移位导致的 from_position 变动
-        for idx, r in ipairs(user_adjustment_list) do
-            local min_position = math.min(from_position, to_position)
-            local max_position = math.max(from_position, to_position)
+        -- 修正后续由于移位导致的 from_position 变动
+        local min_position = math.min(from_position, to_position)
+        local max_position = math.max(from_position, to_position)
+        for j = i, #user_adjustment_list, 1 do
+            local r = user_adjustment_list[j]
             if min_position <= r.from_position and r.from_position <= max_position then
                 local offset = to_position < from_position and 1 or -1
-                user_adjustment_list[idx].from_position = r.from_position + offset
+                user_adjustment_list[j].from_position = r.from_position + offset
             end
         end
         ::continue_restore::
@@ -479,14 +490,15 @@ function F.func(input, env)
     local candidates = {}  -- 去重排序后的候选列表
     local hash_phrase = {} -- 用于去重
     local is_function_mode_active = wanxiang.is_function_mode_active(context)
+    local position = 0
     for candidate in input:iter() do
         local phrase = candidate.text
         if not hash_phrase[phrase] then
             hash_phrase[phrase] = true
 
             -- 依次插入得到去重后的列表
-            local position = #candidates + 1
-            candidates[position] = candidate
+            position = position + 1
+            table.insert(candidates, candidate)
 
             local curr_key = is_function_mode_active
                 and position - 1 -- function mode 使用索引模式
