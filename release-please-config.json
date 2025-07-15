@@ -5,6 +5,9 @@
     "packages": {
         ".": {
             "release-type": "simple",
+            "extra-files": [
+                "lua/wanxiang.lua"
+            ],
             "changelog-sections": [
                 {
                     "type": "feat",

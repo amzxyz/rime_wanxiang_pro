@@ -3,6 +3,10 @@
 -- 万象的一些共用工具函数
 local wanxiang = {}
 
+-- x-release-please-start-version
+wanxiang.version = "8.8.0"
+-- x-release-please-end
+
 -- 全局内容
 ---@alias PROCESS_RESULT ProcessResult
 wanxiang.RIME_PROCESS_RESULTS = {
