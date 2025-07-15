@@ -1,7 +1,5 @@
-# Rime table
-# coding: utf-8
-#@/db_name	cn_en_flypy.txt
-#@/db_type	tabledb
+IT之家	itvijx
+SD卡	sdka
 ENSO循环	ensoxyhr
 方块A	fhkka
 方块J	fhkkj

@@ -1,7 +1,5 @@
-# Rime table
-# coding: utf-8
-#@/db_name	cn_en_double_pinyin.txt
-#@/db_type	tabledb
+IT之家	itvijw
+SD卡	sdka
 ENSO循环	ensoxphr
 X光	Xgd
 X光	xgd

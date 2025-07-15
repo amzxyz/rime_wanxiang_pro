@@ -1,7 +1,5 @@
-# Rime table
-#@/db_name	cn_en.txt
-#@/db_type	tabledb
-#@/tick	0
+IT之家	itzhijia
+SD卡	sdka
 ENSO循环	ensoxunhuan
 方块A	fangkuaia
 方块J	fangkuaij
