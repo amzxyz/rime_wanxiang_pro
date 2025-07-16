@@ -1,5 +1,24 @@
 # Changelog
 
+## [8.8.1](https://github.com/amzxyz/rime_wanxiang/compare/v8.8.0...v8.8.1) (2025-07-16)
+
+
+### 📚 词库更新
+
+* 词库精简 ([e6f26c5](https://github.com/amzxyz/rime_wanxiang/commit/e6f26c580c898f027364bc56c80ef83ed0e37c45))
+* 词库精简 ([d9d8ad1](https://github.com/amzxyz/rime_wanxiang/commit/d9d8ad1b388990bdb1498dec641d3aef1e8688db))
+* 词库精简 ([dd93488](https://github.com/amzxyz/rime_wanxiang/commit/dd93488c6d19f8a5fc502cdfa9ce8aa497e208e4))
+
+
+### 🔥 性能优化
+
+* **lua:** 修复新版排序性能下降的问题 ([08f0b5b](https://github.com/amzxyz/rime_wanxiang/commit/08f0b5b55cf94dd3ea4f4b3cb86231bef9766a31))
+
+
+### 🏡 杂项
+
+* **lua:** wanxiang.lua 支持获取当前版本号 ([5fc6e95](https://github.com/amzxyz/rime_wanxiang/commit/5fc6e9536b4f953969acb5de8ebfcc0181296f70))
+
 ## [8.8.0](https://github.com/amzxyz/rime_wanxiang/compare/v8.7.7...v8.8.0) (2025-07-14)
 
 
