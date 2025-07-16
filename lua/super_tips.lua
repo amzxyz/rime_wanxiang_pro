@@ -4,39 +4,98 @@
 -- https://github.com/amzxyz/rime_wanxiang
 --     - lua_processor@*super_tips
 --     key_binder/tips_key: "slash" # 上屏按键配置
+
+local META_KEY_PREFIX = "\001"
+local META_KEY_VERSION = "wanxiang_version"
+local META_KEY_USER_TIPS_FILE_HASH = "user_tips_file_hash"
+
+local FILENAME_TIPS_PRESET = "lua/tips/tips_show.txt"
+local FILENAME_TIPS_USER = "lua/tips/tips_user.txt"
+
 local wanxiang = require("wanxiang")
 
+local tips_db = {}
 ---@type UserDb | nil
-local db = nil -- 数据库池
-local function close_db()
-    if db and db:loaded() then
+tips_db.instance = nil -- 数据库池
+function tips_db.close()
+    if tips_db.instance and tips_db.instance:loaded() then
         collectgarbage()
-        return db:close()
+        return tips_db.instance:close()
     end
     return true
 end
 
 -- 获取或创建 LevelDb 实例，避免重复打开
----@param mode? boolean
+---@param write_mode? boolean 是否需要写权限
 ---@return UserDb
-local function getUserDB(mode)
-    if db == nil then db = LevelDb("lua/tips") end
+function tips_db.get(write_mode)
+    if tips_db.instance == nil then tips_db.instance = LevelDb("lua/tips") end
 
-    mode = mode or false
+    local is_loaded = tips_db.instance:loaded()
+    local needs_open = false
 
-    if mode == true and db and db:loaded() and db.read_only then
-        close_db()
+    if is_loaded and write_mode and tips_db.instance.read_only then
+        -- 需要写权限，但当前是只读模式，需要重新打开
+        needs_open = true
+    elseif not is_loaded then
+        -- 尚未加载，需要打开
+        needs_open = true
     end
 
-    if db and not db:loaded() then
-        if mode then
-            db:open()
+    if needs_open then
+        if is_loaded then tips_db.instance:close() end -- 确保关闭旧连接
+        if write_mode then
+            tips_db.instance:open()
         else
-            db:open_read_only()
+            tips_db.instance:open_read_only()
         end
     end
 
-    return db
+    return tips_db.instance
+end
+
+function tips_db.empty()
+    local db = tips_db.get(true)
+    local da
+    da = db:query("")
+    for key, _ in da:iter() do
+        db:erase(key)
+    end
+    da = nil
+end
+
+function tips_db.fetch(key)
+    return tips_db.get():fetch(key)
+end
+
+function tips_db.update(key, value)
+    return tips_db.get(true):update(key, value)
+end
+
+function tips_db.meta_fetch(key)
+    return tips_db.fetch(META_KEY_PREFIX .. key)
+end
+
+function tips_db.meta_update(key, value)
+    return tips_db.update(META_KEY_PREFIX .. key, value)
+end
+
+function tips_db.get_wanxiang_version()
+    return tips_db.meta_fetch(META_KEY_VERSION)
+end
+
+---@param version string
+function tips_db.update_wanxiang_version(version)
+    return tips_db.meta_update(META_KEY_VERSION, version)
+end
+
+function tips_db.get_user_tips_file_hash()
+    return tips_db.meta_fetch(META_KEY_USER_TIPS_FILE_HASH)
+end
+
+---@param hash string
+function tips_db.update_user_tips_file_hash(hash)
+    return tips_db.meta_update(META_KEY_USER_TIPS_FILE_HASH, hash)
 end
 
 local function ensure_dir_exist(dir)
@@ -51,14 +110,14 @@ local function ensure_dir_exist(dir)
     end
 end
 
-local function sync_tips_db_from_file(db, path)
+local function sync_tips_db_from_file(path)
     local file = io.open(path, "r")
     if not file then return end
 
     for line in file:lines() do
         local value, key = line:match("([^\t]+)\t([^\t]+)")
         if value and key then
-            db:update(key, value)
+            tips_db.update(key, value)
         end
     end
 
@@ -141,87 +200,56 @@ local function calculate_file_hash(filepath)
     return string.format("%08x", hash)
 end
 
-local function file_exists(name)
-    local f = io.open(name, "r")
-    if f ~= nil then
-        io.close(f)
-        return true
-    else
-        return false
-    end
-end
-
--- 清空整个 db
-local function empty_tips_db(db)
-    local da = db:query("")
-    for key, _ in da:iter() do
-        db:erase(key)
-    end
-    da = nil
-end
-
-local function get_preset_file_path()
-    local preset_path = "/lua/tips/tips_show.txt"
-    local preset_path_user = rime_api.get_user_data_dir() .. preset_path
-    local preset_path_shared = rime_api.get_shared_data_dir() .. preset_path
-
-    if file_exists(preset_path_user) then
-        return preset_path_user
-    end
-    return preset_path_shared
-end
-
 local function init_tips_userdb()
-    local db = getUserDB()
+    local has_preset_tips_changed = wanxiang.version ~= tips_db.get_wanxiang_version()
 
-    local hash_key = "__TIPS_FILE_HASH"
-    local hash_in_db = db:fetch(hash_key)
+    local has_user_tips_changed = false
+    local user_override_path = rime_api.get_user_data_dir() .. "/" .. FILENAME_TIPS_USER
+    local user_tips_file_hash = calculate_file_hash(user_override_path)
+    if user_tips_file_hash then
+        has_user_tips_changed = user_tips_file_hash ~= tips_db.get_user_tips_file_hash()
+    end
 
-    local preset_file_path = get_preset_file_path()
-    local user_override_path = rime_api.get_user_data_dir() .. "/lua/tips/tips_user.txt"
-    local file_hash = string.format("%s|%s",
-        calculate_file_hash(preset_file_path),
-        calculate_file_hash(user_override_path))
-
-    if hash_in_db == file_hash then
+    if not has_preset_tips_changed and not has_user_tips_changed then
         return
     end
 
-    -- userdb 需要更新
-    db = getUserDB(true) -- 以读写模式打开数据库
-    empty_tips_db(db)
-    db:update(hash_key, file_hash)
-    sync_tips_db_from_file(db, preset_file_path)
-    sync_tips_db_from_file(db, user_override_path)
-    close_db() -- 主动关闭数据库，后续只需要只读方式打开
+    tips_db.empty()
+
+    tips_db.update_wanxiang_version(wanxiang.version)
+    tips_db.update_user_tips_file_hash(user_tips_file_hash or "")
+
+    local preset_file_path = wanxiang.get_filename_with_fallback(FILENAME_TIPS_PRESET)
+    sync_tips_db_from_file(preset_file_path)
+    sync_tips_db_from_file(user_override_path)
+
+    tips_db.close() -- 主动关闭数据库，后续只需要只读方式打开
 end
 
 local function update_tips_prompt(context, env)
     local segment = context.composition:back()
     if segment == nil then return end
 
-    local db = getUserDB()
-
     ---@type string | nil 存放 db 中查到的 tips 值
-    local tips_text = context.input and db:fetch(context.input)
+    env.current_tip = context.input and tips_db.fetch(context.input)
 
     -- 如果 context.input 没有匹配的 tips，则使用候选词查找
-    if tips_text == nil or tips_text == "" then
+    if env.current_tip == nil or env.current_tip == "" then
         local candidate = context:get_selected_candidate()
-        tips_text = candidate and db:fetch(candidate.text)
+        env.current_tip = candidate and tips_db.fetch(candidate.text)
     end
 
-    if tips_text ~= nil and tips_text ~= ""
-    then -- 有 tips 则直接设置 prompt
-        env.last_tip_prompt = "〔" .. tips_text .. "〕"
-        segment.prompt = env.last_tip_prompt
+    if env.current_tip ~= nil and env.current_tip ~= "" then
+        -- 有 tips 则直接设置 prompt
+        segment.prompt = "〔" .. env.current_tip .. "〕"
     else -- 没有则重置
-        if env.last_tip_prompt == segment.prompt then
-            env.last_tip_prompt = nil
-            segment.prompt = ""
-        end
+        segment.prompt = ""
     end
 end
+
+---@class Env
+---@field current_tip string | nil
+---@field tips_update_connection any
 
 local P = {}
 
@@ -251,10 +279,11 @@ function P.init(env)
 end
 
 function P.fini(env)
-    close_db()
+    tips_db.close()
     -- 清理连接
     if env.tips_update_connection then
         env.tips_update_connection:disconnect()
+        env.tips_update_connection = nil
     end
 end
 
@@ -262,12 +291,13 @@ end
 ---@param env Env
 ---@return ProcessResult
 function P.func(key, env)
-    local is_tips_enabled = env.engine.context:get_option("super_tips")
-
     local context = env.engine.context
+    local is_tips_enabled = context:get_option("super_tips")
     local segment = context.composition:back()
 
     if not is_tips_enabled
+        or not (context:is_composing() or context:has_menu())
+        or not P.tips_key or P.tips_key ~= key:repr()
         or not segment
         or wanxiang.is_function_mode_active(context)
     then
@@ -280,19 +310,17 @@ function P.func(key, env)
         update_tips_prompt(context, env)
     end
 
+    if not env.current_tip or env.current_tip == "" then
+        return wanxiang.RIME_PROCESS_RESULTS.kNoop
+    end
+
     -- 检查是否触发提示上屏
     ---@type string 从 prompt 中获取的当前 tip 文本
-    local tip_text = segment.prompt and (
-        segment.prompt:match("：%s*(.*)%s*〕") -- 优先匹配常规的全角冒号
-        or segment.prompt:match(":%s*(.*)%s*〕") -- 没有匹配则回落到半角冒号
-        or "")
+    local commit_txt = env.current_tip:match("：%s*(.*)%s*") -- 优先匹配常规的全角冒号
+        or env.current_tip:match(":%s*(.*)%s*") -- 没有匹配则回落到半角冒号
 
-    if (context:is_composing() or context:has_menu())
-        and P.tips_key
-        and key:repr() == P.tips_key
-        and tip_text:len() > 0
-    then
-        env.engine:commit_text(tip_text)
+    if commit_txt and #commit_txt > 0 then
+        env.engine:commit_text(commit_txt)
         context:clear()
         return wanxiang.RIME_PROCESS_RESULTS.kAccepted
     end

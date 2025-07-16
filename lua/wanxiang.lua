@@ -107,22 +107,53 @@ function wanxiang.is_function_mode_active(context)
         seg:has_tag("Ndate")         -- shijian.lua N日期功能
 end
 
--- 按照优先顺序加载文件：用户目录 > 系统目录
----@param path string 相对路径
----@retur file*, function
-function wanxiang.load_file_with_fallback(path, mode)
-    local _path = path:gsub("^/+", "") -- 去掉开头的斜杠
-    local user_path = rime_api.get_user_data_dir() .. '/' .. _path
-    local shared_path = rime_api.get_shared_data_dir() .. '/' .. _path
+---判断文件是否存在
+function wanxiang.file_exists(filename)
+    local f = io.open(filename, "r")
+    if f ~= nil then
+        io.close(f)
+        return true
+    else
+        return false
+    end
+end
 
-    mode = mode or "r" -- 默认读取模式
-    local file, err = io.open(user_path, mode)
-    if not file then
-        file, err = io.open(shared_path, mode)
+---按照优先顺序获取文件：用户目录 > 系统目录
+---@param filename string 相对路径
+---@retur string | nil
+function wanxiang.get_filename_with_fallback(filename)
+    local _path = filename:gsub("^/+", "") -- 去掉开头的斜杠
+
+    local user_path = rime_api.get_user_data_dir() .. '/' .. _path
+    if wanxiang.file_exists(user_path) then
+        return user_path
     end
 
+    local shared_path = rime_api.get_shared_data_dir() .. '/' .. _path
+    if wanxiang.file_exists(shared_path) then
+        return shared_path
+    end
+
+    return nil
+end
+
+-- 按照优先顺序加载文件：用户目录 > 系统目录
+---@param filename string 相对路径
+---@retur file* | nil, function
+function wanxiang.load_file_with_fallback(filename, mode)
+    mode = mode or "r" -- 默认读取模式
+
+    local _filename = wanxiang.get_filename_with_fallback(filename)
+
+    local file, err
     local function close()
-        if file then file:close() end
+        if not file then return end
+        file:close()
+        file = nil
+    end
+
+    if _filename then
+        file, err = io.open(_filename, mode)
     end
 
     return file, close, err
