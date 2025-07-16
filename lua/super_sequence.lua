@@ -479,8 +479,6 @@ function F.func(input, env)
         }
     end
 
-    log.warning(string.format("[sequence] curr: %s", CurrentState.mode))
-
     if curr_adjustment == nil       -- 如果当前没有排序调整
         and prev_adjustments == nil -- 并且之前也没有自定义排序
     then                            -- 直接 yield 并返回
