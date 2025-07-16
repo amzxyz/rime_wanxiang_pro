@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.8.2](https://github.com/amzxyz/rime_wanxiang/compare/v8.8.1...v8.8.2) (2025-07-16)
+
+
+### 🐛 Bug 修复
+
+* 调整超级注释位置,避免拆分与影子注释关联 ([3072e08](https://github.com/amzxyz/rime_wanxiang/commit/3072e08cad34a119eaf642f0555477868e5a270c))
+
 ## [8.8.1](https://github.com/amzxyz/rime_wanxiang/compare/v8.8.0...v8.8.1) (2025-07-16)
 
 
