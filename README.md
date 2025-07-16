@@ -217,7 +217,7 @@ set_shuru_schema:
 
 **自定义词库：** 自定义词库首先要利用[LMDG](https://github.com/amzxyz/RIME-LMDG)中的脚本将你自己的词库刷成与万象同类型的声调、或者声调+辅助码的形态，因为主词库要参与转写。对于custom_phrase则需要手动编辑编码为实际输入的编码
 
-![思维导图](https://github.com/amzxyz/rime_wanxiang_pro/blob/main/.github/%E4%B8%87%E8%B1%A1%E8%BE%93%E5%85%A5%E6%96%B9%E6%A1%88.png)
+![思维导图](https://github.com/amzxyz/rime_wanxiang_pro/blob/wanxiang/.github/%E4%B8%87%E8%B1%A1%E8%BE%93%E5%85%A5%E6%96%B9%E6%A1%88.png)
 
 ## 鸣谢
 
