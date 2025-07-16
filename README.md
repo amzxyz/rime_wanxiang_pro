@@ -81,7 +81,7 @@ set_shuru_schema:
 3. 打开wanxiang_pro.custom.yaml，找到 **- wanxiang_pro.schema:/小鹤双拼**，看后面的提示，你可以直接设置你要使用的双拼方案，比如你可以直接改为**自然码**；
 4. 打开wanxiang_en.custom.yaml，直接找到 **__include: wanxiang_en.schema:/自然码** ，然后修改自然码为小鹤双拼。
 5. 打开wanxiang_radical.custom.yaml，直接找 **__include: wanxiang_radical.schema:/全拼** ，然后修改全拼为小鹤双拼。
-6. 里面还预设了一些示例，这些例子只是例子，请无比详细阅读每一行，保留有用的删除无用的，千万不要改完双拼就万事大吉了，每一行详细查阅、理解、修改。
+6. 里面还预设了一些示例，这些例子只是例子，请务必详细阅读每一行，保留有用的删除无用的，千万不要改完双拼就万事大吉了，每一行详细查阅、理解、修改。
 7. 上面三个文件设置完成后，将其**复制到用户目录**里，然后重新部署，完成后就可以使用了。
 8. **注意：**使用了此方法，方法①就失效了，填写的数据会被这个方法覆盖。
 9. 更详细参照：[🚀 Rime 万象拼音输入方案 新手安装配置指南](https://docs.qq.com/doc/DQ0FqSXBmYVpWVFpy?rtkey=)
