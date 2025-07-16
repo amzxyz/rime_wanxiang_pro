@@ -1,0 +1,7 @@
+README.md写了，但是老有人问啥是README.md，所以我有些在这里了，若这个文件夹还是点不进来，那是缘分没到
+
+手把手教你如何使用：
+https://www.mintimate.cc/zh/guide/installRime.html
+
+rime基础定制参数那些事
+https://github.com/LEOYoon-Tsaw/Rime_collections/blob/master/Rime_description.md

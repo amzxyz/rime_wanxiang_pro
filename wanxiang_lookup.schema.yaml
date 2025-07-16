@@ -1,0 +1,12 @@
+# Rime schema settings
+# encoding: utf-8
+
+schema:
+  schema_id: wanxiang_lookup
+  name: 万象注释滤镜
+  version: "1.0"
+
+engine:
+
+translator:
+  dictionary: wanxiang_lookup

@@ -1,0 +1,7 @@
+# lua 目录下动态生成的记录文件，不应被 git 追踪
+lua/input_stats.lua
+lua/seq_words.lua
+# 本地测试打包时的临时文件
+dist
+pro-*-fuzhu-dicts
+release_notes.md

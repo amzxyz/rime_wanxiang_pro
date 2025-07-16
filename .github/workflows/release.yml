@@ -1,0 +1,73 @@
+on:
+  push:
+    branches:
+      - wanxiang
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+name: Release
+
+jobs:
+  release-please:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+
+      - name: Checkout repository
+        if: ${{ steps.release.outputs.release_created }}
+        uses: actions/checkout@v4
+
+      - name: Release edit to draft
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          gh release edit ${TAG_VERSION} --draft
+        env:
+          TAG_VERSION: ${{ steps.release.outputs.tag_name }}
+          GH_TOKEN: ${{ github.token }}
+
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      release_tag_name: ${{ steps.release.outputs.tag_name }}
+
+  release-build:
+    needs: [release-please]
+    if: needs.release-please.outputs.release_created == 'true'
+    name: Release build
+    uses: ./.github/workflows/release-build.yml
+    permissions:
+      contents: write
+    secrets: inherit
+
+  release:
+    runs-on: ubuntu-22.04
+    needs: [release-please, release-build]
+    name: Release
+    env:
+      TAG_VERSION: ${{ needs.release-please.outputs.release_tag_name }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download build
+        uses: actions/download-artifact@v4
+        with:
+          name: rime-wanxiang-dist-${{ github.ref_name }}
+          path: ~/artifact
+
+      - name: Update release
+        run: |
+          # 更新 release title
+          gh release edit ${TAG_VERSION} --title "${TAG_VERSION} Rime万象拼音输入方案，全新词库，全新语法模型"
+          # 更新 release note
+          bash .github/workflows/scripts/generate-release-note.sh
+          gh release edit ${TAG_VERSION} --notes-file ./release_notes.md
+          # 更新 Assets
+          gh release upload ${TAG_VERSION} ~/artifact/rime-wanxiang-*.zip
+          # 正式发布
+          gh release edit ${TAG_VERSION} --draft=false --latest
+        env:
+          GH_TOKEN: ${{ github.token }}
