@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.8.2](https://github.com/amzxyz/rime_wanxiang/compare/v8.8.1...v8.8.2) (2025-07-16)
+
+
+### 🐛 Bug 修复
+
+* 词库优化 ([32efc5a](https://github.com/amzxyz/rime_wanxiang/commit/32efc5a56c1b1ce390b4fd2883aedceb9ac21087))
+
 ## [8.8.1](https://github.com/amzxyz/rime_wanxiang/compare/v8.8.0...v8.8.1) (2025-07-16)
 
 
