@@ -103,7 +103,7 @@ engine:
     - predict_translator                   #预测候选的生成器
     - punct_translator                     #配合 punct_segmentor 转换标点符号
     - script_translator                    #脚本翻译器，用于拼音、粤拼等基于音节表的输入方案
-    - lua_translator@*version_display      #输入'wxpy'，显示万象项目网址和当前版本号
+    - lua_translator@*version_display      #输入'/wx'，显示万象项目网址和当前版本号
     - lua_translator@*shijian              #农历、日期、节气、节日、时间、周、问候模板等等，触发清单看下文
     - lua_translator@*unicode              #通过输入大写U引导，并输入Unicode编码获得汉字输出
     - lua_translator@*number_translator    #数字、金额大写，通过输入大写R1234获得候选输出
