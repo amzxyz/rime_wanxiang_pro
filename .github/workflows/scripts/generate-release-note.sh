@@ -54,7 +54,7 @@ CHANGES=$(
   echo ""
   echo "1. **不使用辅助码的用户：**"
   echo ""
-  echo "   请直接下载标准版，按仓库中的 [README.md](${REPO_URL}/blob/main/README.md) 配置使用。"
+  echo "   请直接下载标准版，按仓库中的 [README.md](${REPO_URL}/blob/wanxiang/README.md) 配置使用。"
   echo ""
   echo "2. **使用增强版的用户：**"
   echo "   - PRO 每一个 zip 是**完整独立配置包**，其差异仅在于词库是否带有特定辅助码。"
