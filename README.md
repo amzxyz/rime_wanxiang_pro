@@ -81,7 +81,7 @@ set_shuru_schema:
 3. 打开wanxiang_pro.custom.yaml，找到 **- wanxiang_pro.schema:/小鹤双拼**，看后面的提示，你可以直接设置你要使用的双拼方案，比如你可以直接改为**自然码**；
 4. 打开wanxiang_en.custom.yaml，直接找到 **__include: wanxiang_en.schema:/自然码** ，然后修改自然码为小鹤双拼。
 5. 打开wanxiang_radical.custom.yaml，直接找 **__include: wanxiang_radical.schema:/全拼** ，然后修改全拼为小鹤双拼。
-6. 里面还预设了一些示例，这些例子只是例子，请无比详细阅读每一行，保留有用的删除无用的，千万不要改完双拼就万事大吉了，每一行详细查阅、理解、修改。
+6. 里面还预设了一些示例，这些例子只是例子，请务必详细阅读每一行，保留有用的删除无用的，千万不要改完双拼就万事大吉了，每一行详细查阅、理解、修改。
 7. 上面三个文件设置完成后，将其**复制到用户目录**里，然后重新部署，完成后就可以使用了。
 8. **注意：**使用了此方法，方法①就失效了，填写的数据会被这个方法覆盖。
 9. 更详细参照：[🚀 Rime 万象拼音输入方案 新手安装配置指南](https://docs.qq.com/doc/DQ0FqSXBmYVpWVFpy?rtkey=)
@@ -198,7 +198,7 @@ set_shuru_schema:
     2. 按「部署」，会自动导出数据到 `sequence.txt` 文件
     3. 将生成的 `sequence.txt` 这个复制到 B 的相同位置
 
-            2. B 设置按「部署」导入成功。如想查看同步的结果，可以再次按下部署，查看生成的「sequence.txt」 文件
+2. B 设置按「部署」导入成功。如想查看同步的结果，可以再次按下部署，查看生成的「sequence.txt」 文件
 ```
 
 **声调辅助回退（Lua）：**万象是将7890用于代表1234声，轻声归并到了4，我们支持在例如输入ni9后发现我可能要4声，ni0，此时我们无需删除数字9而是直接输入对的0，类似手动在7890之间轮巡，能有效快速提升声调辅助的效率，减少使用负担，也是万象独创功能。
@@ -217,7 +217,7 @@ set_shuru_schema:
 
 **自定义词库：** 自定义词库首先要利用[LMDG](https://github.com/amzxyz/RIME-LMDG)中的脚本将你自己的词库刷成与万象同类型的声调、或者声调+辅助码的形态，因为主词库要参与转写。对于custom_phrase则需要手动编辑编码为实际输入的编码
 
-![思维导图](https://github.com/amzxyz/rime_wanxiang_pro/blob/main/.github/%E4%B8%87%E8%B1%A1%E8%BE%93%E5%85%A5%E6%96%B9%E6%A1%88.png)
+![思维导图](https://github.com/amzxyz/rime_wanxiang_pro/blob/wanxiang/.github/%E4%B8%87%E8%B1%A1%E8%BE%93%E5%85%A5%E6%96%B9%E6%A1%88.png)
 
 ## 鸣谢
 
