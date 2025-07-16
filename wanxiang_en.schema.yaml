@@ -318,3 +318,26 @@ algebra_common:
     - derive/9/jn/
     - derive/\+/jb/
     - derive/#/jq/
+国标双拼:
+  __include: algebra_common
+  __append:
+    - derive/(?<!\d)1([1-9])(?!\d)/ui$1/
+    - derive/([1-9])0000(?!0)/$1wf/
+    - derive/([1-9])000(?!0)/$1qd/
+    - derive/([1-9])00(?!0)/$1bk/
+    - derive/([2-9])0(?!0)/$1ui/Add commentMore actions
+    - derive/(?<!\d)([2-9])([1-9])(?!\d)/$1ui$2/
+    - derive/\./dd/
+    - derive/10/ui/
+    - derive/0/lj/
+    - derive/1/yi/
+    - derive/2/er/
+    - derive/3/sf/
+    - derive/4/si/
+    - derive/5/wu/
+    - derive/6/ly/
+    - derive/7/qi/
+    - derive/8/ba/
+    - derive/9/jy/
+    - derive/\+/jq/
+    - derive/#/jj/

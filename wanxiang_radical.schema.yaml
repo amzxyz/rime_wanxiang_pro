@@ -299,3 +299,37 @@ translator:
   - xform/([a-z>])ou(?=^|$|')/$1<p>/
   - xform/in(?=^|$|')/<l>/
   - xform/'|<|>//
+国标双拼:
+  - derive/^([aoe])([ioun])(?=^|$|')/$1$1$2/
+  - derive/'([aoe])([ioun])(?=^|$|')/'$1$1$2/
+  - xform/^([aoe])(ng)?(?=^|$|')/$1$1$2/
+  - xform/'([aoe])(ng)?(?=^|$|')/'$1$1$2/
+  - xform/iu(?=^|$|')/<y>/
+  - xform/(.)ei(?=^|$|')/$1<b>/
+  - xform/uan(?=^|$|')/<w>/
+  - xform/[uv]e(?=^|$|')/<x>/
+  - xform/un(?=^|$|')/<z>/
+  - xform/^sh/<u>/
+  - xform/^ch/<i>/
+  - xform/^zh/<v>/
+  - xform/'sh/'<u>/
+  - xform/'ch/'<i>/
+  - xform/'zh/'<v>/
+  - xform/uo(?=^|$|')/<o>/
+  - xform/ie(?=^|$|')/<t>/
+  - xform/([a-z>])i?ong(?=^|$|')/$1<s>/
+  - xform/ing(?=^|$|')|uai(?=^|$|')/<j>/
+  - xform/([a-z>])ai(?=^|$|')/$1<k>/
+  - xform/([a-z>])en(?=^|$|')/$1<r>/
+  - xform/([a-z>])eng(?=^|$|')/$1<h>/
+  - xform/[iu]ang(?=^|$|')/<n>/
+  - xform/([a-z>])ang(?=^|$|')/$1<g>/
+  - xform/ian(?=^|$|')/<d>/
+  - xform/([a-z>])an(?=^|$|')/$1<f>/
+  - xform/([a-z>])ou(?=^|$|')/$1<p>/
+  - xform/[iu]a(?=^|$|')/<q>/
+  - xform/iao(?=^|$|')/<m>/
+  - xform/([a-z>])ao(?=^|$|')/$1<c>/
+  - xform/ui(?=^|$|')/<v>/
+  - xform/in(?=^|$|')/<l>/
+  - xform/'|<|>//
