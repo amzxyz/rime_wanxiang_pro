@@ -292,30 +292,30 @@ end
 ---@return ProcessResult
 function P.func(key, env)
     local context = env.engine.context
+
     local is_tips_enabled = context:get_option("super_tips")
     local segment = context.composition:back()
-
-    if not is_tips_enabled
-        or not (context:is_composing() or context:has_menu())
-        or not P.tips_key or P.tips_key ~= key:repr()
-        or not segment
-        or wanxiang.is_function_mode_active(context)
-    then
+    if not is_tips_enabled or not segment then
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
+    -- 如果启用了 tips 功能，则应使用此 workaround
     -- rime 内核在移动候选时并不会触发 update_notifier，这里做一个临时修复
     -- 如果是 paging，则主动调用 update_tips_prompt
     if segment:has_tag("paging") then
         update_tips_prompt(context, env)
     end
 
-    if not env.current_tip or env.current_tip == "" then
+    -- 以下处理 tips 上屏逻辑
+    if not P.tips_key                                   -- 未设置上屏键
+        or P.tips_key ~= key:repr()                     -- 或者当前按下的不是上屏键
+        or wanxiang.is_function_mode_active(context)    -- 或者是功能模式不用上屏
+        or not env.current_tip or env.current_tip == "" --  或匹配的 tips 为空/空字符串
+    then
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
-    -- 检查是否触发提示上屏
-    ---@type string 从 prompt 中获取的当前 tip 文本
+    ---@type string 从 tips 内容中获取上屏文本
     local commit_txt = env.current_tip:match("：%s*(.*)%s*") -- 优先匹配常规的全角冒号
         or env.current_tip:match(":%s*(.*)%s*") -- 没有匹配则回落到半角冒号
 
