@@ -242,13 +242,17 @@ local function update_tips_prompt(context, env)
     if env.current_tip ~= nil and env.current_tip ~= "" then
         -- 有 tips 则直接设置 prompt
         segment.prompt = "〔" .. env.current_tip .. "〕"
-    else -- 没有则重置
+        env.last_prompt = segment.prompt
+    elseif segment.prompt ~= "" and env.last_prompt == segment.prompt then
+        -- 没有 tips，且当前 prompt 不为空，且是由 super_tips 设置的，则重置
         segment.prompt = ""
+        env.last_prompt = segment.prompt
     end
 end
 
 ---@class Env
 ---@field current_tip string | nil
+---@field last_prompt string
 ---@field tips_update_connection any
 
 local P = {}
