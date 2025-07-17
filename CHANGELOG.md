@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.9.3](https://github.com/amzxyz/rime_wanxiang/compare/v8.9.2...v8.9.3) (2025-07-17)
+
+
+### 🐛 Bug 修复
+
+* 更新说明 ([7d8a2d2](https://github.com/amzxyz/rime_wanxiang/commit/7d8a2d23243684f019d1749b1209a7498a5f9084))
+
 ## [8.9.2](https://github.com/amzxyz/rime_wanxiang/compare/v8.9.1...v8.9.2) (2025-07-17)
 
 
