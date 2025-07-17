@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.9.1](https://github.com/amzxyz/rime_wanxiang/compare/v8.9.0...v8.9.1) (2025-07-17)
+
+
+### 🐛 Bug 修复
+
+* **lua:** tips 应在每次候选切换后更新 ([5aebdaa](https://github.com/amzxyz/rime_wanxiang/commit/5aebdaa91b888c78f6030b57422f53fb7dbbd16e))
+
 ## [8.9.0](https://github.com/amzxyz/rime_wanxiang/compare/v8.8.2...v8.9.0) (2025-07-17)
 
 
