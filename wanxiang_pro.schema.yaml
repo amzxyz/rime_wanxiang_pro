@@ -117,7 +117,7 @@ engine:
     - table_translator@reverse_stroke      #挂接笔画反查
     - script_translator@user_dict_set      #自造词之使用词汇入口
     - script_translator@add_user_dict      #自造词之制造词汇入口
-    - lua_translator@*force_gc             #暴力 GC 降低内存
+    - lua_translator@*force_gc             #暴力 GC 降低内存 
   filters:
     - lua_filter@*chars_filter                      #字符集过滤
     - lua_filter@*super_sequence*F                  #手动排序放在assist_sort 后面，高亮候选 ctrl+j左移动 ctrl+k 右移动 ctrl+0 移除位移
