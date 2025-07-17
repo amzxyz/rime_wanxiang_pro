@@ -244,7 +244,7 @@ chengyu:
   user_dict: jm_dicts/chengyu
   db_class: tabledb
   enable_sentence: false
-  enable_completion: true
+  enable_completion: false
   initial_quality: 1.2 #本表词和系统词重码居后
 
 # 次翻译器，英文
