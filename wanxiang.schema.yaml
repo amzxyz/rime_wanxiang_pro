@@ -6,8 +6,6 @@ set_shuru_schema:               #配置此项就是选择什么输入法,同时�
   __include: 全拼                #可选解码规则有   全拼, 自然码, 自然龙, 汉心龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 拼音加加, 乱序17 选择一个填入
 set_cn_en:                      #中英混输
   user_dict: en_dicts/pinyin    #可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou， en_dicts/pinyin
-set_gongjian_mohu:              #可选的值有：18键, 14键, 9键, 26键  ，PC请选26键
-  __include: 26键
 super_comment:                  # 超级注释模块
   candidate_length: 2           # 候选词注释提醒的生效长度，0为关闭  但同时清空其它，应当使用开关或者快捷键来处理    
   corrector_type: "{comment}"   #错音错词提示显示类型，比如"({comment})" 
@@ -428,7 +426,6 @@ speller:
   algebra:
     __patch:
       - set_shuru_schema     #拼音转双拼码在文件头部配置
-      - set_gongjian_mohu    #共键输入或者模糊音选择性开启
 
 
 全拼:
@@ -1122,55 +1119,6 @@ speller:
     - xform/u$/Ⓓ/
     - xform/v$/Ⓧ/
     - xlit/ⓆⓌⒺⓇⓉⓎⓄⓅⒶⓈⒹⒻⒼⒽⒿⓀⓁⓏⓍⒸⓋⒷⓃⓂ/qwertyopasdfghjklzxcvbnm/
-#以下配合同文输入法等使用，将共键字母后者转换为前者
-9键:
-  __append:
-    - xform/b/a/
-    - xform/c/a/
-    - xform/e/d/
-    - xform/f/d/
-    - xform/h/g/
-    - xform/i/g/
-    - xform/k/j/
-    - xform/l/j/
-    - xform/n/m/
-    - xform/o/m/
-    - xform/q/p/
-    - xform/r/p/
-    - xform/s/p/
-    - xform/u/t/
-    - xform/v/t/
-    - xform/x/w/
-    - xform/y/w/
-    - xform/z/w/
-
-14键:
-  __append:
-    - xform/w/q/
-    - xform/r/e/
-    - xform/y/t/
-    - xform/i/u/
-    - xform/p/o/
-    - xform/s/a/
-    - xform/f/d/
-    - xform/h/g/
-    - xform/k/j/
-    - xform/x/z/
-    - xform/v/c/
-    - xform/n/b/
-
-18键:          
-  __append:
-    - xform/e/w/
-    - xform/t/r/
-    - xform/o/i/
-    - xform/d/s/
-    - xform/g/f/
-    - xform/k/j/
-    - xform/c/x/
-    - xform/n/b/
-26键:          
-  __append: []
 
 # 自定义词典 
 user_dict_set:
