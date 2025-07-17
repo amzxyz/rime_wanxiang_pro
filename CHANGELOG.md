@@ -49,6 +49,7 @@
 * **lua:** 手动排序后会产生大量无效排序记录的问题 ([69fa3d0](https://github.com/amzxyz/rime_wanxiang/commit/69fa3d0069b77ccb242dfc2f183c4eb9e4b0b261))
 * **lua:** 移除排序调试日志 ([e973986](https://github.com/amzxyz/rime_wanxiang/commit/e973986e03ef052710c51fc0e56a73f922065857))
 * 中文英标模式下保证/引导可用 ([eb4718b](https://github.com/amzxyz/rime_wanxiang/commit/eb4718b31c1e2545570a2913695ea164b6b9263d))
+* 修正方案 ([5e4c672](https://github.com/amzxyz/rime_wanxiang/commit/5e4c672289a7dc46aa4bbf6cab463fa49e56d3a3))
 * 删除预设简码 ([c611a5f](https://github.com/amzxyz/rime_wanxiang/commit/c611a5f917f8e472caef7801d3f41f1765e8f354))
 * 删除预设简码 ([fdc238c](https://github.com/amzxyz/rime_wanxiang/commit/fdc238c2e53f2f1f1b45461b0c5d144d172b04e6))
 * 字符集过滤增加符号tag豁免 ([b3d0264](https://github.com/amzxyz/rime_wanxiang/commit/b3d0264871e47113e161d3afd3c2fe1d125a7f36))
