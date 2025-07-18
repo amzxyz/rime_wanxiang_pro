@@ -8,8 +8,6 @@ set_algebra_fuzhu:             #配置此项就是选择什么辅助码
   __include: fuzhu_zrm         #可选辅助码有：fuzhu_kong，fuzhu_hanxin, fuzhu_moqi, fuzhu_flypy, fuzhu_zrm, fuzhu_tiger, fuzhu_wubi    选择一个填入
 set_fuzhu_type:                #直接辅助就是nire/=你，间接辅助就是ni/re=你，区别在于间接辅助不使用/引导的时候就和普通双拼没区别
   __include: 直接辅助           #可选的有：直接辅助、间接辅助
-set_cn_en:                     #中英混输
-  user_dict: en_dicts/pinyin   #可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou， en_dicts/pinyin
 super_comment:                 # 超级注释模块，子项配置 true 开启，false 关闭
   candidate_length: 1          # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理    
   fuzhu_type: zrm              # 用于匹配对应的辅助码注释显示，基于默认词典的可选注释类型有：moqi, flypy, zrm, jdh, cj, tiger, wubi, hanxin 声调用开关切换
@@ -31,7 +29,8 @@ schema:
     - wanxiang_stroke    #笔画反查
     - wanxiang_radical   #部件拆字，反查及辅码
     - wanxiang_lookup    #辅助码拆分注释、翻译注释、行政区划匹配、车牌、等等注释类显示滤镜，Lua专用：super_comment
-    - wanxiang_en        #英文输入
+    - wanxiang_en        #英文词汇输入
+    - wanxiang_cnanden   #中英文混合词汇
     - wanxiang_charset   #字符集过滤器
 
 # 开关
@@ -112,7 +111,7 @@ engine:
     - table_translator@custom_phrase       #自定义短语 custom_phrase.txt，用于置顶自定义编码候选词
     - table_translator@chengyu             #简码成语词汇表导入
     - table_translator@wanxiang_en         #挂接英文输入，参与中英混输
-    - table_translator@cn_en               #中英混合词汇表导入
+    - table_translator@wanxiang_cnanden    #中英混合词汇表导入
     - table_translator@radical_lookup      #挂接部件拆字反查
     - table_translator@reverse_stroke      #挂接笔画反查
     - script_translator@user_dict_set      #自造词之使用词汇入口
@@ -258,9 +257,8 @@ wanxiang_en:
 
 
 # 中英混合词汇
-cn_en:
-  dictionary: ""
-  __include: set_cn_en
+wanxiang_cnanden:
+  dictionary: wanxiang_cnanden
   db_class: stabledb
   enable_completion: true
   enable_sentence: false

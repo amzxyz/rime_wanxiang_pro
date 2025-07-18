@@ -52,8 +52,6 @@ set_algebra_fuzhu:             #配置此项就是选择什么辅助码
   __include: fuzhu_zrm         #可选辅助码有：fuzhu_kong，fuzhu_hanxin, fuzhu_moqi, fuzhu_flypy, fuzhu_zrm, fuzhu_tiger, fuzhu_wubi    选择一个填入
 set_fuzhu_type:                #直接辅助就是nire/=你，间接辅助就是ni/re=你，区别在于间接辅助不使用/引导的时候就和普通双拼没区别
   __include: 直接辅助           #可选的有：直接辅助、间接辅助
-set_cn_en:                     #中英混输
-  user_dict: en_dicts/pinyin   #可选的值有：en_dicts/pinyin， en_dicts/zrm， en_dicts/flypy ，en_dicts/mspy， en_dicts/sogou， en_dicts/pinyin
 super_comment:                 # 超级注释模块，子项配置 true 开启，false 关闭
   candidate_length: 1          # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理    
   fuzhu_type: zrm              # 用于匹配对应的辅助码注释显示，基于默认词典的可选注释类型有：moqi, flypy, zrm, jdh, cj, tiger, wubi, hanxin 声调用开关切换
@@ -63,7 +61,7 @@ __include: octagram            #启用语言模型
     ########################以下是方案配置######################################################
 ```
 
-2. 打开 `wanxiang_radical.schema.yaml` 和 `wanxiang_en.schema.yaml` 表头进行选择，二者情况一致：
+2. 打开 `wanxiang_radical.schema.yaml(用于反查)` 和 `wanxiang_en.schema.yaml(用于输入英文)` 和 `wanxiang_cnanden.schema.yaml(用于中英混合词汇)` 表头进行选择，二者情况一致：
 
 ```yaml
     ###############选择与之匹配的拼音方案#####################
@@ -81,10 +79,11 @@ set_shuru_schema:
 3. 打开wanxiang_pro.custom.yaml，找到 **- wanxiang_pro.schema:/小鹤双拼**，看后面的提示，你可以直接设置你要使用的双拼方案，比如你可以直接改为**自然码**；
 4. 打开wanxiang_en.custom.yaml，直接找到 **__include: wanxiang_en.schema:/自然码** ，然后修改自然码为小鹤双拼。
 5. 打开wanxiang_radical.custom.yaml，直接找 **__include: wanxiang_radical.schema:/全拼** ，然后修改全拼为小鹤双拼。
-6. 里面还预设了一些示例，这些例子只是例子，请务必详细阅读每一行，保留有用的删除无用的，千万不要改完双拼就万事大吉了，每一行详细查阅、理解、修改。
-7. 上面三个文件设置完成后，将其**复制到用户目录**里，然后重新部署，完成后就可以使用了。
-8. **注意：**使用了此方法，方法①就失效了，填写的数据会被这个方法覆盖。
-9. 更详细参照：[🚀 Rime 万象拼音输入方案 新手安装配置指南](https://docs.qq.com/doc/DQ0FqSXBmYVpWVFpy?rtkey=)
+6. 打开wanxiang_cnanden.custom.yaml，直接找 **__include: wanxiang_cnanden.schema:/全拼** ，然后修改全拼为小鹤双拼。
+7. 里面还预设了一些示例，这些例子只是例子，请务必详细阅读每一行，保留有用的删除无用的，千万不要改完双拼就万事大吉了，每一行详细查阅、理解、修改。
+8. 上面三个文件设置完成后，将其**复制到用户目录**里，然后重新部署，完成后就可以使用了。
+9. **注意：**使用了此方法，方法①就失效了，填写的数据会被这个方法覆盖。
+10. 更详细参照：[🚀 Rime 万象拼音输入方案 新手安装配置指南](https://docs.qq.com/doc/DQ0FqSXBmYVpWVFpy?rtkey=)
 
 **③脚本更新：**
 
@@ -221,8 +220,6 @@ set_shuru_schema:
 
 ## 鸣谢
 
-- 项目英文词库部分来自"[rime-ice](https://github.com/iDvel/rime-ice)"
-- 拼音标注来自万象词库与语法模型项目，并在该项目下进行鸣谢！
 - 感谢网友的热情提报问题，使得模型和词库体验进一步提升。
 
 ## 赞赏
