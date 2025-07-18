@@ -116,7 +116,7 @@ package_schema() {
     fi
 
     ZIP_NAME=$(basename "$OUT_DIR").zip
-    (cd "$OUT_DIR" && zip -r -q ../"$ZIP_NAME" . && cd ..)
+    (cd "$OUT_DIR" && zip -r -9 -q ../"$ZIP_NAME" . && cd ..)
     echo "✅ 完成打包: $ZIP_NAME"
     echo
 }
