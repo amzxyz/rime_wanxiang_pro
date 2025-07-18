@@ -5,7 +5,7 @@
 --     - lua_processor@*super_tips
 --     key_binder/tips_key: "slash" # 上屏按键配置
 
-local META_KEY_PREFIX = "\001"
+local META_KEY_PREFIX = "\001" .. "/"
 local META_KEY_VERSION = "wanxiang_version"
 local META_KEY_USER_TIPS_FILE_HASH = "user_tips_file_hash"
 
@@ -20,7 +20,9 @@ tips_db.instance = nil -- 数据库池
 function tips_db.close()
     if tips_db.instance and tips_db.instance:loaded() then
         collectgarbage()
-        return tips_db.instance:close()
+        local result = tips_db.instance:close()
+        tips_db.instance = nil
+        return result
     end
     return true
 end
