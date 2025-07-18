@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.0.1](https://github.com/amzxyz/rime_wanxiang/compare/v9.0.0...v9.0.1) (2025-07-18)
+
+
+### 🐛 Bug 修复
+
+* 压缩级别设置为9尝试 ([6a822ce](https://github.com/amzxyz/rime_wanxiang/commit/6a822ce530ef4f5721d6626afc44bab1ae4bcdef))
+
 ## [9.0.0](https://github.com/amzxyz/rime_wanxiang/compare/v8.10.1...v9.0.0) (2025-07-18)
 
 
