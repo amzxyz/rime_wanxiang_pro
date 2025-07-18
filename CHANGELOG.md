@@ -1,5 +1,22 @@
 # Changelog
 
+## [8.10.1](https://github.com/amzxyz/rime_wanxiang/compare/v8.10.0...v8.10.1) (2025-07-18)
+
+
+### 🔥 性能优化
+
+* **lua:** 使用新数据结构优化排序性能 ([d81d719](https://github.com/amzxyz/rime_wanxiang/commit/d81d719d26269f7eb06e906a368734b80a078bcc))
+
+
+### 🐛 Bug 修复
+
+* **lua:** tips metafiled 保持和 rime 一致的命名逻辑 ([4a9d241](https://github.com/amzxyz/rime_wanxiang/commit/4a9d2415a49aacb6e3c94e4a3ef7f2cbf2b4b5f4))
+
+
+### 💅 重构
+
+* 为彻底解决，中英文混合、带符号词(人名)连字符等形式词库的维护难度，后续将不再采用直接table方式导入，之前的方式，多文件存放占用空间大，多种类脚本维护难度大，大小写重复记录，以及这些难度带来的词汇新增速度慢的问题。后续将采用次方案的形式，采用基础词库+转写的方式适应多种双拼方案，万象将会在次领域再此引领！ ([e0b1769](https://github.com/amzxyz/rime_wanxiang/commit/e0b1769cc451318c76210b5b99d1d078090d7eaa))
+
 ## [8.10.0](https://github.com/amzxyz/rime_wanxiang/compare/v8.9.3...v8.10.0) (2025-07-17)
 
 
