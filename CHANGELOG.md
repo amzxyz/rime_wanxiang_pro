@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.0.0](https://github.com/amzxyz/rime_wanxiang/compare/v8.10.1...v9.0.0) (2025-07-18)
+
+
+### 🏡 杂项
+
+* release 9.0.0 ([6994139](https://github.com/amzxyz/rime_wanxiang/commit/69941392918cafcef5541aef0fd5f47cfa6a8f99))
+
 ## [8.10.1](https://github.com/amzxyz/rime_wanxiang/compare/v8.10.0...v8.10.1) (2025-07-18)
 
 
