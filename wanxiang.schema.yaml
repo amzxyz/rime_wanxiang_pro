@@ -345,7 +345,7 @@ punctuator:
 # 从 default 继承快捷键
 key_binder:
   import_preset: default  # 从 default.yaml 继承通用的
-  sequence: # Lua 配置：手动排序的快捷键 super_sequence.lua
+  sequence: # Lua 配置：手动排序的快捷键 super_sequence.lua，不要用方向键，各种冲突，一定要避免冲突
     up: "Control+j"    # 上移
     down: "Control+k"  # 下移
     reset: "Control+l" # 重置
