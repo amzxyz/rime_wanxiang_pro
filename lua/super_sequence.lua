@@ -6,6 +6,13 @@
 -- ctrl+p 置顶
 local wanxiang = require("wanxiang")
 
+local DEFAULT_SEQ_KEY = {
+    up    = "Control+j",
+    down  = "Control+k",
+    reset = "Control+l",
+    pin   = "Control+p",
+}
+
 --- seq_db start
 local seq_db = {}
 seq_db.db_name = "lua/sequence"
@@ -390,23 +397,28 @@ function P.func(key_event, env)
     if not context:has_menu()
         or selected_cand == nil
         or selected_cand.text == nil
-        or not key_event:ctrl()
-        or key_event:release()
     then
         return wanxiang.RIME_PROCESS_RESULTS.kNoop
     end
 
     -- 判断按下的键，更新偏移量
-    if key_event.keycode == 0x6A then -- 前移
+    local key_repr = key_event:repr()
+
+    local function get_seq_key(type)
+        return env.engine.schema.config:get_string("key_binder/sequence/" .. type)
+            or DEFAULT_SEQ_KEY[type]
+    end
+
+    if key_repr == get_seq_key("up") then -- 前移
         curr_state.offset = -1
         curr_state.mode = curr_state.ADJUST_MODE.Adjust
-    elseif key_event.keycode == 0x6B then -- 后移
+    elseif key_repr == get_seq_key("down") then -- 后移
         curr_state.offset = 1
         curr_state.mode = curr_state.ADJUST_MODE.Adjust
-    elseif key_event.keycode == 0x6C then -- 重置
+    elseif key_repr == get_seq_key("reset") then -- 重置
         curr_state.offset = nil
         curr_state.mode = curr_state.ADJUST_MODE.Reset
-    elseif key_event.keycode == 0x70 then -- 置顶
+    elseif key_repr == get_seq_key("pin") then -- 置顶
         curr_state.offset = nil
         curr_state.mode = curr_state.ADJUST_MODE.Pin
     else

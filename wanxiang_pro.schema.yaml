@@ -354,6 +354,11 @@ punctuator:
 # 从 default 继承快捷键
 key_binder:
   import_preset: default  # 从 default.yaml 继承通用的
+  sequence: # Lua 配置：手动排序的快捷键 super_sequence.lua
+    up: "Control+j"    # 上移
+    down: "Control+k"  # 下移
+    reset: "Control+l" # 重置
+    pin: "Control+p"   # 置顶
   # Lua 配置: shijian.lua 的引导符，涉及：日期、时间、节日、节气、生日、问候模板等功能
   shijian_keys: ["/", "o"]
   # Lua 配置: 超级tips上屏按键
