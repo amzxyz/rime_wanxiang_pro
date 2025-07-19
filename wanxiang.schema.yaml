@@ -457,6 +457,7 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
+    - xform/ḿ/m②/
     - xlit/①②③④/7890
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
@@ -502,6 +503,7 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
+    - xform/ḿ/m②/
     - xlit/①②③④/7890/
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
@@ -704,6 +706,7 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
+    - xform/ḿ/m②/
     - xlit/①②③④/7890/
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
@@ -770,6 +773,7 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
+    - xform/ḿ/m②/
     - xlit/①②③④/7890/
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
@@ -837,6 +841,7 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
+    - xform/ḿ/m②/
     - xlit/①②③④/7890/
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
@@ -905,6 +910,7 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
+    - xform/ḿ/m②/
     - xlit/①②③④/7890/
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
@@ -968,6 +974,7 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
+    - xform/ḿ/m②/
     - xlit/①②③④/7890/
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
@@ -1033,6 +1040,7 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
+    - xform/ḿ/m②/
     - xlit/①②③④/7890/
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
@@ -1068,9 +1076,10 @@ speller:
 乱序17:  
   __append:
     - xlit/āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü/aaaaooooeeeeiiiiuuuuvvvvv/
-    - xform/ń|ň|ǹ/en/ 
-    - xform/\bng\b/eng/
+    - xform/^ng$/eng/
     - xform/ńg|ňg|ǹg/eng/
+    - xform/ń|ň|ǹ/en/
+    - xform/ḿ/m/
     - erase/^xx$/
     - derive/^([jqxy])u$/$1Ⓥ/
     - xform/^ch/Ⓒ/
