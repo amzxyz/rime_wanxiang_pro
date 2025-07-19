@@ -10,13 +10,6 @@
 ## [9.0.0](https://github.com/amzxyz/rime_wanxiang/compare/v8.10.1...v9.0.0) (2025-07-18)
 
 
-### 🏡 杂项
-
-* release 9.0.0 ([6994139](https://github.com/amzxyz/rime_wanxiang/commit/69941392918cafcef5541aef0fd5f47cfa6a8f99))
-
-## [8.10.1](https://github.com/amzxyz/rime_wanxiang/compare/v8.10.0...v8.10.1) (2025-07-18)
-
-
 ### 🔥 性能优化
 
 * **lua:** 使用新数据结构优化排序性能 ([d81d719](https://github.com/amzxyz/rime_wanxiang/commit/d81d719d26269f7eb06e906a368734b80a078bcc))
@@ -46,24 +39,6 @@
 * 修正部分读音 ([ad379b1](https://github.com/amzxyz/rime_wanxiang/commit/ad379b12ed4b98c943c30142516679530ab603de))
 * 删减无用词条 ([59875d3](https://github.com/amzxyz/rime_wanxiang/commit/59875d3f24b19f6011322fc20d21b8d809a83f20))
 * 删减词条 ([078f9bf](https://github.com/amzxyz/rime_wanxiang/commit/078f9bf31b31bf08b00f482c3233d961331ccbff))
-* 精简词库 ([29981ec](https://github.com/amzxyz/rime_wanxiang/commit/29981ec946f3604738ff42d3bb4a389c044f2815))
-* 词库删改 ([d495937](https://github.com/amzxyz/rime_wanxiang/commit/d495937e2d0e135ada77bf021110d198691c28db))
-* 词库更新 ([8ad66b3](https://github.com/amzxyz/rime_wanxiang/commit/8ad66b353b2b234ecc6fbe335d63f0728ba45627))
-* 词库精简 ([e6f26c5](https://github.com/amzxyz/rime_wanxiang/commit/e6f26c580c898f027364bc56c80ef83ed0e37c45))
-* 词库精简 ([d9d8ad1](https://github.com/amzxyz/rime_wanxiang/commit/d9d8ad1b388990bdb1498dec641d3aef1e8688db))
-* 词库精简 ([dd93488](https://github.com/amzxyz/rime_wanxiang/commit/dd93488c6d19f8a5fc502cdfa9ce8aa497e208e4))
-* 词库调整 ([3ed9897](https://github.com/amzxyz/rime_wanxiang/commit/3ed989764c4137535b2583053607d543fd64c22c))
-* 词库调整 ([a4484e8](https://github.com/amzxyz/rime_wanxiang/commit/a4484e839c3dbde83e9f279bc012ac5419f2286b))
-* 词库调整 ([c47b395](https://github.com/amzxyz/rime_wanxiang/commit/c47b39546eddfba8d21959113812033b4f4d9547))
-* 词库调整 ([adf742a](https://github.com/amzxyz/rime_wanxiang/commit/adf742aa0c81938c1159eeadfcb4b50f1429a5ce))
-* 词库调整 ([1799f73](https://github.com/amzxyz/rime_wanxiang/commit/1799f73f16f432093a4d566757ffea1cca650b94))
-* 词库调整 ([f100496](https://github.com/amzxyz/rime_wanxiang/commit/f1004960ddfab7422b8c11ec18116881ada98760))
-* 词库调整 ([1e01ec1](https://github.com/amzxyz/rime_wanxiang/commit/1e01ec100815f615d128aad98a315c4ae852bae5))
-* 词库调整 ([a3ba5e9](https://github.com/amzxyz/rime_wanxiang/commit/a3ba5e95b042992fb28b30c8ba16252222c2231b))
-* 词库调整 ([76ea067](https://github.com/amzxyz/rime_wanxiang/commit/76ea067130dd5beca9992daa361ee2cad3db5605))
-* 词库调整 ([768384a](https://github.com/amzxyz/rime_wanxiang/commit/768384ad89e2f802f708de199df0529d4fb9447d))
-* 词库调整 ([9562e98](https://github.com/amzxyz/rime_wanxiang/commit/9562e989d634bd4c3c569fc04d1eee012960e7b8))
-* 读音修正 ([977cad1](https://github.com/amzxyz/rime_wanxiang/commit/977cad1cf47cc1f4e49d8f449b32aec73ddb0b1b))
 
 
 ### 🔥 性能优化
@@ -96,37 +71,6 @@
 * 通用简码精简 ([42da5fd](https://github.com/amzxyz/rime_wanxiang/commit/42da5fd5975ea1623cc8987d04d9fdaec0bfe84e))
 * 预设分包方案修改 ([d7d9be7](https://github.com/amzxyz/rime_wanxiang/commit/d7d9be75a46d6f01f97583e995aca5de0dc0ff53))
 * 预设分包方案修改翻译器排序 ([e012730](https://github.com/amzxyz/rime_wanxiang/commit/e012730fdbbeac4b50dcbd377a8d666a4181ceb8))
-
-
-### 📖 文档
-
-* 发行日志中加入 Arch Linux 安装小注 ([879baf4](https://github.com/amzxyz/rime_wanxiang/commit/879baf48aaea2432b927868f09062b0d05d2f49e))
-
-
-### 🏡 杂项
-
-* **lua:** wanxiang.lua 支持获取当前版本号 ([5fc6e95](https://github.com/amzxyz/rime_wanxiang/commit/5fc6e9536b4f953969acb5de8ebfcc0181296f70))
-* **main:** release 8.6.2 ([959c5d2](https://github.com/amzxyz/rime_wanxiang/commit/959c5d2b05cffa15c1905f231bcb830ddb810b08))
-* **main:** release 8.7.0 ([113e8bc](https://github.com/amzxyz/rime_wanxiang/commit/113e8bcce131fb9f29610aa6f2053274513e6912))
-* **main:** release 8.7.1 ([ca47d05](https://github.com/amzxyz/rime_wanxiang/commit/ca47d053a6f444df5923bb5aa6fa94551ebdce8b))
-* **main:** release 8.7.2 ([b793e7d](https://github.com/amzxyz/rime_wanxiang/commit/b793e7df622ce41ba4b9d36cc5729d5ec19bec75))
-* **main:** release 8.7.3 ([9e980bd](https://github.com/amzxyz/rime_wanxiang/commit/9e980bdb95c266973ebd04f5bf808942c3bed413))
-* **main:** release 8.7.4 ([5b65d4b](https://github.com/amzxyz/rime_wanxiang/commit/5b65d4bcb7dc0118b1006b626ccbc86c47c672dd))
-* **main:** release 8.7.5 ([cc8dd5e](https://github.com/amzxyz/rime_wanxiang/commit/cc8dd5e92c08187fd4138a5bce4dd5b4269db042))
-* **main:** release 8.7.6 ([6dd076d](https://github.com/amzxyz/rime_wanxiang/commit/6dd076da9ac487256cc29b4a393d5b55c34ac73a))
-* **main:** release 8.7.7 ([4a45c6e](https://github.com/amzxyz/rime_wanxiang/commit/4a45c6e067cd56e5c282d326af947a23173ed0c4))
-* **main:** release 8.8.0 ([3b75347](https://github.com/amzxyz/rime_wanxiang/commit/3b75347a222c284e6aff5aab6001041db4bdf55b))
-* readme完善 ([756564f](https://github.com/amzxyz/rime_wanxiang/commit/756564f8e0b1e8476c24462a4acac19b546d2b40))
-* **wanxiang:** release 8.8.1 ([e6ab8a4](https://github.com/amzxyz/rime_wanxiang/commit/e6ab8a4919d2cba52e9d7763ea472f663738602e))
-* **wanxiang:** release 8.8.2 ([7fe75b3](https://github.com/amzxyz/rime_wanxiang/commit/7fe75b354e58b401f1a38257347be46098cd3ea0))
-* **wanxiang:** release 8.9.0 ([5ff0eae](https://github.com/amzxyz/rime_wanxiang/commit/5ff0eae91c6556944726d75cd47553ba4c597ba5))
-* **wanxiang:** release 8.9.1 ([d48de56](https://github.com/amzxyz/rime_wanxiang/commit/d48de56948f29aea8cedd6e29fb5a17159b8d9bf))
-* **wanxiang:** release 8.9.2 ([31466bc](https://github.com/amzxyz/rime_wanxiang/commit/31466bc8f943c703b022a5a21d991ee220eb0fde))
-* **wanxiang:** release 8.9.3 ([b93e361](https://github.com/amzxyz/rime_wanxiang/commit/b93e361140c7c4fee06f3316d0dad7fec426a9b4))
-* 添加显示万象项目网址和当前版本号 ([922450e](https://github.com/amzxyz/rime_wanxiang/commit/922450ea5384093cbf952e999b6911f1bcd554b7))
-* 添加显示万象项目网址和当前版本号 ([46f961e](https://github.com/amzxyz/rime_wanxiang/commit/46f961e1163a008dbed2b8f0cb11f29074d3768a))
-* 添加显示万象项目网址和当前版本号 ([567d556](https://github.com/amzxyz/rime_wanxiang/commit/567d556ddc78c06009d27b869f97a86f2411c057))
-* 简码词库放入jmdict文件夹 ([bd57576](https://github.com/amzxyz/rime_wanxiang/commit/bd575765019b20f4f80045063980504ac94fcbd9))
 
 
 ### 🤖 持续集成
@@ -171,22 +115,6 @@
 * 删减无用词条 ([59875d3](https://github.com/amzxyz/rime_wanxiang/commit/59875d3f24b19f6011322fc20d21b8d809a83f20))
 * 删减词条 ([078f9bf](https://github.com/amzxyz/rime_wanxiang/commit/078f9bf31b31bf08b00f482c3233d961331ccbff))
 * 精简词库 ([29981ec](https://github.com/amzxyz/rime_wanxiang/commit/29981ec946f3604738ff42d3bb4a389c044f2815))
-* 词库删改 ([d495937](https://github.com/amzxyz/rime_wanxiang/commit/d495937e2d0e135ada77bf021110d198691c28db))
-* 词库更新 ([8ad66b3](https://github.com/amzxyz/rime_wanxiang/commit/8ad66b353b2b234ecc6fbe335d63f0728ba45627))
-* 词库精简 ([e6f26c5](https://github.com/amzxyz/rime_wanxiang/commit/e6f26c580c898f027364bc56c80ef83ed0e37c45))
-* 词库精简 ([d9d8ad1](https://github.com/amzxyz/rime_wanxiang/commit/d9d8ad1b388990bdb1498dec641d3aef1e8688db))
-* 词库精简 ([dd93488](https://github.com/amzxyz/rime_wanxiang/commit/dd93488c6d19f8a5fc502cdfa9ce8aa497e208e4))
-* 词库调整 ([a4484e8](https://github.com/amzxyz/rime_wanxiang/commit/a4484e839c3dbde83e9f279bc012ac5419f2286b))
-* 词库调整 ([c47b395](https://github.com/amzxyz/rime_wanxiang/commit/c47b39546eddfba8d21959113812033b4f4d9547))
-* 词库调整 ([adf742a](https://github.com/amzxyz/rime_wanxiang/commit/adf742aa0c81938c1159eeadfcb4b50f1429a5ce))
-* 词库调整 ([1799f73](https://github.com/amzxyz/rime_wanxiang/commit/1799f73f16f432093a4d566757ffea1cca650b94))
-* 词库调整 ([f100496](https://github.com/amzxyz/rime_wanxiang/commit/f1004960ddfab7422b8c11ec18116881ada98760))
-* 词库调整 ([1e01ec1](https://github.com/amzxyz/rime_wanxiang/commit/1e01ec100815f615d128aad98a315c4ae852bae5))
-* 词库调整 ([a3ba5e9](https://github.com/amzxyz/rime_wanxiang/commit/a3ba5e95b042992fb28b30c8ba16252222c2231b))
-* 词库调整 ([76ea067](https://github.com/amzxyz/rime_wanxiang/commit/76ea067130dd5beca9992daa361ee2cad3db5605))
-* 词库调整 ([768384a](https://github.com/amzxyz/rime_wanxiang/commit/768384ad89e2f802f708de199df0529d4fb9447d))
-* 词库调整 ([9562e98](https://github.com/amzxyz/rime_wanxiang/commit/9562e989d634bd4c3c569fc04d1eee012960e7b8))
-* 读音修正 ([977cad1](https://github.com/amzxyz/rime_wanxiang/commit/977cad1cf47cc1f4e49d8f449b32aec73ddb0b1b))
 
 
 ### 🔥 性能优化
@@ -214,33 +142,6 @@
 * 通用简码精简 ([42da5fd](https://github.com/amzxyz/rime_wanxiang/commit/42da5fd5975ea1623cc8987d04d9fdaec0bfe84e))
 * 预设分包方案修改 ([d7d9be7](https://github.com/amzxyz/rime_wanxiang/commit/d7d9be75a46d6f01f97583e995aca5de0dc0ff53))
 * 预设分包方案修改翻译器排序 ([e012730](https://github.com/amzxyz/rime_wanxiang/commit/e012730fdbbeac4b50dcbd377a8d666a4181ceb8))
-
-
-### 📖 文档
-
-* 发行日志中加入 Arch Linux 安装小注 ([879baf4](https://github.com/amzxyz/rime_wanxiang/commit/879baf48aaea2432b927868f09062b0d05d2f49e))
-
-
-### 🏡 杂项
-
-* **lua:** wanxiang.lua 支持获取当前版本号 ([5fc6e95](https://github.com/amzxyz/rime_wanxiang/commit/5fc6e9536b4f953969acb5de8ebfcc0181296f70))
-* **main:** release 8.6.2 ([959c5d2](https://github.com/amzxyz/rime_wanxiang/commit/959c5d2b05cffa15c1905f231bcb830ddb810b08))
-* **main:** release 8.7.0 ([113e8bc](https://github.com/amzxyz/rime_wanxiang/commit/113e8bcce131fb9f29610aa6f2053274513e6912))
-* **main:** release 8.7.1 ([ca47d05](https://github.com/amzxyz/rime_wanxiang/commit/ca47d053a6f444df5923bb5aa6fa94551ebdce8b))
-* **main:** release 8.7.2 ([b793e7d](https://github.com/amzxyz/rime_wanxiang/commit/b793e7df622ce41ba4b9d36cc5729d5ec19bec75))
-* **main:** release 8.7.3 ([9e980bd](https://github.com/amzxyz/rime_wanxiang/commit/9e980bdb95c266973ebd04f5bf808942c3bed413))
-* **main:** release 8.7.4 ([5b65d4b](https://github.com/amzxyz/rime_wanxiang/commit/5b65d4bcb7dc0118b1006b626ccbc86c47c672dd))
-* **main:** release 8.7.5 ([cc8dd5e](https://github.com/amzxyz/rime_wanxiang/commit/cc8dd5e92c08187fd4138a5bce4dd5b4269db042))
-* **main:** release 8.7.6 ([6dd076d](https://github.com/amzxyz/rime_wanxiang/commit/6dd076da9ac487256cc29b4a393d5b55c34ac73a))
-* **main:** release 8.7.7 ([4a45c6e](https://github.com/amzxyz/rime_wanxiang/commit/4a45c6e067cd56e5c282d326af947a23173ed0c4))
-* **main:** release 8.8.0 ([3b75347](https://github.com/amzxyz/rime_wanxiang/commit/3b75347a222c284e6aff5aab6001041db4bdf55b))
-* readme完善 ([756564f](https://github.com/amzxyz/rime_wanxiang/commit/756564f8e0b1e8476c24462a4acac19b546d2b40))
-* **wanxiang:** release 8.8.1 ([e6ab8a4](https://github.com/amzxyz/rime_wanxiang/commit/e6ab8a4919d2cba52e9d7763ea472f663738602e))
-* **wanxiang:** release 8.8.2 ([7fe75b3](https://github.com/amzxyz/rime_wanxiang/commit/7fe75b354e58b401f1a38257347be46098cd3ea0))
-* 添加显示万象项目网址和当前版本号 ([922450e](https://github.com/amzxyz/rime_wanxiang/commit/922450ea5384093cbf952e999b6911f1bcd554b7))
-* 添加显示万象项目网址和当前版本号 ([46f961e](https://github.com/amzxyz/rime_wanxiang/commit/46f961e1163a008dbed2b8f0cb11f29074d3768a))
-* 添加显示万象项目网址和当前版本号 ([567d556](https://github.com/amzxyz/rime_wanxiang/commit/567d556ddc78c06009d27b869f97a86f2411c057))
-* 简码词库放入jmdict文件夹 ([bd57576](https://github.com/amzxyz/rime_wanxiang/commit/bd575765019b20f4f80045063980504ac94fcbd9))
 
 
 ### 🤖 持续集成
