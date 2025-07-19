@@ -156,7 +156,7 @@ set_shuru_schema:
 #节气：ojq 或者 /jq
 #日期+时间：ors 或者 /rs
 #时间戳：ott 或者 /tt
-#大写N日期：N20250315
+#大写N日期：N20250315 或者 N0302 即不添加年
 #节日：ojr 或者 /jr
 #问候模板：/day 或者 oday
 ```
