@@ -22,6 +22,11 @@ patch:
   #  ascii_icon: "icons/ying.ico"
   #下面这个可以改变tips上屏的按键
   key_binder/tips_key: "period"   #修改时候去default找按键名称，默认是句号
+  key_binder/sequence: # Lua 配置：手动排序的快捷键 super_sequence.lua，不要用方向键，各种冲突，一定要避免冲突
+    up: "Control+j"    # 上移
+    down: "Control+k"  # 下移
+    reset: "Control+l" # 重置
+    pin: "Control+p"   # 置顶
   #下面这个是修改快符的映射，按自己需求来
   quick_symbol_text:
     q: "‰"
