@@ -223,10 +223,10 @@ translator:
   always_show_comments: true    # Rime 默认在 preedit 等于 comment 时取消显示 comment，这里强制一直显示，供super_comment.lua做判断用。
   comment_format: {comment}  #将注释以词典字符串形式完全暴露，通过super_comment.lua完全接管，灵活配置。
   preedit_format:               # preedit_format 影响到输入框的显示和“Shift+回车”上屏的字符
-    - xform/7/1/
-    - xform/8/2/
-    - xform/9/3/
-    - xform/0/4/
+    - xform/7/¹/
+    - xform/8/²/
+    - xform/9/³/
+    - xform/0/⁴/
 
 # 自定义短语
 custom_phrase:
@@ -1266,10 +1266,10 @@ user_dict_set:
   spelling_hints: 100
   comment_format:
   preedit_format:               # preedit_format 影响到输入框的显示和“Shift+回车”上屏的字符
-    - xform/7/1/
-    - xform/8/2/
-    - xform/9/3/
-    - xform/0/4/
+    - xform/7/¹/
+    - xform/8/²/
+    - xform/9/³/
+    - xform/0/⁴/
   enable_user_dict: true
   user_dict: zc
 
