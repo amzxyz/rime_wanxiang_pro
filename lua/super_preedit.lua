@@ -73,7 +73,7 @@ local function modify_preedit_filter(input, env)
             if part == auto_delimiter or part == manual_delimiter then
                 input_parts[i] = visual_delim
             else
-                local body, tone = part:match("(%a+)(%d?)")
+                local body, tone = part:match("([%a]+)([^%a]+)") --后面加号很必要
                 local py = pinyin_segments[pinyin_index]
 
                 if py then
