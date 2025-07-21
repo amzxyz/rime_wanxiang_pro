@@ -7,7 +7,7 @@ set_shuru_schema:
 ######################################################
 schema:
   schema_id: wanxiang_radical
-  name: "反查：部件组字"
+  name: "万象：部件组字反查"
   version: "1.1.0"
   author: Mirtle
   description:

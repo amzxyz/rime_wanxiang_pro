@@ -3,7 +3,7 @@
 
 schema:
   schema_id: wanxiang_charset
-  name: 字符集过滤器
+  name: 万象:字符集过滤器
   version: "1.0"
 
 engine:

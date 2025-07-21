@@ -3,7 +3,7 @@
 
 schema:
   schema_id: wanxiang_stroke
-  name: "反查：五笔画"
+  name: "万象：笔画反查"
   version: "0.5"
   author:
     - amzxyz

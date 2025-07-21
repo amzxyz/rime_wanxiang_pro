@@ -7,7 +7,7 @@ set_shuru_schema:
 ######################################################
 schema:
   schema_id: wanxiang_cnanden
-  name: "中英文结合翻译器"
+  name: "万象:中英混合词"
   version: "LTS"
   author: amzxyz
   description:
