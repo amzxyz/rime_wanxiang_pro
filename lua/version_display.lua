@@ -1,7 +1,6 @@
--- version_display.lua
 local wanxiang = require("wanxiang")
 
---输入'wxpy'，显示万象项目地址和当前版本号
+--输入'/wx'，显示万象项目地址和当前版本号
 local function translator(input, seg, env)
     if input == "/wx" then
         -- 候选1: GitHub 网址
@@ -9,9 +8,12 @@ local function translator(input, seg, env)
             "https://github.com/amzxyz/rime_wanxiang",
             "万象项目地址"))
 
-        -- 候选2: 当前版本号
+        -- 判断是否为专业版
+        local version_prefix = wanxiang.is_pro_scheme(env) and "增强版" or "标准版"
+
+        -- 候选2: 当前版本号（加上“增强版”或“标准版”前缀）
         yield(Candidate("version", seg.start, seg._end,
-            "v" .. wanxiang.version,
+            version_prefix .. " v" .. wanxiang.version,
             "当前版本号"))
     end
 end
