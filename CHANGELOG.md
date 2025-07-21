@@ -1,5 +1,17 @@
 # Changelog
 
+## [9.1.3](https://github.com/amzxyz/rime_wanxiang/compare/v9.1.3...v9.1.3) (2025-07-21)
+
+
+### 📚 词库更新
+
+* 词库调整 ([def8a23](https://github.com/amzxyz/rime_wanxiang/commit/def8a23dfde3772aaaf0be0fb99f17a280e6756f))
+
+
+### 🏡 杂项
+
+* release 9.1.3 ([0355ca6](https://github.com/amzxyz/rime_wanxiang/commit/0355ca68818191d59e079f9316ab471ae9165947))
+
 ## [9.1.3](https://github.com/amzxyz/rime_wanxiang/compare/v9.1.2...v9.1.3) (2025-07-21)
 
 
