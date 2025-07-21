@@ -1,5 +1,18 @@
 # Changelog
 
+## [9.1.2](https://github.com/amzxyz/rime_wanxiang/compare/v9.1.1...v9.1.2) (2025-07-21)
+
+
+### 📚 词库更新
+
+* 词库调整 ([fd0cb93](https://github.com/amzxyz/rime_wanxiang/commit/fd0cb939a8f30d9bd9e2905e3c60767b7f25be17))
+
+
+### 🐛 Bug 修复
+
+* **tips:** 仅在首选时优先使用输入码查询tips ([ef89368](https://github.com/amzxyz/rime_wanxiang/commit/ef8936827c710059a436ab66b1db46773a157052))
+* 修复呣呒两个字读音m引发的m无法打出“没”等派生字，我把他们放进M大写打出来 ([6c87743](https://github.com/amzxyz/rime_wanxiang/commit/6c877436a98b2046e2dc1f665422fc944d91897b))
+
 ## [9.1.1](https://github.com/amzxyz/rime_wanxiang/compare/v9.1.0...v9.1.1) (2025-07-20)
 
 
