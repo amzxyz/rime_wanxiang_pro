@@ -1,14 +1,3 @@
-# Rime table
-#@/db_name	custom_phrase
-#@/db_type	tabledb
-#@/rime_version	1.12.0
-#@/tick	0
 #给自定义用户词扩展一个换行:\n, 制表符：\t, 回车符：\r, 空格：\s
 吧	b	50
-12300001234（手机）	info	56
-foo@xx.com（邮箱）	info	40
-xxx（学号/工号）	info	60
-xx学院/部门	info	48
-xx學校/單位	info	44
-姓名（在custom_phrase.txt里设置）	info	64
 静夜思\n\s\s李白\n床前明月光\n疑似地上霜\n举头望明月\n低头思故乡	jys	50

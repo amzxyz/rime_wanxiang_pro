@@ -3,7 +3,7 @@
 
 schema:
   schema_id: wanxiang_lookup
-  name: 万象:注释滤镜
+  name: 万象:拆分注释滤镜
   version: "1.0"
 
 engine:

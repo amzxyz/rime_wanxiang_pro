@@ -462,7 +462,6 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
-    - xform/ḿ/m②/
     - xlit/①②③④/7890
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
@@ -508,7 +507,6 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
-    - xform/ḿ/m②/
     - xlit/①②③④/7890/
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
@@ -711,7 +709,6 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
-    - xform/ḿ/m②/
     - xlit/①②③④/7890/
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
@@ -778,7 +775,6 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
-    - xform/ḿ/m②/
     - xlit/①②③④/7890/
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
@@ -846,7 +842,6 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
-    - xform/ḿ/m②/
     - xlit/①②③④/7890/
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
@@ -915,7 +910,6 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
-    - xform/ḿ/m②/
     - xlit/①②③④/7890/
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
@@ -979,7 +973,6 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
-    - xform/ḿ/m②/
     - xlit/①②③④/7890/
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
@@ -1045,7 +1038,6 @@ speller:
     - xform/^(.*)ń(.*)$/$1n$2②/
     - xform/^(.*)ň(.*)$/$1n$2③/
     - xform/^(.*)ǹ(.*)$/$1n$2④/
-    - xform/ḿ/m②/
     - xlit/①②③④/7890/
     - derive/^ng(\d)$/eng$1/
     - xform/^n(\d)/en$1/
