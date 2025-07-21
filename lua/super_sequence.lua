@@ -34,7 +34,8 @@ function seq_db._get()
 end
 
 local META_KEY_PREFIX = "\001" .. "/"
-local META_KEY_M_VERSION = "migration_version"
+local META_KEY_MIGRATION_VERSION = "migration_version"
+local LAST_MIGRATION_VERSION = "9.1.3"
 
 function seq_db.update(key, value) return seq_db._get():update(key, value) end
 
@@ -53,12 +54,11 @@ function seq_db.meta_update(key, value)
 end
 
 function seq_db.get_migration_version()
-    return seq_db.meta_fetch(META_KEY_M_VERSION)
+    return seq_db.meta_fetch(META_KEY_MIGRATION_VERSION)
 end
 
----@param version string
-function seq_db.update_migration_version(version)
-    return seq_db.meta_update(META_KEY_M_VERSION, version)
+function seq_db.update_migration_version()
+    return seq_db.meta_update(META_KEY_MIGRATION_VERSION, LAST_MIGRATION_VERSION)
 end
 
 --- seq_db end
@@ -126,29 +126,42 @@ function curr_state.has_adjustment()
     return curr_state.mode ~= curr_state.ADJUST_MODE.None
 end
 
+---解析单个排序信息字符串
+---@param value_item string
+---@return string | nil, RuntimeAdjustment | nil
+local function parse_adjustment_value_item(value_item)
+    local item, fixed_position, offset, updated_at =
+        value_item:match("i=(%S+) p=(%S+) o=(%S*) t=(%S+)") -- 兼容旧数据格式，offset 可能为 0
+    fixed_position = fixed_position and tonumber(fixed_position)
+    offset = offset and tonumber(offset) or 0
+    updated_at = updated_at and tonumber(updated_at)
+    -- 忽略为 0 的位置，0 位置代表重置
+    if fixed_position and fixed_position > 0 then
+        return item, {
+            fixed_position = fixed_position,
+            offset = offset,
+            updated_at = updated_at,
+        }
+        -- log.warning(string.format("[sequence] %s: %s", adjust_key, value))
+    end
+
+    return nil, nil
+end
+
+---从数据库中的排序字符串中解析排序数据。
+---一个输入码，对应多条排序信息，用制表符分割
 ---@return table<string, RuntimeAdjustment> | nil
-local function parse_adjustment_value(value_str)
-    local adjustment = nil
+local function parse_adjustment_values(values_str)
+    local adjustments = {}
 
-    for value in value_str:gmatch("[^\t]+") do
-        if adjustment == nil then adjustment = {} end
-
-        local item, fixed_position, offset, updated_at = value:match("i=(%S+) p=(%S+) o=(%S+) t=(%S+)")
-        fixed_position = fixed_position and tonumber(fixed_position)
-        offset = offset and tonumber(offset)
-        updated_at = updated_at and tonumber(updated_at)
-        -- 忽略为 0 的位置，0 位置代表重置
-        if fixed_position > 0 then
-            adjustment[item] = {
-                fixed_position = fixed_position,
-                offset = offset,
-                updated_at = updated_at,
-            }
-            -- log.warning(string.format("[sequence] %s: %s", adjust_key, value))
+    for value in values_str:gmatch("[^\t]+") do
+        local item, adjustment = parse_adjustment_value_item(value)
+        if item then
+            adjustments[item] = adjustment
         end
     end
 
-    return adjustment
+    return next(adjustments) and adjustments or nil
 end
 
 local adjustments_cache = {
@@ -157,7 +170,7 @@ local adjustments_cache = {
 }
 ---@param input string 当前输入码
 ---@return table<string, RuntimeAdjustment> | nil
-local function get_adjustments(input)
+local function get_input_adjustments(input)
     if adjustments_cache.key == input then return adjustments_cache.value end
 
     if input == "" or input == nil then return nil end
@@ -165,8 +178,8 @@ local function get_adjustments(input)
     local value_str = seq_db.fetch(input)
     if value_str == nil then return nil end
 
-    local adjustment = parse_adjustment_value(value_str)
-    adjustments_cache.value = adjustment
+    local adjustments = parse_adjustment_values(value_str)
+    adjustments_cache.value = adjustments
     return adjustments_cache.value
 end
 
@@ -190,9 +203,12 @@ end
 ---@param item string 调整项：命令模式为候选索引，其他为候选词
 ---@param adjustment Adjustment
 local function save_adjustment(input, item, adjustment)
-    if input == "" or input == nil then return end
+    if input == "" or input == nil then
+        log.warning(string.format("[sequence] 输入码不能为空: %s", input))
+        return
+    end
 
-    local adjustments = get_adjustments(input) or {}
+    local adjustments = get_input_adjustments(input) or {}
 
     adjustments[item] = {
         fixed_position = adjustment.fixed_position,
@@ -201,8 +217,12 @@ local function save_adjustment(input, item, adjustment)
     }
 
     local values = {}
-    for key, value in pairs(adjustments) do
-        local value_str = string.format("i=%s p=%s o=%s t=%s", key, value.fixed_position, value.offset, value.updated_at)
+    for item, item_adjustment in pairs(adjustments) do
+        local value_str = string.format("i=%s p=%s o=%s t=%s",
+            item,
+            item_adjustment.fixed_position,
+            item_adjustment.offset,
+            item_adjustment.updated_at)
         table.insert(values, value_str)
     end
 
@@ -231,9 +251,28 @@ end
 
 local sync_file_name = rime_api.get_user_data_dir() .. "/" .. seq_db.db_name .. ".txt"
 
+---将旧数据转化为新数据格式
+---@param key string db key
+---@param value string db value
+local function transform_legacy_record(key, value)
+    local new_input, new_value = key, value
+
+    local input, item = key:match("^(.+)|(.+)$")
+    if input and item then
+        new_input = input
+        local fixed_position, offset, updated_at = value:match("([-%d]+),?([-%d]*)\t([.%d]+)")
+        if not offset or offset == "" then offset = 0 end
+        new_value = string.format("i=%s p=%s o=%s t=%s", item, fixed_position, offset, updated_at)
+    end
+
+    return new_input, new_value
+end
+
 local function db_migration()
     local migration_version = seq_db.get_migration_version()
-    if migration_version then return end
+    if migration_version == LAST_MIGRATION_VERSION then
+        return
+    end
 
     local migration_count = 0
     ---@type nil | DbAccessor
@@ -241,24 +280,53 @@ local function db_migration()
     da = seq_db.query("")
     if not da then return end
 
-    for old_key, old_value in da:iter() do
-        -- 兼容旧数据
-        local input, item = old_key:match("(%S+)|(%S+)")
-        if input and item then
-            local fixed_position, offset, updated_at = old_value:match("([-%d]+),?([-%d]*)\t([.%d]+)")
-            seq_db.erase(old_key)
-            save_adjustment(input, item, { fixed_position = fixed_position, offset = offset, updated_at = updated_at })
-            migration_count = migration_count + 1
+    for key, value in da:iter() do
+        local new_key, new_value = transform_legacy_record(key, value)
+        if key ~= new_key then
+            local item, adjustment = parse_adjustment_value_item(new_value)
+            if item and adjustment then
+                save_adjustment(new_key, item, adjustment)
+                seq_db.erase(key)
+                migration_count = migration_count + 1
+            end
         end
     end
     da = nil
 
-    seq_db.update_migration_version("8.9.3")
+    seq_db.update_migration_version()
     if migration_count > 0 then
-        log.info(string.format("[super_sequence] 完成旧格式数据迁移，共 %s 条", migration_count))
+        log.info(string.format("[sequence] 完成旧格式数据迁移，共 %s 条", migration_count))
     end
 end
 
+
+-- 导出排序数据
+--
+-- 每行数据格式如下：
+-- ```console
+--   制表符分割
+--       |        空格分割
+--       |            |
+--       v            v
+--  /rq	i=2 p=1 o=0 t=1752737077.5417
+--  vuvj	i=主站 p=1 o=0 t=1752737072.5412
+--   ^        ^     ^   ^          ^
+--   |        |     |   |          |
+-- 输入码   排序项  | 偏移量     时间戳
+--                  |
+--                 位置
+-- ```
+--
+-- 其中：
+-- - 排序项：普通模式为「候选词」，功能模式为「候选索引」（从 0  开始计算）
+-- - 位置：
+--   - 重置为 `0`
+--   - 置顶为 `1`
+--   - 其他值为移动后的位置。（此种情况只做记录，实际排序按偏移量计算）
+-- - 偏移量：前／后移动的偏移量
+--   - 前移 `<0`
+--   - 后移 `>0`
+--   - 「重置」、「置顶」等非前／后移操作为 `0`
 local function export_to_file()
     -- 文件已存在不进行覆盖
     if wanxiang.file_exists(sync_file_name) then return end
@@ -273,12 +341,7 @@ local function export_to_file()
 
     for key, value in da:iter() do
         -- 兼容旧数据
-        local input, item = key:match("(%S+)|(%S+)")
-        if input and item then
-            key = input
-            local fixed_position, offset, updated_at = value:match("([-%d]+),?([-%d]*)\t([.%d]+)")
-            value = string.format("i=%s p=%s o=%s t=%s", item, fixed_position, offset, updated_at)
-        end
+        key, value = transform_legacy_record(key, value)
 
         if key:sub(1, 2) == "\001" .. "/" then
             local line = string.format("%s\t%s", key, value)
@@ -299,7 +362,7 @@ local function export_to_file()
     end
     da = nil
 
-    log.info(string.format("[super_sequence] 已导出排序数据至文件 %s", sync_file_name))
+    log.info(string.format("[sequence] 已导出排序数据至文件 %s", sync_file_name))
 
     file:close()
 end
@@ -311,49 +374,45 @@ local function import_from_file()
     local import_count = 0
 
     local user_id = wanxiang.get_user_id()
-    local from_user_id = nil
+    local file_user_id = nil
     for line in file:lines() do
         if line == "" then goto continue end
         -- 先找 from_user_id
-        if from_user_id == nil then
-            from_user_id = string.match(line, "^" .. "\001" .. "/user_id\t(.+)")
+        if file_user_id == nil then
+            file_user_id = string.match(line, "^" .. "\001" .. "/user_id\t(.+)")
             goto continue
         end
+
         -- 如果 user_id 一致，则不进行同步
-        if from_user_id == user_id then break end
+        if file_user_id == user_id then break end
         -- 忽略开头是 "\001/" 开头
         if line:sub(1, 2) == "\001" .. "/" then goto continue end
 
         -- 以下开始处理输入
-        local input, value = line:match("^(%S+)\t(%S+)$")
+        local key, value = line:match("^(%S+)\t(.+)$")
 
-        if input and value then
-            local old_input, item = input:match("^(.+)|(.+)$")
-            if old_input and item then
-                input = old_input
-                local fixed_position, offset, updated_at = value:match("([-%d]+),?([-%d]*)\t([.%d]+)")
-                value = string.format("i=%s p=%s o=%s t=%s", item, fixed_position, offset, updated_at)
-            end
+        if key and value then
+            local input, value_item = transform_legacy_record(key, value)
+            local item, adjustment = parse_adjustment_value_item(value_item)
+            if item == nil or adjustment == nil then goto continue end
 
-            local from_adjustment = parse_adjustment_value(value)
-            if not from_adjustment then goto continue end
-
-            local exist_adjustments = get_adjustments(input)
-            local exist_adjustment  = exist_adjustments and exist_adjustments[from_adjustment.item] or nil
-            if exist_adjustment then -- 跳过旧的数据
-                if from_adjustment.updated_at <= exist_adjustment.updated_at then
-                    goto continue
-                end
+            local curr_adjustments = get_input_adjustments(input)
+            if curr_adjustments
+                and curr_adjustments[item]
+                and adjustment.updated_at <= curr_adjustments[item].updated_at
+            then
+                -- 跳过旧的数据
+                goto continue
             end
 
             import_count = import_count + 1
-            save_adjustment(input, item, from_adjustment)
+            save_adjustment(input, item, adjustment)
         end
 
         ::continue::
     end
 
-    log.info(string.format("[super_sequence] 自动导入排序数据 %s 条", import_count))
+    log.info(string.format("[sequence] 自动导入排序数据 %s 条", import_count))
 
     file:close()
     if import_count > 0 then
@@ -560,7 +619,7 @@ function F.func(input, env)
         return original_list()
     end
 
-    local prev_adjustments = get_adjustments(adjust_code)
+    local prev_adjustments = get_input_adjustments(adjust_code)
 
     ---@type RuntimeAdjustment | nil
     local curr_adjustment = nil
