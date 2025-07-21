@@ -240,20 +240,24 @@ local function update_tips_prompt(context, env)
     local segment = context.composition:back()
     if segment == nil then return end
 
-    ---@type string | nil
-    local tips_key = nil
-    if segment.selected_index == 0
-        and context.input and #context.input > 0 then
-        -- 对于首选，优先使用输入码查询
-        tips_key = context.input
-    else
-        local cand = context:get_selected_candidate()
-        if cand then
-            tips_key = cand.text
-        end
+    ---@param key string
+    ---@param fallback_key? string
+    ---@return string | nil
+    local function get_tip(key, fallback_key)
+        if not key or key == "" then return nil end
+
+        if not fallback_key then return tips_db.fetch(key) end
+
+        local tip = tips_db.fetch(key)
+        return (tip and #tip > 0)
+            and tip
+            or tips_db.fetch(fallback_key)
     end
 
-    env.current_tip = tips_key and tips_db.fetch(tips_key) or nil
+    local cand = context:get_selected_candidate() or {}
+    env.current_tip = segment.selected_index == 0
+        and get_tip(context.input, cand.text)
+        or get_tip(cand.text)
 
     if env.current_tip ~= nil and env.current_tip ~= "" then
         -- 有 tips 则直接设置 prompt
