@@ -32,16 +32,16 @@ local function replace_schema(file_path, target_schema)
 
     -- 根据文件名决定替换模式
     if file_path:find("wanxiang_radical") then
-        content = content:gsub("([%s]*__include:%s*wanxiang_radical%.schema:/)[^%s\r\n]+", "%1" .. target_schema)
+        content = content:gsub("([%s]*__include:%s*wanxiang_radical%.schema:/)[^%sa-zA-Z\r\n]+", "%1" .. target_schema)
 
     elseif file_path:find("wanxiang_cnanden") then
-        content = content:gsub("([%s]*__include:%s*wanxiang_cnanden%.schema:/)[^%s\r\n]+", "%1" .. target_schema)
+        content = content:gsub("([%s]*__include:%s*wanxiang_cnanden%.schema:/)[^%sa-zA-Z\r\n]+", "%1" .. target_schema)
 
     elseif file_path:find("wanxiang_en") then
-        content = content:gsub("([%s]*__include:%s*wanxiang_en%.schema:/)[^%s\r\n]+", "%1" .. target_schema)
+        content = content:gsub("([%s]*__include:%s*wanxiang_en%.schema:/)[^%sa-zA-Z\r\n]+", "%1" .. target_schema)
 
     elseif file_path:find("wanxiang%.custom") or file_path:find("wanxiang_pro") then
-        content = content:gsub("([%s%-]*wanxiang[_]?pro?%.schema:/)[^%s\r\n]+", "%1" .. target_schema, 1)
+        content = content:gsub("([%s%-]*wanxiang[_]?pro?%.schema:/)[^%sa-zA-Z\r\n]+", "%1" .. target_schema, 1)
     end
 
     f = io.open(file_path, "w")
