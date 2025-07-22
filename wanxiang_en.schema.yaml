@@ -10,7 +10,7 @@ set_shuru_schema:
 
 schema:
   schema_id: wanxiang_en
-  name: 万象:英文词库
+  name: 万象：英文词库
   version: "LTS"
   author:
   description: Easy English Nano，只包含少量常用词汇，方便中英文混合输入度方案调用。
