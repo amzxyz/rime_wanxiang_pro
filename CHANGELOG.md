@@ -1,5 +1,28 @@
 # Changelog
 
+## [9.2.0](https://github.com/amzxyz/rime_wanxiang/compare/v9.1.3...v9.2.0) (2025-07-22)
+
+
+### ✨ 新特性
+
+* 新增快速初始化插件set_schema.lua ([f557533](https://github.com/amzxyz/rime_wanxiang/commit/f5575330c245d24d64fac5a7553da2717c79ec30))
+
+
+### 📚 词库更新
+
+* 词库优化 ([1f41bef](https://github.com/amzxyz/rime_wanxiang/commit/1f41bef92bdcf552859251771d9646f4f56e6aec))
+* 词库调整 ([26a9626](https://github.com/amzxyz/rime_wanxiang/commit/26a96268a012c2c085df02086ac80971a1baf231))
+
+
+### 🐛 Bug 修复
+
+* **sequence:** 旧排序格式的数据迁移和导入 ([4f9f90f](https://github.com/amzxyz/rime_wanxiang/commit/4f9f90f8f30208b5f019cca26d1a8a96120aaff5))
+
+
+### 🏡 杂项
+
+* 修改说明 ([2b5c837](https://github.com/amzxyz/rime_wanxiang/commit/2b5c8379d7fa36ed58ffd35cdccd32210273ec80))
+
 ## [9.1.3](https://github.com/amzxyz/rime_wanxiang/compare/v9.1.2...v9.1.3) (2025-07-21)
 
 
