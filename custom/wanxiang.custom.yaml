@@ -5,7 +5,7 @@ patch:
       - wanxiang.schema:/自然码            # 可选输入方案名称：全拼, 自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
   custom_phrase/user_dict: custom_phrasexx    # 这里改成什么就需要手动创建同名的 custom_phrasexx.txt 文件在用户目录，这个文件主要用于置顶，编码为自定义编码的词汇
   translator/packs/+:
-    - userxx                                  #导入根目录下名称为userxx.dict.yaml的自定义固定词典，编码要与固定词库一致（或者不写编码），形如姓名、专有名词公司名称等等
+    - userxx                                  #导入根目录下名称为userxx.dict.yaml的自定义固定词典，编码要与固定词库一致，编码权重都不要少，形如姓名、专有名词公司名称等等
   #下面是候选数量
   menu/page_size: 6  #不要超过6，7890用于代表声调1234，6个管够你用了，如果你非要10个，不要问我😜。
   #生日信息：/sr或者osr，在这里定义全局替换构建你的生日查询数据库
