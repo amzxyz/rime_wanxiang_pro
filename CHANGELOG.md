@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.2.1](https://github.com/amzxyz/rime_wanxiang/compare/v9.2.0...v9.2.1) (2025-07-22)
+
+
+### 📚 词库更新
+
+* **en:** 同步雾凇英文词库并去重 ([dde7bf3](https://github.com/amzxyz/rime_wanxiang/commit/dde7bf35c2bb10eb7c9cffb55edc578b44cf147d))
+
 ## [9.2.0](https://github.com/amzxyz/rime_wanxiang/compare/v9.1.3...v9.2.0) (2025-07-22)
 
 
