@@ -4,7 +4,7 @@
 # 全拼和各个双拼有部分拼写规则不通用，需要修改
 ###############选择与之匹配的拼音方案#####################
 set_shuru_schema:
-  __include: 全拼    #可选的选项有（全拼, 自然码, 小鹤双拼, 微软双拼, 搜狗双拼, 智能ABC, 紫光双拼, 拼音加加）
+  __include: 全拼    #可选的选项有（全拼, 自然码, 小鹤双拼, 微软双拼, 搜狗双拼, 智能ABC, 紫光双拼, 拼音加加, 自然龙, 汉心龙）
 
 ######################################################
 
@@ -341,3 +341,51 @@ algebra_common:
     - derive/9/jy/
     - derive/\+/jq/
     - derive/#/jj/
+汉心龙:
+  __include: algebra_common
+  __append:
+    - derive/(?<!\d)1([1-9])(?!\d)/tn$1/
+    - derive/([1-9])0000(?!0)/$1gs/
+    - derive/([1-9])000(?!0)/$1ax/
+    - derive/([1-9])00(?!0)/$1ir/
+    - derive/([2-9])0(?!0)/$1tn/
+    - derive/(?<!\d)([2-9])([1-9])(?!\d)/$1tn$2/
+    - derive/\./hq/
+    - derive/10/tn/
+    - derive/0/dk/
+    - derive/1/jg/
+    - derive/2/bo/
+    - derive/2/dn/
+    - derive/3/zo/
+    - derive/4/zl/
+    - derive/5/gc/
+    - derive/6/de/
+    - derive/7/ag/
+    - derive/8/ie/
+    - derive/9/ez/
+    - derive/\+/eo/
+    - derive/#/eq/
+自然龙:
+  __include: algebra_common
+  __append:
+    - derive/(?<!\d)1([1-9])(?!\d)/ub$1/
+    - derive/([1-9])0000(?!0)/$1wj/
+    - derive/([1-9])000(?!0)/$1qr/
+    - derive/([1-9])00(?!0)/$1bu/
+    - derive/([2-9])0(?!0)/$1ub/
+    - derive/(?<!\d)([2-9])([1-9])(?!\d)/$1ub$2/
+    - derive/\./dp/
+    - derive/10/ub/
+    - derive/0/ln/
+    - derive/1/yj/
+    - derive/2/eh/
+    - derive/2/lu/
+    - derive/3/sn/
+    - derive/4/st/
+    - derive/5/wm/
+    - derive/6/lo/
+    - derive/7/qj/
+    - derive/8/bl/
+    - derive/9/jz/
+    - derive/\+/jd/
+    - derive/#/jw/
