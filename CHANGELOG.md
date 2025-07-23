@@ -1,5 +1,24 @@
 # Changelog
 
+## [9.2.2](https://github.com/amzxyz/rime_wanxiang/compare/v9.2.1...v9.2.2) (2025-07-23)
+
+
+### 📚 词库更新
+
+* 词库调整 ([94efeff](https://github.com/amzxyz/rime_wanxiang/commit/94efeffd075b8e0373ae3458285697fc1e0e1991))
+
+
+### 🐛 Bug 修复
+
+* 修正/符号为半角输出 ([2ecac62](https://github.com/amzxyz/rime_wanxiang/commit/2ecac62d524b738169130d585034152ed9ba0902))
+
+
+### 🏡 杂项
+
+* 修改说明 ([77f9427](https://github.com/amzxyz/rime_wanxiang/commit/77f942761f97a8fcbcf949520cef8b5bcbabfe62))
+* 修改说明 ([b403032](https://github.com/amzxyz/rime_wanxiang/commit/b403032acd81a45407d460b0cbf583b458ea253e))
+* 调整说明 ([8ab979a](https://github.com/amzxyz/rime_wanxiang/commit/8ab979ad0cf24050022d8d2d9cc429d3d54bb457))
+
 ## [9.2.1](https://github.com/amzxyz/rime_wanxiang/compare/v9.2.0...v9.2.1) (2025-07-22)
 
 
