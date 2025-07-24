@@ -51,6 +51,7 @@ package_schema_base() {
             for f in \
             "cn&en.dict.yaml" \
             en.dict.yaml \
+            chengyu.txt \
             correlation.dict.yaml \
             base.dict.yaml \
             chars.dict.yaml \
@@ -127,6 +128,7 @@ package_schema_pro() {
             for f in \
             "cn&en.dict.yaml" \
             en.dict.yaml \
+            chengyu.txt \
             correlation.pro.dict.yaml \
             base.pro.dict.yaml \
             chars.pro.dict.yaml \
