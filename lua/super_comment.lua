@@ -47,7 +47,7 @@ end
 
 function CF.get_dict(env)
     if env.chaifen_dict == nil then
-        env.chaifen_dict = ReverseLookup("wanxiang_lookup")
+        env.chaifen_dict = ReverseLookup("wanxiang_chaifen")
     end
     return env.chaifen_dict
 end

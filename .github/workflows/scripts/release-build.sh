@@ -86,7 +86,15 @@ package_schema_pro() {
     if [[ -d "$ROOT_DIR/pro-$SCHEMA_NAME-fuzhu-dicts" ]]; then
         mv "$ROOT_DIR/pro-$SCHEMA_NAME-fuzhu-dicts" "$OUT_DIR/dicts"
     fi
-
+    # 1.1 补充复制必需的附加文件
+    for f in en.dict.yaml "cn&en.dict.yaml" chengyu.txt; do
+        if [ -f "$ROOT_DIR/dicts/$f" ]; then
+            cp "$ROOT_DIR/dicts/$f" "$OUT_DIR/dicts/"
+            echo "✅ Copied $f to $OUT_DIR/dicts/"
+        else
+            echo "⚠️ Warning: $f not found in dicts"
+        fi
+    done
     # 2. 从 chaifen 文件夹中复制对应文件并重命名
     LOOKUP_SRC="$ROOT_DIR/chaifen/wanxiang_chaifen_${SCHEMA_NAME}.dict.yaml"
     LOOKUP_DST="$OUT_DIR/wanxiang_chaifen.dict.yaml"
@@ -119,35 +127,8 @@ package_schema_pro() {
         if [[ "$name" == "custom" || "$name" == "dist" ]]; then continue; fi
         if [[ "$name" == "LICENSE" ]]; then continue; fi
         cp -r "$item" "$OUT_DIR/"
-        # 处理 dicts 文件夹
-        if [[ "$name" == "dicts" ]]; then
-            mkdir -p "$OUT_DIR/dicts"
-            cd "$ROOT_DIR/dicts"
-
-            # 复制指定文件
-            for f in \
-            "cn&en.dict.yaml" \
-            en.dict.yaml \
-            chengyu.txt \
-            correlation.pro.dict.yaml \
-            base.pro.dict.yaml \
-            chars.pro.dict.yaml \
-            compatible.pro.dict.yaml \
-            corrections.pro.dict.yaml \
-            place.pro.dict.yaml \
-            poetry.pro.dict.yaml \
-            suggestion.pro.dict.yaml; do
-                if [ -f "$f" ]; then
-                    cp "$f" "$OUT_DIR/dicts/"
-                else
-                    echo "Warning: $f not found in dicts"
-                fi
-            done
-            cd "$ROOT_DIR"
-            continue
-        fi
-        cp -r "$item" "$OUT_DIR/"
     done
+
     # 6. 修改 default.yaml，删除 schema_list 中的 - schema: wanxiang
     remove_schema wanxiang "$OUT_DIR"
 }
