@@ -3,7 +3,7 @@
 # 方案说明
 ########################万象拼音标准版本，支持同文8、14、18键 ###########################
 set_shuru_schema:               #配置此项就是选择什么输入法,同时拆分反查和中英文混输也将匹配该输入方案
-  __include: 全拼                #可选解码规则有   全拼, 自然码, 自然龙, 汉心龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 拼音加加, 乱序17 选择一个填入
+  __include: 自然码                #可选解码规则有   全拼, 自然码, 自然龙, 汉心龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 拼音加加, 乱序17 选择一个填入
 super_comment:                  # 超级注释模块
   candidate_length: 2           # 候选词注释提醒的生效长度，0为关闭  但同时清空其它，应当使用开关或者快捷键来处理    
   corrector_type: "{comment}"   #错音错词提示显示类型，比如"({comment})" 
@@ -19,10 +19,9 @@ schema:
   description: |
     万象拼音标准版本，带声调的词库，支持语法模型，全拼、简拼、整句、声调辅助筛选，拥有超越大厂的输入体验！
   dependencies:
-    - wanxiang_en         # 英文输入，作为次翻译器挂载到拼音方案
-    - wanxiang_cnanden    #中英文混合词汇
-    - wanxiang_radical    # 部件拆字，反查及辅码
-    - wanxiang_stroke     #笔画反查
+    - wanxiang_mixedcode    #中英文混合词汇
+    - wanxiang_reverse      # 部件拆字，反查及辅码
+
 # 开关
 # reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。
 # states: 方案选单显示的名称。可以注释掉，仍可以通过快捷键切换。
@@ -79,31 +78,28 @@ engine:
     - ascii_segmentor                           #标识英文段落〔譬如在英文模式下〕字母直接上屛
     - matcher                                   #配合 recognizer 标识符合特定规则的段落，如网址、反查等，加上特定 tag
     - abc_segmentor                             #标识常规的文字段落，加上 abc 这个 tag
-    - affix_segmentor@radical_lookup            #部件拆字自定义 tag
-    - affix_segmentor@reverse_stroke            #笔画反查自定义 tag
+    - affix_segmentor@wanxiang_reverse          #反查 tag
     - affix_segmentor@add_user_dict             #自造词tag
     - punct_segmentor                           #标识符号段落〔键入标点符号用〕加上 punct 这个 tag
     - fallback_segmentor                        #标识其他未标识段落，必须放在最后帮助tag模式切换后回退重新处理
   translators:
-    - predict_translator                 #预测候选的生成器
-    - punct_translator                   #配合 punct_segmentor 转换标点符号
-    - script_translator                  #脚本翻译器，用于拼音、粤拼等基于音节表的输入方案
-    - lua_translator@*version_display    #输入'/wx'，显示万象项目网址和当前版本号
-    - lua_translator@*set_schema         #输入'/zrm'，快速切换为自然码双拼， /flypy→小鹤双拼 /mspy→微软双拼 /zrm→自然码 /sogou→搜狗双拼 /abc→智能ABC /ziguang→紫光双拼 /pyjj→拼音加加 /gbpy→国标双拼 /lxsq→乱序17 /pinyin→全拼
-    - lua_translator@*shijian            #农历、日期、节气、节日、时间、周、问候模板等等，触发清单看下文
-    - lua_translator@*unicode            #通过输入大写U引导，并输入Unicode编码获得汉字输出
-    - lua_translator@*number_translator  #数字、金额大写，通过输入大写R1234获得候选输出
-    - lua_translator@*super_calculator   #超级计算器，Lua内查看高级用法
-    - lua_translator@*input_statistics   #一个输入统计的脚本，以日、周、月、年等维度的统计
-    - table_translator@custom_phrase     #自定义短语 custom_phrase.txt，用于置顶自定义编码候选词
-    - table_translator@chengyu           #简码成语词汇表导入
-    - table_translator@wanxiang_en       #挂接英文输入，参与中英混输
-    - table_translator@wanxiang_cnanden  #中英混合词汇表导入
-    - table_translator@radical_lookup    #挂接部件拆字反查
-    - table_translator@reverse_stroke    #挂接笔画反查
-    - script_translator@add_user_dict    #按需自造词
-    - script_translator@user_dict_set    #使用自造词
-    - lua_translator@*force_gc           #暴力 GC 降低内存
+    - predict_translator                   #预测候选的生成器
+    - punct_translator                     #配合 punct_segmentor 转换标点符号
+    - script_translator                    #脚本翻译器，用于拼音、粤拼等基于音节表的输入方案
+    - lua_translator@*version_display      #输入'/wx'，显示万象项目网址和当前版本号
+    - lua_translator@*set_schema           #输入'/zrm'，快速切换为自然码双拼， /flypy→小鹤双拼 /mspy→微软双拼 /zrm→自然码 /sogou→搜狗双拼 /abc→智能ABC /ziguang→紫光双拼 /pyjj→拼音加加 /gbpy→国标双拼 /lxsq→乱序17 /pinyin→全拼
+    - lua_translator@*shijian              #农历、日期、节气、节日、时间、周、问候模板等等，触发清单看下文
+    - lua_translator@*unicode              #通过输入大写U引导，并输入Unicode编码获得汉字输出
+    - lua_translator@*number_translator    #数字、金额大写，通过输入大写R1234获得候选输出
+    - lua_translator@*super_calculator     #超级计算器，Lua内查看高级用法
+    - lua_translator@*input_statistics     #一个输入统计的脚本，以日、周、月、年等维度的统计
+    - table_translator@custom_phrase       #自定义短语 custom_phrase.txt，用于置顶自定义编码候选词
+    - table_translator@chengyu             #简码成语词汇表导入
+    - table_translator@wanxiang_mixedcode  #中英等混合词汇表导入
+    - table_translator@wanxiang_reverse    #挂接部件组字和笔画反查
+    - script_translator@add_user_dict      #按需自造词
+    - script_translator@user_dict_set      #使用自造词
+    - lua_translator@*force_gc             #暴力 GC 降低内存
   filters:
     - lua_filter@*super_sequence*F                  #手动排序，高亮候选 ctrl+j左移动 ctrl+k 右移动 ctrl+0 移除位移
     - lua_filter@*autocap_filter                    #英文自动大写，当输入一个大写那么候选首字母大写，当输入两个大写那么候选全为大写
@@ -115,7 +111,7 @@ engine:
     - simplifier@s2tw                               #简繁切换台繁
     - simplifier@s2hk                               #简繁切换港繁
     - simplifier@chinese_english                    #中英翻译滤镜
-    - lua_filter@*search@wanxiang_radical           #部件拆字辅码放在简繁转换之后
+    - lua_filter@*search@wanxiang_reverse           #部件拆字辅码放在简繁转换之后
     - lua_filter@*text_formatting                   #给自定义用户词扩展一个换行:\n, 制表符：\t, 回车符：\r, 空格：\s
     - uniquifier                                    # 去重
 
@@ -228,28 +224,18 @@ custom_phrase:
   initial_quality: 99       #custom_phrase 的权重应该比 pinyin 和 wanxiang_en 大
 
 
-# 简码词库导入位于jm_dicts得chengyu.txt文件词库
+# 简码词库导入位于dicts得chengyu.txt文件词库
 chengyu:
   dictionary: ""
-  user_dict: jm_dicts/chengyu
+  user_dict: dicts/chengyu
   db_class: stabledb
   enable_sentence: false
   enable_completion: false
   initial_quality: 1.3
 
-# 次翻译器，英文
-wanxiang_en:
-  dictionary: wanxiang_en  # 挂载词库 wanxiang_en.dict.yaml
-  enable_sentence: false
-  enable_user_dict: false
-  initial_quality: 1.1
-  comment_format:
-    - xform/.*//           # 清空提示码
-
-
-# 中英混合词汇
-wanxiang_cnanden:
-  dictionary: wanxiang_cnanden
+# 中文、英文、数字、符号等混合词汇
+wanxiang_mixedcode:
+  dictionary: wanxiang_mixedcode
   db_class: stabledb
   enable_completion: true
   enable_sentence: false
@@ -290,29 +276,17 @@ s2tw:
   tags: [abc]
 
 # 部件拆字反查
-radical_lookup:
-  tag: radical_lookup
-  dictionary: wanxiang_radical
+wanxiang_reverse:
+  tag: wanxiang_reverse
+  dictionary: wanxiang_reverse
+  db_class: stabledb
   enable_user_dict: false
   prefix: "`"  # 反查前缀（反查时前缀会消失影响打英文所以设定为两个字母，或可改成一个非字母符号），与 recognizer/patterns/radical_lookup 匹配
   tips: "〔反查：部件|笔画〕"
-  extra_tags:
-    - reverse_stroke   #带上笔画反查一起玩，单次引导两种兼容，节约引导按键
-# 笔画反查
-reverse_stroke:
-  tag: reverse_stroke
-  dictionary: wanxiang_stroke
-  db_class: stabledb
-  enable_user_dict: false
-  enable_completion: true
-  suffix: "'"
-  preedit_format:
-    - xlit/hspnz/一丨丿丶乙/
-
 
 # 部件拆字滤镜
 radical_reverse_lookup:
-  tags: [ radical_lookup,reverse_stroke ]  #起作用tag范围
+  tags: [ wanxiang_reverse ]  #起作用tag范围
   overwrite_comment: true   #是否覆盖其他提示
   dictionary: wanxiang      #带音调的词典
 
@@ -322,8 +296,8 @@ recognizer:
   import_preset: default  # 从 default.yaml 继承通用的
   patterns:  # 再增加方案专有的：
     punct: "^/([0-9]|10|[A-Za-z]+)$"    # 响应 symbols.yaml 的 symbols
-    radical_lookup: "^`[A-Za-z]*$"      # 响应部件拆字与笔画的反查，与 radical_lookup/prefix 匹配
-    #add_user_dict: "^ac[A-Za-z/`']*$"   #自造词
+    wanxiang_reverse: "^`[A-Za-z]*$"      # 响应部件拆字与笔画的反查，与 wanxiang_reverse/prefix 匹配
+    #add_user_dict: "^ac[A-Za-z/`']*$"   #引导式造词
     unicode: "^U[a-f0-9]+"              # U 作为触发前缀，响应 lua_translator@unicode，输出 Unicode 字符
     number: "^R[0-9]+[.]?[0-9]*"        # R 作为触发前缀, 响应 lua_translator@number_translator，数字金额大写
     lunar: "^N[0-9]{1,8}"               # N 作为触发前缀，响应 lua_translator@shijian，公历转农历，输入 N20250515 得到「二〇二五年五月十五」

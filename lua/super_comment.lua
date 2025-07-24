@@ -103,7 +103,7 @@ function CR.init(env)
     local auto_delimiter = env.settings.auto_delimiter
     local is_pro = wanxiang.is_pro_scheme(env)
     -- 根据方案选择加载路径
-    local path = (is_pro and "zh_dicts_pro/corrections.dict.yaml") or "zh_dicts/corrections.dict.yaml"
+    local path = (is_pro and "dicts/corrections.pro.dict.yaml") or "dicts/corrections.dict.yaml"
     local file, close_file, err = wanxiang.load_file_with_fallback(path)
     if not file then
         log.error(string.format("[super_comment]: 加载失败 %s，错误: %s", path, err))

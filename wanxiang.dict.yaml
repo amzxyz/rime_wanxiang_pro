@@ -14,12 +14,12 @@ version: "LTS"
 sort: by_weight  #字典初始排序，可選original或by_weight
 use_preset_vocabulary: false
 import_tables:
-  - zh_dicts/chars           #字表，包含了所有带拼音的汉字
-  - zh_dicts/base            #基础词库，2-3字词汇
-  - zh_dicts/correlation     #关联词库，4字词汇，多为不同词频的2字语句连接起来起到合理组句的能力
-  - zh_dicts/suggestion      #联想词库，5字以上词汇，多用于输入前半段第二候选可以出来整段
-  - zh_dicts/corrections     #错音错字，支持错音和错字输入的兼容，同时供超级注释lua使用会在输入错误音节打出的时候给予提示
-  - zh_dicts/compatible      #兼容词库，是基础词库的扩充，收录了多场景多种读音的词组
-  - zh_dicts/poetry          #诗词
-  - zh_dicts/place           #地名
+  - dicts/chars           #字表，包含了所有带拼音的汉字
+  - dicts/base            #基础词库，2-3字词汇
+  - dicts/correlation     #关联词库，4字词汇，多为不同词频的2字语句连接起来起到合理组句的能力
+  - dicts/suggestion      #联想词库，5字以上词汇，多用于输入前半段第二候选可以出来整段
+  - dicts/corrections     #错音错字，支持错音和错字输入的兼容，同时供超级注释lua使用会在输入错误音节打出的时候给予提示
+  - dicts/compatible      #兼容词库，是基础词库的扩充，收录了多场景多种读音的词组
+  - dicts/poetry          #诗词
+  - dicts/place           #地名
 ...

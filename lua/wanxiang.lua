@@ -82,8 +82,8 @@ end
 function wanxiang.is_in_radical_mode(env)
     local seg = env.engine.context.composition:back()
     return seg and (
-        seg:has_tag("radical_lookup")
-        or seg:has_tag("reverse_stroke")
+        seg:has_tag("wanxiang_reverse")
+        --or seg:has_tag("reverse_stroke")
         or seg:has_tag("add_user_dict")
     ) or false
 end

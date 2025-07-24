@@ -6,7 +6,7 @@ on:
     branches:
       - wanxiang
     paths:
-      - 'zh_dicts/**'
+      - 'dicts/**'
 
 concurrency: # 防止并发冲突
   group: nightly-release
@@ -22,10 +22,10 @@ jobs:
         uses: actions/checkout@v4
 
       # 2. 检查指定文件夹或文件是否有变动
-      - name: Check if cn_dicts or wanxiang-lts-zh-hans.gram has changes
+      - name: Check if dicts or wanxiang-lts-zh-hans.gram has changes
         id: check_changes
         run: |
-          if git diff --quiet HEAD HEAD~1 -- cn_dicts wanxiang-lts-zh-hans.gram; then
+          if git diff --quiet HEAD HEAD~1 -- dicts wanxiang-lts-zh-hans.gram; then
             echo "SKIP=true" >> $GITHUB_ENV
           else
             echo "SKIP=false" >> $GITHUB_ENV
@@ -33,7 +33,7 @@ jobs:
       # 3. 条件跳过任务
       - name: Skip if no changes
         if: env.SKIP == 'true'
-        run: echo "No changes detected in 'cn_dicts' or 'wanxiang-lts-zh-hans.gram'. Skipping release process."
+        run: echo "No changes detected in 'dicts' or 'wanxiang-lts-zh-hans.gram'. Skipping release process."
 
       # 4. 安装 Python（确保我们能够调用 Python 脚本）
       - name: Setup Python
@@ -46,36 +46,58 @@ jobs:
       - name: Process Rime dicts
         if: env.SKIP != 'true'
         run: |
-          echo "Processing cn_dicts with Python script..."
+          echo "Processing dicts with Python script..."
           pip install --upgrade pip
           python .github/workflows/scripts/万象分包.py
 
-      # 6. 打包原有的 zh_dicts_pro 文件夹
-      - name: Pack zh_dicts_pro
+      # 6. 打包指定的 pro dict 文件
+      - name: Pack pro dicts
         if: env.SKIP != 'true'
         run: |
           mkdir -p dist
-          echo "Packing original zh_dicts_pro..."
-          if [ -d "zh_dicts_pro" ]; then
-            zip -r dist/8-pro-all-zh-dicts.zip zh_dicts_pro
+          echo "Packing specified pro zh_dicts..."
+          if [ -d "dicts" ]; then
+            cd dicts
+            zip -r ../dist/8-pro-all-zh-dicts.zip \
+              correlation.pro.dict.yaml \
+              base.pro.dict.yaml \
+              chars.pro.dict.yaml \
+              compatible.pro.dict.yaml \
+              corrections.pro.dict.yaml \
+              place.pro.dict.yaml \
+              poetry.pro.dict.yaml \
+              suggestion.pro.dict.yaml
             echo "Packing completed: dist/8-pro-all-zh-dicts.zip"
+            cd ..
           else
-            echo "Error: zh_dicts_pro folder does not exist."
+            echo "Error: dicts folder does not exist."
             exit 1
           fi
-      # 7. 打包原有的 zh_dicts 文件夹
-      - name: Pack zh_dicts
+
+      # 7. 打包指定的 base dict 文件
+      - name: Pack base zh_dicts
         if: env.SKIP != 'true'
         run: |
           mkdir -p dist
-          echo "Packing original zh_dicts..."
-          if [ -d "zh_dicts" ]; then
-            zip -r dist/9-base-zh-dicts.zip zh_dicts
+          echo "Packing specified base zh_dicts..."
+          if [ -d "dicts" ]; then
+            cd dicts
+            zip -r ../dist/9-base-zh-dicts.zip \
+              correlation.dict.yaml \
+              base.dict.yaml \
+              chars.dict.yaml \
+              compatible.dict.yaml \
+              corrections.dict.yaml \
+              place.dict.yaml \
+              poetry.dict.yaml \
+              suggestion.dict.yaml
             echo "Packing completed: dist/9-base-zh-dicts.zip"
+            cd ..
           else
-            echo "Error: zh_dicts_pro folder does not exist."
+            echo "Error: dicts folder does not exist."
             exit 1
           fi
+
       # 7. 将拆分后的 8 个词库文件夹一并打包
       - name: Pack splitted dicts
         if: env.SKIP != 'true'

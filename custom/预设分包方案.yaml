@@ -23,12 +23,10 @@ schema:
   description: |
     万象拼音 支持常见双拼方案和全拼输入，辅助码同时支持 全拼拼音；墨奇码;鹤形;自然码;简单鹤;仓颉;虎码首末;五笔前2;汉心码; 采用万象归一的词库，换方案不换词库，不丢失用户词！
   dependencies:
-    - wanxiang_stroke    #笔画反查
-    - wanxiang_radical   #部件拆字，反查及辅码
-    - wanxiang_lookup    #辅助码拆分注释、翻译注释、行政区划匹配、车牌、等等注释类显示滤镜，Lua专用：super_comment
-    - wanxiang_en        #英文输入
-    - wanxiang_cnanden   #中英文混合词汇
-    - wanxiang_charset   #字符集过滤器
+    - wanxiang_mixedcode  #中英文混合词汇
+    - wanxiang_reverse    # 部件拆字，反查及辅码
+    - wanxiang_chaifen    #辅助码拆分注释、翻译注释、行政区划匹配、车牌、等等注释类显示滤镜，Lua专用：super_comment
+    - wanxiang_charset    #字符集过滤器
 
 # 开关
 # reset: 默认状态。注释掉后，切换窗口时不会重置到默认状态。
@@ -90,8 +88,7 @@ engine:
     - ascii_segmentor                      #标识英文段落〔譬如在英文模式下〕字母直接上屛
     - matcher                              #配合 recognizer 标识符合特定规则的段落，如网址、反查等，加上特定 tag
     - abc_segmentor                        #标识常规的文字段落，加上 abc 这个 tag
-    - affix_segmentor@radical_lookup       #部件拆字自定义 tag
-    - affix_segmentor@reverse_stroke       #笔画反查自定义 tag
+    - affix_segmentor@wanxiang_reverse     #反查 tag
     - affix_segmentor@add_user_dict        #自造词加词 tag
     - punct_segmentor                      #标识符号段落〔键入标点符号用〕加上 punct 这个 tag
     - fallback_segmentor                   #标识其他未标识段落，必须放在最后帮助tag模式切换后回退重新处理
@@ -108,10 +105,8 @@ engine:
     - lua_translator@*input_statistics     #一个输入统计的脚本，以日、周、月、年等维度的统计
     - table_translator@custom_phrase       #自定义短语 custom_phrase.txt，用于置顶自定义编码候选词
     - table_translator@chengyu             #简码成语词汇表导入
-    - table_translator@wanxiang_en         #挂接英文输入，参与中英混输
-    - table_translator@wanxiang_cnanden    #中英混合词汇表导入
-    - table_translator@radical_lookup      #挂接部件拆字反查
-    - table_translator@reverse_stroke      #挂接笔画反查
+    - table_translator@wanxiang_mixedcode  #中英等混合词汇表导入
+    - table_translator@wanxiang_reverse    #挂接部件组字和笔画反查
     - script_translator@user_dict_set      #自造词之使用词汇入口
     - script_translator@add_user_dict      #自造词之制造词汇入口
     - lua_translator@*force_gc             #暴力 GC 降低内存
@@ -127,7 +122,7 @@ engine:
     - simplifier@s2tw                               #简繁切换台繁
     - simplifier@s2hk                               #简繁切换港繁
     - simplifier@chinese_english                    #中英翻译滤镜
-    - lua_filter@*search@wanxiang_radical           #部件拆字辅码放在简繁转换之后
+    - lua_filter@*search@wanxiang_reverse           #部件拆字辅码放在简繁转换之后
     - lua_filter@*text_formatting                   #给自定义用户词扩展一个换行:\n, 制表符：\t, 回车符：\r, 空格：\s
     - uniquifier                                    #去重
 
@@ -237,28 +232,18 @@ custom_phrase:
   initial_quality: 99      # custom_phrase 的权重应该比 pinyin 和 wanxiang_en 大
 
 
-# 简码词库导入位于jm_dicts得txt文件词库
+# 简码词库导入位于dicts得txt文件词库
 chengyu:
   dictionary: ""
-  user_dict: jm_dicts/chengyu
+  user_dict: dicts/chengyu
   db_class: stabledb
   enable_sentence: false
   enable_completion: false
   initial_quality: 1.2 #本表词和系统词重码居后
 
-# 次翻译器，英文
-wanxiang_en:
-  dictionary: wanxiang_en     # 挂载词库 wanxiang_en.dict.yaml
-  enable_sentence: false   # 禁止造句
-  enable_user_dict: false  # 禁用用户词典，是否开启自动调频
-  initial_quality: 1.1     # 初始权重
-  comment_format:          # 自定义提示码
-    - xform/.*//           # 清空提示码
-
-
-# 中英混合词汇
-wanxiang_cnanden:
-  dictionary: wanxiang_cnanden
+# 中文、英文、数字、符号等混合词汇
+wanxiang_mixedcode:
+  dictionary: wanxiang_mixedcode
   db_class: stabledb
   enable_completion: true
   enable_sentence: false
@@ -298,30 +283,19 @@ s2tw:
   tags: [abc]
 
 # 部件拆字反查
-radical_lookup:
-  tag: radical_lookup
-  dictionary: wanxiang_radical
+wanxiang_reverse:
+  tag: wanxiang_reverse
+  dictionary: wanxiang_reverse
+  db_class: stabledb
   enable_user_dict: false
   prefix: "`"  # 反查前缀（反查时前缀会消失影响打英文所以设定为两个字母，或可改成一个非字母符号），与 recognizer/patterns/radical_lookup 匹配
   tips: "〔反查：部件|笔画〕"
-  extra_tags:
-    - reverse_stroke
-
-reverse_stroke:
-  tag: reverse_stroke
-  dictionary: wanxiang_stroke
-  db_class: stabledb
-  enable_completion: true
-  suffix: "'"
-  preedit_format:
-    - xlit/hspnz/一丨丿丶乙/
-
 
 # 部件拆字滤镜
 radical_reverse_lookup:
-  tags: [ radical_lookup,reverse_stroke ]
-  overwrite_comment: true
-  dictionary: wanxiang_pro #带音调的词典
+  tags: [ wanxiang_reverse ]  #起作用tag范围
+  overwrite_comment: true   #是否覆盖其他提示
+  dictionary: wanxiang_pro      #带音调的词典
 
 
 # 处理符合特定规则的输入码，如网址、反查
@@ -329,7 +303,7 @@ recognizer:
   import_preset: default  # 从 default.yaml 继承通用的
   patterns:  # 再增加方案专有的：
     punct: "^/([0-9]|10|[A-Za-z]+)$"    # 响应 symbols.yaml 的 symbols
-    radical_lookup: "^`[A-Za-z]*$"        # 响应部件拆字与笔画的反查，与 radical_lookup/prefix 匹配
+    wanxiang_reverse: "^`[A-Za-z]*$"        # 响应部件拆字与笔画的反查，与 radical_lookup/prefix 匹配
     add_user_dict: "^``[A-Za-z/`']*$"      #自造词
     unicode: "^U[a-f0-9]+"              # 脚本将自动获取第 2 个字符 U 作为触发前缀，响应 lua_translator@unicode，输出 Unicode 字符
     number: "^R[0-9]+[.]?[0-9]*"        # 脚本将自动获取第 2 个字符 R 作为触发前缀，响应 lua_translator@number_translator，数字金额大写

@@ -1,0 +1,15 @@
+# Rime dictionary
+# encoding: utf-8
+---
+name: wanxiang_chaifen
+version: 1.0
+sort: original
+import_tables:
+  - chaifen/wanxiang_chaifen_hanxin #A
+  - chaifen/wanxiang_chaifen_jdh    #B
+  - chaifen/wanxiang_chaifen_tiger  #C
+  - chaifen/wanxiang_chaifen_flypy  #D
+  - chaifen/wanxiang_chaifen_moqi   #E
+  - chaifen/wanxiang_chaifen_zrm   #F
+  - chaifen/wanxiang_chaifen_wubi  #G
+...
