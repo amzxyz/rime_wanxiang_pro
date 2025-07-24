@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.0.1](https://github.com/amzxyz/rime_wanxiang/compare/v10.0.0...v10.0.1) (2025-07-24)
+
+
+### 🐛 Bug 修复
+
+* 修正自动化 ([7135c4a](https://github.com/amzxyz/rime_wanxiang/commit/7135c4a4dee956ad39d6a1e490701ec85d0ed93f))
+
 ## [10.0.0](https://github.com/amzxyz/rime_wanxiang/compare/v9.2.2...v10.0.0) (2025-07-24)
 
 
