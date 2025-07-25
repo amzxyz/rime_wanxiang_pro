@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.0.4](https://github.com/amzxyz/rime_wanxiang/compare/v10.0.3...v10.0.4) (2025-07-25)
+
+
+### 🐛 Bug 修复
+
+* 完善两分码表 ([d31b7f7](https://github.com/amzxyz/rime_wanxiang/commit/d31b7f7e339f37fb87dc13a8b2cf3d679aa41e4a))
+
 ## [10.0.3](https://github.com/amzxyz/rime_wanxiang/compare/v10.0.2...v10.0.3) (2025-07-25)
 
 
