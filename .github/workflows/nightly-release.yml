@@ -60,7 +60,7 @@ jobs:
             cd dicts
             zip -r ../dist/8-pro-all-dicts.zip \
               en.dict.yaml \
-              cn&en.dict.yaml \
+              "cn&en.dict.yaml" \
               chengyu.txt \
               correlation.pro.dict.yaml \
               base.pro.dict.yaml \
@@ -87,7 +87,7 @@ jobs:
             cd dicts
             zip -r ../dist/9-base-dicts.zip \
               en.dict.yaml \
-              cn&en.dict.yaml \
+              "cn&en.dict.yaml" \
               chengyu.txt \
               correlation.dict.yaml \
               base.dict.yaml \
