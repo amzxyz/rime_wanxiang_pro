@@ -9,7 +9,8 @@ schema:
   name: "万象：混合编码"
   version: "LTS"
   author: amzxyz
-  description:
+  description: |
+    混合编码负责将英文、中英文混合、携带符号的词组等全部统一到这个方案中完成
 engine:
   processors:
     - key_binder

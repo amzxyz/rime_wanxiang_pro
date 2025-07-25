@@ -8,9 +8,10 @@ set_shuru_schema:
 schema:
   schema_id: wanxiang_reverse
   name: "万象：部件组字反查"
-  version: "1.1.0"
-  author: Mirtle
-  description:
+  version: "LTS"
+  author: amzxyz
+  description: |
+    万象的反查功能模块，方案融合了组字与笔画的能力
 engine:
   processors:
     - key_binder
