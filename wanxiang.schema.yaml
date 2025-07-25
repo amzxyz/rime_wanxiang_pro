@@ -3,7 +3,7 @@
 # 方案说明
 ########################万象拼音标准版本，支持同文8、14、18键 ###########################
 set_shuru_schema:               #配置此项就是选择什么输入法,同时拆分反查和中英文混输也将匹配该输入方案
-  __include: 自然码                #可选解码规则有   全拼, 自然码, 自然龙, 汉心龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 拼音加加, 乱序17 选择一个填入
+  __include: 全拼                #可选解码规则有   全拼, 自然码, 自然龙, 汉心龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 拼音加加, 乱序17 选择一个填入
 super_comment:                  # 超级注释模块
   candidate_length: 2           # 候选词注释提醒的生效长度，0为关闭  但同时清空其它，应当使用开关或者快捷键来处理    
   corrector_type: "{comment}"   #错音错词提示显示类型，比如"({comment})" 
@@ -37,15 +37,16 @@ switches:
     states: [表情关, 表情开]
   - name: chinese_english               #候选进入翻译模式滤镜，会显示在相应的候选后面，万象侧重于tips提示，避免候选被占用，归属opencc 翻译滤镜
     states: [ 翻译关, 翻译开 ]
-  - name: tone_display                  #开启后在输入编码的位置实时转换为带声调全拼，不开启则采用系统配置，影响的是preedit_format,归属：super_preedit.lua
-    states: [ 声调关, 声调开 ]
+  - options: [ raw_input, tone_display, full_pinyin ]   #开启后在输入编码的位置实时转换为带声调全拼或者不带声调全拼，不开启则采用系统配置原始编码，影响的是preedit_format,归属：super_preedit.lua
+    states: [ 原编码, 不带调, 带声调 ]
+#    reset: 2     #对于开关组从0开始数，第几个就reset几可设为默认
+  - options: [ s2s, s2t, s2hk, s2tw ]   # 简繁转换开关组，可以在一个空选项和多个实际“- simplifier@s2hk”引入的项目之前切换，这是一个开关组，你可以将其中任意一个s2s等设置为toggle快捷键，多次按下将轮询
+    states: [ 简体, 通繁, 港繁, 臺繁 ]
   - name: tone_hint                    #开启后在候选的注释里面实时显示全拼声调，不开启则采用系统配置，影响的是comment_format，归属：super_comment.lua
     states: [ 读音关, 读音开 ]
   - name: super_tips                    #开启后在输入编码后面的提示区显示实时的提示数据，受tips数据库影响，表情、翻译、车牌、符号等对应关系数据，并可实现句号上屏，不开启则默认，影响的是segment.prompt参数，归属：super_tips.lua
     states: [ 提示关, 提示开 ]
     reset: 1
-  - options: [ s2s, s2t, s2hk, s2tw ]   # 简繁转换开关组，可以在一个空选项和多个实际“- simplifier@s2hk”引入的项目之前切换，这是一个开关组，你可以将其中任意一个s2s等设置为toggle快捷键，多次按下将轮询
-    states: [ 简体, 通繁, 港繁, 臺繁 ]
   - name: prediction                    #开启后输入上屏后继续弹出预测数据候选展示例如输入：你在 ，预测候选： 哪里 干嘛 吗 做等等，predictor配置区可设置详细参数，归属：predict内置插件
     states: [ 预测关, 预测开 ]
   - name: search_single_char            #多体现在编码重合但候选有单字或者多字的情况辅码查词时是否单字优先，全拼常见，类似于特定编码情况下、反查状态下的调序能力。归属：search.lua
