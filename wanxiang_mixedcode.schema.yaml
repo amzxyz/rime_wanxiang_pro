@@ -126,9 +126,9 @@ translator:
     - xform/^([aoe])(ng)?(?=^|$|')/$1$1$2/
     - xform/'([aoe])(ng)?(?=^|$|')/'$1$1$2/
     - xform/iu(?=^|$|')/<q>/
-    - xform/[iu]a(?=^|$|')/<w>/
+    - xform/(?<![abcefprsA-Z])[iu]a(?=^|$|')/<w>/        #前面负向零宽断言Lua
     - xform/[uv]an(?=^|$|')/<r>/
-    - xform/[uv]e(?=^|$|')/<t>/
+    - xform/(?<![abcdefghkmprstA-Z])[uv]e(?=^|$|')/<t>/  #前面负向零宽断言cue
     - xform/ing(?=^|$|')|uai(?=^|$|')/<y>/
     - xform/^sh/<u>/
     - xform/^ch/<i>/
@@ -169,7 +169,7 @@ translator:
     - xform/iu(?=^|$|')/<q>/
     - xform/(.)ei(?=^|$|')/$1<w>/
     - xform/uan(?=^|$|')/<r>/
-    - xform/[uv]e(?=^|$|')/<t>/
+    - xform/(?<![abcdefghkmprstA-Z])[uv]e(?=^|$|')/<t>/
     - xform/un(?=^|$|')/<y>/
     - xform/^sh/<u>/
     - xform/^ch/<i>/
@@ -189,7 +189,7 @@ translator:
     - xform/ian(?=^|$|')/<m>/
     - xform/([a-z>])an(?=^|$|')/$1<j>/
     - xform/([a-z>])ou(?=^|$|')/$1<z>/
-    - xform/[iu]a(?=^|$|')/<x>/
+    - xform/(?<![abcefprsA-Z])[iu]a(?=^|$|')/<x>/
     - xform/iao(?=^|$|')/<n>/
     - xform/([a-z>])ao(?=^|$|')/$1<c>/
     - xform/ui(?=^|$|')/<v>/
@@ -208,9 +208,9 @@ translator:
     - xform/^([ae])(.*)(?=^|$|')/$1$1$2/
     - xform/'([ae])(.*)(?=^|$|')/'$1$1$2/
     - xform/iu(?=^|$|')/<q>/
-    - xform/[iu]a(?=^|$|')/<w>/
+    - xform/(?<![abcefprsA-Z])[iu]a(?=^|$|')/<w>/
     - xform/er(?=^|$|')|[uv]an(?=^|$|')/<r>/
-    - xform/[uv]e(?=^|$|')/<t>/
+    - xform/(?<![abcdefghkmprstA-Z])[uv]e(?=^|$|')/<t>/
     - xform/v(?=^|$|')|uai(?=^|$|')/<y>/
     - xform/^sh/<u>/
     - xform/^ch/<i>/
@@ -251,9 +251,9 @@ translator:
     - xform/^([ae])(.*)(?=^|$|')/$1$1$2/
     - xform/'([ae])(.*)(?=^|$|')/'$1$1$2/
     - xform/iu(?=^|$|')/<q>/
-    - xform/[iu]a(?=^|$|')/<w>/
+    - xform/(?<![abcefprsA-Z])[iu]a(?=^|$|')/<w>/
     - xform/er(?=^|$|')|[uv]an(?=^|$|')/<r>/
-    - xform/[uv]e(?=^|$|')/<t>/
+    - xform/(?<![abcdefghkmprstA-Z])[uv]e(?=^|$|')/<t>/
     - xform/v(?=^|$|')|uai(?=^|$|')/<y>/
     - xform/^sh/<u>/
     - xform/^ch/<i>/
@@ -303,7 +303,7 @@ translator:
     - xform/uo(?=^|$|')/<o>/
     - xform/uan(?=^|$|')/<p>/
     - xform/([a-z>])i?ong(?=^|$|')/$1<s>/
-    - xform/[iu]a(?=^|$|')/<d>/
+    - xform/(?<![abcefprsA-Z])[iu]a(?=^|$|')/<d>/
     - xform/en(?=^|$|')/<f>/
     - xform/eng(?=^|$|')/<g>/
     - xform/ang(?=^|$|')/<h>/
@@ -315,7 +315,7 @@ translator:
     - xform/ie(?=^|$|')/<x>/
     - xform/ou(?=^|$|')/<b>/
     - xform/un(?=^|$|')/<n>/
-    - xform/[uv]e(?=^|$|')|ui(?=^|$|')/<m>/
+    - xform/(?<![abcdefghkmprstA-Z])[uv]e(?=^|$|')|ui(?=^|$|')/<m>/
     - xform/'|<|>//
     - derive/^.+$/\L$0/
     - erase/.*[^a-zA-Z].+$/
@@ -349,9 +349,9 @@ translator:
     - xform/uan(?=^|$|')/<l>/
     - xform/ing(?=^|$|')/;/
     - xform/ou(?=^|$|')/<z>/
-    - xform/[iu]a(?=^|$|')/<x>/
+    - xform/(?<![abcefprsA-Z])[iu]a(?=^|$|')/<x>/
     - xform/iao(?=^|$|')/<b>/
-    - xform/ue(?=^|$|')|ui(?=^|$|')|ve(?=^|$|')/<n>/
+    - xform/(?<![abcdefghkmprstA-Z])ue(?=^|$|')|ui(?=^|$|')|(?<![abcdefghkmprstA-Z])ve(?=^|$|')/<n>/
     - xform/un(?=^|$|')/<m>/
     - xform/ao(?=^|$|')/<q>/
     - xform/an(?=^|$|')/<r>/
@@ -370,9 +370,9 @@ translator:
     - xform/^([aoe])(ng)?(?=^|$|')/$1$1$2/
     - xform/'([aoe])(ng)?(?=^|$|')/'$1$1$2/
     - xform/iu(?=^|$|')/<n>/
-    - xform/[iu]a(?=^|$|')/<b>/Add commentMore actions
+    - xform/(?<![abcefprsA-Z])[iu]a(?=^|$|')/<b>/Add commentMore actions
     - xform/[uv]an(?=^|$|')/<c>/
-    - xform/[uv]e(?=^|$|')/<x>/
+    - xform/(?<![abcdefghkmprstA-Z])[uv]e(?=^|$|')/<x>/
     - xform/ing(?=^|$|')|er(?=^|$|')/<q>/
     - xform/^sh/<i>/
     - xform/^ch/<u>/
