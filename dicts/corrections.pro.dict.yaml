@@ -7,7 +7,7 @@ name: corrections
 version: "LTS"
 sort: by_weight
 ...
-株木琅玛	zhū;mw;mv;mv;we;ea;sr;lv mù;ur;un;ad;ww;em;ss;un láng;wl;wl;wl;ah;ni;gy;wh mǎ;wm;wm;wm;az;nn;gc;wm	12	(有声)
+株木琅玛	zhū;mw;mv;mv;we;ea;sr;lv mù;ur;un,an;ad;ww;em;ss;un láng;wl;wl;wl;ah;ni;gy;wh mǎ;wm;wm;wm;az;nn;gc;wm	12	(有声)
 衾何以堪	qīn;ry;ry;yj;ek;jt;wy;rh hé;rk;rk;rk;xj;jz;ws;rk yǐ;lr;vr;rd,ry;re;vj;ny;vr kān;tb;tv;tu;gr;ga;fa;tu	364	(小说)
 墨明棋妙	mò;lt;ht;th,ht;ng;pg;lf;ht míng;oo;oo;oo;vl;ov;je;oo qí;mb;mb;mq;wf;eh;sa;lb miào;nu;nu;nu;yu;bt;vi;nu	382	(乐队)
 压力山大	yā;id;id;id,it;rh;xi;df;id lì;vp;vp;gp;uu;sl;lt;vp shān;kl;lk;aa;pp;vs;mm;aa dà;ar;un;ad;xx;md;dd;an	190	(网络语)
@@ -17,7 +17,7 @@ sort: by_weight
 毁人不倦	huǐ;ju;jy;jy,ug;sl;pr;va;jy rén;pn;pn;pd;ee;jr;ww;pn bú;ab;ad;ad,ax;dh;cb;gi;ad juàn;rv;rv;rj;xt;jz;wu;rv	431	(歌曲名)
 满山遍野	mǎn;dl;dl;dl;ke;km;ia;dl shān;kl;lk;aa;pp;vs;mm;aa biàn;zc;zc;zb;qq;mu;yn;zc yě;ly;ll;ly,yl;vp;di;jf;ly	519	(漫)山遍野
 佛教胜地	fó;rf;rf;rf;xp;jt;wx;rf jiào;lw;lw;wx;gj;qh;ft;uw shèng;ou;ou;ou;lg;vl;et;ou dì;ty;ty;ty;ga;ge;fb;ty	1	佛教(圣)地
-杉杉来吃	shān;mp;mp;mp;wu;ee;se;lp shān;mp;mp;mp;wu;ee;se;lp lái;am;an;am,wb;dl;ah;go;an chī;kv;kv;kq;or;da;kt;ky	424	(书名)
+杉杉来吃	shān;mp;mp;mp;wu;ee;se;lp shān;mp;mp;mp;wu;ee;se;lp lái;am;an;am,wb;dl;ah;go;an chī;kv;kq;kq;or;da;kt;ky	424	(书名)
 一泄千里	yī;aa;aa;aa;dd;fi;gg;aa xiè;du;du;du;kr;ka;ia;du qiān;pu;pu;pa;ss;lq;tf;pu lǐ;tt;la;aa,tt;vg;dl;jf;aa	315	(玩笑语)
 美丽冻人	měi;yd;yd;dy,yd;fx;gm;ug;ed lì;ad;ad;ad;dh;fv;gm;ad dòng;dd;dd;dd;ff;wy;ua;dd rén;pn;pn;pd;ee;jr;ww;pn	123	(俏皮话)
 老肩巨滑	lǎo;lb;lb;bl,lb;ga;ql;ft;ub jiān;ho;ho;ho,oh;ql;mv;yn;ho jù;kk;ka;kk,aa;dr;nn;an;ka huá;do;dg;dg;kc;kf;im;do	233	(玩笑语)
@@ -27,7 +27,7 @@ sort: by_weight
 阻塞	zu;eq;eq;eq;bu;tf;be;eq sai;bt;bt;tb,bt;ig;wg;pf;gt	20	阻塞(sè)
 句芒	ju;bk;bk;gk,kg,pk;ii;gj;qk;pk mang;cw;cw;cw;zr;lf;ay;cw	317	句(gōu)芒
 烘焙	hong;hg;hb;hg;tf;ch;oa;hb pei;hk;hk;hk,hp;to;cd;ou;hk	402	hōng bèi
-谄媚	xian;yj;wj;yj,yx;cs;sp;yq;yj mei;no;no;nm;ys;bq;vn;nm	303	chǎn mèi
+谄媚	xian;yj;yj;yj,yx;cs;sp;yq;yj mei;no;no;nm;ys;bq;vn;nm	303	chǎn mèi
 着落	zhao;yo;yo;yo;fs;gq;ud;em luo;ck;ck;cl;zo;ls;ai;ck	472	zhuó luò
 胁差	lei;ob;ob;ob;lf;vh;el;ob cha;yg;yg;yg;fp;gu;ud;eg	428	xié chā
 刚劲	gang;kd;kd;dg;oi;mp;mq;gd jin;jl;vl;lg;ru;rs;ca;vl	415	gāng jìng
@@ -63,16 +63,16 @@ sort: by_weight
 给予	gei;sk;sk;sh;eo;id;xw;sk yu;sl;sl;sa,aa;pp;iv;cb;vv	349	jǐ yǔ
 厚朴	hou;iz;iz;iz;ra;xh;dj;iz pu;mb;mb;mb;wh;ey;sh;lb	52	hòu pò
 馄饨	hun;ub;ub;uk;ga;qv;qn;ub dun;ut;ut;ut;gr;qs;qn;ut	400	hún tun
-角色	jiao;dy;dl,dy;dy;gp;xt;qe;ey se;db;db;db;gt;xm;qc;eb	201	jué sè
+角色	jiao;dy;dy;dy;gp;xt;qe;ey se;db;db;db;gt;xm;qc;eb	201	jué sè
 结扎	jie;sk;sk;sj;eo;id;xf;sk zha;fv;fv;fg;jr;ua;rn;fv	126	jié zā
 钜惠	jù;jj;jj;jj;dr;zn;qa;jj huì;ix;ax;xh,hx;dn;nh;gj;ax	549	(巨)惠
 六安	liu;wb;wb;wb,dd,db;if;al;uy;wb an;bn;bn;bn;iy;wb;pv;gn	110	lù ān
-女主角	nv;va;va;aa,vh;yy;bn;vv;va zhu;wt;dw;dw;ha;in;yg;wt jiao;dy;dl,dy;dy;gp;xt;qe;ey	196	女主角(jué)
+女主角	nv;va;va;aa,vh;yy;bn;vv;va zhu;wt;dw;dw;ha;in;yg;wt jiao;dy;dy;dy;gp;xt;qe;ey	196	女主角(jué)
 埋怨	mai;tl;tl;tl;gg;gd;fj;tl yuan;xx;xx;xe,xy;fn;lh;qb;xx	138	mán yuàn
 模板	mo;md;md;mm;wx;em;sa;ld ban;my;my;mf;wl;er;sr;ly	14674	mú bǎn
 模具	mo;md;md;mm;wx;em;sa;ld ju;qb;qb;ba,bq,qb;pf;qh;hw;ab	1935	mú jù
 模样	mo;md;md;mm;wx;em;sa;ld yang;my;my;my;wp;eg;su;ly	5185	mú yàng
-木讷	mu;ur;un;ad;ww;em;ss;un na;yn;yn;yn;ce;sj;ym;yn	471	mù nè
+木讷	mu;ur;un,an;ad;ww;em;ss;un na;yn;yn;yn;ce;sj;ym;yn	471	mù nè
 弄堂	nong;wc;wc;cw,wc;az;nl;ga;wa tang;xt;xt;tk,dt,xt;hg;sg;ip;et	126	lòng táng
 暖和	nuan;oy;oy;oy;vl;or;je;oy he;hk;hk;hk;uo;xd;tk;hk	590	nuǎn huo
 偌大	nuo;rk;rk;rr;xo;jd;wa;rk da;ar;un;ad;xx;md;dd;an	680	偌(ruò)大
@@ -91,7 +91,7 @@ sort: by_weight
 蔚县	wei;cc;cc;cw;zk;lk;an;cc xian;qs;qs;sq,qs;pp;fk;eg;qv	427	yù xiàn
 嵊州	cheng;ur;en;ui;pu;vv;mt;si zhou;dl;dl;id,da;hp;oo;yt;da	436	shèng zhōu
 吱声	zhi;kv;ky;kv;ol;dc;kf;ky sheng;tu;up;um;gp;gc;fn;up	217	zī shēng
-主角	zhu;wt;dw;dw;ha;in;yg;wt jiao;dy;dl,dy;dy;gp;xt;qe;ey	24115	zhǔ jué
+主角	zhu;wt;dw;dw;ha;in;yg;wt jiao;dy;dy;dy;gp;xt;qe;ey	24115	zhǔ jué
 脖颈儿	bo;oz;oz;ob,oz;la;vh;ef;oz jing;jy;vr;yg;rm;rw;ca;vr er;pv;pv;pg;kk;pe;qt;pv	10	bó gěng er
 草薙剑	cao;cu;cu;cz;zs;ln;aj;cu zhi;cv;cf;cv;za;lu;at;cv jian;qd,rd;rd;da,dq;ei;jp;wg;rd	17	cǎo tì jiàn
 草薙京	cao;cu;cu;cz;zs;ln;aj;cu zhi;cv;cf;cv;za;lu;at;cv jing;wx;wx;wx;if;gy;yi;wx	144	cǎo tì jīng

@@ -165,8 +165,8 @@ sort: by_weight
 长牙	cháng;pn;pn;pd;uh;pc;ta;pn yá;gp,ac;ap;ap;du;ly;ah;ap	84
 长头发	cháng;pn;pn;pd;uh;pc;ta;pn tóu;dd;dd;dd;hx;wm;ud;dd fā;fy;vd;ay,fd,vy,yd;rh;si;nt;vy	503
 长头发	zhǎng;pn;pn;pd;uh;pc;ta;pn tóu;dd;dd;dd;hx;wm;ud;dd fā;fy;vd;ay,fd,vy,yd;rh;si;nt;vy	503
-长尾巴	cháng;pn;pn;pd;uh;pc;ta;pn wěi;um;um;um;qa;cv;nt;um bā;sl;vv;ag,kg,vg;tt;mb;cn;vv	399
-长尾巴	zhǎng;pn;pn;pd;uh;pc;ta;pn wěi;um;um;um;qa;cv;nt;um bā;sl;vv;ag,kg,vg;tt;mb;cn;vv	399
+长尾巴	cháng;pn;pn;pd;uh;pc;ta;pn wěi;um;um;um;qa;cv;nt;um bā;sl;vv,sl;ag,kg,vg;tt;mb;cn;vv	399
+长尾巴	zhǎng;pn;pn;pd;uh;pc;ta;pn wěi;um;um;um;qa;cv;nt;um bā;sl;vv,sl;ag,kg,vg;tt;mb;cn;vv	399
 长细纹	cháng;pn;pn;pd;uh;pc;ta;pn xì;st;st;st;ew;iq;xl;st wén;sw;sw;sw;ej;iv;xy;sx	250
 长细纹	zhǎng;pn;pn;pd;uh;pc;ta;pn xì;st;st;st;ew;iq;xl;st wén;sw;sw;sw;ej;iv;xy;sx	250
 长羽毛	cháng;pn;pn;pd;uh;pc;ta;pn yǔ;xx;xx;xx;dd;zv;nn;xx máo;pv;pv;pg;ua;vm;tf;pv	252
@@ -610,10 +610,10 @@ sort: by_weight
 趁这时	chèn;tp;tp;zp;gu;pe;fh;tp zhèi;zw;zw;zw;jq;vu;yp;zx shí;oc;oc;oc;vk;ok;jf;oc	172
 成这样	chéng;wv;wv;gg,wg;rh;na;dn;vg zhèi;zw;zw;zw;jq;vu;yp;zx yàng;my;my;my;wp;eg;su;ly	598
 成这种	chéng;wv;wv;gg,wg;rh;na;dn;vg zhèi;zw;zw;zw;jq;vu;yp;zx zhǒng;hv;hv;hv;up;xg;tk;hv	337
-吃这个	chī;kv;kv;kq;or;da;kt;ky zhèi;zw;zw;zw;jq;vu;yp;zx ge;rl;rl;ra,pa;ep;jg;wh;ra	615
-吃这类	chī;kv;kv;kq;or;da;kt;ky zhèi;zw;zw;zw;jq;vu;yp;zx lèi;md;md;md;lx;pm;od;md	370
-吃这里	chī;kv;kv;kq;or;da;kt;ky zhèi;zw;zw;zw;jq;vu;yp;zx lǐ;tt;la;aa,tt;vg;dl;jf;aa	409
-吃这套	chī;kv;kv;kq;or;da;kt;ky zhèi;zw;zw;zw;jq;vu;yp;zx tào;dg;ds;di;xh;mp;dd;dv	321
+吃这个	chī;kv;kq;kq;or;da;kt;ky zhèi;zw;zw;zw;jq;vu;yp;zx ge;rl;rl;ra,pa;ep;jg;wh;ra	615
+吃这类	chī;kv;kq;kq;or;da;kt;ky zhèi;zw;zw;zw;jq;vu;yp;zx lèi;md;md;md;lx;pm;od;md	370
+吃这里	chī;kv;kq;kq;or;da;kt;ky zhèi;zw;zw;zw;jq;vu;yp;zx lǐ;tt;la;aa,tt;vg;dl;jf;aa	409
+吃这套	chī;kv;kq;kq;or;da;kt;ky zhèi;zw;zw;zw;jq;vu;yp;zx tào;dg;ds;di;xh;mp;dd;dv	321
 持这样	chí;fc;fc;fs;jk;uk;rf;fc zhèi;zw;zw;zw;jq;vu;yp;zx yàng;my;my;my;wp;eg;su;ly	271
 持这种	chí;fc;fc;fs;jk;uk;rf;fc zhèi;zw;zw;zw;jq;vu;yp;zx zhǒng;hv;hv;hv;up;xg;tk;hv	424
 穿这个	chuān;by;by;xy,by;iu;el;pw;gy zhèi;zw;zw;zw;jq;vu;yp;zx ge;rl;rl;ra,pa;ep;jg;wh;ra	407
@@ -714,7 +714,7 @@ sort: by_weight
 就这样	jiù;wy;wy;yj;ih;go;yi;wy zhèi;zw;zw;zw;jq;vu;yp;zx yàng;my;my;my;wp;eg;su;ly	753
 就这种	jiù;wy;wy;yj;ih;go;yi;wy zhèi;zw;zw;zw;jq;vu;yp;zx zhǒng;hv;hv;hv;up;xg;tk;hv	486
 据这位	jù;fg;fk;fj;jo;uc;rn;fk zhèi;zw;zw;zw;jq;vu;yp;zx wèi;rl;rl;rl;xb;ji;wu;rl	367
-开这个	kāi;ac;kc;ac;up;fl;ga;aa zhèi;zw;zw;zw;jq;vu;yp;zx ge;rl;rl;ra,pa;ep;jg;wh;ra	479
+开这个	kāi;ac;ac;ac;up;fl;ga;aa zhèi;zw;zw;zw;jq;vu;yp;zx ge;rl;rl;ra,pa;ep;jg;wh;ra	479
 看这个	kàn;uo;uo;ou,uo;us;uq;rh;pm zhèi;zw;zw;zw;jq;vu;yp;zx ge;rl;rl;ra,pa;ep;jg;wh;ra	641
 看这里	kàn;uo;uo;ou,uo;us;uq;rh;pm zhèi;zw;zw;zw;jq;vu;yp;zx lǐ;tt;la;aa,tt;vg;dl;jf;aa	567
 看这样	kàn;uo;uo;ou,uo;us;uq;rh;pm zhèi;zw;zw;zw;jq;vu;yp;zx yàng;my;my;my;wp;eg;su;ly	421
@@ -1215,7 +1215,7 @@ sort: by_weight
 这个货	zhèi;zw;zw;zw;jq;vu;yp;zx ge;rl;rl;ra,pa;ep;jg;wh;ra huò;rb;rr;bh;xm;jo;wx;rr	393
 这个价	zhèi;zw;zw;zw;jq;vu;yp;zx ge;rl;rl;ra,pa;ep;jg;wh;ra jià;rj;rl;rj;xp;jp;ww;rj	642
 这个家	zhèi;zw;zw;zw;jq;vu;yp;zx ge;rl;rl;ra,pa;ep;jg;wh;ra jiā;bu;bu;bu;ih;wj;pe;gn	548
-这个键	zhèi;zw;zw;zw;jq;vu;yp;zx ge;rl;rl;ra,pa;ep;jg;wh;ra jiàn;jy;jy;jj;dq;zu;qv;jj	401
+这个键	zhèi;zw;zw;zw;jq;vu;yp;zx ge;rl;rl;ra,pa;ep;jg;wh;ra jiàn;jy;jz;jj;dq;zu;qv;jj	401
 这个奖	zhèi;zw;zw;zw;jq;vu;yp;zx ge;rl;rl;ra,pa;ep;jg;wh;ra jiǎng;ld;dd;dx;lx;am;uq;dd	490
 这个叫	zhèi;zw;zw;zw;jq;vu;yp;zx ge;rl;rl;ra,pa;ep;jg;wh;ra jiào;kj;kl;kj;op;di;kn;ka	533
 这个节	zhèi;zw;zw;zw;jq;vu;yp;zx ge;rl;rl;ra,pa;ep;jg;wh;ra jié;ce;ce;ce;zb;lz;ab;ce	463
@@ -1369,7 +1369,7 @@ sort: by_weight
 这伙人	zhèi;zw;zw;zw;jq;vu;yp;zx huǒ;rh;rh;rh;xt;jc;wo;rh rén;pn;pn;pd;ee;jr;ww;pn	423
 这或许	zhèi;zw;zw;zw;jq;vu;yp;zx huò;ga;ga;gk;ha;pf;ak;ag xǔ;yw;yw;yw;cs;sn;yt;yu	576
 这几把	zhèi;zw;zw;zw;jq;vu;yp;zx jǐ;pv;pv;py;ii;oj;mt;pv bǎ;fb;fb;fb;jt;um;rc;fb	246
-这鸡巴	zhèi;zw;zw;zw;jq;vu;yp;zx jī;yn;yn;ny,yn;lc;rx;cq;yn bā;sl;vv;ag,kg,vg;tt;mb;cn;vv	165
+这鸡巴	zhèi;zw;zw;zw;jq;vu;yp;zx jī;yn;yn;ny,yn;lc;rx;cq;yn bā;sl;vv,sl;ag,kg,vg;tt;mb;cn;vv	165
 这基本	zhèi;zw;zw;zw;jq;vu;yp;zx jī;ct;qt;tq,qt;vg;zg;ad;qt běn;ma;aa;aa,ma;wd;ef;sg;aa	452
 这几本	zhèi;zw;zw;zw;jq;vu;yp;zx jǐ;pv;pv;py;ii;oj;mt;pv běn;ma;aa;aa,ma;wd;ef;sg;aa	446
 这几笔	zhèi;zw;zw;zw;jq;vu;yp;zx jǐ;pv;pv;py;ii;oj;mt;pv bǐ;vm;vm;vm;na;rv;tt;vm	241
@@ -1505,7 +1505,7 @@ sort: by_weight
 这里买	zhèi;zw;zw;zw;jq;vu;yp;zx lǐ;tt;la;aa,tt;vg;dl;jf;aa mǎi;ad;vd;at,vt;rx;am;nu;vd	572
 这里没	zhèi;zw;zw;zw;jq;vu;yp;zx lǐ;tt;la;aa,tt;vg;dl;jf;aa méi;du;dy;du;kl;kr;im;dy	457
 这里面	zhèi;zw;zw;zw;jq;vu;yp;zx lǐ;tt;la;aa,tt;vg;dl;jf;aa miàn;ao;aa;aa;du;bm;dm;aa	665
-这里木	zhèi;zw;zw;zw;jq;vu;yp;zx lǐ;tt;la;aa,tt;vg;dl;jf;aa mù;ur;un;ad;ww;em;ss;un	158
+这里木	zhèi;zw;zw;zw;jq;vu;yp;zx lǐ;tt;la;aa,tt;vg;dl;jf;aa mù;ur;un,an;ad;ww;em;ss;un	158
 这里那	zhèi;zw;zw;zw;jq;vu;yp;zx lǐ;tt;la;aa,tt;vg;dl;jf;aa nà;ve;ve;el;rb;at;vf;ve	308
 这里能	zhèi;zw;zw;zw;jq;vu;yp;zx lǐ;tt;la;aa,tt;vg;dl;jf;aa néng;sb;sb;sb;pa;kv;ce;vb	431
 这里是	zhèi;zw;zw;zw;jq;vu;yp;zx lǐ;tt;la;aa,tt;vg;dl;jf;aa shì;oz;or;op,ov;ve;ot;jg;or	721
@@ -2372,7 +2372,7 @@ sort: by_weight
 成熟型	chéng;wv;wv;gg,wg;rh;na;dn;vg shóu;wh;wh;hu;in;gc;yb;we xíng;kt;kt;tx;ug;fg;ga;kt	185
 成熟早	chéng;wv;wv;gg,wg;rh;na;dn;vg shóu;wh;wh;hu;in;gc;yb;we zǎo;ou;ou;ou;vs;on;jh;ou	126
 成熟中	chéng;wv;wv;gg,wg;rh;na;dn;vg shóu;wh;wh;hu;in;gc;yb;we zhōng;kl;ll;aa,ka;op;dg;kh;aa	153
-吃熟食	chī;kv;kv;kq;or;da;kt;ky shóu;wh;wh;hu;in;gc;yb;we shí;rg;rl;rl,pd;eh;qs;wy;rh	168
+吃熟食	chī;kv;kq;kq;or;da;kt;ky shóu;wh;wh;hu;in;gc;yb;we shí;rg;rl;rl,pd;eh;qs;wy;rh	168
 初熟的	chū;pd;pd;yd;hi;tp;pu;pd shóu;wh;wh;hu;in;gc;yb;we de;bu;bu;bu;sh;ui;rq;bu	89
 从熟睡	cóng;rr;rr;rr;ee;jj;ww;rr shóu;wh;wh;hu;in;gc;yb;we shuì;ot;oi;oi;sg;qg;ht;mi	45
 从熟悉	cóng;rr;rr;rr;ee;jj;ww;rr shóu;wh;wh;hu;in;gc;yb;we xī;cx;px;xm,xb;hn;th;to;px	25
@@ -2521,7 +2521,7 @@ sort: by_weight
 三分熟	sān;ae;ae;aa;uu;ts;dg;ae fēn;bd;bd;bd,db;fi;hp;wv;bd shóu;wh;wh;hu;in;gc;yb;we	190
 烧熟了	shāo;hw;hw;hy;tk;cp;oa;he shóu;wh;wh;hu;in;gc;yb;we le;al;vl;aa,vu;rp;rl;bn;vv	160
 生变熟	shēng;pf;pf;na;eg;ls;tg;pa biàn;wy;wy;wy,yy;il;zr;yo;wy shóu;wh;wh;hu;in;gc;yb;we	90
-生吃熟	shēng;pf;pf;na;eg;ls;tg;pa chī;kv;kv;kq;or;da;kt;ky shóu;wh;wh;hu;in;gc;yb;we	164
+生吃熟	shēng;pf;pf;na;eg;ls;tg;pa chī;kv;kq;kq;or;da;kt;ky shóu;wh;wh;hu;in;gc;yb;we	164
 生熟地	shēng;pf;pf;na;eg;ls;tg;pa shóu;wh;wh;hu;in;gc;yb;we dì;ty;ty;ty;ga;ge;fb;ty	160
 是常熟	shì;oz;or;op,ov;ve;ot;jg;or cháng;xj;xj;jk,xd,dd;hy;sr;ip;ej shóu;wh;wh;hu;in;gc;yb;we	130
 十成熟	shí;al;al;aa;ss;ns;fg;aa chéng;wv;wv;gg,wg;rh;na;dn;vg shóu;wh;wh;hu;in;gc;yb;we	132
@@ -2529,7 +2529,7 @@ sort: by_weight
 是熟么	shì;oz;or;op,ov;ve;ot;jg;or shóu;wh;wh;hu;in;gc;yb;we me;ps;ps;ps;up;tk;tc;pv	102
 熟不熟	shóu;wh;wh;hu;in;gc;yb;we bù;ab;ad;ad,ax;dh;cb;gi;ad shóu;wh;wh;hu;in;gc;yb;we	176
 熟菜油	shóu;wh;wh;hu;in;gc;yb;we cài;cc;cm;cc;zw;le;ae;cl yóu;dy;dy;dy;kp;kd;im;dy	151
-熟吃好	shóu;wh;wh;hu;in;gc;yb;we chī;kv;kv;kq;or;da;kt;ky hǎo;nz;nz;nz;ya;bh;vb;nz	128
+熟吃好	shóu;wh;wh;hu;in;gc;yb;we chī;kv;kq;kq;or;da;kt;ky hǎo;nz;nz;nz;ya;bh;vb;nz	128
 熟大黄	shóu;wh;wh;hu;in;gc;yb;we dài;ar;un;ad;xx;md;dd;an huáng;cb;cb;ad,cb;zf;nh;am;cb	71
 熟蛋黄	shóu;wh;wh;hu;in;gc;yb;we dàn;zi;vi;ip,pi;rf;tc;nh;vi huáng;cb;cb;ad,cb;zf;nh;am;cb	154
 熟当时	shóu;wh;wh;hu;in;gc;yb;we dāng;xe;xe;xx;hs;yb;iv;ea shí;oc;oc;oc;vk;ok;jf;oc	100
@@ -2749,7 +2749,7 @@ sort: by_weight
 帮谁	bāng;fj;fj;jb;uy;ar;dt;bj shéi;yv;yf;yv;ca;su;yw;ya	335
 被谁	bèi;pp;py;yp;hl;tr;pu;py shéi;yv;yf;yv;ca;su;yw;ya	499
 比谁	bǐ;bb;bb;bb;aa;vv;xx;bb shéi;yv;yf;yv;ca;su;yw;ya	559
-吃谁	chī;kv;kv;kq;or;da;kt;ky shéi;yv;yf;yv;ca;su;yw;ya	298
+吃谁	chī;kv;kq;kq;or;da;kt;ky shéi;yv;yf;yv;ca;su;yw;ya	298
 打谁	dǎ;fd;fd;fd;jj;ua;rs;fd shéi;yv;yf;yv;ca;su;yw;ya	413
 带谁	dài;cj;fj;jb;zy;lr;gk;aj shéi;yv;yf;yv;ca;su;yw;ya	296
 到谁	dào;gd;ad;dv;di;yp;gc;vd shéi;yv;yf;yv;ca;su;yw;ya	366
@@ -2787,7 +2787,7 @@ sort: by_weight
 谁把	shéi;yv;yf;yv;ca;su;yw;ya bǎ;fb;fb;fb;jt;um;rc;fb	473
 谁不	shéi;yv;yf;yv;ca;su;yw;ya bù;ab;ad;ad,ax;dh;cb;gi;ad	541
 谁曾	shéi;yv;yf;yv;ca;su;yw;ya céng;bo;bo;ob,bo;fv;ho;ul;eo	338
-谁吃	shéi;yv;yf;yv;ca;su;yw;ya chī;kv;kv;kq;or;da;kt;ky	386
+谁吃	shéi;yv;yf;yv;ca;su;yw;ya chī;kv;kq;kq;or;da;kt;ky	386
 谁出	shéi;yv;yf;yv;ca;su;yw;ya chū;uu;vk;ck,aa;pp;sm;bm;va	376
 谁错	shéi;yv;yf;yv;ca;su;yw;ya cuò;jo;jo;jx;dv;zo;qa;jo	290
 谁带	shéi;yv;yf;yv;ca;su;yw;ya dài;cj;fj;jb;zy;lr;gk;aj	344
@@ -2817,7 +2817,7 @@ sort: by_weight
 谁教	shéi;yv;yf;yv;ca;su;yw;ya jiào;lw;lw;wx;gj;qh;ft;uw	344
 谁接	shéi;yv;yf;yv;ca;su;yw;ya jiē;fn;fn;fq;jy;ub;ru;fn	285
 谁就	shéi;yv;yf;yv;ca;su;yw;ya jiù;wy;wy;yj;ih;go;yi;wy	572
-谁开	shéi;yv;yf;yv;ca;su;yw;ya kāi;ac;kc;ac;up;fl;ga;aa	338
+谁开	shéi;yv;yf;yv;ca;su;yw;ya kāi;ac;ac;ac;up;fl;ga;aa	338
 谁看	shéi;yv;yf;yv;ca;su;yw;ya kàn;uo;uo;ou,uo;us;uq;rh;pm	408
 谁肯	shéi;yv;yf;yv;ca;su;yw;ya kěn;vo;vo;ov,vo;rl;sv;he;vo	347
 谁快	shéi;yv;yf;yv;ca;su;yw;ya kuài;xg;xg;xd,xg;ne;hj;nn;xn	354
@@ -2989,7 +2989,7 @@ sort: by_weight
 可谁有	kě;dk;dk;dk;jj;zk;sk;av shéi;yv;yf;yv;ca;su;yw;ya yǒu;uo;uo;ou,uo;sl;nv;de;ao	65
 可谁知	kě;dk;dk;dk;jj;zk;sk;av shéi;yv;yf;yv;ca;su;yw;ya zhī;uk;uk;uk,ku;eo;od;td;uk	393
 坑谁呢	kēng;tj;tj;tk;gi;go;fy;tj shéi;yv;yf;yv;ca;su;yw;ya ne;kb;kb;kn;oa;dv;kn;kb	188
-离开谁	lí;wn;wd;ws,wl;ip;zv;yb;wd kāi;ac;kc;ac;up;fl;ga;aa shéi;yv;yf;yv;ca;su;yw;ya	314
+离开谁	lí;wn;wd;ws,wl;ip;zv;yb;wd kāi;ac;ac;ac;up;fl;ga;aa shéi;yv;yf;yv;ca;su;yw;ya	314
 联系谁	lián;et;et;eg;dx;qm;bu;ed xì;px;px;ps;uf;ti;tx;px shéi;yv;yf;yv;ca;su;yw;ya	306
 留给谁	liú;pt;pt;td,tl,lt;uw;bq;qy;pt gěi;sk;sk;sh;eo;id;xw;sk shéi;yv;yf;yv;ca;su;yw;ya	234
 轮到谁	lún;il;ib;il;ta;yj;lw;ib dào;gd;ad;dv;di;yp;gc;vd shéi;yv;yf;yv;ca;su;yw;ya	273
@@ -3099,8 +3099,8 @@ sort: by_weight
 谁唱歌	shéi;yv;yf;yv;ca;su;yw;ya chàng;ko;ko;ki;ov;do;kj;ko gē;kq;dr;qg;je;ze;sk;gr	180
 谁承担	shéi;yv;yf;yv;ca;su;yw;ya chéng;ln;vn;ad,vd;ru;at;bd;vn dān;fd;fa;fd;jd;uf;rj;fd	352
 谁承想	shéi;yv;yf;yv;ca;su;yw;ya chéng;ln;vn;ad,vd;ru;at;bd;vn xiǎng;mx;mx;xx;wn;eh;sh;lx	305
-谁吃亏	shéi;yv;yf;yv;ca;su;yw;ya chī;kv;kv;kq;or;da;kt;ky kuī;ak;ev;ak,eg;ur;ma;fn;ev	314
-谁吃谁	shéi;yv;yf;yv;ca;su;yw;ya chī;kv;kv;kq;or;da;kt;ky shéi;yv;yf;yv;ca;su;yw;ya	367
+谁吃亏	shéi;yv;yf;yv;ca;su;yw;ya chī;kv;kq;kq;or;da;kt;ky kuī;ak;ev;ak,eg;ur;ma;fn;ev	314
+谁吃谁	shéi;yv;yf;yv;ca;su;yw;ya chī;kv;kq;kq;or;da;kt;ky shéi;yv;yf;yv;ca;su;yw;ya	367
 谁出的	shéi;yv;yf;yv;ca;su;yw;ya chū;uu;vk;ck,aa;pp;sm;bm;va de;bu;bu;bu;sh;ui;rq;bu	339
 谁出轨	shéi;yv;yf;yv;ca;su;yw;ya chū;uu;vk;ck,aa;pp;sm;bm;va guǐ;ij;ij;ij;tr;yk;lv;ij	201
 谁出来	shéi;yv;yf;yv;ca;su;yw;ya chū;uu;vk;ck,aa;pp;sm;bm;va lái;am;an;am,wb;dl;ah;go;an	256
@@ -3179,7 +3179,7 @@ sort: by_weight
 谁敢不	shéi;yv;yf;yv;ca;su;yw;ya gǎn;ew;vw;we,aw,vw;rj;ah;nb;vw bù;ab;ad;ad,ax;dh;cb;gi;ad	251
 谁干的	shéi;yv;yf;yv;ca;su;yw;ya gàn;au;au;aa;ss;eg;fg;au de;bu;bu;bu;sh;ui;rq;bu	422
 谁干净	shéi;yv;yf;yv;ca;su;yw;ya gān;au;au;aa;ss;eg;fg;au jìng;dy;dl;dv;fp;wb;uq;dv	65
-谁敢拦	shéi;yv;yf;yv;ca;su;yw;ya gǎn;ew;vw;we,aw,vw;rj;ah;nb;vw lán;fl;ff;fl;ju;ut;ru;fs	172
+谁敢拦	shéi;yv;yf;yv;ca;su;yw;ya gǎn;ew;vw;we,aw,vw;rj;ah;nb;vw lán;fl;fs;fl;ju;ut;ru;fs	172
 谁敢娶	shéi;yv;yf;yv;ca;su;yw;ya gǎn;ew;vw;we,aw,vw;rj;ah;nb;vw qǔ;en;en;nq;dy;qb;bc;en	236
 谁敢惹	shéi;yv;yf;yv;ca;su;yw;ya gǎn;ew;vw;we,aw,vw;rj;ah;nb;vw rě;cx;cx;cx,xr;zn;lh;ad;cx	269
 谁敢上	shéi;yv;yf;yv;ca;su;yw;ya gǎn;ew;vw;we,aw,vw;rj;ah;nb;vw shàng;ba;la;aa,ba;pu;yf;hh;aa	146
@@ -3207,7 +3207,7 @@ sort: by_weight
 谁更强	shéi;yv;yf;yv;ca;su;yw;ya gèng;an;an;ad,ag;dh;fb;gj;an qiáng;gi;gi;gs;rf;bc;xk;gi	440
 谁更帅	shéi;yv;yf;yv;ca;su;yw;ya gèng;an;an;ad,ag;dh;fb;gj;an shuài;lj;lj;aj,dj,jd;py;pr;jm;aj	319
 谁更像	shéi;yv;yf;yv;ca;su;yw;ya gèng;an;an;ad,ag;dh;fb;gj;an xiàng;ru;rn;rx;xh;jw;wq;rx	273
-谁公开	shéi;yv;yf;yv;ca;su;yw;ya gōng;bs;bs;sb,bs;fp;hk;wc;bv kāi;ac;kc;ac;up;fl;ga;aa	175
+谁公开	shéi;yv;yf;yv;ca;su;yw;ya gōng;bs;bs;sb,bs;fp;hk;wc;bv kāi;ac;ac;ac;up;fl;ga;aa	175
 谁共我	shéi;yv;yf;yv;ca;su;yw;ya gòng;cb;cb;bc,cb;zf;lh;aw;cb wǒ;ga;pd;pd,pp;ua;tp;tr;pg	205
 谁管理	shéi;yv;yf;yv;ca;su;yw;ya guǎn;vl;vk;vg;nd;rk;tp;vg lǐ;wl;wl;wl;ag;nd;gj;wl	262
 谁管你	shéi;yv;yf;yv;ca;su;yw;ya guǎn;vl;vk;vg;nd;rk;tp;vg nǐ;rx;rx;re;xf;jy;wq;rx	395
@@ -3265,9 +3265,9 @@ sort: by_weight
 谁就是	shéi;yv;yf;yv;ca;su;yw;ya jiù;wy;wy;yj;ih;go;yi;wy shì;oz;or;op,ov;ve;ot;jg;or	482
 谁举报	shéi;yv;yf;yv;ca;su;yw;ya jǔ;xf;xl;df,xf;hp;ku;iw;ea bào;fy;fy;fy;jl;ur;rb;fy	308
 谁举证	shéi;yv;yf;yv;ca;su;yw;ya jǔ;xf;xl;df,xf;hp;ku;iw;ea zhèng;yv;yv;yv;cr;ss;yg;yv	397
-谁开车	shéi;yv;yf;yv;ca;su;yw;ya kāi;ac;kc;ac;up;fl;ga;aa chē;au;al;aa;tt;yc;lg;aa	220
-谁开的	shéi;yv;yf;yv;ca;su;yw;ya kāi;ac;kc;ac;up;fl;ga;aa de;bu;bu;bu;sh;ui;rq;bu	269
-谁开发	shéi;yv;yf;yv;ca;su;yw;ya kāi;ac;kc;ac;up;fl;ga;aa fā;fy;vd;ay,fd,vy,yd;rh;si;nt;vy	272
+谁开车	shéi;yv;yf;yv;ca;su;yw;ya kāi;ac;ac;ac;up;fl;ga;aa chē;au;al;aa;tt;yc;lg;aa	220
+谁开的	shéi;yv;yf;yv;ca;su;yw;ya kāi;ac;ac;ac;up;fl;ga;aa de;bu;bu;bu;sh;ui;rq;bu	269
+谁开发	shéi;yv;yf;yv;ca;su;yw;ya kāi;ac;ac;ac;up;fl;ga;aa fā;fy;vd;ay,fd,vy,yd;rh;si;nt;vy	272
 谁看到	shéi;yv;yf;yv;ca;su;yw;ya kàn;uo;uo;ou,uo;us;uq;rh;pm dào;gd;ad;dv;di;yp;gc;vd	347
 谁看的	shéi;yv;yf;yv;ca;su;yw;ya kàn;uo;uo;ou,uo;us;uq;rh;pm de;bu;bu;bu;sh;ui;rq;bu	322
 谁看过	shéi;yv;yf;yv;ca;su;yw;ya kàn;uo;uo;ou,uo;us;uq;rh;pm guò;zc;zc;zc;kq;ku;fp;zc	384
@@ -3321,7 +3321,7 @@ sort: by_weight
 谁能把	shéi;yv;yf;yv;ca;su;yw;ya néng;sb;sb;sb;pa;kv;ce;vb bǎ;fb;fb;fb;jt;um;rc;fb	405
 谁能保	shéi;yv;yf;yv;ca;su;yw;ya néng;sb;sb;sb;pa;kv;ce;vb bǎo;rm;rm;rd;xw;je;wk;rl	113
 谁能比	shéi;yv;yf;yv;ca;su;yw;ya néng;sb;sb;sb;pa;kv;ce;vb bǐ;bb;bb;bb;aa;vv;xx;bb	343
-谁能吃	shéi;yv;yf;yv;ca;su;yw;ya néng;sb;sb;sb;pa;kv;ce;vb chī;kv;kv;kq;or;da;kt;ky	180
+谁能吃	shéi;yv;yf;yv;ca;su;yw;ya néng;sb;sb;sb;pa;kv;ce;vb chī;kv;kq;kq;or;da;kt;ky	180
 谁能带	shéi;yv;yf;yv;ca;su;yw;ya néng;sb;sb;sb;pa;kv;ce;vb dài;cj;fj;jb;zy;lr;gk;aj	193
 谁能敌	shéi;yv;yf;yv;ca;su;yw;ya néng;sb;sb;sb;pa;kv;ce;vb dí;uw;qw;wu,uw;sj;ah;td;qw	230
 谁能懂	shéi;yv;yf;yv;ca;su;yw;ya néng;sb;sb;sb;pa;kv;ce;vb dǒng;xv;xv;xd;ng;hd;na;xv	324
@@ -3543,7 +3543,7 @@ sort: by_weight
 忘记谁	wàng;wx;wx;xw;in;fh;yn;wx jì;yj;yj;yj;ct;sv;yn;yj shéi;yv;yf;yv;ca;su;yw;ya	209
 忘了谁	wàng;wx;wx;xw;in;fh;yn;wx le;al;vl;aa,vu;rp;rl;bn;vv shéi;yv;yf;yv;ca;su;yw;ya	277
 为了谁	wèi;ld;dd;dd;uu;ii;yl;dd le;al;vl;aa,vu;rp;rl;bn;vv shéi;yv;yf;yv;ca;su;yw;ya	425
-为谁开	wéi;ld;dd;dd;uu;ii;yl;dd shéi;yv;yf;yv;ca;su;yw;ya kāi;ac;kc;ac;up;fl;ga;aa	256
+为谁开	wéi;ld;dd;dd;uu;ii;yl;dd shéi;yv;yf;yv;ca;su;yw;ya kāi;ac;ac;ac;up;fl;ga;aa	256
 为谁留	wéi;ld;dd;dd;uu;ii;yl;dd shéi;yv;yf;yv;ca;su;yw;ya liú;pt;pt;td,tl,lt;uw;bq;qy;pt	158
 为谁落	wéi;ld;dd;dd;uu;ii;yl;dd shéi;yv;yf;yv;ca;su;yw;ya luò;ck;ck;cl;zo;ls;ai;ck	178
 为谁忙	wéi;ld;dd;dd;uu;ii;yl;dd shéi;yv;yf;yv;ca;su;yw;ya máng;xw;xw;xw;nr;hf;ny;xw	241
@@ -3710,11 +3710,11 @@ sort: by_weight
 解组谁逼	jiě;dn;dn;jn;gb;xq;qe;en zǔ;sq;sq;sq;eu;if;xe;sq shéi;yv;yf;yv;ca;su;yw;ya bī;zt;zt;zf,zt;dq;fu;gk;zt	125
 今倩谁温	jīn;rv;rv;ra,rv;er;ja;wy;rv qiàn;ro;ro;rq;xl;jv;wg;ro shéi;yv;yf;yv;ca;su;yw;ya wēn;dm;dm;dm,dw;ka;ka;ij;dm	58
 今谁存者	jīn;rv;rv;ra,rv;er;ja;wy;rv shéi;yv;yf;yv;ca;su;yw;ya cún;uz;uz;uz,za;sa;nh;dh;az zhě;lo;lo;lo,ol;gv;qo;ft;uo	77
-就给谁吃	jiù;wy;wy;yj;ih;go;yi;wy gěi;sk;sk;sh;eo;id;xw;sk shéi;yv;yf;yv;ca;su;yw;ya chī;kv;kv;kq;or;da;kt;ky	92
+就给谁吃	jiù;wy;wy;yj;ih;go;yi;wy gěi;sk;sk;sh;eo;id;xw;sk shéi;yv;yf;yv;ca;su;yw;ya chī;kv;kq;kq;or;da;kt;ky	92
 就卖给谁	jiù;wy;wy;yj;ih;go;yi;wy mài;ud;ud;um;sx;nm;fn;ud gěi;sk;sk;sh;eo;id;xw;sk shéi;yv;yf;yv;ca;su;yw;ya	222
 绝艳谁怜	jué;sb;sb;ss;et;im;xq;sb yàn;fb;fb;fs;at;am;dh;fb shéi;yv;yf;yv;ca;su;yw;ya lián;xs;xs;xl;np;hk;nw;xv	35
 君谁与守	jūn;yk;yk;ky;so;bd;vt;yk shéi;yv;yf;yv;ca;su;yw;ya yǔ;va;aa;aa;dd;ff;gn;aa shǒu;bc;bc;bc;ik;wk;pf;gc	1
-开口谁亲	kāi;ac;kc;ac;up;fl;ga;aa kǒu;la;la;aa;oo;dk;kk;aa shéi;yv;yf;yv;ca;su;yw;ya qīn;lm;lm;lm;bw;ie;us;lx	222
+开口谁亲	kāi;ac;ac;ac;up;fl;ga;aa kǒu;la;la;aa;oo;dk;kk;aa shéi;yv;yf;yv;ca;su;yw;ya qīn;lm;lm;lm;bw;ie;us;lx	222
 看不出谁	kàn;uo;uo;ou,uo;us;uq;rh;pm bù;ab;ad;ad,ax;dh;cb;gi;ad chū;uu;vk;ck,aa;pp;sm;bm;va shéi;yv;yf;yv;ca;su;yw;ya	255
 看不惯谁	kàn;uo;uo;ou,uo;us;uq;rh;pm bù;ab;ad;ad,ax;dh;cb;gi;ad guàn;xb;xr;xg;nm;ho;nx;xr shéi;yv;yf;yv;ca;su;yw;ya	275
 看不起谁	kàn;uo;uo;ou,uo;us;uq;rh;pm bù;ab;ad;ad,ax;dh;cb;gi;ad qǐ;tj;tj;zj;gt;pv;fh;tj shéi;yv;yf;yv;ca;su;yw;ya	338
@@ -3728,14 +3728,14 @@ sort: by_weight
 看谁先死	kàn;uo;uo;ou,uo;us;uq;rh;pm shéi;yv;yf;yv;ca;su;yw;ya xiān;ne;ne;ne,en;bk;qp;tf;pe sǐ;db;db;db;ff;gv;gq;db	1
 可谁想到	kě;dk;dk;dk;jj;zk;sk;av shéi;yv;yf;yv;ca;su;yw;ya xiǎng;mx;mx;xx;wn;eh;sh;lx dào;gd;ad;dv;di;yp;gc;vd	275
 可谁知道	kě;dk;dk;dk;jj;zk;sk;av shéi;yv;yf;yv;ca;su;yw;ya zhī;uk;uk;uk,ku;eo;od;td;uk dào;zz;zz;zu;fq;hu;ut;zm	421
-离不开谁	lí;wn;wd;ws,wl;ip;zv;yb;wd bù;ab;ad;ad,ax;dh;cb;gi;ad kāi;ac;kc;ac;up;fl;ga;aa shéi;yv;yf;yv;ca;su;yw;ya	1
+离不开谁	lí;wn;wd;ws,wl;ip;zv;yb;wd bù;ab;ad;ad,ax;dh;cb;gi;ad kāi;ac;ac;ac;up;fl;ga;aa shéi;yv;yf;yv;ca;su;yw;ya	1
 帘影谁摇	lián;bj;bj;bj,jb,jx,xj;iy;er;pw;gj yǐng;op;op;pj;vu;oe;jy;op shéi;yv;yf;yv;ca;su;yw;ya yáo;ff;ff;ff;jp;ua;re;ff	58
 鹿死谁手	lù;gb;gb;gb,lb;ra;xl;yn;gb sǐ;db;db;db;ff;gv;gq;db shéi;yv;yf;yv;ca;su;yw;ya shǒu;pf;pl;pa,ub;up;us;rt;pv	505
 卖给了谁	mài;ud;ud;um;sx;nm;fn;ud gěi;sk;sk;sh;eo;id;xw;sk le;al;vl;aa,vu;rp;rl;bn;vv shéi;yv;yf;yv;ca;su;yw;ya	296
 卖给谁了	mài;ud;ud;um;sx;nm;fn;ud gěi;sk;sk;sh;eo;id;xw;sk shéi;yv;yf;yv;ca;su;yw;ya le;al;vl;aa,vu;rp;rl;bn;vv	1
 满庭谁扫	mǎn;dl;dl;dl;ke;km;ia;dl tíng;gw;gz;gt;rq;xu;yt;gr shéi;yv;yf;yv;ca;su;yw;ya sǎo;fe;fe;fx;js;ub;rv;fa	1
 没看好谁	méi;du;dy;du;kl;kr;im;dy kàn;uo;uo;ou,uo;us;uq;rh;pm hǎo;nz;nz;nz;ya;bh;vb;nz shéi;yv;yf;yv;ca;su;yw;ya	1
-明年谁健	míng;oo;oo;oo;vl;ov;je;oo nián;pf;pl;ra,pa;es;ev;rh;pa shéi;yv;yf;yv;ca;su;yw;ya jiàn;ry;ry;rj;xq;ju;wv;rj	58
+明年谁健	míng;oo;oo;oo;vl;ov;je;oo nián;pf;pl;ra,pa;es;ev;rh;pa shéi;yv;yf;yv;ca;su;yw;ya jiàn;ry;rz;rj;xq;ju;wv;rj	58
 名之者谁	míng;xk;xk;xk;fo;ld;qk;xk zhī;dn;dn;dd;hh;ri;pp;dn zhě;lo;lo;lo,ol;gv;qo;ft;uo shéi;yv;yf;yv;ca;su;yw;ya	142
 莫敢谁何	mò;cd;cd;cd,ct;zx;lm;aj;cd gǎn;ew;vw;we,aw,vw;rj;ah;nb;vw shéi;yv;yf;yv;ca;su;yw;ya hé;rk;rk;rk;xj;jz;ws;rk	125
 莫之谁何	mò;cd;cd;cd,ct;zx;lm;aj;cd zhī;dn;dn;dd;hh;ri;pp;dn shéi;yv;yf;yv;ca;su;yw;ya hé;rk;rk;rk;xj;jz;ws;rk	1
@@ -3821,11 +3821,11 @@ sort: by_weight
 谁曾想到	shéi;yv;yf;yv;ca;su;yw;ya céng;bo;bo;ob,bo;fv;ho;ul;eo xiǎng;mx;mx;xx;wn;eh;sh;lx dào;gd;ad;dv;di;yp;gc;vd	358
 谁曾想过	shéi;yv;yf;yv;ca;su;yw;ya céng;bo;bo;ob,bo;fv;ho;ul;eo xiǎng;mx;mx;xx;wn;eh;sh;lx guò;zc;zc;zc;kq;ku;fp;zc	219
 谁唱的了	shéi;yv;yf;yv;ca;su;yw;ya chàng;ko;ko;ki;ov;do;kj;ko de;bu;bu;bu;sh;ui;rq;bu le;al;vl;aa,vu;rp;rl;bn;vv	125
-谁吃的饭	shéi;yv;yf;yv;ca;su;yw;ya chī;kv;kv;kq;or;da;kt;ky de;bu;bu;bu;sh;ui;rq;bu fàn;uy;uy;uf;gl;qr;qn;uy	1
+谁吃的饭	shéi;yv;yf;yv;ca;su;yw;ya chī;kv;kq;kq;or;da;kt;ky de;bu;bu;bu;sh;ui;rq;bu fàn;uy;uy;uf;gl;qr;qn;uy	1
 谁处对象	shéi;yv;yf;yv;ca;su;yw;ya chù;wb;wb;wb;jh;hy;th;wb duì;yc;yc;cy,yc;lk;rk;cf;yc xiàng;du;dn;du,pd,ua;gh;wx;qj;en	105
 谁传道之	shéi;yv;yf;yv;ca;su;yw;ya chuán;rv;rv;rv;xh;ji;wf;rv dào;zz;zz;zu;fq;hu;ut;zm zhī;dn;dn;dd;hh;ri;pp;dn	187
 谁穿谁美	shéi;yv;yf;yv;ca;su;yw;ya chuān;by;by;xy,by;iu;el;pw;gy shéi;yv;yf;yv;ca;su;yw;ya měi;yd;yd;dy,yd;fx;gm;ug;ed	149
-谁打开的	shéi;yv;yf;yv;ca;su;yw;ya dǎ;fd;fd;fd;jj;ua;rs;fd kāi;ac;kc;ac;up;fl;ga;aa de;bu;bu;bu;sh;ui;rq;bu	77
+谁打开的	shéi;yv;yf;yv;ca;su;yw;ya dǎ;fd;fd;fd;jj;ua;rs;fd kāi;ac;ac;ac;up;fl;ga;aa de;bu;bu;bu;sh;ui;rq;bu	77
 谁搭理你	shéi;yv;yf;yv;ca;su;yw;ya dā;fk;fk;fd,fh;jo;ud;ra;fk lǐ;wl;wl;wl;ag;nd;gj;wl nǐ;rx;rx;re;xf;jy;wq;rx	213
 谁大谁小	shéi;yv;yf;yv;ca;su;yw;ya dà;ar;un;ad;xx;md;dd;an shéi;yv;yf;yv;ca;su;yw;ya xiǎo;lb;ld;ad;pf;yx;ih;vd	365
 谁带孩子	shéi;yv;yf;yv;ca;su;yw;ya dài;cj;fj;jb;zy;lr;gk;aj hái;zr;zr;zh;ae;hk;by;zr zi;la;va;aa,vh;aa;hi;bb;va	255
@@ -3910,7 +3910,7 @@ sort: by_weight
 谁还打牌	shéi;yv;yf;yv;ca;su;yw;ya hái;zb;zb;zb;dq;cu;gi;zb dǎ;fd;fd;fd;jj;ua;rs;fd pái;pu;pu;pb;us;an;th;pu	1
 谁还以为	shéi;yv;yf;yv;ca;su;yw;ya hái;zb;zb;zb;dq;cu;gi;zb yǐ;lr;vr;rd,ry;re;vj;ny;vr wéi;ld;dd;dd;uu;ii;yl;dd	35
 谁和你在	shéi;yv;yf;yv;ca;su;yw;ya hé;hk;hk;hk;uo;xd;tk;hk nǐ;rx;rx;re;xf;jy;wq;rx zài;ut;ut;ta,ut;sg;ng;dh;at	1
-谁和我开	shéi;yv;yf;yv;ca;su;yw;ya hé;hk;hk;hk;uo;xd;tk;hk wǒ;ga;pd;pd,pp;ua;tp;tr;pg kāi;ac;kc;ac;up;fl;ga;aa	1
+谁和我开	shéi;yv;yf;yv;ca;su;yw;ya hé;hk;hk;hk;uo;xd;tk;hk wǒ;ga;pd;pd,pp;ua;tp;tr;pg kāi;ac;ac;ac;up;fl;ga;aa	1
 谁和我约	shéi;yv;yf;yv;ca;su;yw;ya hé;hk;hk;hk;uo;xd;tk;hk wǒ;ga;pd;pd,pp;ua;tp;tr;pg yuē;su;su;su;eh;ii;xq;su	1
 谁会搭理	shéi;yv;yf;yv;ca;su;yw;ya huì;ry;rs;ry;ep;jb;wf;rv dā;fk;fk;fd,fh;jo;ud;ra;fk lǐ;wl;wl;wl;ag;nd;gj;wl	92
 谁毁谁誉	shéi;yv;yf;yv;ca;su;yw;ya huǐ;ju;jy;jy,ug;sl;pr;va;jy shéi;yv;yf;yv;ca;su;yw;ya yù;xk;xk;yx;ho;ks;iw;ek	58
@@ -3926,7 +3926,7 @@ sort: by_weight
 谁叫你手	shéi;yv;yf;yv;ca;su;yw;ya jiào;kj;kl;kj;op;di;kn;ka nǐ;rx;rx;re;xf;jy;wq;rx shǒu;pf;pl;pa,ub;up;us;rt;pv	1
 谁结婚呢	shéi;yv;yf;yv;ca;su;yw;ya jié;sk;sk;sj;eo;id;xf;sk hūn;no;no;nh;yv;bo;vq;no ne;kb;kb;kn;oa;dv;kn;kb	1
 谁就指挥	shéi;yv;yf;yv;ca;su;yw;ya jiù;wy;wy;yj;ih;go;yi;wy zhǐ;fo;fo;fv;jv;uo;rx;fo huī;fi;fi;fj;jt;uy;rp;fi	1
-谁开的房	shéi;yv;yf;yv;ca;su;yw;ya kāi;ac;kc;ac;up;fl;ga;aa de;bu;bu;bu;sh;ui;rq;bu fáng;hf;hf;hf;qf;ml;yn;hf	1
+谁开的房	shéi;yv;yf;yv;ca;su;yw;ya kāi;ac;ac;ac;up;fl;ga;aa de;bu;bu;bu;sh;ui;rq;bu fáng;hf;hf;hf;qf;ml;yn;hf	1
 谁扛得住	shéi;yv;yf;yv;ca;su;yw;ya káng;fg;fg;fg;jp;uu;ra;fg de;rc;ic;xc;hk;wk;tj;rc zhù;rv;rv;rv;xg;jn;wy;rv	199
 谁可知道	shéi;yv;yf;yv;ca;su;yw;ya kě;dk;dk;dk;jj;zk;sk;av zhī;uk;uk;uk,ku;eo;od;td;uk dào;zz;zz;zu;fq;hu;ut;zm	1
 谁坑你了	shéi;yv;yf;yv;ca;su;yw;ya kēng;tj;tj;tk;gi;go;fy;tj nǐ;rx;rx;re;xf;jy;wq;rx le;al;vl;aa,vu;rp;rl;bn;vv	35
@@ -3934,7 +3934,7 @@ sort: by_weight
 谁来救我	shéi;yv;yf;yv;ca;su;yw;ya lái;am;an;am,wb;dl;ah;go;an jiù;qw;qw;wq;dj;fh;fi;qw wǒ;ga;pd;pd,pp;ua;tp;tr;pg	262
 谁来主宰	shéi;yv;yf;yv;ca;su;yw;ya lái;am;an;am,wb;dl;ah;go;an zhǔ;wt;dw;dw;ha;in;yg;wt zǎi;bx;bu;bx;is;wn;pu;gu	156
 谁来阻止	shéi;yv;yf;yv;ca;su;yw;ya lái;am;an;am,wb;dl;ah;go;an zǔ;eq;eq;eq;bu;tf;be;eq zhǐ;lb,la,ba;la;aa;rr;si;hh;ua	156
-谁拦得住	shéi;yv;yf;yv;ca;su;yw;ya lán;fl;ff;fl;ju;ut;ru;fs dé;rc;ic;xc;hk;wk;tj;rc zhù;rv;rv;rv;xg;jn;wy;rv	210
+谁拦得住	shéi;yv;yf;yv;ca;su;yw;ya lán;fl;fs;fl;ju;ut;ru;fs dé;rc;ic;xc;hk;wk;tj;rc zhù;rv;rv;rv;xg;jn;wy;rv	210
 谁厉害呢	shéi;yv;yf;yv;ca;su;yw;ya lì;iw;iw;iw;ee;xp;dd;iw hài;bk;bk;bk;io;wd;pd;gk ne;kb;kb;kn;oa;dv;kn;kb	1
 谁怜夭折	shéi;yv;yf;yv;ca;su;yw;ya lián;xs;xs;xl;np;hk;nw;xv yāo;pd;pd;pd;ux;tm;td;pd zhé;fj;fj;fj;jp;ut;rr;fj	35
 谁临晚眺	shéi;yv;yf;yv;ca;su;yw;ya lín;lk;la;ao,do;pd;po;jt;aa wǎn;oe;ov;om;vk;op;jq;om tiào;ov;od;ov;sf;qw;hi;mv	1
@@ -3952,7 +3952,7 @@ sort: by_weight
 谁能猜到	shéi;yv;yf;yv;ca;su;yw;ya néng;sb;sb;sb;pa;kv;ce;vb cāi;qo;qo;qq;bl;mv;qt;qo dào;gd;ad;dv;di;yp;gc;vd	318
 谁能挡我	shéi;yv;yf;yv;ca;su;yw;ya néng;sb;sb;sb;pa;kv;ce;vb dǎng;fe;fe;fd;js;ub;ri;fd wǒ;ga;pd;pd,pp;ua;tp;tr;pg	225
 谁能极之	shéi;yv;yf;yv;ca;su;yw;ya néng;sb;sb;sb;pa;kv;ce;vb jí;mj,mn;mj;mj;wh;ec;se;lj zhī;dn;dn;dd;hh;ri;pp;dn	134
-谁能解开	shéi;yv;yf;yv;ca;su;yw;ya néng;sb;sb;sb;pa;kv;ce;vb jiě;dn;dn;jn;gb;xq;qe;en kāi;ac;kc;ac;up;fl;ga;aa	199
+谁能解开	shéi;yv;yf;yv;ca;su;yw;ya néng;sb;sb;sb;pa;kv;ce;vb jiě;dn;dn;jn;gb;xq;qe;en kāi;ac;ac;ac;up;fl;ga;aa	199
 谁能晋级	shéi;yv;yf;yv;ca;su;yw;ya néng;sb;sb;sb;pa;kv;ce;vb jìn;yo;yo;oy,yo;dv;fo;go;yo jí;sj;sj;sj;eh;ic;xe;sj	253
 谁能尽善	shéi;yv;yf;yv;ca;su;yw;ya néng;sb;sb;sb;pa;kv;ce;vb jìn;id;id;id;qh;cw;ny;id shàn;yk;yk;yk,ka,kq;fo;gd;ud;ek	1
 谁能像你	shéi;yv;yf;yv;ca;su;yw;ya néng;sb;sb;sb;pa;kv;ce;vb xiàng;ru;rn;rx;xh;jw;wq;rx nǐ;rx;rx;re;xf;jy;wq;rx	92
@@ -4025,7 +4025,7 @@ sort: by_weight
 谁下地狱	shéi;yv;yf;yv;ca;su;yw;ya xià;ab;ab;ab,ad;dh;fy;gh;ab dì;ty;ty;ty;ga;ge;fb;ty yù;qq;qq;qq;bb;mm;qt;qq	318
 谁羡骖鸾	shéi;yv;yf;yv;ca;su;yw;ya xiàn;yq;yr;yc;fe;ge;ug;er cān;mp;mp;mc;zu;ne;cc;mp luán;wn;wn;ny,wn,yn;ic;zx;yo;wn	1
 谁先动手	shéi;yv;yf;yv;ca;su;yw;ya xiān;ne;ne;ne,en;bk;qp;tf;pe dòng;yl;el;ly,yl;uu;bs;fc;el shǒu;pf;pl;pa,ub;up;us;rt;pv	326
-谁先开口	shéi;yv;yf;yv;ca;su;yw;ya xiān;ne;ne;ne,en;bk;qp;tf;pe kāi;ac;kc;ac;up;fl;ga;aa kǒu;la;la;aa;oo;dk;kk;aa	293
+谁先开口	shéi;yv;yf;yv;ca;su;yw;ya xiān;ne;ne;ne,en;bk;qp;tf;pe kāi;ac;ac;ac;up;fl;ga;aa kǒu;la;la;aa;oo;dk;kk;aa	293
 谁先谁后	shéi;yv;yf;yv;ca;su;yw;ya xiān;ne;ne;ne,en;bk;qp;tf;pe shéi;yv;yf;yv;ca;su;yw;ya hòu;ik;pk;pk;uo;xd;rg;pk	449
 谁先主动	shéi;yv;yf;yv;ca;su;yw;ya xiān;ne;ne;ne,en;bk;qp;tf;pe zhǔ;wt;dw;dw;ha;in;yg;wt dòng;yl;el;ly,yl;uu;bs;fc;el	235
 谁想得到	shéi;yv;yf;yv;ca;su;yw;ya xiǎng;mx;mx;xx;wn;eh;sh;lx dé;rc;ic;xc;hk;wk;tj;rc dào;gd;ad;dv;di;yp;gc;vd	295
@@ -4296,7 +4296,7 @@ sort: by_weight
 两个明	liǎng;ar;ad;ad;de;ml;gm;ad gè;rl;rl;ra,pa;ep;jg;wh;ra míng;oo;oo;oo;vl;ov;je;oo	1
 两个牟	liǎng;ar;ad;ad;de;ml;gm;ad gè;rl;rl;ra,pa;ep;jg;wh;ra móu;sn;sn;sn;pb;kq;cr;vn	1
 两个母	liǎng;ar;ad;ad;de;ml;gm;ad gè;rl;rl;ra,pa;ep;jg;wh;ra mǔ;md;vd;ad,vd;rh;km;xg;vd	1
-两个木	liǎng;ar;ad;ad;de;ml;gm;ad gè;rl;rl;ra,pa;ep;jg;wh;ra mù;ur;un;ad;ww;em;ss;un	1
+两个木	liǎng;ar;ad;ad;de;ml;gm;ad gè;rl;rl;ra,pa;ep;jg;wh;ra mù;ur;un,an;ad;ww;em;ss;un	1
 两个目	liǎng;ar;ad;ad;de;ml;gm;ad gè;rl;rl;ra,pa;ep;jg;wh;ra mù;ke;ka;aa,om,mu;ss;qm;hh;we	1
 两个男	liǎng;ar;ad;ad;de;ml;gm;ad gè;rl;rl;ra,pa;ep;jg;wh;ra nán;tl;tl;tl;wu;qs;ll;tl	1
 两个𡥦	liǎng;ar;ad;ad;de;ml;gm;ad gè;rl;rl;ra,pa;ep;jg;wh;ra nǐ;zz;zz;zz;;hh;bb;	1
@@ -4445,7 +4445,7 @@ sort: by_weight
 三个門	sān;ae;ae;aa;uu;ts;dg;ae gè;rl;rl;ra,pa;ep;jg;wh;ra mén;ll;ll;aa,vh,xa;;am;uh;	1
 三个米	sān;ae;ae;aa;uu;ts;dg;ae gè;rl;rl;ra,pa;ep;jg;wh;ra mǐ;bm;dm;dd;ll;pm;oy;dl	1
 三个面	sān;ae;ae;aa;uu;ts;dg;ae gè;rl;rl;ra,pa;ep;jg;wh;ra miàn;ao;aa;aa;du;bm;dm;aa	1
-三个木	sān;ae;ae;aa;uu;ts;dg;ae gè;rl;rl;ra,pa;ep;jg;wh;ra mù;ur;un;ad;ww;em;ss;un	1
+三个木	sān;ae;ae;aa;uu;ts;dg;ae gè;rl;rl;ra,pa;ep;jg;wh;ra mù;ur;un,an;ad;ww;em;ss;un	1
 三个目	sān;ae;ae;aa;uu;ts;dg;ae gè;rl;rl;ra,pa;ep;jg;wh;ra mù;ke;ka;aa,om,mu;ss;qm;hh;we	1
 三个男	sān;ae;ae;aa;uu;ts;dg;ae gè;rl;rl;ra,pa;ep;jg;wh;ra nán;tl;tl;tl;wu;qs;ll;tl	1
 三个鳥	sān;ae;ae;aa;uu;ts;dg;ae gè;rl;rl;ra,pa;ep;jg;wh;ra niǎo;nh;ph;ph;;xn;wv;	1
@@ -4592,7 +4592,7 @@ sort: by_weight
 越长越	yuè;tl;tv;zy;gh;pn;fh;tg cháng;pn;pn;pd;uh;pc;ta;pn yuè;tl;tv;zy;gh;pn;fh;tg	315
 越长大	yuè;tl;tv;zy;gh;pn;fh;tg zhǎng;pn;pn;pd;uh;pc;ta;pn dà;ar;un;ad;xx;md;dd;an	321
 越长越	yuè;tl;tv;zy;gh;pn;fh;tg zhǎng;pn;pn;pd;uh;pc;ta;pn yuè;tl;tv;zy;gh;pn;fh;tg	265
-这是蚕	zhè;zw;zw;zw;jq;vu;yp;zx shì;oz;or;op,ov;ve;ot;jg;or cán;ti;fi;it,ti;uf;fc;gd;ti	1
+这是蚕	zhè;zw;zw;zw;jq;vu;yp;zx shì;oz;or;op,ov;ve;ot;jg;or cán;ti;ti;it,ti;uf;fc;gd;ti	1
 紫瓷盘	zǐ;vx;vx;sc;rf;si;hx;vx cí;dw;dw;wc;fh;wr;uq;dw pán;vm;vm;mv,vm;ta;ia;te;vm	1
 紫葡萄	zǐ;vx;vx;sc;rf;si;hx;vx pú;cf;cf;cp;zh;ln;aq;cf táo;cf;cf;cf,ct;zp;la;aq;cf	1
 嘴不黑	zuǐ;ky;ky;kj,kz;op;dt;kh;ky bù;ab;ad;ad,ax;dh;cb;gi;ad hēi;lh;lh;ad,ha;nn;ph;lf;ae	1
@@ -4602,7 +4602,7 @@ sort: by_weight
 便宜行事	biàn;rg;rg;rg;xy;jb;wg;rg yí;bq;bq;bq;iu;wf;pe;gq xíng;rd;ii;xd,xi;hp;px;tf;rd shì;gy;al;aa;dp;fb;gk;av	281
 便宜之内	biàn;rg;rg;rg;xy;jb;wg;rg yí;bq;bq;bq;iu;wf;pe;gq zhī;dn;dn;dd;hh;ri;pp;dn nèi;kr;ld;ad,kr;oe;mj;mw;ad	110
 不剥桔子	bù;ab;ad;ad,ax;dh;cb;gi;ad bō;ed;ed;dl;si;bp;vi;ld jú;mk;mk;mj;wo;ed;sf;lk zi;la;va;aa,vh;aa;hi;bb;va	1
-不吃桔子	bù;ab;ad;ad,ax;dh;cb;gi;ad chī;kv;kv;kq;or;da;kt;ky jú;mk;mk;mj;wo;ed;sf;lk zi;la;va;aa,vh;aa;hi;bb;va	1
+不吃桔子	bù;ab;ad;ad,ax;dh;cb;gi;ad chī;kv;kq;kq;or;da;kt;ky jú;mk;mk;mj;wo;ed;sf;lk zi;la;va;aa,vh;aa;hi;bb;va	1
 不是字纸	bú;ab;ad;ad,ax;dh;cb;gi;ad shì;oz;or;op,ov;ve;ot;jg;or zì;bz;bz;bz;ia;wh;pb;gz zhǐ;su;su;su;er;ib;xq;su	1
 鹅要过河	é;wn;wn;nw;uc;tx;tr;wn yào;xn;xn;xn;py;vb;sv;xn guò;zc;zc;zc;kq;ku;fp;zc hé;dk;dk;dk;kj;kz;is;dk	1
 肥肥的鹅	féi;ob;ob;ob;lt;vm;ec;ob féi;ob;ob;ob;lt;vm;ec;ob de;bu;bu;bu;sh;ui;rq;bu é;wn;wn;nw;uc;tx;tr;wn	1
@@ -4668,14 +4668,14 @@ sort: by_weight
 胡子打驼子	hú;go;uo;og;sl;cv;de;uo zi;la;va;aa,vh;aa;hi;bb;va dǎ;fd;fd;fd;jj;ua;rs;fd tuó;mb;mb;mt;za;nv;cp;mb zi;la;va;aa,vh;aa;hi;bb;va	1
 花粉花凤凰	huā;cb;cb;ch;za;lv;aw;cb fěn;mf;md;mf;lu;pp;ow;md huā;cb;cb;ch;za;lv;aw;cb fèng;jy;jy;jy;il;or;mc;jy huáng;jw;jw;jh;ia;on;mr;jw	1
 花鸟怕灰猫	huā;cb;cb;ch;za;lv;aw;cb niǎo;na;pa,wd;na,pa;cc;xn;qy;pa pà;xb;xb;xb;ns;hu;nr;xb huī;uh;uh;hu,uh;st;nc;do;ah māo;qt;qt;qm;bw;mq;qt;qt	1
-黄贺搞木刻	huáng;cb;cb;ad,cb;zf;nh;am;cb hè;lb;lr;bj;um;so;lk;lr gǎo;fk;fk;fg;jo;ug;ry;fk mù;ur;un;ad;ww;em;ss;un kè;wd;wd;dh;ii;kp;yn;wd	1
+黄贺搞木刻	huáng;cb;cb;ad,cb;zf;nh;am;cb hè;lb;lr;bj;um;so;lk;lr gǎo;fk;fk;fg;jo;ug;ry;fk mù;ur;un,an;ad;ww;em;ss;un kè;wd;wd;dh;ii;kp;yn;wd	1
 假梨差不离	jiǎ;ry;ry;rj,ry;xl;jr;wn;ry lí;hm;hm;ml;uw;xe;tj;hl chà;yg;yg;yg;fp;gu;ud;eg bù;ab;ad;ad,ax;dh;cb;gi;ad lí;wn;wd;ws,wl;ip;zv;yb;wd	1
 教练和主力	jiào;lw;lw;wx;gj;qh;ft;uw liàn;sd;sd;sd,sj;ef;iy;xa;sd hé;hk;hk;hk;uo;xd;tk;hk zhǔ;wt;dw;dw;ha;in;yg;wt lì;vp;vp;gp;uu;sl;lt;vp	1
 糠赶不走枪	kāng;ml;mn;mk;lo;pk;oy;ml gǎn;tg;tg;zg;qs;pe;fh;tg bù;ab;ad;ad,ax;dh;cb;gi;ad zǒu;tz;tr;tv;ge;pz;fh;tr qiāng;mv;mv;mc;wt;ez;sw;lv	1
 糠埋住了枪	kāng;ml;mn;mk;lo;pk;oy;ml mái;tl;tl;tl;gg;gd;fj;tl zhù;rv;rv;rv;xg;jn;wy;rv le;al;vl;aa,vu;rp;rl;bn;vv qiāng;mv;mv;mc;wt;ez;sw;lv	1
 糠要枪上墙	kāng;ml;mn;mk;lo;pk;oy;ml yào;xn;xn;xn;py;vb;sv;xn qiāng;mv;mv;mc;wt;ez;sw;lv shàng;ba;la;aa,ba;pu;yf;hh;aa qiáng;tk;tk;th;gd;gd;ff;tk	1
 吭哧吭哧走	kēng;kj;kj;kk;oi;do;ky;kj chī;ki;kd;ki;oi;dc;kf;ki kēng;kj;kj;kk;oi;do;ky;kj chī;ki;kd;ki;oi;dc;kf;ki zǒu;tz;tr;tv;ge;pz;fh;tr	1
-口渴要吃梨	kǒu;la;la;aa;oo;dk;kk;aa kě;dr;dv;dh;kr;kf;ij;dv yào;xn;xn;xn;py;vb;sv;xn chī;kv;kv;kq;or;da;kt;ky lí;hm;hm;ml;uw;xe;tj;hl	1
+口渴要吃梨	kǒu;la;la;aa;oo;dk;kk;aa kě;dr;dv;dh;kr;kf;ij;dv yào;xn;xn;xn;py;vb;sv;xn chī;kv;kq;kq;or;da;kt;ky lí;hm;hm;ml;uw;xe;tj;hl	1
 来到山坡坡	lái;am;an;am,wb;dl;ah;go;an dào;gd;ad;dv;di;yp;gc;vd shān;kl;lk;aa;pp;vs;mm;aa pō;tp;ty;tp;gl;gr;fh;ty pō;tp;ty;tp;gl;gr;fh;ty	1
 老刘夸小牛	lǎo;lb;lb;bl,lb;ga;ql;ft;ub liú;wd;wd;dw,wd;ji;vp;yj;wd kuā;dk;dk;dk;xr;ma;df;dk xiǎo;lb;ld;ad;pf;yx;ih;vd niú;pu;pl;pa;bb;qn;rh;pa	1
 李虎满屋转	lǐ;mz;mz;mz;wa;eh;sb;lz hǔ;hj;hj;hj;pi;zh;ha;aj mǎn;dl;dl;dl;ke;km;ia;dl wū;ut;ut;uv;qg;cy;ng;ut zhuǎn;iv;iv;iv;th;yi;lf;iv	1
@@ -4716,7 +4716,7 @@ sort: by_weight
 一盘生鱼翅	yì;aa;aa;aa;dd;fi;gg;aa pán;vm;vm;mv,vm;ta;ia;te;vm shēng;pf;pf;na;eg;ls;tg;pa yú;da;da;da;qq;wv;qg;ea chì;vx;ux;vy,yv;sd;cz;fc;ux	1
 一盘熟鱼翅	yì;aa;aa;aa;dd;fi;gg;aa pán;vm;vm;mv,vm;ta;ia;te;vm shú;wh;wh;hu;in;gc;yb;we yú;da;da;da;qq;wv;qg;ea chì;vx;ux;vy,yv;sd;cz;fc;ux	1
 一天天下雨	yì;aa;aa;aa;dd;fi;gg;aa tiān;ad;ad;ad;ue;fm;gd;ad tiān;ad;ad;ad;ue;fm;gd;ad xià;ab;ab;ab,ad;dh;fy;gh;ab yǔ;ad;ad;ad;yy;tv;fg;ad	1
-有吃又有喝	yǒu;uo;uo;ou,uo;sl;nv;de;ao chī;kv;kv;kq;or;da;kt;ky yòu;vn;vn;vd,ad;ll;ry;cc;vn yǒu;uo;uo;ou,uo;sl;nv;de;ao hē;kr;kv;kh;or;df;kj;kv	1
+有吃又有喝	yǒu;uo;uo;ou,uo;sl;nv;de;ao chī;kv;kq;kq;or;da;kt;ky yòu;vn;vn;vd,ad;ll;ry;cc;vn yǒu;uo;uo;ou,uo;sl;nv;de;ao hē;kr;kv;kh;or;df;kj;kv	1
 沾了一身泥	zhān;dv;dk;dv;ko;kd;ih;dk le;al;vl;aa,vu;rp;rl;bn;vv yì;aa;aa;aa;dd;fi;gg;aa shēn;zc;pp;pp;uu;zs;tm;pp ní;db;db;dn;ka;kv;in;db	1
 只得去过河	zhǐ;kb;kb;kb;of;dh;kw;kb de;rc;ic;xc;hk;wk;tj;rc qù;ts;ts;ts;gp;gk;fc;tv guò;zc;zc;zc;kq;ku;fp;zc hé;dk;dk;dk;kj;kz;is;dk	1
 只需洗掉泥	zhǐ;kb;kb;kb;of;dh;kw;kb xū;ye;ye;ye;ye;tl;fd;ye xǐ;de;de;dx;kk;kp;it;de diào;fu;fu;fv;js;un;rh;fu ní;db;db;dn;ka;kv;in;db	1
@@ -4725,13 +4725,13 @@ sort: by_weight
 绊倒了秃丫头	bàn;sb;sb;sb;es;iu;xu;sb dǎo;rd;rd;rd;xi;jp;wg;rd le;al;vl;aa,vu;rp;rl;bn;vv tū;hj;hj;hj;ui;xo;tm;hj yā;bl;bl;ba,da;fp;hg;uh;ea tou;dd;dd;dd;hx;wm;ud;dd	1
 板凳比扁担宽	bǎn;my;my;mf;wl;er;sr;ly dèng;bj;vj;jd;ri;ho;wg;dj bǐ;bb;bb;bb;aa;vv;xx;bb biǎn;hc;hc;hc;qd;mi;yn;hc dàn;fd;fa;fd;jd;uf;rj;fd kuān;bj;be;bj,jb;ir;we;pa;gj	1
 扁担比板凳长	biǎn;hc;hc;hc;qd;mi;yn;hc dàn;fd;fa;fd;jd;uf;rj;fd bǐ;bb;bb;bb;aa;vv;xx;bb bǎn;my;my;mf;wl;er;sr;ly dèng;bj;vj;jd;ri;ho;wg;dj cháng;pn;pn;pd;uh;pc;ta;pn	1
-别喇叭的哑巴	bié;kd;kd;dl;oi;dp;kl;kd lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb de;bu;bu;bu;sh;ui;rq;bu yǎ;ky;ky;ky;od;dc;kg;ky bā;sl;vv;ag,kg,vg;tt;mb;cn;vv	1
+别喇叭的哑巴	bié;kd;kd;dl;oi;dp;kl;kd lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb de;bu;bu;bu;sh;ui;rq;bu yǎ;ky;ky;ky;od;dc;kg;ky bā;sl;vv,sl;ag,kg,vg;tt;mb;cn;vv	1
 不知是鹅过河	bù;ab;ad;ad,ax;dh;cb;gi;ad zhī;uk;uk;uk,ku;eo;od;td;uk shì;oz;or;op,ov;ve;ot;jg;or é;wn;wn;nw;uc;tx;tr;wn guò;zc;zc;zc;kq;ku;fp;zc hé;dk;dk;dk;kj;kz;is;dk	1
 不知是猴咬狗	bù;ab;ad;ad,ax;dh;cb;gi;ad zhī;uk;uk;uk,ku;eo;od;td;uk shì;oz;or;op,ov;ve;ot;jg;or hóu;qu;qu;qh;bx;mo;qt;qd yǎo;kf;kx;kj;oy;db;ku;kx gǒu;qj;qk;qj;bi;mg;qt;qk	1
 不知是瓶碰盆	bù;ab;ad;ad,ax;dh;cb;gi;ad zhī;uk;uk;uk,ku;eo;od;td;uk shì;oz;or;op,ov;ve;ot;jg;or píng;bw;bw;wb;fh;hr;ua;ew pèng;uy;uy;ub;td;mc;du;uy pén;fm;bm;mf;fa;ha;wv;bm	1
-蚕常在叶里藏	cán;ti;fi;it,ti;uf;fc;gd;ti cháng;xj;xj;jk,xd,dd;hy;sr;ip;ej zài;ut;ut;ta,ut;sg;ng;dh;at yè;ku;ku;ku;os;dn;kf;ku lǐ;tt;la;aa,tt;vg;dl;jf;aa cáng;ci;ci;cg,ci;zh;lq;ad;cg	1
+蚕常在叶里藏	cán;ti;ti;it,ti;uf;fc;gd;ti cháng;xj;xj;jk,xd,dd;hy;sr;ip;ej zài;ut;ut;ta,ut;sg;ng;dh;at yè;ku;ku;ku;os;dn;kf;ku lǐ;tt;la;aa,tt;vg;dl;jf;aa cáng;ci;ci;cg,ci;zh;lq;ad;cg	1
 蝉常在林里唱	chán;iu;il;id;fs;cn;ju;id cháng;xj;xj;jk,xd,dd;hy;sr;ip;ej zài;ut;ut;ta,ut;sg;ng;dh;at lín;mm;mm;mm;ww;ee;ss;ll lǐ;tt;la;aa,tt;vg;dl;jf;aa chàng;ko;ko;ki;ov;do;kj;ko	1
-吃桔子吃桔子	chī;kv;kv;kq;or;da;kt;ky jú;mk;mk;mj;wo;ed;sf;lk zi;la;va;aa,vh;aa;hi;bb;va chī;kv;kv;kq;or;da;kt;ky jú;mk;mk;mj;wo;ed;sf;lk zi;la;va;aa,vh;aa;hi;bb;va	1
+吃桔子吃桔子	chī;kv;kq;kq;or;da;kt;ky jú;mk;mk;mj;wo;ed;sf;lk zi;la;va;aa,vh;aa;hi;bb;va chī;kv;kq;kq;or;da;kt;ky jú;mk;mk;mj;wo;ed;sf;lk zi;la;va;aa,vh;aa;hi;bb;va	1
 到底是布补鼓	dào;gd;ad;dv;di;yp;gc;vd dǐ;gu;gd;gd;rh;xi;yq;gd shì;oz;or;op,ov;ve;ot;jg;or bù;uj;uj;ju,uj;sy;nr;dm;aj bǔ;pb;pb;yb;hh;ty;pu;pb gǔ;tv;uy;vd,uv;gl;hc;fk;uy	1
 地上有只白猫	dì;ty;ty;ty;ga;ge;fb;ty shàng;ba;la;aa,ba;pu;yf;hh;aa yǒu;uo;uo;ou,uo;sl;nv;de;ao zhǐ;kb;kb;kb;of;dh;kw;kb bái;po;po;pa,po;ss;ub;rr;po māo;qt;qt;qm;bw;mq;qt;qt	1
 地下的硬石头	dì;ty;ty;ty;ga;ge;fb;ty xià;ab;ab;ab,ad;dh;fy;gh;ab de;bu;bu;bu;sh;ui;rq;bu yìng;ug;ug;ug;th;mb;dg;ug shí;ak;ak;kp,aa,ak,pk;tt;ms;dg;ak tou;dd;dd;dd;hx;wm;ud;dd	1
@@ -4779,10 +4779,10 @@ sort: by_weight
 标兵怕碰炮兵炮	biāo;mu;mx;mu;wf;ef;sf;lx bīng;qb;qb;qb;uf;th;rg;qb pà;xb;xb;xb;ns;hu;nr;xb pèng;uy;uy;ub;td;mc;du;uy pào;hb;hs;hb;tt;cv;oq;hv bīng;qb;qb;qb;uf;th;rg;qb pào;hb;hs;hb;tt;cv;oq;hv	1
 不如不长腿和嘴	bù;ab;ad;ad,ax;dh;cb;gi;ad rú;nk;nk;nk;yo;bd;vk;nk bù;ab;ad;ad,ax;dh;cb;gi;ad cháng;pn;pn;pd;uh;pc;ta;pn tuǐ;og;oz;ot;lq;vu;ev;oh hé;hk;hk;hk;uo;xd;tk;hk zuǐ;ky;ky;kj,kz;op;dt;kh;ky	1
 不是鸡卵品种乱	bú;ab;ad;ad,ax;dh;cb;gi;ad shì;oz;or;op,ov;ve;ot;jg;or jī;yn;yn;ny,yn;lc;rx;cq;yn luǎn;pd;pd;pd,md;uh;bl;qy;pd pǐn;kk;kk;kk;oo;dd;kk;kk zhǒng;hv;hv;hv;up;xg;tk;hv luàn;uv;qv;ug;sr;aa;td;qv	1
-吃完柿子玩石子	chī;kv;kv;kq;or;da;kt;ky wán;by;be;by;ik;wp;pf;ge shì;mj;mj;mu;wy;er;sy;lj zi;la;va;aa,vh;aa;hi;bb;va wán;wy;we;wy;ak;np;gf;we shí;ak;ak;kp,aa,ak,pk;tt;ms;dg;ak zǐ;la;va;aa,vh;aa;hi;bb;va	1
+吃完柿子玩石子	chī;kv;kq;kq;or;da;kt;ky wán;by;be;by;ik;wp;pf;ge shì;mj;mj;mu;wy;er;sy;lj zi;la;va;aa,vh;aa;hi;bb;va wán;wy;we;wy;ak;np;gf;we shí;ak;ak;kp,aa,ak,pk;tt;ms;dg;ak zǐ;la;va;aa,vh;aa;hi;bb;va	1
 从北边来个哑吧	cóng;rr;rr;rr;ee;jj;ww;rr běi;lb;lb;ap,bj;la;av;ux;ab biān;zl;zl;zl;uq;su;lp;zl lái;am;an;am,wb;dl;ah;go;an gè;rl;rl;ra,pa;ep;jg;wh;ra yǎ;ky;ky;ky;od;dc;kg;ky ba;kb;kb;kb;ot;dm;kc;kb	1
 大渠水流进小渠	dà;ar;un;ad;xx;md;dd;an qú;dm;dm;mj;kw;ke;ia;dl shuǐ;ln;ln;ad,uv;oo;ks;ii;vn liú;di;dv;di;kr;ko;iy;dv jìn;zj;zj;zj;uq;qu;fj;zj xiǎo;lb;ld;ad;pf;yx;ih;vd qú;dm;dm;mj;kw;ke;ia;dl	1
-到了家里吃柿子	dào;gd;ad;dv;di;yp;gc;vd le;al;vl;aa,vu;rp;rl;bn;vv jiā;bu;bu;bu;ih;wj;pe;gn lǐ;tt;la;aa,tt;vg;dl;jf;aa chī;kv;kv;kq;or;da;kt;ky shì;mj;mj;mu;wy;er;sy;lj zi;la;va;aa,vh;aa;hi;bb;va	1
+到了家里吃柿子	dào;gd;ad;dv;di;yp;gc;vd le;al;vl;aa,vu;rp;rl;bn;vv jiā;bu;bu;bu;ih;wj;pe;gn lǐ;tt;la;aa,tt;vg;dl;jf;aa chī;kv;kq;kq;or;da;kt;ky shì;mj;mj;mu;wy;er;sy;lj zi;la;va;aa,vh;aa;hi;bb;va	1
 地下有块破砖头	dì;ty;ty;ty;ga;ge;fb;ty xià;ab;ab;ab,ad;dh;fy;gh;ab yǒu;uo;uo;ou,uo;sl;nv;de;ao kuài;tg;tg;td,tg;gx;gj;fn;tn pò;up;uy;up;tl;mr;dh;uy zhuān;uv;uv;uv;th;mi;df;uv tóu;dd;dd;dd;hx;wm;ud;dd	1
 二人山前来比腿	èr;aa;aa;aa;uu;me;fg;aa rén;pn;pn;pd;ee;jr;ww;pn shān;kl;lk;aa;pp;vs;mm;aa qián;bd;bd;bd,qd;fi;hp;ue;ed lái;am;an;am,wb;dl;ah;go;an bǐ;bb;bb;bb;aa;vv;xx;bb tuǐ;og;oz;ot;lq;vu;ev;oh	1
 二人山前来比眼	èr;aa;aa;aa;uu;me;fg;aa rén;pn;pn;pd;ee;jr;ww;pn shān;kl;lk;aa;pp;vs;mm;aa qián;bd;bd;bd,qd;fi;hp;ue;ed lái;am;an;am,wb;dl;ah;go;an bǐ;bb;bb;bb;aa;vv;xx;bb yǎn;og;og;og;sh;qi;hv;mh	1
@@ -4801,8 +4801,8 @@ sort: by_weight
 猴跳下来撞了狗	hóu;qu;qu;qh;bx;mo;qt;qd tiào;zv;zd;zv;gf;pw;kh;zv xià;ab;ab;ab,ad;dh;fy;gh;ab lái;am;an;am,wb;dl;ah;go;an zhuàng;fl;fl;ft;jg;ud;ru;fl le;al;vl;aa,vu;rp;rl;bn;vv gǒu;qj;qk;qj;bi;mg;qt;qk	1
 湖州有个胡梳子	hú;do;do;dh;kl;kv;id;do zhōu;dl;dl;id,da;hp;oo;yt;da yǒu;uo;uo;ou,uo;sl;nv;de;ao gè;rl;rl;ra,pa;ep;jg;wh;ra hú;go;uo;og;sl;cv;de;uo shū;mi;mv;mi;wr;eo;sy;lv zi;la;va;aa,vh;aa;hi;bb;va	1
 花了硬币四毛四	huā;cb;cb;ch;za;lv;aw;cb le;al;vl;aa,vu;rp;rl;bn;vv yìng;ug;ug;ug;th;mb;dg;ug bì;pj;pj;pj;uy;tr;tm;pj sì;ke;ke;aa,ke;nk;ys;lh;we máo;pv;pv;pg;ua;vm;tf;pv sì;ke;ke;aa,ke;nk;ys;lh;we	1
-黄贺完成了木刻	huáng;cb;cb;ad,cb;zf;nh;am;cb hè;lb;lr;bj;um;so;lk;lr wán;by;be;by;ik;wp;pf;ge chéng;wv;wv;gg,wg;rh;na;dn;vg le;al;vl;aa,vu;rp;rl;bn;vv mù;ur;un;ad;ww;em;ss;un kè;wd;wd;dh;ii;kp;yn;wd	1
-回家吃饭路又远	huí;kk;kk;kk;no;rd;lk;wk jiā;bu;bu;bu;ih;wj;pe;gn chī;kv;kv;kq;or;da;kt;ky fàn;uy;uy;uf;gl;qr;qn;uy lù;zk;zk;zg;go;ps;kh;zk yòu;vn;vn;vd,ad;ll;ry;cc;vn yuǎn;zy;ze;zy;uq;mu;fq;ze	1
+黄贺完成了木刻	huáng;cb;cb;ad,cb;zf;nh;am;cb hè;lb;lr;bj;um;so;lk;lr wán;by;be;by;ik;wp;pf;ge chéng;wv;wv;gg,wg;rh;na;dn;vg le;al;vl;aa,vu;rp;rl;bn;vv mù;ur;un,an;ad;ww;em;ss;un kè;wd;wd;dh;ii;kp;yn;wd	1
+回家吃饭路又远	huí;kk;kk;kk;no;rd;lk;wk jiā;bu;bu;bu;ih;wj;pe;gn chī;kv;kq;kq;or;da;kt;ky fàn;uy;uy;uf;gl;qr;qn;uy lù;zk;zk;zg;go;ps;kh;zk yòu;vn;vn;vd,ad;ll;ry;cc;vn yuǎn;zy;ze;zy;uq;mu;fq;ze	1
 灰猫跳起抓花鸟	huī;uh;uh;hu,uh;st;nc;do;ah māo;qt;qt;qm;bw;mq;qt;qt tiào;zv;zd;zv;gf;pw;kh;zv qǐ;tj;tj;zj;gt;pv;fh;tj zhuā;fv;fv;fv;jh;uy;rr;fv huā;cb;cb;ch;za;lv;aw;cb niǎo;na;pa,wd;na,pa;cc;xn;qy;pa	1
 回头看见鹰抓兔	huí;kk;kk;kk;no;rd;lk;wk tóu;dd;dd;dd;hx;wm;ud;dd kàn;uo;uo;ou,uo;us;uq;rh;pm jiàn;ke;ke;ag,ek,ke;pr;ej;mq;av yīng;gn;gn;gn,nv;rc;xx;yw;gn zhuā;fv;fv;fv;jh;uy;rr;fv tù;dd;dd;dd;gh;wt;qk;ed	1
 蒋家要杨家赔墙	jiǎng;cc;cc;cj;zk;lk;au;cc jiā;bu;bu;bu;ih;wj;pe;gn yào;xn;xn;xn;py;vb;sv;xn yáng;mp;mp;my;wu;ee;sn;lp jiā;bu;bu;bu;ih;wj;pe;gn péi;bk;kk;bk,bp;mo;od;mu;bk qiáng;tk;tk;th;gd;gd;ff;tk	1
@@ -4839,7 +4839,7 @@ sort: by_weight
 妞妞扭牛牛更拗	niū;ni;ni;ni;yg;bg;vn;ni niū;ni;ni;ni;yg;bg;vn;ni niǔ;fi;fi;fi;jg;ug;rn;fi niú;pu;pl;pa;bb;qn;rh;pa niú;pu;pl;pa;bb;qn;rh;pa gèng;an;an;ad,ag;dh;fb;gj;an ǎo;fl;fl;fy;ju;us;rx;fl	1
 妞妞扭牛牛更牛	niū;ni;ni;ni;yg;bg;vn;ni niū;ni;ni;ni;yg;bg;vn;ni niǔ;fi;fi;fi;jg;ug;rn;fi niú;pu;pl;pa;bb;qn;rh;pa niú;pu;pl;pa;bb;qn;rh;pa gèng;an;an;ad,ag;dh;fb;gj;an niú;pu;pl;pa;bb;qn;rh;pa	1
 牛牛扭头瞅妞妞	niú;pu;pl;pa;bb;qn;rh;pa niú;pu;pl;pa;bb;qn;rh;pa niǔ;fi;fi;fi;jg;ug;rn;fi tóu;dd;dd;dd;hx;wm;ud;dd chǒu;oh;oh;oq;st;qc;ht;mh niū;ni;ni;ni;yg;bg;vn;ni niū;ni;ni;ni;yg;bg;vn;ni	1
-牛牛要吃河边柳	niú;pu;pl;pa;bb;qn;rh;pa niú;pu;pl;pa;bb;qn;rh;pa yào;xn;xn;xn;py;vb;sv;xn chī;kv;kv;kq;or;da;kt;ky hé;dk;dk;dk;kj;kz;is;dk biān;zl;zl;zl;uq;su;lp;zl liǔ;me;me;mm;wb;eb;sq;le	1
+牛牛要吃河边柳	niú;pu;pl;pa;bb;qn;rh;pa niú;pu;pl;pa;bb;qn;rh;pa yào;xn;xn;xn;py;vb;sv;xn chī;kv;kq;kq;or;da;kt;ky hé;dk;dk;dk;kj;kz;is;dk biān;zl;zl;zl;uq;su;lp;zl liǔ;me;me;mm;wb;eb;sq;le	1
 牛牛要顶小妞妞	niú;pu;pl;pa;bb;qn;rh;pa niú;pu;pl;pa;bb;qn;rh;pa yào;xn;xn;xn;py;vb;sv;xn dǐng;dy;dr;dy,yd;jm;aw;sd;dr xiǎo;lb;ld;ad;pf;yx;ih;vd niū;ni;ni;ni;yg;bg;vn;ni niū;ni;ni;ni;yg;bg;vn;ni	1
 趴着八只活蛤蟆	pā;zb;zb;zb;gf;ph;kh;zb zhe;yo;yo;yo;fs;gq;ud;em bā;pn;pn;pd;ff;hb;wt;pn zhǐ;kb;kb;kb;of;dh;kw;kb huó;du;dk;du;ko;ka;it;dk há;ik;ik;ih;fo;cd;jw;ik má;id;id;im;fx;cm;ja;id	1
 趴着一只活蛤蟆	pā;zb;zb;zb;gf;ph;kh;zb zhe;yo;yo;yo;fs;gq;ud;em yì;aa;aa;aa;dd;fi;gg;aa zhī;kb;kb;kb;of;dh;kw;kb huó;du;dk;du;ko;ka;it;dk há;ik;ik;ih;fo;cd;jw;ik má;id;id;im;fx;cm;ja;id	1
@@ -4891,7 +4891,7 @@ sort: by_weight
 眼看着梨手捏泥	yǎn;og;og;og;sh;qi;hv;mh kàn;uo;uo;ou,uo;us;uq;rh;pm zhe;yo;yo;yo;fs;gq;ud;em lí;hm;hm;ml;uw;xe;tj;hl shǒu;pf;pl;pa,ub;up;us;rt;pv niē;ft;ft;fn,ft;jg;ug;rj;ft ní;db;db;dn;ka;kv;in;db	1
 杨家养了一只羊	yáng;mp;mp;my;wu;ee;sn;lp jiā;bu;bu;bu;ih;wj;pe;gn yǎng;yl;yl;ya,yd;fp;gp;ud;ea le;al;vl;aa,vu;rp;rl;bn;vv yì;aa;aa;aa;dd;fi;gg;aa zhī;kb;kb;kb;of;dh;kw;kb yáng;bf;bl;da;fp;gy;ud;ea	1
 杨家要蒋家赔羊	yáng;mp;mp;my;wu;ee;sn;lp jiā;bu;bu;bu;ih;wj;pe;gn yào;xn;xn;xn;py;vb;sv;xn jiǎng;cc;cc;cj;zk;lk;au;cc jiā;bu;bu;bu;ih;wj;pe;gn péi;bk;kk;bk,bp;mo;od;mu;bk yáng;bf;bl;da;fp;gy;ud;ea	1
-要吃清蒸美鱼翅	yào;xn;xn;xn;py;vb;sv;xn chī;kv;kv;kq;or;da;kt;ky qīng;do;do;dq;kl;kv;ig;do zhēng;ch;ch;hv,ch;zn;lc;ab;ce měi;yd;yd;dy,yd;fx;gm;ug;ed yú;da;da;da;qq;wv;qg;ea chì;vx;ux;vy,yv;sd;cz;fc;ux	1
+要吃清蒸美鱼翅	yào;xn;xn;xn;py;vb;sv;xn chī;kv;kq;kq;or;da;kt;ky qīng;do;do;dq;kl;kv;ig;do zhēng;ch;ch;hv,ch;zn;lc;ab;ce měi;yd;yd;dy,yd;fx;gm;ug;ed yú;da;da;da;qq;wv;qg;ea chì;vx;ux;vy,yv;sd;cz;fc;ux	1
 腰里别着个喇叭	yāo;on;on;oy;ly;vb;es;on lǐ;tt;la;aa,tt;vg;dl;jf;aa bié;kd;kd;dl;oi;dp;kl;kd zhe;yo;yo;yo;fs;gq;ud;em gè;rl;rl;ra,pa;ep;jg;wh;ra lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb	1
 一次撕下横字纸	yí;aa;aa;aa;dd;fi;gg;aa cì;dq;dr;dq;fe;we;uq;dr sī;fj;fj;fs;jp;ut;ra;fj xià;ab;ab;ab,ad;dh;fy;gh;ab héng;mb;mb;mh;wf;en;sa;lb zì;bz;bz;bz;ia;wh;pb;gz zhǐ;su;su;su;er;ib;xq;su	1
 一次撕下竖字纸	yí;aa;aa;aa;dd;fi;gg;aa cì;dq;dr;dq;fe;we;uq;dr sī;fj;fj;fs;jp;ut;ra;fj xià;ab;ab;ab,ad;dh;fy;gh;ab shù;ll;ll;ly;pb;pi;jc;al zì;bz;bz;bz;ia;wh;pb;gz zhǐ;su;su;su;er;ib;xq;su	1
@@ -4903,7 +4903,7 @@ sort: by_weight
 又画一个小喇叭	yòu;vn;vn;vd,ad;ll;ry;cc;vn huà;at;ak;ak;dp;fm;gl;aa yí;aa;aa;aa;dd;fi;gg;aa gè;rl;rl;ra,pa;ep;jg;wh;ra xiǎo;lb;ld;ad;pf;yx;ih;vd lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb	1
 由于二人搞协作	yóu;ol,lt;la;aa,ao;vp;dy;mh;aa yú;au;al;aa;ss;fn;gf;av èr;aa;aa;aa;uu;me;fg;aa rén;pn;pn;pd;ee;jr;ww;pn gǎo;fk;fk;fg;jo;ug;ry;fk xié;ub;ub;ub;sf;nh;fl;ub zuò;rv;rv;rv;xu;jw;wt;rv	1
 鱼刺刺进齿缝里	yú;da;da;da;qq;wv;qg;ea cì;ud;ad;dc;di;ep;gm;ad cì;ud;ad;dc;di;ep;gm;ad jìn;zj;zj;zj;uq;qu;fj;zj chǐ;vr;vk;vk;rp;lc;hw;va fèng;sf;sz;sf;eq;iu;xt;sf lǐ;tt;la;aa,tt;vg;dl;jf;aa	1
-愚公捅开青龙洞	yú;tx;yx;xy;vn;qh;jm;ax gōng;bs;bs;sb,bs;fp;hk;wc;bv tǒng;fy;fy;fy;jp;ut;rc;fy kāi;ac;kc;ac;up;fl;ga;aa qīng;fo;fo;of,fo;al;av;ge;ao lóng;yp;ud;ad;sh;tl;dx;ab dòng;dk;dk;dt;ko;kd;im;dk	1
+愚公捅开青龙洞	yú;tx;yx;xy;vn;qh;jm;ax gōng;bs;bs;sb,bs;fp;hk;wc;bv tǒng;fy;fy;fy;jp;ut;rc;fy kāi;ac;ac;ac;up;fl;ga;aa qīng;fo;fo;of,fo;al;av;ge;ao lóng;yp;ud;ad;sh;tl;dx;ab dòng;dk;dk;dt;ko;kd;im;dk	1
 摘了蓝布棉门帘	zhāi;fg;fk;fd,fg;jo;uc;ru;fk le;al;vl;aa,vu;rp;rl;bn;vv lán;cm;cm;cj;za;la;aj;cm bù;uj;uj;ju,uj;sy;nr;dm;aj mián;mj;mj;mb,mj;wy;er;sr;lj mén;dv;dv;dg;oo;am;uy;dv lián;bj;bj;bj,jb,jx,xj;iy;er;pw;gj	1
 撞塌了蒋家的墙	zhuàng;fl;fl;ft;jg;ud;ru;fl tā;tx;tx;ty;gd;gz;fj;tx le;al;vl;aa,vu;rp;rl;bn;vv jiǎng;cc;cc;cj;zk;lk;au;cc jiā;bu;bu;bu;ih;wj;pe;gn de;bu;bu;bu;sh;ui;rq;bu qiáng;tk;tk;th;gd;gd;ff;tk	1
 桌上放块橡皮泥	zhuō;bm;lm;mo,bm;pw;ye;hj;al shàng;ba;la;aa,ba;pu;yf;hh;aa fàng;fw;fw;wf,fw;fj;lh;yt;fw kuài;tg;tg;td,tg;gx;gj;fn;tn xiàng;mu;mn;mx;wh;ew;sq;lx pí;py;vy;ad,ay,vd,vy,ya;rl;rp;hc;vy ní;db;db;dn;ka;kv;in;db	1
@@ -4914,7 +4914,7 @@ sort: by_weight
 白石塔白石白又滑	bái;po;po;pa,po;ss;ub;rr;po shí;ak;ak;kp,aa,ak,pk;tt;ms;dg;ak tǎ;tk;tk;td,th;go;gd;fa;tk bái;po;po;pa,po;ss;ub;rr;po shí;ak;ak;kp,aa,ak,pk;tt;ms;dg;ak bái;po;po;pa,po;ss;ub;rr;po yòu;vn;vn;vd,ad;ll;ry;cc;vn huá;do;dg;dg;kc;kf;im;do	1
 扁担和板凳板凳宽	biǎn;hc;hc;hc;qd;mi;yn;hc dàn;fd;fa;fd;jd;uf;rj;fd hé;hk;hk;hk;uo;xd;tk;hk bǎn;my;my;mf;wl;er;sr;ly dèng;bj;vj;jd;ri;ho;wg;dj bǎn;my;my;mf;wl;er;sr;ly dèng;bj;vj;jd;ri;ho;wg;dj kuān;bj;be;bj,jb;ir;we;pa;gj	1
 扁担要绑在板凳上	biǎn;hc;hc;hc;qd;mi;yn;hc dàn;fd;fa;fd;jd;uf;rj;fd yào;xn;xn;xn;py;vb;sv;xn bǎng;se;se;sb;eb;it;xd;se zài;ut;ut;ta,ut;sg;ng;dh;at bǎn;my;my;mf;wl;er;sr;ly dèng;bj;vj;jd;ri;ho;wg;dj shàng;ba;la;aa,ba;pu;yf;hh;aa	1
-吃葡萄不吐葡萄皮	chī;kv;kv;kq;or;da;kt;ky pú;cf;cf;cp;zh;ln;aq;cf táo;cf;cf;cf,ct;zp;la;aq;cf bù;ab;ad;ad,ax;dh;cb;gi;ad tǔ;kt;kt;kt;og;dg;kf;kt pú;cf;cf;cp;zh;ln;aq;cf táo;cf;cf;cf,ct;zp;la;aq;cf pí;py;vy;ad,ay,vd,vy,ya;rl;rp;hc;vy	1
+吃葡萄不吐葡萄皮	chī;kv;kq;kq;or;da;kt;ky pú;cf;cf;cp;zh;ln;aq;cf táo;cf;cf;cf,ct;zp;la;aq;cf bù;ab;ad;ad,ax;dh;cb;gi;ad tǔ;kt;kt;kt;og;dg;kf;kt pú;cf;cf;cp;zh;ln;aq;cf táo;cf;cf;cf,ct;zp;la;aq;cf pí;py;vy;ad,ay,vd,vy,ya;rl;rp;hc;vy	1
 从南边来了个喇嘛	cóng;rr;rr;rr;ee;jj;ww;rr nán;ug;ug;ua,uy;sp;ng;fm;uu biān;zl;zl;zl;uq;su;lp;zl lái;am;an;am,wb;dl;ah;go;an le;al;vl;aa,vu;rp;rl;bn;vv gè;rl;rl;ra,pa;ep;jg;wh;ra lǎ;kd;kd;kd,kl;oi;dp;kg;kd ma;km;km;km;ow;dz;ky;kl	1
 雕与猫树上有只雕	diāo;kv;kf;vv;ua;mu;mf;va yǔ;va;aa;aa;dd;ff;gn;aa māo;qt;qt;qm;bw;mq;qt;qt shù;mc;mc;md;wk;ek;sc;lc shàng;ba;la;aa,ba;pu;yf;hh;aa yǒu;uo;uo;ou,uo;sl;nv;de;ao zhǐ;kb;kb;kb;of;dh;kw;kb diāo;kv;kf;vv;ua;mu;mf;va	1
 董家都懂得种冬瓜	dǒng;cv;cv;cv;zg;ld;at;cv jiā;bu;bu;bu;ih;wj;pe;gn dōu;le;le;ev;gb;qt;ft;ue dǒng;xv;xv;xd;ng;hd;na;xv de;rc;ic;xc;hk;wk;tj;rc zhǒng;hv;hv;hv;up;xg;tk;hv dōng;wd;wd;wd;jh;hw;tu;wd guā;in,vd;pn;pd;uh;yg;rc;pn	1
@@ -4954,10 +4954,10 @@ sort: by_weight
 捉壁虎李虎捉壁虎	zhuō;fz;fr;fz;jg;up;rk;fr bì;ut;ut;tb,tx;qg;cg;nk;ut hǔ;hj;hj;hj;pi;zh;ha;aj lǐ;mz;mz;mz;wa;eh;sb;lz hǔ;hj;hj;hj;pi;zh;ha;aj zhuō;fz;fr;fz;jg;up;rk;fr bì;ut;ut;tb,tx;qg;cg;nk;ut hǔ;hj;hj;hj;pi;zh;ha;aj	1
 白家门前一棵白果树	bái;po;po;pa,po;ss;ub;rr;po jiā;bu;bu;bu;ih;wj;pe;gn mén;dv;dv;dg;oo;am;uy;dv qián;bd;bd;bd,qd;fi;hp;ue;ed yì;aa;aa;aa;dd;fi;gg;aa kē;mg;mg;mg;ww;ee;sj;lg bái;po;po;pa,po;ss;ub;rr;po guǒ;tm;ln;ad,tm;vw;qe;js;an shù;mc;mc;md;wk;ek;sc;lc	1
 扁担绑在那个板凳上	biǎn;hc;hc;hc;qd;mi;yn;hc dàn;fd;fa;fd;jd;uf;rj;fd bǎng;se;se;sb;eb;it;xd;se zài;ut;ut;ta,ut;sg;ng;dh;at nà;ve;ve;el;rb;at;vf;ve gè;rl;rl;ra,pa;ep;jg;wh;ra bǎn;my;my;mf;wl;er;sr;ly dèng;bj;vj;jd;ri;ho;wg;dj shàng;ba;la;aa,ba;pu;yf;hh;aa	1
-别喇叭的哑巴吹喇叭	bié;kd;kd;dl;oi;dp;kl;kd lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb de;bu;bu;bu;sh;ui;rq;bu yǎ;ky;ky;ky;od;dc;kg;ky bā;sl;vv;ag,kg,vg;tt;mb;cn;vv chuī;kq;kr;kq;oe;de;kq;kr lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb	1
+别喇叭的哑巴吹喇叭	bié;kd;kd;dl;oi;dp;kl;kd lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb de;bu;bu;bu;sh;ui;rq;bu yǎ;ky;ky;ky;od;dc;kg;ky bā;sl;vv,sl;ag,kg,vg;tt;mb;cn;vv chuī;kq;kr;kq;oe;de;kq;kr lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb	1
 剥了秕谷壳儿补鼻子	bō;ed;ed;dl;si;bp;vi;ld le;al;vl;aa,vu;rp;rl;bn;vv bǐ;hb;hb;hb;ua;xv;tx;hb gǔ;bk;bk;bk,kr;fo;hg;ww;bk ké;tj;uj;uj;gi;go;fp;uj er;pv;pv;pg;kk;pe;qt;pv bǔ;pb;pb;yb;hh;ty;pu;pb bí;zw;zl;zb,zq;sp;ol;th;za zi;la;va;aa,vh;aa;hi;bb;va	1
 不剥秕谷壳儿补鼻子	bù;ab;ad;ad,ax;dh;cb;gi;ad bō;ed;ed;dl;si;bp;vi;ld bǐ;hb;hb;hb;ua;xv;tx;hb gǔ;bk;bk;bk,kr;fo;hg;ww;bk ké;tj;uj;uj;gi;go;fp;uj er;pv;pv;pg;kk;pe;qt;pv bǔ;pb;pb;yb;hh;ty;pu;pb bí;zw;zl;zb,zq;sp;ol;th;za zi;la;va;aa,vh;aa;hi;bb;va	1
-不吃葡萄倒吐葡萄皮	bù;ab;ad;ad,ax;dh;cb;gi;ad chī;kv;kv;kq;or;da;kt;ky pú;cf;cf;cp;zh;ln;aq;cf táo;cf;cf;cf,ct;zp;la;aq;cf dào;rd;rd;rd;xi;jp;wg;rd tǔ;kt;kt;kt;og;dg;kf;kt pú;cf;cf;cp;zh;ln;aq;cf táo;cf;cf;cf,ct;zp;la;aq;cf pí;py;vy;ad,ay,vd,vy,ya;rl;rp;hc;vy	1
+不吃葡萄倒吐葡萄皮	bù;ab;ad;ad,ax;dh;cb;gi;ad chī;kv;kq;kq;or;da;kt;ky pú;cf;cf;cp;zh;ln;aq;cf táo;cf;cf;cf,ct;zp;la;aq;cf dào;rd;rd;rd;xi;jp;wg;rd tǔ;kt;kt;kt;og;dg;kf;kt pú;cf;cf;cp;zh;ln;aq;cf táo;cf;cf;cf,ct;zp;la;aq;cf pí;py;vy;ad,ay,vd,vy,ya;rl;rp;hc;vy	1
 不管是天上的热日头	bù;ab;ad;ad,ax;dh;cb;gi;ad guǎn;vl;vk;vg;nd;rk;tp;vg shì;oz;or;op,ov;ve;ot;jg;or tiān;ad;ad;ad;ue;fm;gd;ad shàng;ba;la;aa,ba;pu;yf;hh;aa de;bu;bu;bu;sh;ui;rq;bu rè;fh;fh;hv;jn;uc;rv;fe rì;ka;ka;aa,or,ri;vv;or;jj;wa tou;dd;dd;dd;hx;wm;ud;dd	1
 不知是严圆眼的眼圆	bù;ab;ad;ad,ax;dh;cb;gi;ad zhī;uk;uk;uk,ku;eo;od;td;uk shì;oz;or;op,ov;ve;ot;jg;or yán;ai;yp;ap,yp;dr;fx;go;ai yuán;kb;kr;ky;nm;ro;lk;wr yǎn;og;og;og;sh;qi;hv;mh de;bu;bu;bu;sh;ui;rq;bu yǎn;og;og;og;sh;qi;hv;mh yuán;kb;kr;ky;nm;ro;lk;wr	1
 打那百十百个白斑鸠	dǎ;fd;fd;fd;jj;ua;rs;fd nà;ve;ve;el;rb;at;vf;ve bǎi;ab;ab;ab;ds;fu;dj;ab shí;al;al;aa;ss;ns;fg;aa bǎi;ab;ab;ab;ds;fu;dj;ab gè;rl;rl;ra,pa;ep;jg;wh;ra bái;po;po;pa,po;ss;ub;rr;po bān;ww;ww;ww;aa;nn;gy;ww jiū;jn;jn;nj;uc;kx;vq;jn	1
@@ -4989,7 +4989,7 @@ sort: by_weight
 天上是日头不是石头	tiān;ad;ad;ad;ue;fm;gd;ad shàng;ba;la;aa,ba;pu;yf;hh;aa shì;oz;or;op,ov;ve;ot;jg;or rì;ka;ka;aa,or,ri;vv;or;jj;wa tou;dd;dd;dd;hx;wm;ud;dd bú;ab;ad;ad,ax;dh;cb;gi;ad shì;oz;or;op,ov;ve;ot;jg;or shí;ak;ak;kp,aa,ak,pk;tt;ms;dg;ak tou;dd;dd;dd;hx;wm;ud;dd	1
 童家知道董家冬瓜大	tóng;ll;ll;ll;bg;id;uj;ll jiā;bu;bu;bu;ih;wj;pe;gn zhī;uk;uk;uk,ku;eo;od;td;uk dào;zz;zz;zu;fq;hu;ut;zm dǒng;cv;cv;cv;zg;ld;at;cv jiā;bu;bu;bu;ih;wj;pe;gn dōng;wd;wd;wd;jh;hw;tu;wd guā;in,vd;pn;pd;uh;yg;rc;pn dà;ar;un;ad;xx;md;dd;an	1
 驼子拖住胡子的驴子	tuó;mb;mb;mt;za;nv;cp;mb zi;la;va;aa,vh;aa;hi;bb;va tuō;fy;fy;fy;jr;ue;rt;fy zhù;rv;rv;rv;xg;jn;wy;rv hú;go;uo;og;sl;cv;de;uo zi;la;va;aa,vh;aa;hi;bb;va de;bu;bu;bu;sh;ui;rq;bu lǘ;mh;mh;mh;zq;nm;cy;mh zǐ;la;va;aa,vh;aa;hi;bb;va	1
-王克帮助黄贺搞木刻	wáng;at;at;aa;aa;nw;gg;at kè;ux,ge;ue;eg,ux;sk;cp;dq;ue bāng;fj;fj;jb;uy;ar;dt;bj zhù;ql;ql;lq,ql;pu;fs;eg;ql huáng;cb;cb;ad,cb;zf;nh;am;cb hè;lb;lr;bj;um;so;lk;lr gǎo;fk;fk;fg;jo;ug;ry;fk mù;ur;un;ad;ww;em;ss;un kè;wd;wd;dh;ii;kp;yn;wd	1
+王克帮助黄贺搞木刻	wáng;at;at;aa;aa;nw;gg;at kè;ux,ge;ue;eg,ux;sk;cp;dq;ue bāng;fj;fj;jb;uy;ar;dt;bj zhù;ql;ql;lq,ql;pu;fs;eg;ql huáng;cb;cb;ad,cb;zf;nh;am;cb hè;lb;lr;bj;um;so;lk;lr gǎo;fk;fk;fg;jo;ug;ry;fk mù;ur;un,an;ad;ww;em;ss;un kè;wd;wd;dh;ii;kp;yn;wd	1
 乌鸦说它身比黑猪黑	wū;pa;pa;pa;ud;xu;qn;pa yā;yn;yn;ny,yn;dc;lx;ah;yn shuō;yx;ye;yd;ck;sp;yu;ye tā;bb;bb;bb;ia;wv;px;gb shēn;zc;pp;pp;uu;zs;tm;pp bǐ;bb;bb;bb;aa;vv;xx;bb hēi;lh;lh;ad,ha;nn;ph;lf;ae zhū;qo;qo;qv;bv;mo;qt;qo hēi;lh;lh;ad,ha;nn;ph;lf;ae	1
 小花猫小花猫爱画画	xiǎo;lb;ld;ad;pf;yx;ih;vd huā;cb;cb;ch;za;lv;aw;cb māo;qt;qt;qm;bw;mq;qt;qt xiǎo;lb;ld;ad;pf;yx;ih;vd huā;cb;cb;ch;za;lv;aw;cb māo;qt;qt;qm;bw;mq;qt;qt ài;vy;py;vy;hl;yr;ep;py huà;at;ak;ak;dp;fm;gl;aa huà;at;ak;ak;dp;fm;gl;aa	1
 小渠养小鱼不养大鱼	xiǎo;lb;ld;ad;pf;yx;ih;vd qú;dm;dm;mj;kw;ke;ia;dl yǎng;yl;yl;ya,yd;fp;gp;ud;ea xiǎo;lb;ld;ad;pf;yx;ih;vd yú;da;da;da;qq;wv;qg;ea bù;ab;ad;ad,ax;dh;cb;gi;ad yǎng;yl;yl;ya,yd;fp;gp;ud;ea dà;ar;un;ad;xx;md;dd;an yú;da;da;da;qq;wv;qg;ea	1
@@ -5051,7 +5051,7 @@ sort: by_weight
 小渠里有了大鱼不见小鱼	xiǎo;lb;ld;ad;pf;yx;ih;vd qú;dm;dm;mj;kw;ke;ia;dl lǐ;tt;la;aa,tt;vg;dl;jf;aa yǒu;uo;uo;ou,uo;sl;nv;de;ao le;al;vl;aa,vu;rp;rl;bn;vv dà;ar;un;ad;xx;md;dd;an yú;da;da;da;qq;wv;qg;ea bú;ab;ad;ad,ax;dh;cb;gi;ad jiàn;ke;ke;ag,ek,ke;pr;ej;mq;av xiǎo;lb;ld;ad;pf;yx;ih;vd yú;da;da;da;qq;wv;qg;ea	1
 养鱼大渠养大鱼不养小鱼	yǎng;yl;yl;ya,yd;fp;gp;ud;ea yú;da;da;da;qq;wv;qg;ea dà;ar;un;ad;xx;md;dd;an qú;dm;dm;mj;kw;ke;ia;dl yǎng;yl;yl;ya,yd;fp;gp;ud;ea dà;ar;un;ad;xx;md;dd;an yú;da;da;da;qq;wv;qg;ea bù;ab;ad;ad,ax;dh;cb;gi;ad yǎng;yl;yl;ya,yd;fp;gp;ud;ea xiǎo;lb;ld;ad;pf;yx;ih;vd yú;da;da;da;qq;wv;qg;ea	1
 也惦着梁上的两对倒吊鸟	yě;vv;vv;gg;rr;ey;bn;vv diàn;xv;xk;xd;no;hd;ny;xk zhe;yo;yo;yo;fs;gq;ud;em liáng;dm;dm;mb;kw;ke;iv;dl shàng;ba;la;aa,ba;pu;yf;hh;aa de;bu;bu;bu;sh;ui;rq;bu liǎng;ar;ad;ad;de;ml;gm;ad duì;yc;yc;cy,yc;lk;rk;cf;yc dào;rd;rd;rd;xi;jp;wg;rd diào;kj;kj;kj;oy;dr;km;kj niǎo;na;pa,wd;na,pa;cc;xn;qy;pa	1
-再吃掉篮子里几个软鸡卵	zài;ar;ar;aa,at;dd;fg;gm;ar chī;kv;kv;kq;or;da;kt;ky diào;fu;fu;fv;js;un;rh;fu lán;vm;vm;vj;na;ra;tj;vm zi;la;va;aa,vh;aa;hi;bb;va lǐ;tt;la;aa,tt;vg;dl;jf;aa jǐ;pv;pv;py;ii;oj;mt;pv gè;rl;rl;ra,pa;ep;jg;wh;ra ruǎn;iq;ir;iq;te;ye;lq;ir jī;yn;yn;ny,yn;lc;rx;cq;yn luǎn;pd;pd;pd,md;uh;bl;qy;pd	1
+再吃掉篮子里几个软鸡卵	zài;ar;ar;aa,at;dd;fg;gm;ar chī;kv;kq;kq;or;da;kt;ky diào;fu;fu;fv;js;un;rh;fu lán;vm;vm;vj;na;ra;tj;vm zi;la;va;aa,vh;aa;hi;bb;va lǐ;tt;la;aa,tt;vg;dl;jf;aa jǐ;pv;pv;py;ii;oj;mt;pv gè;rl;rl;ra,pa;ep;jg;wh;ra ruǎn;iq;ir;iq;te;ye;lq;ir jī;yn;yn;ny,yn;lc;rx;cq;yn luǎn;pd;pd;pd,md;uh;bl;qy;pd	1
 种冬瓜东门童家门东董家	zhǒng;hv;hv;hv;up;xg;tk;hv dōng;wd;wd;wd;jh;hw;tu;wd guā;in,vd;pn;pd;uh;yg;rc;pn dōng;ax;ad;ad,qx;af;ry;ai;ad mén;dv;dv;dg;oo;am;uy;dv tóng;ll;ll;ll;bg;id;uj;ll jiā;bu;bu;bu;ih;wj;pe;gn mén;dv;dv;dg;oo;am;uy;dv dōng;ax;ad;ad,qx;af;ry;ai;ad dǒng;cv;cv;cv;zg;ld;at;cv jiā;bu;bu;bu;ih;wj;pe;gn	1
 板凳不让扁担绑在那板凳上	bǎn;my;my;mf;wl;er;sr;ly dèng;bj;vj;jd;ri;ho;wg;dj bú;ab;ad;ad,ax;dh;cb;gi;ad ràng;yu;yu;yu;cd;sf;yh;yu biǎn;hc;hc;hc;qd;mi;yn;hc dàn;fd;fa;fd;jd;uf;rj;fd bǎng;se;se;sb;eb;it;xd;se zài;ut;ut;ta,ut;sg;ng;dh;at nà;ve;ve;el;rb;at;vf;ve bǎn;my;my;mf;wl;er;sr;ly dèng;bj;vj;jd;ri;ho;wg;dj shàng;ba;la;aa,ba;pu;yf;hh;aa	1
 还是崔腿粗比崔粗腿的腿粗	hái;zb;zb;zb;dq;cu;gi;zb shì;oz;or;op,ov;ve;ot;jg;or cuī;uv;ef;uv;pa;vu;mw;sa tuǐ;og;oz;ot;lq;vu;ev;oh cū;mq;mq;mq;lu;pf;oe;mq bǐ;bb;bb;bb;aa;vv;xx;bb cuī;uv;ef;uv;pa;vu;mw;sa cū;mq;mq;mq;lu;pf;oe;mq tuǐ;og;oz;ot;lq;vu;ev;oh de;bu;bu;bu;sh;ui;rq;bu tuǐ;og;oz;ot;lq;vu;ev;oh cū;mq;mq;mq;lu;pf;oe;mq	1
@@ -5059,7 +5059,7 @@ sort: by_weight
 荷花和蛤蟆一朵粉红大荷花	hé;ck;ck;ch;zj;lz;aw;ck huā;cb;cb;ch;za;lv;aw;cb hé;hk;hk;hk;uo;xd;tk;hk há;ik;ik;ih;fo;cd;jw;ik má;id;id;im;fx;cm;ja;id yì;aa;aa;aa;dd;fi;gg;aa duǒ;jm;jm;mj,jm;iw;oe;ms;jl fěn;mf;md;mf;lu;pp;ow;md hóng;sg;sg;sg;ep;iu;xa;sg dà;ar;un;ad;xx;md;dd;an hé;ck;ck;ch;zj;lz;aw;ck huā;cb;cb;ch;za;lv;aw;cb	1
 六叔和六舅好六叔和好六舅	liù;wb;wb;wb,dd,db;if;al;uy;wb shū;uy;uy;yx;pl;yr;hi;uy hé;hk;hk;hk;uo;xd;tk;hk liù;wb;wb;wb,dd,db;if;al;uy;wb jiù;jl;jl;jn;su;ps;vl;jl hǎo;nz;nz;nz;ya;bh;vb;nz liù;wb;wb;wb,dd,db;if;al;uy;wb shū;uy;uy;yx;pl;yr;hi;uy hé;hk;hk;hk;uo;xd;tk;hk hǎo;nz;nz;nz;ya;bh;vb;nz liù;wb;wb;wb,dd,db;if;al;uy;wb jiù;jl;jl;jn;su;ps;vl;jl	1
 年十四的石小四见了好报纸	nián;pf;pl;ra,pa;es;ev;rh;pa shí;al;al;aa;ss;ns;fg;aa sì;ke;ke;aa,ke;nk;ys;lh;we de;bu;bu;bu;sh;ui;rq;bu shí;ak;ak;kp,aa,ak,pk;tt;ms;dg;ak xiǎo;lb;ld;ad;pf;yx;ih;vd sì;ke;ke;aa,ke;nk;ys;lh;we jiàn;ke;ke;ag,ek,ke;pr;ej;mq;av le;al;vl;aa,vu;rp;rl;bn;vv hǎo;nz;nz;nz;ya;bh;vb;nz bào;fy;fy;fy;jl;ur;rb;fy zhǐ;su;su;su;er;ib;xq;su	1
-妞妞和牛牛牛牛要吃河边柳	niū;ni;ni;ni;yg;bg;vn;ni niū;ni;ni;ni;yg;bg;vn;ni hé;hk;hk;hk;uo;xd;tk;hk niú;pu;pl;pa;bb;qn;rh;pa niú;pu;pl;pa;bb;qn;rh;pa niú;pu;pl;pa;bb;qn;rh;pa niú;pu;pl;pa;bb;qn;rh;pa yào;xn;xn;xn;py;vb;sv;xn chī;kv;kv;kq;or;da;kt;ky hé;dk;dk;dk;kj;kz;is;dk biān;zl;zl;zl;uq;su;lp;zl liǔ;me;me;mm;wb;eb;sq;le	1
+妞妞和牛牛牛牛要吃河边柳	niū;ni;ni;ni;yg;bg;vn;ni niū;ni;ni;ni;yg;bg;vn;ni hé;hk;hk;hk;uo;xd;tk;hk niú;pu;pl;pa;bb;qn;rh;pa niú;pu;pl;pa;bb;qn;rh;pa niú;pu;pl;pa;bb;qn;rh;pa niú;pu;pl;pa;bb;qn;rh;pa yào;xn;xn;xn;py;vb;sv;xn chī;kv;kq;kq;or;da;kt;ky hé;dk;dk;dk;kj;kz;is;dk biān;zl;zl;zl;uq;su;lp;zl liǔ;me;me;mm;wb;eb;sq;le	1
 三娘翻过山梁去找三只山羊	sān;ae;ae;aa;uu;ts;dg;ae niáng;nl;nl;nl;yh;bi;vy;nh fān;cx;px;yf;hd;tz;to;fx guò;zc;zc;zc;kq;ku;fp;zc shān;kl;lk;aa;pp;vs;mm;aa liáng;dm;dm;mb;kw;ke;iv;dl qù;ts;ts;ts;gp;gk;fc;tv zhǎo;fg;fg;fg;ja;up;ra;fg sān;ae;ae;aa;uu;ts;dg;ae zhǐ;kb;kb;kb;of;dh;kw;kb shān;kl;lk;aa;pp;vs;mm;aa yáng;bf;bl;da;fp;gy;ud;ea	1
 三十三的弟子在寺里练写字	sān;ae;ae;aa;uu;ts;dg;ae shí;al;al;aa;ss;ns;fg;aa sān;ae;ae;aa;uu;ts;dg;ae de;bu;bu;bu;sh;ui;rq;bu dì;bd;bp;bp;fu;ht;ux;ep zǐ;la;va;aa,vh;aa;hi;bb;va zài;ut;ut;ta,ut;sg;ng;dh;at sì;tc;tc;ct,tc;gk;gk;ff;tc lǐ;tt;la;aa,tt;vg;dl;jf;aa liàn;sd;sd;sd,sj;ef;iy;xa;sd xiě;by;by;by;id;wf;pg;gy zì;bz;bz;bz;ia;wh;pb;gz	1
 石狮寺前有四十四个石狮子	shí;ak;ak;kp,aa,ak,pk;tt;ms;dg;ak shī;qj;qj;qu;by;mr;qt;qj sì;tc;tc;ct,tc;gk;gk;ff;tc qián;bd;bd;bd,qd;fi;hp;ue;ed yǒu;uo;uo;ou,uo;sl;nv;de;ao sì;ke;ke;aa,ke;nk;ys;lh;we shí;al;al;aa;ss;ns;fg;aa sì;ke;ke;aa,ke;nk;ys;lh;we gè;rl;rl;ra,pa;ep;jg;wh;ra shí;ak;ak;kp,aa,ak,pk;tt;ms;dg;ak shī;qj;qj;qu;by;mr;qt;qj zi;la;va;aa,vh;aa;hi;bb;va	1
@@ -5075,7 +5075,7 @@ sort: by_weight
 三十三的弟子用了四十四小时	sān;ae;ae;aa;uu;ts;dg;ae shí;al;al;aa;ss;ns;fg;aa sān;ae;ae;aa;uu;ts;dg;ae de;bu;bu;bu;sh;ui;rq;bu dì;bd;bp;bp;fu;ht;ux;ep zǐ;la;va;aa,vh;aa;hi;bb;va yòng;kf,ol;kl;kf;lp;ty;et;pa le;al;vl;aa,vu;rp;rl;bn;vv sì;ke;ke;aa,ke;nk;ys;lh;we shí;al;al;aa;ss;ns;fg;aa sì;ke;ke;aa,ke;nk;ys;lh;we xiǎo;lb;ld;ad;pf;yx;ih;vd shí;oc;oc;oc;vk;ok;jf;oc	1
 寺前树上结了四十四个涩柿子	sì;tc;tc;ct,tc;gk;gk;ff;tc qián;bd;bd;bd,qd;fi;hp;ue;ed shù;mc;mc;md;wk;ek;sc;lc shàng;ba;la;aa,ba;pu;yf;hh;aa jié;sk;sk;sj;eo;id;xf;sk le;al;vl;aa,vu;rp;rl;bn;vv sì;ke;ke;aa,ke;nk;ys;lh;we shí;al;al;aa;ss;ns;fg;aa sì;ke;ke;aa,ke;nk;ys;lh;we gè;rl;rl;ra,pa;ep;jg;wh;ra sè;dv;dv;dv;kr;ks;iv;dv shì;mj;mj;mu;wy;er;sy;lj zi;la;va;aa,vh;aa;hi;bb;va	1
 四十四的师傅走了三十三里地	sì;ke;ke;aa,ke;nk;ys;lh;we shí;al;al;aa;ss;ns;fg;aa sì;ke;ke;aa,ke;nk;ys;lh;we de;bu;bu;bu;sh;ui;rq;bu shī;lj;lj;ab,aj,db,dj;py;pr;jg;aj fù;rc;rc;rc,rf;xk;jk;wg;rc zǒu;tz;tr;tv;ge;pz;fh;tr le;al;vl;aa,vu;rp;rl;bn;vv sān;ae;ae;aa;uu;ts;dg;ae shí;al;al;aa;ss;ns;fg;aa sān;ae;ae;aa;uu;ts;dg;ae lǐ;tt;la;aa,tt;vg;dl;jf;aa dì;ty;ty;ty;ga;ge;fb;ty	1
-要拿塔嘛换别喇叭哑巴的喇叭	yào;xn;xn;xn;py;vb;sv;xn ná;ru;ru;uh;ep;ju;wg;ru tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl huàn;fr;fd;fh;je;um;rq;fd bié;kd;kd;dl;oi;dp;kl;kd lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb yǎ;ky;ky;ky;od;dc;kg;ky bā;sl;vv;ag,kg,vg;tt;mb;cn;vv de;bu;bu;bu;sh;ui;rq;bu lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb	1
+要拿塔嘛换别喇叭哑巴的喇叭	yào;xn;xn;xn;py;vb;sv;xn ná;ru;ru;uh;ep;ju;wg;ru tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl huàn;fr;fd;fh;je;um;rq;fd bié;kd;kd;dl;oi;dp;kl;kd lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb yǎ;ky;ky;ky;od;dc;kg;ky bā;sl;vv,sl;ag,kg,vg;tt;mb;cn;vv de;bu;bu;bu;sh;ui;rq;bu lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb	1
 再还六叔六舅六斗六升绿绿豆	zài;ar;ar;aa,at;dd;fg;gm;ar hái;zb;zb;zb;dq;cu;gi;zb liù;wb;wb;wb,dd,db;if;al;uy;wb shū;uy;uy;yx;pl;yr;hi;uy liù;wb;wb;wb,dd,db;if;al;uy;wb jiù;jl;jl;jn;su;ps;vl;jl liù;wb;wb;wb,dd,db;if;al;uy;wb dòu;ud;du;du;sh;jd;uf;du liù;wb;wb;wb,dd,db;if;al;uy;wb shēng;pc;pc;pc;up;tl;ta;pa lǜ;su;su;sl;eo;ik;xv;su lǜ;su;su;sl;eo;ik;xv;su dòu;ab;aa;aa,aq;dd;zd;gk;aa	1
 扁担偏要板凳让扁担绑在板凳上	biǎn;hc;hc;hc;qd;mi;yn;hc dàn;fd;fa;fd;jd;uf;rj;fd piān;rc;rc;rb;xd;ji;wy;rc yào;xn;xn;xn;py;vb;sv;xn bǎn;my;my;mf;wl;er;sr;ly dèng;bj;vj;jd;ri;ho;wg;dj ràng;yu;yu;yu;cd;sf;yh;yu biǎn;hc;hc;hc;qd;mi;yn;hc dàn;fd;fa;fd;jd;uf;rj;fd bǎng;se;se;sb;eb;it;xd;se zài;ut;ut;ta,ut;sg;ng;dh;at bǎn;my;my;mf;wl;er;sr;ly dèng;bj;vj;jd;ri;ho;wg;dj shàng;ba;la;aa,ba;pu;yf;hh;aa	1
 高高山上一条藤高高山上一条藤	gāo;wk;wk;wk;io;gg;ym;wk gāo;wk;wk;wk;io;gg;ym;wk shān;kl;lk;aa;pp;vs;mm;aa shàng;ba;la;aa,ba;pu;yf;hh;aa yì;aa;aa;aa;dd;fi;gg;aa tiáo;wm;wm;wm;jf;he;ts;wx téng;cu;cu;ct;zo;lk;ae;cu gāo;wk;wk;wk;io;gg;ym;wk gāo;wk;wk;wk;io;gg;ym;wk shān;kl;lk;aa;pp;vs;mm;aa shàng;ba;la;aa,ba;pu;yf;hh;aa yì;aa;aa;aa;dd;fi;gg;aa tiáo;wm;wm;wm;jf;he;ts;wx téng;cu;cu;ct;zo;lk;ae;cu	1
@@ -5089,10 +5089,10 @@ sort: by_weight
 用了四十四小时才写了三十三个字	yòng;kf,ol;kl;kf;lp;ty;et;pa le;al;vl;aa,vu;rp;rl;bn;vv sì;ke;ke;aa,ke;nk;ys;lh;we shí;al;al;aa;ss;ns;fg;aa sì;ke;ke;aa,ke;nk;ys;lh;we xiǎo;lb;ld;ad;pf;yx;ih;vd shí;oc;oc;oc;vk;ok;jf;oc cái;up;ap;ap;du;nt;ft;ap xiě;by;by;by;id;wf;pg;gy le;al;vl;aa,vu;rp;rl;bn;vv sān;ae;ae;aa;uu;ts;dg;ae shí;al;al;aa;ss;ns;fg;aa sān;ae;ae;aa;uu;ts;dg;ae gè;rl;rl;ra,pa;ep;jg;wh;ra zì;bz;bz;bz;ia;wh;pb;gz	1
 走了三十三里地就办了四十四件事	zǒu;tz;tr;tv;ge;pz;fh;tr le;al;vl;aa,vu;rp;rl;bn;vv sān;ae;ae;aa;uu;ts;dg;ae shí;al;al;aa;ss;ns;fg;aa sān;ae;ae;aa;uu;ts;dg;ae lǐ;tt;la;aa,tt;vg;dl;jf;aa dì;ty;ty;ty;ga;ge;fb;ty jiù;wy;wy;yj;ih;go;yi;wy bàn;lb;ld;lb;uf;sh;lw;ld le;al;vl;aa,vu;rp;rl;bn;vv sì;ke;ke;aa,ke;nk;ys;lh;we shí;al;al;aa;ss;ns;fg;aa sì;ke;ke;aa,ke;nk;ys;lh;we jiàn;rn;rn;rn;xb;jq;wr;rn shì;gy;al;aa;dp;fb;gk;av	1
 不愿意拿喇叭换提拉塔嘛喇嘛的塔嘛	bú;ab;ad;ad,ax;dh;cb;gi;ad yuàn;ix;ix;xy;rn;xh;dr;ix yì;lx;lx;xy,lx;cn;xh;uj;lx ná;ru;ru;uh;ep;ju;wg;ru lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb huàn;fr;fd;fh;je;um;rq;fd tí;fz;fr;fu;je;ut;rj;fr lā;fl;fl;fl;jb;ui;ru;fl tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl lǎ;kd;kd;kd,kl;oi;dp;kg;kd ma;km;km;km;ow;dz;ky;kl de;bu;bu;bu;sh;ui;rq;bu tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl	1
-四十四个涩柿子倒吃四十四个石狮子	sì;ke;ke;aa,ke;nk;ys;lh;we shí;al;al;aa;ss;ns;fg;aa sì;ke;ke;aa,ke;nk;ys;lh;we gè;rl;rl;ra,pa;ep;jg;wh;ra sè;dv;dv;dv;kr;ks;iv;dv shì;mj;mj;mu;wy;er;sy;lj zi;la;va;aa,vh;aa;hi;bb;va dào;rd;rd;rd;xi;jp;wg;rd chī;kv;kv;kq;or;da;kt;ky sì;ke;ke;aa,ke;nk;ys;lh;we shí;al;al;aa;ss;ns;fg;aa sì;ke;ke;aa,ke;nk;ys;lh;we gè;rl;rl;ra,pa;ep;jg;wh;ra shí;ak;ak;kp,aa,ak,pk;tt;ms;dg;ak shī;qj;qj;qu;by;mr;qt;qj zi;la;va;aa,vh;aa;hi;bb;va	1
-四十四个石狮子不吃四十四个涩柿子	sì;ke;ke;aa,ke;nk;ys;lh;we shí;al;al;aa;ss;ns;fg;aa sì;ke;ke;aa,ke;nk;ys;lh;we gè;rl;rl;ra,pa;ep;jg;wh;ra shí;ak;ak;kp,aa,ak,pk;tt;ms;dg;ak shī;qj;qj;qu;by;mr;qt;qj zi;la;va;aa,vh;aa;hi;bb;va bù;ab;ad;ad,ax;dh;cb;gi;ad chī;kv;kv;kq;or;da;kt;ky sì;ke;ke;aa,ke;nk;ys;lh;we shí;al;al;aa;ss;ns;fg;aa sì;ke;ke;aa,ke;nk;ys;lh;we gè;rl;rl;ra,pa;ep;jg;wh;ra sè;dv;dv;dv;kr;ks;iv;dv shì;mj;mj;mu;wy;er;sy;lj zi;la;va;aa,vh;aa;hi;bb;va	1
+四十四个涩柿子倒吃四十四个石狮子	sì;ke;ke;aa,ke;nk;ys;lh;we shí;al;al;aa;ss;ns;fg;aa sì;ke;ke;aa,ke;nk;ys;lh;we gè;rl;rl;ra,pa;ep;jg;wh;ra sè;dv;dv;dv;kr;ks;iv;dv shì;mj;mj;mu;wy;er;sy;lj zi;la;va;aa,vh;aa;hi;bb;va dào;rd;rd;rd;xi;jp;wg;rd chī;kv;kq;kq;or;da;kt;ky sì;ke;ke;aa,ke;nk;ys;lh;we shí;al;al;aa;ss;ns;fg;aa sì;ke;ke;aa,ke;nk;ys;lh;we gè;rl;rl;ra,pa;ep;jg;wh;ra shí;ak;ak;kp,aa,ak,pk;tt;ms;dg;ak shī;qj;qj;qu;by;mr;qt;qj zi;la;va;aa,vh;aa;hi;bb;va	1
+四十四个石狮子不吃四十四个涩柿子	sì;ke;ke;aa,ke;nk;ys;lh;we shí;al;al;aa;ss;ns;fg;aa sì;ke;ke;aa,ke;nk;ys;lh;we gè;rl;rl;ra,pa;ep;jg;wh;ra shí;ak;ak;kp,aa,ak,pk;tt;ms;dg;ak shī;qj;qj;qu;by;mr;qt;qj zi;la;va;aa,vh;aa;hi;bb;va bù;ab;ad;ad,ax;dh;cb;gi;ad chī;kv;kq;kq;or;da;kt;ky sì;ke;ke;aa,ke;nk;ys;lh;we shí;al;al;aa;ss;ns;fg;aa sì;ke;ke;aa,ke;nk;ys;lh;we gè;rl;rl;ra,pa;ep;jg;wh;ra sè;dv;dv;dv;kr;ks;iv;dv shì;mj;mj;mu;wy;er;sy;lj zi;la;va;aa,vh;aa;hi;bb;va	1
 乌鸦说猪黑乌鸦站在黑猪脊上说黑猪黑	wū;pa;pa;pa;ud;xu;qn;pa yā;yn;yn;ny,yn;dc;lx;ah;yn shuō;yx;ye;yd;ck;sp;yu;ye zhū;qo;qo;qv;bv;mo;qt;qo hēi;lh;lh;ad,ha;nn;ph;lf;ae wū;pa;pa;pa;ud;xu;qn;pa yā;yn;yn;ny,yn;dc;lx;ah;yn zhàn;lv;lk;lv;bo;id;uh;lk zài;ut;ut;ta,ut;sg;ng;dh;at hēi;lh;lh;ad,ha;nn;ph;lf;ae zhū;qo;qo;qv;bv;mo;qt;qo jí;ro;do;od,or;fl;wv;iw;do shàng;ba;la;aa,ba;pu;yf;hh;aa shuō;yx;ye;yd;ck;sp;yu;ye hēi;lh;lh;ad,ha;nn;ph;lf;ae zhū;qo;qo;qv;bv;mo;qt;qo hēi;lh;lh;ad,ha;nn;ph;lf;ae	1
 你说共数出多少只大石狮子和多少只小石狮子	nǐ;rx;rx;re;xf;jy;wq;rx shuō;yx;ye;yd;ck;sp;yu;ye gòng;cb;cb;bc,cb;zf;lh;aw;cb shǔ;mw;mw;wl;lj;ph;ov;mw chū;uu;vk;ck,aa;pp;sm;bm;va duō;xx;xx;xx;ff;ll;qq;xx shǎo;xp;xp;xp;pu;yt;it;ap zhǐ;kb;kb;kb;of;dh;kw;kb dà;ar;un;ad;xx;md;dd;an shí;ak;ak;kp,aa,ak,pk;tt;ms;dg;ak shī;qj;qj;qu;by;mr;qt;qj zi;la;va;aa,vh;aa;hi;bb;va hé;hk;hk;hk;uo;xd;tk;hk duō;xx;xx;xx;ff;ll;qq;xx shǎo;xp;xp;xp;pu;yt;it;ap zhǐ;kb;kb;kb;of;dh;kw;kb xiǎo;lb;ld;ad;pf;yx;ih;vd shí;ak;ak;kp,aa,ak,pk;tt;ms;dg;ak shī;qj;qj;qu;by;mr;qt;qj zi;la;va;aa,vh;aa;hi;bb;va	1
-提拉塔嘛的喇嘛拿塔嘛打了别喇叭的哑巴一塔嘛	tí;fz;fr;fu;je;ut;rj;fr lā;fl;fl;fl;jb;ui;ru;fl tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl de;bu;bu;bu;sh;ui;rq;bu lǎ;kd;kd;kd,kl;oi;dp;kg;kd ma;km;km;km;ow;dz;ky;kl ná;ru;ru;uh;ep;ju;wg;ru tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl dǎ;fd;fd;fd;jj;ua;rs;fd le;al;vl;aa,vu;rp;rl;bn;vv bié;kd;kd;dl;oi;dp;kl;kd lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb de;bu;bu;bu;sh;ui;rq;bu yǎ;ky;ky;ky;od;dc;kg;ky bā;sl;vv;ag,kg,vg;tt;mb;cn;vv yī;aa;aa;aa;dd;fi;gg;aa tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl	1
-也不知别喇叭的哑巴拿喇巴打坏了提拉塔嘛喇嘛的塔嘛	yě;vv;vv;gg;rr;ey;bn;vv bù;ab;ad;ad,ax;dh;cb;gi;ad zhī;uk;uk;uk,ku;eo;od;td;uk bié;kd;kd;dl;oi;dp;kl;kd lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb de;bu;bu;bu;sh;ui;rq;bu yǎ;ky;ky;ky;od;dc;kg;ky bā;sl;vv;ag,kg,vg;tt;mb;cn;vv ná;ru;ru;uh;ep;ju;wg;ru lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;sl;vv;ag,kg,vg;tt;mb;cn;vv dǎ;fd;fd;fd;jj;ua;rs;fd huài;tb;tb;tb;gh;gc;fg;tb le;al;vl;aa,vu;rp;rl;bn;vv tí;fz;fr;fu;je;ut;rj;fr lā;fl;fl;fl;jb;ui;ru;fl tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl lǎ;kd;kd;kd,kl;oi;dp;kg;kd ma;km;km;km;ow;dz;ky;kl de;bu;bu;bu;sh;ui;rq;bu tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl	1
-也不知提拉塔嘛的喇嘛拿塔嘛打坏了别喇叭哑巴的喇叭	yě;vv;vv;gg;rr;ey;bn;vv bù;ab;ad;ad,ax;dh;cb;gi;ad zhī;uk;uk;uk,ku;eo;od;td;uk tí;fz;fr;fu;je;ut;rj;fr lā;fl;fl;fl;jb;ui;ru;fl tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl de;bu;bu;bu;sh;ui;rq;bu lǎ;kd;kd;kd,kl;oi;dp;kg;kd ma;km;km;km;ow;dz;ky;kl ná;ru;ru;uh;ep;ju;wg;ru tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl dǎ;fd;fd;fd;jj;ua;rs;fd huài;tb;tb;tb;gh;gc;fg;tb le;al;vl;aa,vu;rp;rl;bn;vv bié;kd;kd;dl;oi;dp;kl;kd lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb yǎ;ky;ky;ky;od;dc;kg;ky bā;sl;vv;ag,kg,vg;tt;mb;cn;vv de;bu;bu;bu;sh;ui;rq;bu lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb	1
+提拉塔嘛的喇嘛拿塔嘛打了别喇叭的哑巴一塔嘛	tí;fz;fr;fu;je;ut;rj;fr lā;fl;fl;fl;jb;ui;ru;fl tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl de;bu;bu;bu;sh;ui;rq;bu lǎ;kd;kd;kd,kl;oi;dp;kg;kd ma;km;km;km;ow;dz;ky;kl ná;ru;ru;uh;ep;ju;wg;ru tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl dǎ;fd;fd;fd;jj;ua;rs;fd le;al;vl;aa,vu;rp;rl;bn;vv bié;kd;kd;dl;oi;dp;kl;kd lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb de;bu;bu;bu;sh;ui;rq;bu yǎ;ky;ky;ky;od;dc;kg;ky bā;sl;vv,sl;ag,kg,vg;tt;mb;cn;vv yī;aa;aa;aa;dd;fi;gg;aa tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl	1
+也不知别喇叭的哑巴拿喇巴打坏了提拉塔嘛喇嘛的塔嘛	yě;vv;vv;gg;rr;ey;bn;vv bù;ab;ad;ad,ax;dh;cb;gi;ad zhī;uk;uk;uk,ku;eo;od;td;uk bié;kd;kd;dl;oi;dp;kl;kd lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb de;bu;bu;bu;sh;ui;rq;bu yǎ;ky;ky;ky;od;dc;kg;ky bā;sl;vv,sl;ag,kg,vg;tt;mb;cn;vv ná;ru;ru;uh;ep;ju;wg;ru lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;sl;vv,sl;ag,kg,vg;tt;mb;cn;vv dǎ;fd;fd;fd;jj;ua;rs;fd huài;tb;tb;tb;gh;gc;fg;tb le;al;vl;aa,vu;rp;rl;bn;vv tí;fz;fr;fu;je;ut;rj;fr lā;fl;fl;fl;jb;ui;ru;fl tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl lǎ;kd;kd;kd,kl;oi;dp;kg;kd ma;km;km;km;ow;dz;ky;kl de;bu;bu;bu;sh;ui;rq;bu tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl	1
+也不知提拉塔嘛的喇嘛拿塔嘛打坏了别喇叭哑巴的喇叭	yě;vv;vv;gg;rr;ey;bn;vv bù;ab;ad;ad,ax;dh;cb;gi;ad zhī;uk;uk;uk,ku;eo;od;td;uk tí;fz;fr;fu;je;ut;rj;fr lā;fl;fl;fl;jb;ui;ru;fl tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl de;bu;bu;bu;sh;ui;rq;bu lǎ;kd;kd;kd,kl;oi;dp;kg;kd ma;km;km;km;ow;dz;ky;kl ná;ru;ru;uh;ep;ju;wg;ru tǎ;tk;tk;td,th;go;gd;fa;tk ma;km;km;km;ow;dz;ky;kl dǎ;fd;fd;fd;jj;ua;rs;fd huài;tb;tb;tb;gh;gc;fg;tb le;al;vl;aa,vu;rp;rl;bn;vv bié;kd;kd;dl;oi;dp;kl;kd lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb yǎ;ky;ky;ky;od;dc;kg;ky bā;sl;vv,sl;ag,kg,vg;tt;mb;cn;vv de;bu;bu;bu;sh;ui;rq;bu lǎ;kd;kd;kd,kl;oi;dp;kg;kd bā;kb;kb;kb;of;dh;kw;kb	1

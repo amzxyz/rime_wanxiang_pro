@@ -130,9 +130,9 @@ translator:
     - xform/[uv]an(?=^|$|')/<r>/
     - xform/(?<![abcdefghkmprstA-Z])[uv]e(?=^|$|')/<t>/  #前面负向零宽断言cue
     - xform/ing(?=^|$|')|uai(?=^|$|')/<y>/
-    - xform/^sh/<u>/
-    - xform/^ch/<i>/
-    - xform/^zh/<v>/
+    - xform/^sh(?!.{1}[bcdefghjklmnpqrstvwxyz])/<u>/      #第四位为特定字母的不匹配，如shell的l
+    - xform/^ch(?!.{1}[bcdefghjklmnpqrstvwxyz])/<i>/
+    - xform/^zh(?!.{1}[bcdefghjklmnpqrstvwxyz])/<v>/
     - xform/'sh/'<u>/
     - xform/'ch/'<i>/
     - xform/'zh/'<v>/
