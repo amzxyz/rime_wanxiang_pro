@@ -54,7 +54,7 @@ switches:
     states: [ 提示关, 提示开 ]
     reset: 1
   - options: [ raw_input, tone_display, full_pinyin ]   #开启后在输入编码的位置实时转换为带声调全拼或者不带声调全拼，不开启则采用系统配置原始编码，影响的是preedit_format,归属：super_preedit.lua
-    states: [ 原编码, 带声调, 不带调 ]
+    states: [ 原编码, 有声调, 无声调 ]
 #    reset: 2     #对于开关组从0开始数，第几个就reset几可设为默认
   - options: [ comment_off, fuzhu_hint, tone_hint ]  #开启后在候选的注释里面实时显示辅助码或者全拼声调，不开启则采用系统配置，影响的是comment_format，快捷键配套ctrl+a,归属：super_comment.lua
     states: [ 注释关, 辅助开, 读音开 ]
