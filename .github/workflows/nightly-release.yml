@@ -55,10 +55,13 @@ jobs:
         if: env.SKIP != 'true'
         run: |
           mkdir -p dist
-          echo "Packing specified pro zh_dicts..."
+          echo "Packing specified pro dicts..."
           if [ -d "dicts" ]; then
             cd dicts
-            zip -r ../dist/8-pro-all-zh-dicts.zip \
+            zip -r ../dist/8-pro-all-dicts.zip \
+              en.dict.yaml \
+              cn&en.dict.yaml \
+              chengyu.txt \
               correlation.pro.dict.yaml \
               base.pro.dict.yaml \
               chars.pro.dict.yaml \
@@ -67,7 +70,7 @@ jobs:
               place.pro.dict.yaml \
               poetry.pro.dict.yaml \
               suggestion.pro.dict.yaml
-            echo "Packing completed: dist/8-pro-all-zh-dicts.zip"
+            echo "Packing completed: dist/8-pro-all-dicts.zip"
             cd ..
           else
             echo "Error: dicts folder does not exist."
@@ -75,14 +78,17 @@ jobs:
           fi
 
       # 7. 打包指定的 base dict 文件
-      - name: Pack base zh_dicts
+      - name: Pack base dicts
         if: env.SKIP != 'true'
         run: |
           mkdir -p dist
-          echo "Packing specified base zh_dicts..."
+          echo "Packing specified base dicts..."
           if [ -d "dicts" ]; then
             cd dicts
-            zip -r ../dist/9-base-zh-dicts.zip \
+            zip -r ../dist/9-base-dicts.zip \
+              en.dict.yaml \
+              cn&en.dict.yaml \
+              chengyu.txt \
               correlation.dict.yaml \
               base.dict.yaml \
               chars.dict.yaml \
@@ -91,14 +97,14 @@ jobs:
               place.dict.yaml \
               poetry.dict.yaml \
               suggestion.dict.yaml
-            echo "Packing completed: dist/9-base-zh-dicts.zip"
+            echo "Packing completed: dist/9-base-dicts.zip"
             cd ..
           else
             echo "Error: dicts folder does not exist."
             exit 1
           fi
 
-      # 7. 将拆分后的 8 个词库文件夹一并打包
+      # 8. 将拆分后的 7 个词库文件夹一并打包，并先复制通用文件
       - name: Pack splitted dicts
         if: env.SKIP != 'true'
         run: |
@@ -120,6 +126,12 @@ jobs:
           # 遍历字典并按指定顺序命名 ZIP 文件
           for dict_dir in "${!dict_map[@]}"; do
             if [ -d "$dict_dir" ]; then
+              echo "Copying common files into $dict_dir..."
+              cp dicts/en.dict.yaml "$dict_dir"/
+              cp dicts/cn\&en.dict.yaml "$dict_dir"/
+              cp dicts/chengyu.txt "$dict_dir"/
+
+              echo "Packing: ${dict_map[$dict_dir]}"
               zip -r "dist/${dict_map[$dict_dir]}" "$dict_dir"
               echo "Packed: dist/${dict_map[$dict_dir]}"
             else
@@ -127,7 +139,8 @@ jobs:
             fi
           done
 
-      # 8. 删除旧的 Release 和 Tag
+
+      # 9. 删除旧的 Release 和 Tag
       - name: Delete existing Nightly Release and Tag
         if: env.SKIP != 'true'
         uses: actions/github-script@v6
@@ -162,7 +175,7 @@ jobs:
               console.log(`Error deleting Release or Tag: ${error.message}`);
             }
 
-      # 9. 等待清理完成
+      # 10. 等待清理完成
       - name: Wait for cleanup
         if: env.SKIP != 'true'
         run: sleep 10
@@ -172,7 +185,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-      # 10. 创建新的 Release，并把上述打包好的所有文件都上传
+      # 11. 创建新的 Release，并把上述打包好的所有文件都上传
       - name: Create new Release
         if: env.SKIP != 'true'
         uses: "softprops/action-gh-release@v2"
@@ -181,8 +194,8 @@ jobs:
           tag_name: dict-nightly
           name: "实时提交的词库更新"
           body: |
-            - **base-zh-dicts.zip**：最新的标准版原始中文词库文件
-            - **pro-all-zh-dicts.zip**：最新的全辅助码原始中文词库文件
+            - **base-dicts.zip**：最新的标准版原始中文词库文件
+            - **pro-all-dicts.zip**：最新的全辅助码原始中文词库文件
             - **pro-moqi-fuzhu-dicts.zip**：携带了墨奇辅助码的词库文件
             - **pro-flypy-fuzhu-dicts.zip**：携带了小鹤辅助码的词库文件
             - **pro-zrm-fuzhu-dicts.zip**：携带了自然码辅助码的词库文件
@@ -192,8 +205,8 @@ jobs:
             - **pro-hanxin-fuzhu-dicts.zip**：携带了汉心辅助码的词库文件
             - **[wanxiang-lts-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram)**：与词库同步更新的语法模型
           files: |
-            dist/9-base-zh-dicts.zip
-            dist/8-pro-all-zh-dicts.zip
+            dist/9-base-dicts.zip
+            dist/8-pro-all-dicts.zip
             dist/1-pro-moqi-fuzhu-dicts.zip
             dist/2-pro-flypy-fuzhu-dicts.zip
             dist/3-pro-zrm-fuzhu-dicts.zip
