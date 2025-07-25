@@ -28,7 +28,7 @@ schema:
   dependencies:
     - wanxiang_mixedcode  #中英文混合词汇
     - wanxiang_reverse    # 部件拆字，反查及辅码
-    - wanxiang_lookup     #辅助码拆分注释、翻译注释、行政区划匹配、车牌、等等注释类显示滤镜，Lua专用：super_comment
+    - wanxiang_chaifen     #辅助码拆分注释、翻译注释、行政区划匹配、车牌、等等注释类显示滤镜，Lua专用：super_comment
     - wanxiang_charset    #字符集过滤器
 
 # 开关

@@ -31,18 +31,17 @@ local function replace_schema(file_path, target_schema)
     f:close()
 
     -- 根据文件名决定替换模式
-    if file_path:find("wanxiang_radical") then
-        content = content:gsub("([%s]*__include:%s*wanxiang_radical%.schema:/)[^%sa-zA-Z\r\n]+", "%1" .. target_schema)
+    if file_path:find("wanxiang_reverse") then
+        content = content:gsub("([%s]*__include:%s*wanxiang_reverse%.schema:/)[^%sa-zA-Z\r\n]+", "%1" .. target_schema)
 
-    elseif file_path:find("wanxiang_cnanden") then
-        content = content:gsub("([%s]*__include:%s*wanxiang_cnanden%.schema:/)[^%sa-zA-Z\r\n]+", "%1" .. target_schema)
+    elseif file_path:find("wanxiang_mixedcode") then
+        content = content:gsub("([%s]*__include:%s*wanxiang_mixedcode%.schema:/)[^%sa-zA-Z\r\n]+", "%1" .. target_schema)
 
-    elseif file_path:find("wanxiang_en") then
-        content = content:gsub("([%s]*__include:%s*wanxiang_en%.schema:/)[^%sa-zA-Z\r\n]+", "%1" .. target_schema)
-
-    elseif file_path:find("wanxiang%.custom") or file_path:find("wanxiang_pro") then
-        content = content:gsub("([%s%-]*wanxiang[_]?pro?%.schema:/)[^%sa-zA-Z\r\n]+", "%1" .. target_schema, 1)
+    elseif file_path:find("wanxiang%.custom") or file_path:find("wanxiang_pro%.custom") then
+        content = content:gsub("([%s%-]*wanxiang[_]pro%.schema:/)[^%sa-zA-Z\r\n]+", "%1" .. target_schema, 1)
+        content = content:gsub("([%s%-]*wanxiang%.schema:/)[^%sa-zA-Z\r\n]+", "%1" .. target_schema, 1)
     end
+    
 
     f = io.open(file_path, "w")
     if not f then 
@@ -86,9 +85,8 @@ local function translator(input, seg, env)
         end
 
         local files = {
-            "wanxiang_radical.custom.yaml",
-            "wanxiang_cnanden.custom.yaml",
-            "wanxiang_en.custom.yaml"
+            "wanxiang_mixedcode.custom.yaml",
+            "wanxiang_reverse.custom.yaml"
         }
 
         -- 判断是否为专业版
