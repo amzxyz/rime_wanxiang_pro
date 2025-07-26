@@ -115,9 +115,9 @@ local function translator(input, seg, env)
 
         -- 返回提示候选
         if custom_file_exists then
-            yield(Candidate("switch", seg.start, seg._end, "检测到已有自定义文件，已为您切换到〔" .. target_schema .. "〕，请手动重新部署", ""))
+            yield(Candidate("switch", seg.start, seg._end, "", "检测到已有自定义文件，已为您切换到〔" .. target_schema .. "〕，请手动重新部署"))
         else
-            yield(Candidate("switch", seg.start, seg._end, "已帮您复制并切换到〔" .. target_schema .. "〕，请手动重新部署", ""))
+            yield(Candidate("switch", seg.start, seg._end, "", "已帮您复制并切换到〔" .. target_schema .. "〕，请手动重新部署"))
         end
     end
 end
